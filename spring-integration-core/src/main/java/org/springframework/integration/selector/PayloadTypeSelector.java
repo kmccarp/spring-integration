@@ -32,7 +32,7 @@ import org.springframework.util.Assert;
  */
 public class PayloadTypeSelector implements MessageSelector {
 
-	private final List<Class<?>> acceptedTypes = new ArrayList<Class<?>>();
+	private final List<Class<?>> acceptedTypes = new ArrayList<>();
 
 
 	/**

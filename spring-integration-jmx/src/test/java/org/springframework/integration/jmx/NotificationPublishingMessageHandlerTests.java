@@ -83,7 +83,7 @@ public class NotificationPublishingMessageHandlerTests {
 	public void simplePublish() {
 		MessageHandler handler = context.getBean("testPublisher", MessageHandler.class);
 		assertThat(this.listener.notifications.size()).isEqualTo(0);
-		handler.handleMessage(new GenericMessage<String>("foo"));
+		handler.handleMessage(new GenericMessage<>("foo"));
 		assertThat(this.listener.notifications.size()).isEqualTo(1);
 		Notification notification = this.listener.notifications.get(0);
 		assertThat(notification.getSource()).isEqualTo(this.publisherObjectName);

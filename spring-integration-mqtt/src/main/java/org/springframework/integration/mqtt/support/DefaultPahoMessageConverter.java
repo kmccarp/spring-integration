@@ -58,7 +58,7 @@ public class DefaultPahoMessageConverter implements MqttMessageConverter, BeanFa
 
 	private BytesMessageMapper bytesMessageMapper;
 
-	private boolean payloadAsBytes = false;
+	private boolean payloadAsBytes;
 
 	private BeanFactory beanFactory;
 

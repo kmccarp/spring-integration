@@ -215,7 +215,7 @@ public abstract class AbstractRemoteFileStreamingMessageSource<F>
 			if (this.filter != null && this.filter.supportsSingleFileFiltering()
 					&& !this.filter.accept(file.getFileInfo())) {
 
-				if (this.toBeReceived.size() > 0) { // don't re-fetch already filtered files
+				if (!this.toBeReceived.isEmpty()) { // don't re-fetch already filtered files
 					file = poll();
 					continue;
 				}
@@ -267,7 +267,7 @@ public abstract class AbstractRemoteFileStreamingMessageSource<F>
 	}
 
 	protected AbstractFileInfo<F> poll() {
-		if (this.toBeReceived.size() == 0) {
+		if (this.toBeReceived.isEmpty()) {
 			listFiles();
 		}
 		return this.toBeReceived.poll();

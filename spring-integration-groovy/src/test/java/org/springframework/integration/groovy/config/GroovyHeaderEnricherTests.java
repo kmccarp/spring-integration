@@ -80,7 +80,7 @@ public class GroovyHeaderEnricherTests {
 		Object targetProcessor = TestUtils.getPropertyValue(headerValueMessageProcessor, "targetProcessor");
 		assertThat(targetProcessor.getClass()).isEqualTo(GroovyScriptExecutingMessageProcessor.class);
 
-		inputB.send(new GenericMessage<String>("Hello"));
+		inputB.send(new GenericMessage<>("Hello"));
 		assertThat(outputB.receive(1000).getHeaders().get("TEST_HEADER")).isEqualTo("groovy");
 	}
 

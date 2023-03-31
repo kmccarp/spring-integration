@@ -73,7 +73,7 @@ public class R2dbcMessageSource extends AbstractMessageSource<Publisher<?>> {
 
 	private BiFunction<Row, RowMetadata, ?> rowMapper = ColumnMapRowMapper.INSTANCE;
 
-	private boolean expectSingleResult = false;
+	private boolean expectSingleResult;
 
 	private StandardEvaluationContext evaluationContext;
 
@@ -81,7 +81,7 @@ public class R2dbcMessageSource extends AbstractMessageSource<Publisher<?>> {
 
 	private BiFunction<DatabaseClient.GenericExecuteSpec, Object, DatabaseClient.GenericExecuteSpec> bindFunction;
 
-	private volatile boolean initialized = false;
+	private volatile boolean initialized;
 
 	/**
 	 * Create an instance with the provided {@link R2dbcEntityOperations} and SpEL expression
@@ -216,7 +216,7 @@ public class R2dbcMessageSource extends AbstractMessageSource<Publisher<?>> {
 
 	private Supplier<String> evaluateQueryObject(Object queryObject) {
 		if (queryObject instanceof String) {
-			return () -> (String) queryObject;
+			return String.class::cast;
 		}
 		else if (queryObject instanceof StatementMapper.SelectSpec) {
 			return this.statementMapper.getMappedObject((StatementMapper.SelectSpec) queryObject);

@@ -69,7 +69,7 @@ public class AsyncHandlerTests {
 
 	private volatile String failedCallbackMessage;
 
-	private volatile CountDownLatch exceptionLatch = new CountDownLatch(1);
+	private final volatile CountDownLatch exceptionLatch = new CountDownLatch(1);
 
 	private ExecutorService executor;
 

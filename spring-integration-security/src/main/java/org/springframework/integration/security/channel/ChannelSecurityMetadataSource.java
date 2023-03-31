@@ -70,7 +70,7 @@ public class ChannelSecurityMetadataSource implements SecurityMetadataSource {
 		MessageChannel channel = invocation.getChannel();
 		Assert.isAssignable(NamedComponent.class, channel.getClass());
 		String channelName = ((NamedComponent) channel).getComponentName();
-		List<ConfigAttribute> attributes = new ArrayList<ConfigAttribute>();
+		List<ConfigAttribute> attributes = new ArrayList<>();
 		for (Map.Entry<Pattern, ChannelAccessPolicy> mapping : this.patternMappings.entrySet()) {
 			Pattern pattern = mapping.getKey();
 			ChannelAccessPolicy accessPolicy = mapping.getValue();
@@ -93,7 +93,7 @@ public class ChannelSecurityMetadataSource implements SecurityMetadataSource {
 	}
 
 	public Collection<ConfigAttribute> getAllConfigAttributes() {
-		Set<ConfigAttribute> allAttributes = new HashSet<ConfigAttribute>();
+		Set<ConfigAttribute> allAttributes = new HashSet<>();
 		for (ChannelAccessPolicy policy : this.patternMappings.values()) {
 			Collection<ConfigAttribute> receiveAttributes = policy.getConfigAttributesForReceive();
 			allAttributes.addAll(receiveAttributes);

@@ -78,7 +78,7 @@ public class AggregatorWithMessageStoreParserTests {
 		assertThat(messageGroupStore.getMessageGroup("id1").size()).isEqualTo(1);
 		input.send(createMessage("456", "id1", 3, 2, null));
 		assertThat(messageGroupStore.getMessageGroup("id1").size()).isEqualTo(2);
-		this.controlBusChannel.send(new GenericMessage<Object>("@messageStore.expireMessageGroups(-10000)"));
+		this.controlBusChannel.send(new GenericMessage<>("@messageStore.expireMessageGroups(-10000)"));
 		assertThat(aggregatorBean
 				.getAggregatedMessages().size()).as("One and only one message should have been aggregated")
 				.isEqualTo(1);

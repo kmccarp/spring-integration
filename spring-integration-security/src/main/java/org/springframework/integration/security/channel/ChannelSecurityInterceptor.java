@@ -63,7 +63,7 @@ public final class ChannelSecurityInterceptor extends AbstractSecurityIntercepto
 	@Override
 	public Object invoke(MethodInvocation invocation) throws Throwable { // NOSONAR
 		Method method = invocation.getMethod();
-		if (method.getName().equals("send") || method.getName().equals("receive")) {
+		if ("send".equals(method.getName()) || "receive".equals(method.getName())) {
 			return this.invokeWithAuthorizationCheck(invocation);
 		}
 		return invocation.proceed();

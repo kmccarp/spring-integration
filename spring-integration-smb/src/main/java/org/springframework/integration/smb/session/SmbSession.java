@@ -68,18 +68,18 @@ public class SmbSession implements Session<SmbFile> {
 
 	/**
 	 * Constructor for an SMB session.
-	 * @param _host server NetBIOS name, DNS name, or IP address, case-insensitive
-	 * @param _port port
-	 * @param _domain case-sensitive domain name
-	 * @param _user case-sensitive username
-	 * @param _password case-sensitive password
-	 * @param _shareAndDir server root SMB directory
+	 * @param host server NetBIOS name, DNS name, or IP address, case-insensitive
+	 * @param port port
+	 * @param domain case-sensitive domain name
+	 * @param user case-sensitive username
+	 * @param password case-sensitive password
+	 * @param shareAndDir server root SMB directory
 	 * @throws IOException in case of I/O errors
 	 */
-	SmbSession(String _host, int _port, String _domain, String _user, String _password, String _shareAndDir)
+	SmbSession(String host, int port, String domain, String user, String password, String shareAndDir)
 			throws IOException {
 
-		this(new SmbShare(new SmbConfig(_host, _port, _domain, _user, _password, _shareAndDir)));
+		this(new SmbShare(new SmbConfig(host, port, domain, user, password, shareAndDir)));
 	}
 
 	/**
@@ -190,20 +190,20 @@ public class SmbSession implements Session<SmbFile> {
 	 * Read the remote resource specified by path and copies its contents to the specified
 	 * {@link OutputStream}.
 	 * @param _path path to a remote file
-	 * @param _outputStream output stream
+	 * @param outputStream output stream
 	 * @throws IOException on error conditions returned by a CIFS server or if the remote resource is not a file.
 	 */
 	@Override
-	public void read(String _path, OutputStream _outputStream) throws IOException {
+	public void read(String _path, OutputStream outputStream) throws IOException {
 		Assert.hasText(_path, "path must not be empty");
-		Assert.notNull(_outputStream, "outputStream must not be null");
+		Assert.notNull(outputStream, "outputStream must not be null");
 
 		try {
 			SmbFile remoteFile = createSmbFileObject(_path);
 			if (!remoteFile.isFile()) {
 				throw new IOException("[" + _path + "] is not a file.");
 			}
-			FileCopyUtils.copy(remoteFile.getInputStream(), _outputStream);
+			FileCopyUtils.copy(remoteFile.getInputStream(), outputStream);
 		}
 		catch (SmbException _ex) {
 			throw new IOException("Failed to read resource [" + _path + "].", _ex);
@@ -248,13 +248,13 @@ public class SmbSession implements Session<SmbFile> {
 
 	/**
 	 * Convenience method to write a byte array to a remote location.
-	 * @param _contents the {@code byte[]} to write
+	 * @param contents the {@code byte[]} to write
 	 * @param _path the remote file to write to
 	 * @return the {@link SmbFile} for remote file
 	 * @throws IOException the IO exception
 	 */
-	public SmbFile write(byte[] _contents, String _path) throws IOException {
-		return writeAndClose(new ByteArrayInputStream(_contents), _path);
+	public SmbFile write(byte[] contents, String _path) throws IOException {
+		return writeAndClose(new ByteArrayInputStream(contents), _path);
 	}
 
 	/**
@@ -334,11 +334,11 @@ public class SmbSession implements Session<SmbFile> {
 	}
 
 	@Override
-	public void rename(String _pathFrom, String _pathTo) throws IOException {
+	public void rename(String pathFrom, String pathTo) throws IOException {
 		try {
 
-			SmbFile smbFileFrom = createSmbFileObject(_pathFrom);
-			SmbFile smbFileTo = createSmbFileObject(_pathTo);
+			SmbFile smbFileFrom = createSmbFileObject(pathFrom);
+			SmbFile smbFileTo = createSmbFileObject(pathTo);
 			if (smbFileTo.exists()) {
 				smbFileTo.delete();
 			}
@@ -346,9 +346,9 @@ public class SmbSession implements Session<SmbFile> {
 
 		}
 		catch (SmbException _ex) {
-			throw new IOException("Failed to rename [" + _pathFrom + "] to [" + _pathTo + "].", _ex);
+			throw new IOException("Failed to rename [" + pathFrom + "] to [" + pathTo + "].", _ex);
 		}
-		logger.info(() -> "Successfully renamed remote resource [" + _pathFrom + "] to [" + _pathTo + "].");
+		logger.info(() -> "Successfully renamed remote resource [" + pathFrom + "] to [" + pathTo + "].");
 	}
 
 	@Override

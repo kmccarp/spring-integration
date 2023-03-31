@@ -70,7 +70,7 @@ public class BaseHttpInboundEndpoint extends MessagingGatewaySupport implements 
 
 	private Validator validator;
 
-	private ResolvableType requestPayloadType = null;
+	private ResolvableType requestPayloadType;
 
 	private HeaderMapper<HttpHeaders> headerMapper = DefaultHttpHeaderMapper.inboundMapper();
 

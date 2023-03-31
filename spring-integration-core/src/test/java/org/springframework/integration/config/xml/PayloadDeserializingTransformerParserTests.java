@@ -70,7 +70,7 @@ public class PayloadDeserializingTransformerParserTests {
 	@Test
 	public void directChannelWithSerializedStringMessage() throws Exception {
 		byte[] bytes = serialize("foo");
-		directInput.send(new GenericMessage<byte[]>(bytes));
+		directInput.send(new GenericMessage<>(bytes));
 		Message<?> result = output.receive(10000);
 		assertThat(result).isNotNull();
 		assertThat(result.getPayload() instanceof String).isTrue();
@@ -138,6 +138,8 @@ public class PayloadDeserializingTransformerParserTests {
 
 	@SuppressWarnings("serial")
 	private static class TestBean implements Serializable {
+
+		private static final long serialVersionUID = 1;
 
 		TestBean() {
 			super();

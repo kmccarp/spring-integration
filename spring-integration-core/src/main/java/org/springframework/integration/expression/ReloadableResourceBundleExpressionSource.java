@@ -211,7 +211,7 @@ public class ReloadableResourceBundleExpressionSource implements ExpressionSourc
 	 * @param cacheSeconds The cache seconds.
 	 */
 	public void setCacheSeconds(int cacheSeconds) {
-		this.cacheMillis = (cacheSeconds * 1000); // NOSONAR
+		this.cacheMillis = cacheSeconds * 1000; // NOSONAR
 	}
 
 	/**
@@ -222,7 +222,7 @@ public class ReloadableResourceBundleExpressionSource implements ExpressionSourc
 	 */
 	public void setPropertiesPersister(@Nullable PropertiesPersister propertiesPersister) {
 		this.propertiesPersister =
-				(propertiesPersister != null ? propertiesPersister : new DefaultPropertiesPersister());
+				propertiesPersister != null ? propertiesPersister : new DefaultPropertiesPersister();
 	}
 
 	/**
@@ -236,7 +236,7 @@ public class ReloadableResourceBundleExpressionSource implements ExpressionSourc
 	 */
 	@Override
 	public void setResourceLoader(@Nullable ResourceLoader resourceLoader) {
-		this.resourceLoader = (resourceLoader != null ? resourceLoader : new DefaultResourceLoader());
+		this.resourceLoader = resourceLoader != null ? resourceLoader : new DefaultResourceLoader();
 	}
 
 

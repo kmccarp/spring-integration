@@ -85,7 +85,7 @@ public class RemoteFileTemplate<F> implements RemoteFileOperations<F>, Initializ
 
 	private String temporaryFileSuffix = ".writing";
 
-	private boolean autoCreateDirectory = false;
+	private boolean autoCreateDirectory;
 
 	private boolean useTemporaryFileName = true;
 

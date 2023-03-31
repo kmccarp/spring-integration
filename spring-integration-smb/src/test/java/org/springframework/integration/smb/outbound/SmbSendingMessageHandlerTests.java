@@ -159,8 +159,8 @@ public class SmbSendingMessageHandlerTests extends AbstractBaseTests {
 				return smbSession;
 
 			}
-			catch (Exception _ex) {
-				throw new RuntimeException("Failed to create mock session.", _ex);
+			catch (Exception ex) {
+				throw new RuntimeException("Failed to create mock session.", ex);
 			}
 		}
 

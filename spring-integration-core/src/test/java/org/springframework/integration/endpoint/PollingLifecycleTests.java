@@ -37,7 +37,6 @@ import org.springframework.integration.core.MessageSource;
 import org.springframework.integration.scheduling.PollerMetadata;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageHandler;
-import org.springframework.messaging.MessagingException;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.scheduling.support.PeriodicTrigger;
@@ -77,13 +76,8 @@ public class PollingLifecycleTests {
 		channel.send(new GenericMessage<>("foo"));
 
 		//Has to be an explicit implementation - Mockito cannot mock/spy lambdas
-		MessageHandler handler = Mockito.spy(new MessageHandler() {
-
-			@Override
-			public void handleMessage(Message<?> message) throws MessagingException {
-				latch.countDown();
-			}
-
+		MessageHandler handler = Mockito.spy(message -> {
+			latch.countDown();
 		});
 		PollingConsumer consumer = new PollingConsumer(channel, handler);
 		consumer.setTrigger(new PeriodicTrigger(Duration.ZERO));
@@ -112,14 +106,7 @@ public class PollingLifecycleTests {
 		adapterFactory.setPollerMetadata(pollerMetadata);
 
 		//Has to be an explicit implementation - Mockito cannot mock/spy lambdas
-		MessageSource<String> source = spy(new MessageSource<String>() {
-
-			@Override
-			public Message<String> receive() {
-				return new GenericMessage<>("hello");
-			}
-
-		});
+		MessageSource<String> source = spy(() -> new GenericMessage<>("hello"));
 		adapterFactory.setSource(source);
 		adapterFactory.setOutputChannel(channel);
 		adapterFactory.setBeanFactory(mock(ConfigurableBeanFactory.class));

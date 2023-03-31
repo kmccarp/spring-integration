@@ -40,7 +40,7 @@ public class ScriptSpec extends MessageProcessorSpec<ScriptSpec> {
 
 	private ScriptVariableGenerator variableGenerator;
 
-	private Map<String, Object> variables = new HashMap<String, Object>();
+	private Map<String, Object> variables = new HashMap<>();
 
 	ScriptSpec(Resource scriptResource) {
 		Assert.notNull(scriptResource, "'scriptResource' must not be null");

@@ -201,7 +201,7 @@ public class HttpInboundChannelAdapterParserTests extends AbstractHttpInboundTes
 
 		assertThatExceptionOfType(HttpRequestMethodNotSupportedException.class)
 				.isThrownBy(() -> this.integrationRequestMappingHandlerMapping.getHandler(request))
-				.satisfies((ex) -> {
+				.satisfies(ex -> {
 					assertThat(ex.getMethod()).isEqualTo("GET");
 					assertThat(ex.getSupportedMethods()).containsExactly("POST");
 				});
@@ -320,6 +320,8 @@ public class HttpInboundChannelAdapterParserTests extends AbstractHttpInboundTes
 
 	@SuppressWarnings("serial")
 	private static class TestObject implements Serializable {
+
+		private static final long serialVersionUID = 1;
 
 		String text;
 

@@ -49,7 +49,7 @@ public class TcpSendingNoSocketTests {
 	@Test
 	public void exceptionExpected() {
 		try {
-			shouldFail.send(new GenericMessage<String>("foo"));
+			shouldFail.send(new GenericMessage<>("foo"));
 			fail("Exception expected");
 		}
 		catch (MessageHandlingException e) {
@@ -59,6 +59,6 @@ public class TcpSendingNoSocketTests {
 
 	@Test
 	public void exceptionTrapped() {
-		advised.send(new GenericMessage<String>("foo"));
+		advised.send(new GenericMessage<>("foo"));
 	}
 }

@@ -103,7 +103,7 @@ public class JpaMessageHandlerParserTests {
 
 		adviceCalled = 0;
 
-		handler.handleMessage(new GenericMessage<String>("foo"));
+		handler.handleMessage(new GenericMessage<>("foo"));
 
 		assertThat(adviceCalled).isEqualTo(1);
 	}
@@ -125,7 +125,7 @@ public class JpaMessageHandlerParserTests {
 
 		adviceCalled = 0;
 
-		handler.handleMessage(new GenericMessage<String>("foo"));
+		handler.handleMessage(new GenericMessage<>("foo"));
 
 		assertThat(adviceCalled).isEqualTo(1);
 	}

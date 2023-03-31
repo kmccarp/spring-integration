@@ -430,7 +430,7 @@ public class CachingClientConnectionFactoryTests {
 		String connectionId = m.getHeaders().get(IpHeaders.CONNECTION_ID, String.class);
 
 		// assert we use the same connection from the pool
-		outbound.send(new GenericMessage<String>("Hello, world!"));
+		outbound.send(new GenericMessage<>("Hello, world!"));
 		m = inbound.receive(20_000);
 		assertThat(m).isNotNull();
 		assertThat(m.getHeaders().get(IpHeaders.CONNECTION_ID, String.class)).isEqualTo(connectionId);
@@ -464,7 +464,7 @@ public class CachingClientConnectionFactoryTests {
 		BlockingQueue<?> connections = TestUtils
 				.getPropertyValue(this.gatewayCF, "pool.available", BlockingQueue.class);
 		// wait until the connection is returned to the pool
-		await().atMost(Duration.ofSeconds(10)).until(() -> connections.size() > 0);
+		await().atMost(Duration.ofSeconds(10)).until(() -> !connections.isEmpty());
 
 		// assert we use the same connection from the pool
 		toGateway.send(new GenericMessage<>("Hello, world2!"));

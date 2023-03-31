@@ -55,7 +55,7 @@ public class GlobalChannelInterceptorSubElementTests {
 
 	@Test
 	public void testWiretapSubElement() {
-		this.inputA.send(new GenericMessage<String>("hello"));
+		this.inputA.send(new GenericMessage<>("hello"));
 		Message<?> result = this.wiretapChannel.receive(100);
 		assertThat(result).isNotNull();
 		assertThat(result.getPayload()).isEqualTo("hello");

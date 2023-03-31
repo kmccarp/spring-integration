@@ -80,7 +80,7 @@ public class JmsSendingMessageHandler extends AbstractMessageHandler {
 	public void setDestinationExpression(Expression destinationExpression) {
 		Assert.isTrue(this.destination == null && this.destinationName == null,
 				"The 'destination', 'destinationName', and 'destinationExpression' properties are mutually exclusive.");
-		this.destinationExpressionProcessor = new ExpressionEvaluatingMessageProcessor<Object>(destinationExpression);
+		this.destinationExpressionProcessor = new ExpressionEvaluatingMessageProcessor<>(destinationExpression);
 		setPrimaryExpression(destinationExpression);
 	}
 

@@ -58,7 +58,7 @@ public class DispatcherHasNoSubscribersTests {
 	@Test
 	public void oneChannel() {
 		try {
-			noSubscribersChannel.send(new GenericMessage<String>("Hello, world!"));
+			noSubscribersChannel.send(new GenericMessage<>("Hello, world!"));
 			fail("Exception expected");
 		}
 		catch (MessagingException e) {
@@ -70,7 +70,7 @@ public class DispatcherHasNoSubscribersTests {
 	@Test
 	public void stackedChannels() {
 		try {
-			subscribedChannel.send(new GenericMessage<String>("Hello, world!"));
+			subscribedChannel.send(new GenericMessage<>("Hello, world!"));
 			fail("Exception expected");
 		}
 		catch (MessagingException e) {
@@ -84,7 +84,7 @@ public class DispatcherHasNoSubscribersTests {
 		DirectChannel channel = new DirectChannel();
 		channel.setBeanName("bar");
 		try {
-			channel.send(new GenericMessage<String>("Hello, world!"));
+			channel.send(new GenericMessage<>("Hello, world!"));
 			fail("Exception expected");
 		}
 		catch (MessagingException e) {

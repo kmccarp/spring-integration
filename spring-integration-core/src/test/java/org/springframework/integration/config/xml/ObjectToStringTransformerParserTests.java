@@ -59,7 +59,7 @@ public class ObjectToStringTransformerParserTests {
 
 	@Test
 	public void directChannelWithStringMessage() {
-		directInput.send(new GenericMessage<String>("foo"));
+		directInput.send(new GenericMessage<>("foo"));
 		Message<?> result = output.receive(0);
 		assertThat(result).isNotNull();
 		assertThat(result.getPayload()).isEqualTo("foo");
@@ -67,7 +67,7 @@ public class ObjectToStringTransformerParserTests {
 
 	@Test
 	public void queueChannelWithStringMessage() {
-		queueInput.send(new GenericMessage<String>("foo"));
+		queueInput.send(new GenericMessage<>("foo"));
 		Message<?> result = output.receive(3000);
 		assertThat(result).isNotNull();
 		assertThat(result.getPayload()).isEqualTo("foo");
@@ -75,7 +75,7 @@ public class ObjectToStringTransformerParserTests {
 
 	@Test
 	public void directChannelWithObjectMessage() {
-		directInput.send(new GenericMessage<TestBean>(new TestBean()));
+		directInput.send(new GenericMessage<>(new TestBean()));
 		Message<?> result = output.receive(0);
 		assertThat(result).isNotNull();
 		assertThat(result.getPayload()).isEqualTo("test");
@@ -83,7 +83,7 @@ public class ObjectToStringTransformerParserTests {
 
 	@Test
 	public void queueChannelWithObjectMessage() {
-		queueInput.send(new GenericMessage<TestBean>(new TestBean()));
+		queueInput.send(new GenericMessage<>(new TestBean()));
 		Message<?> result = output.receive(3000);
 		assertThat(result).isNotNull();
 		assertThat(result.getPayload()).isEqualTo("test");

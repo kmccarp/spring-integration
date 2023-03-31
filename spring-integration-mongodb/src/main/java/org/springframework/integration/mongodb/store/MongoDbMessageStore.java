@@ -266,7 +266,7 @@ public class MongoDbMessageStore extends AbstractMessageGroupStore
 		Assert.notNull(id, "'id' must not be null");
 		MessageWrapper messageWrapper =
 				this.template.findAndRemove(whereMessageIdIs(id), MessageWrapper.class, this.collectionName);
-		return (messageWrapper != null ? messageWrapper.getMessage() : null);
+		return messageWrapper != null ? messageWrapper.getMessage() : null;
 	}
 
 	@Override
@@ -341,7 +341,7 @@ public class MongoDbMessageStore extends AbstractMessageGroupStore
 				ids.clear();
 			}
 		}
-		if (ids.size() > 0) {
+		if (!ids.isEmpty()) {
 			bulkRemove(groupId, ids);
 		}
 		updateGroup(groupId, lastModifiedUpdate());
@@ -934,8 +934,8 @@ public class MongoDbMessageStore extends AbstractMessageGroupStore
 			return this._message_timestamp;
 		}
 
-		public void set_message_timestamp(long _message_timestamp) { // NOSONAR name
-			this._message_timestamp = _message_timestamp;
+		public void set_message_timestamp(long messageTimestamp) { // NOSONAR name
+			this._message_timestamp = messageTimestamp;
 		}
 
 		public long get_Group_update_timestamp() { // NOSONAR name

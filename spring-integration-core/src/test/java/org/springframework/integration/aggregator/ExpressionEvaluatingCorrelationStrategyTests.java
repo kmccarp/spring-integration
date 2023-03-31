@@ -61,7 +61,7 @@ public class ExpressionEvaluatingCorrelationStrategyTests {
 		Expression expression = parser.parseExpression("payload.substring(0,1)");
 		strategy = new ExpressionEvaluatingCorrelationStrategy(expression);
 		strategy.setBeanFactory(mock(BeanFactory.class));
-		Object correlationKey = strategy.getCorrelationKey(new GenericMessage<String>("bla"));
+		Object correlationKey = strategy.getCorrelationKey(new GenericMessage<>("bla"));
 		assertThat(correlationKey).isInstanceOf(String.class);
 		assertThat((String) correlationKey).isEqualTo("b");
 	}

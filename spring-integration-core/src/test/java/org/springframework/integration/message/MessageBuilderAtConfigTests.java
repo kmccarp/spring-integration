@@ -60,7 +60,7 @@ public class MessageBuilderAtConfigTests {
 	@Test
 	public void mutate() {
 		assertThat(messageBuilderFactory instanceof MutableMessageBuilderFactory).isTrue();
-		in.send(new GenericMessage<String>("foo"));
+		in.send(new GenericMessage<>("foo"));
 		Message<?> m1 = out.receive(0);
 		Message<?> m2 = out.receive(0);
 		assertThat(m1.getClass().getName()).isEqualTo("org.springframework.integration.support.MutableMessage");

@@ -58,13 +58,13 @@ public class DatatypeChannelTests {
 	@Test
 	public void supportedType() {
 		MessageChannel channel = createChannel(String.class);
-		assertThat(channel.send(new GenericMessage<String>("test"))).isTrue();
+		assertThat(channel.send(new GenericMessage<>("test"))).isTrue();
 	}
 
 	@Test(expected = MessageDeliveryException.class)
 	public void unsupportedTypeAndNoConversionService() {
 		MessageChannel channel = createChannel(Integer.class);
-		channel.send(new GenericMessage<String>("123"));
+		channel.send(new GenericMessage<>("123"));
 	}
 
 	@Test
@@ -74,7 +74,7 @@ public class DatatypeChannelTests {
 		DefaultDatatypeChannelMessageConverter converter = new DefaultDatatypeChannelMessageConverter();
 		converter.setConversionService(conversionService);
 		channel.setMessageConverter(converter);
-		assertThat(channel.send(new GenericMessage<String>("123"))).isTrue();
+		assertThat(channel.send(new GenericMessage<>("123"))).isTrue();
 	}
 
 	@Test(expected = MessageDeliveryException.class)
@@ -84,35 +84,25 @@ public class DatatypeChannelTests {
 		DefaultDatatypeChannelMessageConverter converter = new DefaultDatatypeChannelMessageConverter();
 		converter.setConversionService(conversionService);
 		channel.setMessageConverter(converter);
-		assertThat(channel.send(new GenericMessage<Boolean>(Boolean.TRUE))).isTrue();
+		assertThat(channel.send(new GenericMessage<>(Boolean.TRUE))).isTrue();
 	}
 
 	@Test
 	public void unsupportedTypeButCustomConversionServiceSupports() {
 		QueueChannel channel = createChannel(Integer.class);
 		GenericConversionService conversionService = new DefaultConversionService();
-		conversionService.addConverter(new Converter<Boolean, Integer>() {
-			@Override
-			public Integer convert(Boolean source) {
-				return source ? 1 : 0;
-			}
-		});
+		conversionService.addConverter(source -> source ? 1 : 0);
 		DefaultDatatypeChannelMessageConverter converter = new DefaultDatatypeChannelMessageConverter();
 		converter.setConversionService(conversionService);
 		channel.setMessageConverter(converter);
-		assertThat(channel.send(new GenericMessage<Boolean>(Boolean.TRUE))).isTrue();
+		assertThat(channel.send(new GenericMessage<>(Boolean.TRUE))).isTrue();
 		assertThat(channel.receive().getPayload()).isEqualTo(1);
 	}
 
 	@Test
 	public void conversionServiceBeanUsedByDefault() {
 		GenericApplicationContext context = new GenericApplicationContext();
-		Converter<Boolean, Integer> converter = new Converter<Boolean, Integer>() {
-			@Override
-			public Integer convert(Boolean source) {
-				return source ? 1 : 0;
-			}
-		};
+		Converter<Boolean, Integer> converter = source -> source ? 1 : 0;
 		BeanDefinitionBuilder conversionServiceBuilder =
 				BeanDefinitionBuilder.genericBeanDefinition(ConversionServiceFactoryBean.class);
 		conversionServiceBuilder.addPropertyValue("converters", Collections.singleton(converter));
@@ -132,7 +122,7 @@ public class DatatypeChannelTests {
 		QueueChannel channel = context.getBean("testChannel", QueueChannel.class);
 		assertThat(TestUtils.getPropertyValue(channel, "messageConverter.conversionService"))
 				.isSameAs(context.getBean(ConversionService.class));
-		assertThat(channel.send(new GenericMessage<Boolean>(Boolean.TRUE))).isTrue();
+		assertThat(channel.send(new GenericMessage<>(Boolean.TRUE))).isTrue();
 		assertThat(channel.receive().getPayload()).isEqualTo(1);
 		context.close();
 	}
@@ -140,19 +130,9 @@ public class DatatypeChannelTests {
 	@Test
 	public void conversionServiceReferenceOverridesDefault() {
 		GenericApplicationContext context = new GenericApplicationContext();
-		Converter<Boolean, Integer> defaultConverter = new Converter<Boolean, Integer>() {
-			@Override
-			public Integer convert(Boolean source) {
-				return source ? 1 : 0;
-			}
-		};
+		Converter<Boolean, Integer> defaultConverter = source -> source ? 1 : 0;
 		GenericConversionService customConversionService = new DefaultConversionService();
-		customConversionService.addConverter(new Converter<Boolean, Integer>() {
-			@Override
-			public Integer convert(Boolean source) {
-				return source ? 99 : -99;
-			}
-		});
+		customConversionService.addConverter(source -> source ? 99 : -99);
 		BeanDefinitionBuilder conversionServiceBuilder =
 				BeanDefinitionBuilder.genericBeanDefinition(ConversionServiceFactoryBean.class);
 		conversionServiceBuilder.addPropertyValue("converters", Collections.singleton(defaultConverter));
@@ -169,7 +149,7 @@ public class DatatypeChannelTests {
 		context.refresh();
 
 		QueueChannel channel = context.getBean("testChannel", QueueChannel.class);
-		assertThat(channel.send(new GenericMessage<Boolean>(Boolean.TRUE))).isTrue();
+		assertThat(channel.send(new GenericMessage<>(Boolean.TRUE))).isTrue();
 		assertThat(channel.receive().getPayload()).isEqualTo(99);
 		context.close();
 	}
@@ -177,11 +157,11 @@ public class DatatypeChannelTests {
 	@Test
 	public void multipleTypes() {
 		MessageChannel channel = createChannel(String.class, Integer.class);
-		assertThat(channel.send(new GenericMessage<String>("test1"))).isTrue();
-		assertThat(channel.send(new GenericMessage<Integer>(2))).isTrue();
+		assertThat(channel.send(new GenericMessage<>("test1"))).isTrue();
+		assertThat(channel.send(new GenericMessage<>(2))).isTrue();
 		Exception exception = null;
 		try {
-			channel.send(new GenericMessage<Date>(new Date()));
+			channel.send(new GenericMessage<>(new Date()));
 		}
 		catch (MessageDeliveryException e) {
 			exception = e;
@@ -210,10 +190,10 @@ public class DatatypeChannelTests {
 		DefaultDatatypeChannelMessageConverter converter = new DefaultDatatypeChannelMessageConverter();
 		converter.setConversionService(conversionService);
 		channel.setMessageConverter(converter);
-		assertThat(channel.send(new GenericMessage<String>("foo"))).isTrue();
+		assertThat(channel.send(new GenericMessage<>("foo"))).isTrue();
 		Message<?> out = channel.receive(0);
 		assertThat(out.getPayload()).isInstanceOf(Bar.class);
-		assertThat(channel.send(new GenericMessage<Integer>(42))).isTrue();
+		assertThat(channel.send(new GenericMessage<>(42))).isTrue();
 		out = channel.receive(0);
 		assertThat(out.getPayload()).isInstanceOf(Baz.class);
 	}
@@ -258,7 +238,7 @@ public class DatatypeChannelTests {
 
 		@Override
 		public Set<ConvertiblePair> getConvertibleTypes() {
-			Set<ConvertiblePair> pairs = new HashSet<ConvertiblePair>();
+			Set<ConvertiblePair> pairs = new HashSet<>();
 			pairs.add(new ConvertiblePair(String.class, Foo.class));
 			pairs.add(new ConvertiblePair(String.class, Bar.class));
 			return pairs;
@@ -279,7 +259,7 @@ public class DatatypeChannelTests {
 
 		@Override
 		public Set<ConvertiblePair> getConvertibleTypes() {
-			Set<ConvertiblePair> pairs = new HashSet<ConvertiblePair>();
+			Set<ConvertiblePair> pairs = new HashSet<>();
 			pairs.add(new ConvertiblePair(Integer.class, Foo.class));
 			pairs.add(new ConvertiblePair(Integer.class, Baz.class));
 			return pairs;

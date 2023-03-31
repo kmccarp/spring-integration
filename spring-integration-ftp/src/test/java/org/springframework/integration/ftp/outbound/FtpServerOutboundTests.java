@@ -178,7 +178,7 @@ public class FtpServerOutboundTests extends FtpTestSupport {
 	public void testInt2866LocalDirectoryExpressionGET() {
 		String dir = "ftpSource/";
 		long modified = setModifiedOnSource1();
-		this.inboundGet.send(new GenericMessage<Object>(dir + " ftpSource1.txt"));
+		this.inboundGet.send(new GenericMessage<>(dir + " ftpSource1.txt"));
 		Message<?> result = this.output.receive(1000);
 		assertThat(result).isNotNull();
 		File localFile = (File) result.getPayload();
@@ -187,7 +187,7 @@ public class FtpServerOutboundTests extends FtpTestSupport {
 		assertPreserved(modified, localFile);
 
 		dir = "ftpSource/subFtpSource/";
-		this.inboundGet.send(new GenericMessage<Object>(dir + "subFtpSource1.txt"));
+		this.inboundGet.send(new GenericMessage<>(dir + "subFtpSource1.txt"));
 		result = this.output.receive(1000);
 		assertThat(result).isNotNull();
 		localFile = (File) result.getPayload();
@@ -199,7 +199,7 @@ public class FtpServerOutboundTests extends FtpTestSupport {
 	public void testGetWithRemove() {
 		String dir = "ftpSource/";
 		this.getGw.setOption(Option.DELETE);
-		this.inboundGet.send(new GenericMessage<Object>(dir + "ftpSource2.txt"));
+		this.inboundGet.send(new GenericMessage<>(dir + "ftpSource2.txt"));
 		Message<?> result = this.output.receive(1000);
 		assertThat(result).isNotNull();
 		File localFile = (File) result.getPayload();
@@ -210,7 +210,7 @@ public class FtpServerOutboundTests extends FtpTestSupport {
 
 	@Test
 	public void testInt2866InvalidLocalDirectoryExpression() {
-		assertThatCode(() -> this.invalidDirExpression.send(new GenericMessage<Object>("/ftpSource/ ftpSource1.txt")))
+		assertThatCode(() -> this.invalidDirExpression.send(new GenericMessage<>("/ftpSource/ ftpSource1.txt")))
 				.hasRootCauseInstanceOf(IllegalArgumentException.class)
 				.hasStackTraceContaining("Failed to make local directory");
 	}
@@ -220,7 +220,7 @@ public class FtpServerOutboundTests extends FtpTestSupport {
 	public void testInt2866LocalDirectoryExpressionMGET() {
 		String dir = "ftpSource/";
 		long modified = setModifiedOnSource1();
-		this.inboundMGet.send(new GenericMessage<Object>(dir + "*.txt"));
+		this.inboundMGet.send(new GenericMessage<>(dir + "*.txt"));
 		Message<?> result = this.output.receive(1000);
 		assertThat(result).isNotNull();
 		List<File> localFiles = (List<File>) result.getPayload();
@@ -237,7 +237,7 @@ public class FtpServerOutboundTests extends FtpTestSupport {
 		assertThat(assertedModified).isTrue();
 
 		dir = "ftpSource/subFtpSource/";
-		this.inboundMGet.send(new GenericMessage<Object>(dir + "*.txt"));
+		this.inboundMGet.send(new GenericMessage<>(dir + "*.txt"));
 		result = this.output.receive(1000);
 		assertThat(result).isNotNull();
 		localFiles = (List<File>) result.getPayload();
@@ -247,7 +247,7 @@ public class FtpServerOutboundTests extends FtpTestSupport {
 		for (File file : localFiles) {
 			assertThat(file.getPath().replaceAll(Matcher.quoteReplacement(File.separator), "/")).contains(dir);
 		}
-		this.inboundMGet.send(new GenericMessage<Object>(dir + "*.txt"));
+		this.inboundMGet.send(new GenericMessage<>(dir + "*.txt"));
 		result = this.output.receive(1000);
 		assertThat(result).isNotNull();
 		localFiles = (List<File>) result.getPayload();
@@ -261,7 +261,7 @@ public class FtpServerOutboundTests extends FtpTestSupport {
 		((FTPClient) session.getClientInstance()).changeWorkingDirectory("ftpSource");
 		session.close();
 
-		this.inboundMGet.send(new GenericMessage<Object>(""));
+		this.inboundMGet.send(new GenericMessage<>(""));
 		Message<?> result = this.output.receive(1000);
 		assertThat(result).isNotNull();
 		List<File> localFiles = (List<File>) result.getPayload();
@@ -281,7 +281,7 @@ public class FtpServerOutboundTests extends FtpTestSupport {
 		long modified = setModifiedOnSource1();
 		File secondRemote = new File(getSourceRemoteDirectory(), "ftpSource2.txt");
 		secondRemote.setLastModified(System.currentTimeMillis() - 1_000_000);
-		this.inboundMGetRecursive.send(new GenericMessage<Object>("*"));
+		this.inboundMGetRecursive.send(new GenericMessage<>("*"));
 		Message<?> result = this.output.receive(1000);
 		assertThat(result).isNotNull();
 		List<File> localFiles = (List<File>) result.getPayload();
@@ -309,13 +309,13 @@ public class FtpServerOutboundTests extends FtpTestSupport {
 		FileUtils.copyInputStreamToFile(new ByteArrayInputStream("junk".getBytes()), secondRemote);
 		long newLastModified = secondRemote.lastModified();
 		secondRemote.setLastModified(oldLastModified);
-		this.inboundMGetRecursive.send(new GenericMessage<Object>("*"));
+		this.inboundMGetRecursive.send(new GenericMessage<>("*"));
 		this.output.receive(0);
 		localContents = new ByteArrayOutputStream();
 		FileUtils.copyFile(secondTarget, localContents);
 		assertThat(new String(localContents.toByteArray())).isEqualTo(localAsString);
 		secondRemote.setLastModified(newLastModified);
-		this.inboundMGetRecursive.send(new GenericMessage<Object>("*"));
+		this.inboundMGetRecursive.send(new GenericMessage<>("*"));
 		this.output.receive(0);
 		localContents = new ByteArrayOutputStream();
 		FileUtils.copyFile(secondTarget, localContents);
@@ -343,7 +343,7 @@ public class FtpServerOutboundTests extends FtpTestSupport {
 	@SuppressWarnings("unchecked")
 	public void testInt3172LocalDirectoryExpressionMGETRecursiveFiltered() {
 		String dir = "ftpSource/";
-		this.inboundMGetRecursiveFiltered.send(new GenericMessage<Object>(dir + "*"));
+		this.inboundMGetRecursiveFiltered.send(new GenericMessage<>(dir + "*"));
 		Message<?> result = this.output.receive(1000);
 		assertThat(result).isNotNull();
 		List<File> localFiles = (List<File>) result.getPayload();
@@ -479,7 +479,7 @@ public class FtpServerOutboundTests extends FtpTestSupport {
 	@Test
 	public void testStream() {
 		String dir = "ftpSource/";
-		this.inboundGetStream.send(new GenericMessage<Object>(dir + " ftpSource1.txt"));
+		this.inboundGetStream.send(new GenericMessage<>(dir + " ftpSource1.txt"));
 		Message<?> result = this.output.receive(1000);
 		assertThat(result).isNotNull();
 		assertThat(result.getPayload()).isEqualTo("source1");
@@ -494,7 +494,7 @@ public class FtpServerOutboundTests extends FtpTestSupport {
 				.isFalse();
 
 		// Check that we can use the same session from cache to read another remote InputStream
-		this.inboundGetStream.send(new GenericMessage<Object>(dir + "ftpSource2.txt"));
+		this.inboundGetStream.send(new GenericMessage<>(dir + "ftpSource2.txt"));
 		result = this.output.receive(1000);
 		assertThat(result).isNotNull();
 		assertThat(result.getPayload()).isEqualTo("source2");
@@ -520,7 +520,7 @@ public class FtpServerOutboundTests extends FtpTestSupport {
 		}).when(session).list("ftpSource/subFtpSource/*");
 		String dir = "ftpSource/subFtpSource/";
 		try {
-			this.inboundMGet.send(new GenericMessage<Object>(dir + "*"));
+			this.inboundMGet.send(new GenericMessage<>(dir + "*"));
 			fail("expected exception");
 		}
 		catch (PartialSuccessException e) {
@@ -547,7 +547,7 @@ public class FtpServerOutboundTests extends FtpTestSupport {
 		}).when(session).list("ftpSource/subFtpSource/");
 		String dir = "ftpSource/";
 		try {
-			this.inboundMGetRecursive.send(new GenericMessage<Object>(dir + "*"));
+			this.inboundMGetRecursive.send(new GenericMessage<>(dir + "*"));
 			fail("expected exception");
 		}
 		catch (PartialSuccessException e) {
@@ -817,7 +817,7 @@ public class FtpServerOutboundTests extends FtpTestSupport {
 		@EventListener
 		public void handleEvent(ApacheMinaFtpEvent event) {
 			if (this.latch != null) {
-				if (this.events.size() > 0 || event instanceof SessionOpenedEvent) {
+				if (!this.events.isEmpty() || event instanceof SessionOpenedEvent) {
 					if (event instanceof SessionOpenedEvent) {
 						this.clientAddress = event.getSession().getClientAddress();
 						this.events.add(event);

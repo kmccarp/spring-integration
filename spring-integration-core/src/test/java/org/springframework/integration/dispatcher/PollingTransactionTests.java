@@ -273,6 +273,8 @@ public class PollingTransactionTests {
 	@SuppressWarnings("serial")
 	public static class FailingCommitTransactionManager extends TestTransactionManager {
 
+		private static final long serialVersionUID = 1;
+
 		@Override
 		protected void doCommit(DefaultTransactionStatus status) throws TransactionException {
 			throw new IllegalTransactionStateException("intentional test commit failure");

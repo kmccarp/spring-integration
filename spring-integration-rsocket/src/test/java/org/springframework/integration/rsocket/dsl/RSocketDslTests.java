@@ -131,7 +131,7 @@ public class RSocketDslTests {
 					.from(Function.class)
 					.handle(RSockets.outboundGateway(message ->
 											message.getHeaders().getOrDefault("route", "/uppercase"))
-									.interactionModel((message) -> RSocketInteractionModel.requestChannel)
+									.interactionModel(message -> RSocketInteractionModel.requestChannel)
 									.expectedResponseType("T(java.lang.String)")
 									.clientRSocketConnector(clientRSocketConnector),
 							e -> e.customizeMonoReply(
@@ -146,7 +146,7 @@ public class RSocketDslTests {
 			return IntegrationFlow
 					.from(RSockets.inboundGateway("/uppercase")
 							.interactionModels(RSocketInteractionModel.requestChannel))
-					.<Flux<String>, Flux<String>>transform((flux) -> flux.map(String::toUpperCase))
+					.<Flux<String>, Flux<String>>transform(flux -> flux.map(String::toUpperCase))
 					.get();
 		}
 
@@ -156,7 +156,7 @@ public class RSocketDslTests {
 					.from(RSockets.inboundGateway("/uppercaseWhole")
 							.interactionModels(RSocketInteractionModel.requestChannel)
 							.decodeFluxAsUnit(true))
-					.<Flux<String>, Flux<String>>transform((flux) -> flux.map(String::toUpperCase))
+					.<Flux<String>, Flux<String>>transform(flux -> flux.map(String::toUpperCase))
 					.get();
 		}
 
@@ -164,7 +164,7 @@ public class RSocketDslTests {
 		public IntegrationFlow rsocketLowerCaseFlow() {
 			return IntegrationFlow
 					.from(RSockets.inboundGateway("/lowercase"))
-					.<Flux<String>, Flux<String>>transform((flux) -> flux.map(String::toLowerCase))
+					.<Flux<String>, Flux<String>>transform(flux -> flux.map(String::toLowerCase))
 					.get();
 		}
 

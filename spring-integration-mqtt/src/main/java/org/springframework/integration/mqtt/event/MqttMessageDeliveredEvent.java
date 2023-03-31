@@ -28,6 +28,8 @@ package org.springframework.integration.mqtt.event;
 @SuppressWarnings("serial")
 public class MqttMessageDeliveredEvent extends MqttMessageDeliveryEvent {
 
+	private static final long serialVersionUID = 1;
+
 	public MqttMessageDeliveredEvent(Object source, int messageId, String clientId,
 			int clientInstance) {
 		super(source, messageId, clientId, clientInstance);

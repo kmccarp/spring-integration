@@ -227,7 +227,7 @@ public class AbstractJpaOperationsTests {
 		student2.setFirstName("Otto");
 		student3.setFirstName("Wilhelm");
 
-		List<StudentDomain> students = new ArrayList<StudentDomain>(3);
+		List<StudentDomain> students = new ArrayList<>(3);
 
 		students.add(student1);
 		students.add(student2);
@@ -278,7 +278,7 @@ public class AbstractJpaOperationsTests {
 		student1.setFirstName("Karl");
 		student3.setFirstName("Wilhelm");
 
-		List<StudentDomain> students = new ArrayList<StudentDomain>(3);
+		List<StudentDomain> students = new ArrayList<>(3);
 
 		students.add(student1);
 		students.add(student2);
@@ -327,7 +327,7 @@ public class AbstractJpaOperationsTests {
 		student2.setFirstName("Otto");
 		student3.setFirstName("Wilhelm");
 
-		List<StudentDomain> students = new ArrayList<StudentDomain>(3);
+		List<StudentDomain> students = new ArrayList<>(3);
 
 		students.add(student1);
 		students.add(student2);
@@ -376,7 +376,7 @@ public class AbstractJpaOperationsTests {
 		student1.setFirstName("Karl");
 		student3.setFirstName("Wilhelm");
 
-		List<StudentDomain> students = new ArrayList<StudentDomain>(3);
+		List<StudentDomain> students = new ArrayList<>(3);
 
 		students.add(student1);
 		students.add(student2);
@@ -421,7 +421,7 @@ public class AbstractJpaOperationsTests {
 		final List<?> studentsFromDb = jpaOperations.getResultListForClass(StudentDomain.class, 0, 0);
 
 		assertThat(studentsFromDb).isNotNull();
-		assertThat(studentsFromDb.size() == 0).isTrue();
+		assertThat(studentsFromDb.isEmpty()).isTrue();
 
 	}
 
@@ -483,7 +483,7 @@ public class AbstractJpaOperationsTests {
 
 		TransactionStatus status = transactionManager.getTransaction(def);
 
-		jpaOperations.deleteInBatch(new ArrayList<StudentDomain>(0));
+		jpaOperations.deleteInBatch(new ArrayList<>(0));
 
 		entityManager.flush();
 

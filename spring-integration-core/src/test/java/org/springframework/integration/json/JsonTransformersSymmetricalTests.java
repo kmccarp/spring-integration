@@ -43,7 +43,7 @@ public class JsonTransformersSymmetricalTests {
 		payload.add(person);
 
 		ObjectToJsonTransformer objectToJsonTransformer = new ObjectToJsonTransformer();
-		Message<?> jsonMessage = objectToJsonTransformer.transform(new GenericMessage<Object>(payload));
+		Message<?> jsonMessage = objectToJsonTransformer.transform(new GenericMessage<>(payload));
 
 		JsonToObjectTransformer jsonToObjectTransformer = new JsonToObjectTransformer();
 		Object result = jsonToObjectTransformer.transform(jsonMessage).getPayload();

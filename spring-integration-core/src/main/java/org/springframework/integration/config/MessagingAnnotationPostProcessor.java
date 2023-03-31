@@ -116,7 +116,7 @@ public class MessagingAnnotationPostProcessor
 		this.postProcessors.values().stream()
 				.filter(BeanFactoryAware.class::isInstance)
 				.map(BeanFactoryAware.class::cast)
-				.forEach((processor) -> processor.setBeanFactory((BeanFactory) this.registry));
+				.forEach(processor -> processor.setBeanFactory((BeanFactory) this.registry));
 
 		if (!AotDetector.useGeneratedArtifacts()) {
 			String[] beanNames = registry.getBeanDefinitionNames();
@@ -155,14 +155,14 @@ public class MessagingAnnotationPostProcessor
 
 		for (Class<? extends Annotation> annotationType : this.postProcessors.keySet()) {
 			annotations.stream()
-					.filter((ann) -> ann.getType().equals(annotationType))
+					.filter(ann -> ann.getType().equals(annotationType))
 					.map(MergedAnnotation::getRoot)
 					.map(MergedAnnotation::synthesize)
-					.map((ann) -> new MessagingMetaAnnotation(ann, annotationType))
+					.map(ann -> new MessagingMetaAnnotation(ann, annotationType))
 					.forEach(messagingAnnotations::add);
 		}
 
-		if (annotations.get(EndpointId.class, (ann) -> ann.hasNonDefaultValue("value")).isPresent()
+		if (annotations.get(EndpointId.class, ann -> ann.hasNonDefaultValue("value")).isPresent()
 				&& messagingAnnotations.size() > 1) {
 
 			throw new IllegalStateException("@EndpointId on " + identified

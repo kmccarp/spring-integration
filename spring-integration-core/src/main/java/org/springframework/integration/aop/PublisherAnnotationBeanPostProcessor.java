@@ -42,6 +42,8 @@ import org.springframework.beans.factory.SmartInitializingSingleton;
 public class PublisherAnnotationBeanPostProcessor extends AbstractBeanFactoryAwareAdvisingPostProcessor
 		implements BeanNameAware, SmartInitializingSingleton {
 
+	private static final long serialVersionUID = 1;
+
 	private String defaultChannelName;
 
 	private String beanName;

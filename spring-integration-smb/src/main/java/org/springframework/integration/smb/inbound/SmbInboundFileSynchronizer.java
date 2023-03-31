@@ -45,8 +45,8 @@ public class SmbInboundFileSynchronizer extends AbstractInboundFileSynchronizer<
 		try {
 			return _file != null && _file.isFile();
 		}
-		catch (Exception _ex) {
-			logger.warn("Unable to get resource status [" + _file + "].", _ex);
+		catch (Exception ex) {
+			logger.warn("Unable to get resource status [" + _file + "].", ex);
 		}
 		return false;
 	}

@@ -75,7 +75,7 @@ public class MessageStoreReaperTests {
 
 	@Test
 	public void testExpiry() throws Exception {
-		messageStore.addMessageToGroup("FOO", new GenericMessage<String>("foo"));
+		messageStore.addMessageToGroup("FOO", new GenericMessage<>("foo"));
 		assertThat(messageStore.getMessageGroup("FOO").size()).isEqualTo(1);
 		// wait for expiry...
 		int n = 0;
@@ -88,7 +88,7 @@ public class MessageStoreReaperTests {
 
 	@Test
 	public void testSmartLifecycle() throws Exception {
-		GenericMessage<String> testMessage = new GenericMessage<String>("foo");
+		GenericMessage<String> testMessage = new GenericMessage<>("foo");
 
 		messageStore2.addMessageToGroup("FOO", testMessage);
 		assertThat(messageStore2.getMessageGroup("FOO").size()).isEqualTo(1);
@@ -138,7 +138,7 @@ public class MessageStoreReaperTests {
 
 	public static class ExpiryCallback implements MessageGroupCallback {
 
-		public final List<MessageGroup> groups = new ArrayList<MessageGroup>();
+		public final List<MessageGroup> groups = new ArrayList<>();
 
 		@Override
 		public void execute(MessageGroupStore messageGroupStore, MessageGroup group) {

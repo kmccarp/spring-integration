@@ -113,7 +113,7 @@ public class GroovyFilterTests {
 	@Test
 	public void testCompileStaticIsApplied() {
 		assertThatExceptionOfType(MessageHandlingException.class)
-				.isThrownBy(() -> this.compileStaticFailScriptInput.send(new GenericMessage<Object>("foo")))
+				.isThrownBy(() -> this.compileStaticFailScriptInput.send(new GenericMessage<>("foo")))
 				.withRootCauseExactlyInstanceOf(MultipleCompilationErrorsException.class)
 				.withStackTraceContaining("[Static type checking] - The variable [payload] is undeclared.");
 	}

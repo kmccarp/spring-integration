@@ -141,20 +141,20 @@ public class ChannelAdapterSecurityIntegrationTests {
 	@Test
 	public void testUnsecuredAsAdmin() {
 		login("bob", "bobspassword", "ROLE_ADMIN");
-		unsecuredChannelAdapter.send(new GenericMessage<String>("test"));
+		unsecuredChannelAdapter.send(new GenericMessage<>("test"));
 		assertThat(testConsumer.sentMessages.size()).as("Wrong size of message list in target").isEqualTo(1);
 	}
 
 	@Test
 	public void testUnsecuredAsUser() {
 		login("bob", "bobspassword", "ROLE_USER");
-		unsecuredChannelAdapter.send(new GenericMessage<String>("test"));
+		unsecuredChannelAdapter.send(new GenericMessage<>("test"));
 		assertThat(testConsumer.sentMessages.size()).as("Wrong size of message list in target").isEqualTo(1);
 	}
 
 	@Test
 	public void testUnsecuredWithoutAuthenticating() {
-		unsecuredChannelAdapter.send(new GenericMessage<String>("test"));
+		unsecuredChannelAdapter.send(new GenericMessage<>("test"));
 		assertThat(testConsumer.sentMessages.size()).as("Wrong size of message list in target").isEqualTo(1);
 	}
 

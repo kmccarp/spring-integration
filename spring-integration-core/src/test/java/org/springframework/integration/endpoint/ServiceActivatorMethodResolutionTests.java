@@ -130,7 +130,7 @@ public class ServiceActivatorMethodResolutionTests {
 		serviceActivator.handleMessage(test);
 		assertThat(outputChannel.receive(10)).isEqualTo(test);
 
-		test = new GenericMessage<Object>("foo");
+		test = new GenericMessage<>("foo");
 		serviceActivator.handleMessage(test);
 		assertThat(outputChannel.receive(10).getPayload()).isEqualTo("FOO");
 	}
@@ -163,7 +163,7 @@ public class ServiceActivatorMethodResolutionTests {
 		serviceActivator.handleMessage(test);
 		assertThat(outputChannel.receive(10)).isEqualTo(test);
 
-		test = new GenericMessage<Object>("foo");
+		test = new GenericMessage<>("foo");
 		serviceActivator.handleMessage(test);
 		assertThat(outputChannel.receive(10).getPayload()).isEqualTo("FOO");
 	}
@@ -201,7 +201,7 @@ public class ServiceActivatorMethodResolutionTests {
 		serviceActivator.handleMessage(test);
 		assertThat(outputChannel.receive(10)).isEqualTo(test);
 
-		test = new GenericMessage<Object>("foo");
+		test = new GenericMessage<>("foo");
 		serviceActivator.handleMessage(test);
 		assertThat(outputChannel.receive(10).getPayload()).isNotEqualTo("FOO");
 	}
@@ -239,7 +239,7 @@ public class ServiceActivatorMethodResolutionTests {
 		serviceActivator.handleMessage(test);
 		assertThat(outputChannel.receive(10)).isEqualTo(test);
 
-		test = new GenericMessage<Object>("foo");
+		test = new GenericMessage<>("foo");
 		serviceActivator.handleMessage(test);
 		assertThat(outputChannel.receive(10).getPayload()).isNotEqualTo("FOO");
 	}

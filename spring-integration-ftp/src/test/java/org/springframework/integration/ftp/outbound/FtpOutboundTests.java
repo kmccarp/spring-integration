@@ -137,7 +137,7 @@ public class FtpOutboundTests {
 		File destFile = new File(targetDir, srcFile.getName() + ".test");
 		destFile.deleteOnExit();
 
-		handler.handleMessage(new GenericMessage<File>(srcFile));
+		handler.handleMessage(new GenericMessage<>(srcFile));
 		assertThat(destFile.exists()).as("destination file was not created").isTrue();
 	}
 
@@ -146,7 +146,7 @@ public class FtpOutboundTests {
 		File targetDir = new File("remote-target-dir");
 		assertThat(targetDir.exists()).as("target directory does not exist: " + targetDir.getName()).isTrue();
 
-		FileTransferringMessageHandler<FTPFile> handler = new FileTransferringMessageHandler<FTPFile>(sessionFactory);
+		FileTransferringMessageHandler<FTPFile> handler = new FileTransferringMessageHandler<>(sessionFactory);
 		handler.setRemoteDirectoryExpression(new LiteralExpression(targetDir.getName()));
 		handler.setFileNameGenerator(message -> ((File) message.getPayload()).getName() + ".test");
 		handler.setBeanFactory(mock(BeanFactory.class));
@@ -165,7 +165,7 @@ public class FtpOutboundTests {
 		RemoteFileTemplate<?> template = TestUtils.getPropertyValue(handler, "remoteFileTemplate",
 				RemoteFileTemplate.class);
 		new DirectFieldAccessor(template).setPropertyValue("logger", logger);
-		handler.handleMessage(new GenericMessage<File>(srcFile));
+		handler.handleMessage(new GenericMessage<>(srcFile));
 		assertThat(logged.get()).isNotNull();
 		assertThat(logged.get()).isEqualTo("File " + srcFile.toString() + " does not exist");
 	}
@@ -186,7 +186,7 @@ public class FtpOutboundTests {
 
 		MessageChannel channel = context.getBean("outboundChainChannel", MessageChannel.class);
 
-		channel.send(new GenericMessage<File>(srcFile));
+		channel.send(new GenericMessage<>(srcFile));
 		assertThat(destFile.exists()).as("destination file was not created").isTrue();
 		context.close();
 	}

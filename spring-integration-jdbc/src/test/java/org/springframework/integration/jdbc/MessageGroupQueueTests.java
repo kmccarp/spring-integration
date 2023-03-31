@@ -48,12 +48,12 @@ public class MessageGroupQueueTests {
 
 		final MessageGroupQueue queue = new MessageGroupQueue(new SimpleMessageStore(), 1, 1);
 
-		final AtomicReference<InterruptedException> exceptionHolder = new AtomicReference<InterruptedException>();
+		final AtomicReference<InterruptedException> exceptionHolder = new AtomicReference<>();
 
 		Thread t = new Thread(() -> {
-			queue.offer(new GenericMessage<String>("hello"));
+			queue.offer(new GenericMessage<>("hello"));
 			try {
-				queue.offer(new GenericMessage<String>("hello"), 100, TimeUnit.SECONDS);
+				queue.offer(new GenericMessage<>("hello"), 100, TimeUnit.SECONDS);
 			}
 			catch (InterruptedException e) {
 				exceptionHolder.set(e);
@@ -69,7 +69,7 @@ public class MessageGroupQueueTests {
 	@Test
 	public void testConcurrentReadWrite() throws Exception {
 		final MessageGroupQueue queue = new MessageGroupQueue(new SimpleMessageStore(), 1, 1);
-		final AtomicReference<Message<?>> messageHolder = new AtomicReference<Message<?>>();
+		final AtomicReference<Message<?>> messageHolder = new AtomicReference<>();
 
 		Thread t1 = new Thread(() -> {
 			try {
@@ -81,7 +81,7 @@ public class MessageGroupQueueTests {
 		});
 		Thread t2 = new Thread(() -> {
 			try {
-				queue.offer(new GenericMessage<String>("hello"), 1000, TimeUnit.SECONDS);
+				queue.offer(new GenericMessage<>("hello"), 1000, TimeUnit.SECONDS);
 			}
 			catch (Exception e) {
 				LogFactory.getLog(getClass()).error("queue offer failed", e);
@@ -96,13 +96,13 @@ public class MessageGroupQueueTests {
 	@Test
 	public void testConcurrentWriteRead() throws Exception {
 		final MessageGroupQueue queue = new MessageGroupQueue(new SimpleMessageStore(), 1, 1);
-		final AtomicReference<Message<?>> messageHolder = new AtomicReference<Message<?>>();
+		final AtomicReference<Message<?>> messageHolder = new AtomicReference<>();
 
-		queue.offer(new GenericMessage<String>("hello"), 1000, TimeUnit.SECONDS);
+		queue.offer(new GenericMessage<>("hello"), 1000, TimeUnit.SECONDS);
 
 		Thread t1 = new Thread(() -> {
 			try {
-				queue.offer(new GenericMessage<String>("Hi"), 1000, TimeUnit.SECONDS);
+				queue.offer(new GenericMessage<>("Hi"), 1000, TimeUnit.SECONDS);
 			}
 			catch (Exception e) {
 				LogFactory.getLog(getClass()).error("queue offer failed", e);
@@ -128,9 +128,9 @@ public class MessageGroupQueueTests {
 	@Test
 	public void testConcurrentReadersWithTimeout() throws Exception {
 		final MessageGroupQueue queue = new MessageGroupQueue(new SimpleMessageStore(), 1, 1);
-		final AtomicReference<Message<?>> messageHolder1 = new AtomicReference<Message<?>>();
-		final AtomicReference<Message<?>> messageHolder2 = new AtomicReference<Message<?>>();
-		final AtomicReference<Message<?>> messageHolder3 = new AtomicReference<Message<?>>();
+		final AtomicReference<Message<?>> messageHolder1 = new AtomicReference<>();
+		final AtomicReference<Message<?>> messageHolder2 = new AtomicReference<>();
+		final AtomicReference<Message<?>> messageHolder3 = new AtomicReference<>();
 
 		Thread t1 = new Thread(() -> {
 			try {
@@ -158,7 +158,7 @@ public class MessageGroupQueueTests {
 		});
 		Thread t4 = new Thread(() -> {
 			try {
-				queue.offer(new GenericMessage<String>("Hi"), 10, TimeUnit.SECONDS);
+				queue.offer(new GenericMessage<>("Hi"), 10, TimeUnit.SECONDS);
 			}
 			catch (Exception e) {
 				LogFactory.getLog(getClass()).error("queue offer failed", e);
@@ -181,13 +181,13 @@ public class MessageGroupQueueTests {
 	@Test
 	public void testConcurrentWritersWithTimeout() throws Exception {
 		final MessageGroupQueue queue = new MessageGroupQueue(new SimpleMessageStore(), 1, 1);
-		final AtomicReference<Boolean> booleanHolder1 = new AtomicReference<Boolean>(true);
-		final AtomicReference<Boolean> booleanHolder2 = new AtomicReference<Boolean>(true);
-		final AtomicReference<Boolean> booleanHolder3 = new AtomicReference<Boolean>(true);
+		final AtomicReference<Boolean> booleanHolder1 = new AtomicReference<>(true);
+		final AtomicReference<Boolean> booleanHolder2 = new AtomicReference<>(true);
+		final AtomicReference<Boolean> booleanHolder3 = new AtomicReference<>(true);
 
 		Thread t1 = new Thread(() -> {
 			try {
-				booleanHolder1.set(queue.offer(new GenericMessage<String>("Hi-1"), 2, TimeUnit.SECONDS));
+				booleanHolder1.set(queue.offer(new GenericMessage<>("Hi-1"), 2, TimeUnit.SECONDS));
 			}
 			catch (Exception e) {
 				LogFactory.getLog(getClass()).error("queue offer failed", e);
@@ -195,7 +195,7 @@ public class MessageGroupQueueTests {
 		});
 		Thread t2 = new Thread(() -> {
 			try {
-				boolean offered = queue.offer(new GenericMessage<String>("Hi-2"), 2, TimeUnit.SECONDS);
+				boolean offered = queue.offer(new GenericMessage<>("Hi-2"), 2, TimeUnit.SECONDS);
 				booleanHolder2.set(offered);
 			}
 			catch (Exception e) {
@@ -204,7 +204,7 @@ public class MessageGroupQueueTests {
 		});
 		Thread t3 = new Thread(() -> {
 			try {
-				boolean offered = queue.offer(new GenericMessage<String>("Hi-3"), 2, TimeUnit.SECONDS);
+				boolean offered = queue.offer(new GenericMessage<>("Hi-3"), 2, TimeUnit.SECONDS);
 				booleanHolder3.set(offered);
 			}
 			catch (Exception e) {
@@ -225,15 +225,15 @@ public class MessageGroupQueueTests {
 	@Test
 	public void testConcurrentWriteReadMulti() throws Exception {
 		final MessageGroupQueue queue = new MessageGroupQueue(new SimpleMessageStore(), 1, 4);
-		final AtomicReference<Message<?>> messageHolder = new AtomicReference<Message<?>>();
+		final AtomicReference<Message<?>> messageHolder = new AtomicReference<>();
 
-		queue.offer(new GenericMessage<String>("hello"), 1000, TimeUnit.SECONDS);
+		queue.offer(new GenericMessage<>("hello"), 1000, TimeUnit.SECONDS);
 
 		Thread t1 = new Thread(() -> {
 			try {
-				queue.offer(new GenericMessage<String>("Hi"), 1000, TimeUnit.SECONDS);
-				queue.offer(new GenericMessage<String>("Hi"), 1000, TimeUnit.SECONDS);
-				queue.offer(new GenericMessage<String>("Hi"), 1000, TimeUnit.SECONDS);
+				queue.offer(new GenericMessage<>("Hi"), 1000, TimeUnit.SECONDS);
+				queue.offer(new GenericMessage<>("Hi"), 1000, TimeUnit.SECONDS);
+				queue.offer(new GenericMessage<>("Hi"), 1000, TimeUnit.SECONDS);
 			}
 			catch (Exception e) {
 				LogFactory.getLog(getClass()).error("queue offer failed", e);
@@ -274,15 +274,15 @@ public class MessageGroupQueueTests {
 
 		final MessageGroupQueue queue = new MessageGroupQueue(mgs, 1, 1);
 
-		final AtomicReference<InterruptedException> exceptionHolder = new AtomicReference<InterruptedException>();
+		final AtomicReference<InterruptedException> exceptionHolder = new AtomicReference<>();
 
-		Thread t1 = new Thread(() -> queue.offer(new GenericMessage<String>("hello")));
+		Thread t1 = new Thread(() -> queue.offer(new GenericMessage<>("hello")));
 		t1.start();
 		Thread.sleep(500);
 		Thread t2 = new Thread(() -> {
-			queue.offer(new GenericMessage<String>("hello"));
+			queue.offer(new GenericMessage<>("hello"));
 			try {
-				queue.offer(new GenericMessage<String>("hello"), 100, TimeUnit.SECONDS);
+				queue.offer(new GenericMessage<>("hello"), 100, TimeUnit.SECONDS);
 			}
 			catch (InterruptedException e) {
 				exceptionHolder.set(e);

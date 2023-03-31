@@ -63,9 +63,9 @@ public class MailReceiverFactoryBean extends AbstractFactoryBean<MailReceiver> {
 	 * Indicates whether retrieved messages should be deleted from the server.
 	 * This value will be <code>null</code> <i>unless</i> explicitly configured.
 	 */
-	private Boolean shouldDeleteMessages = null;
+	private Boolean shouldDeleteMessages;
 
-	private Boolean shouldMarkMessagesAsRead = null;
+	private Boolean shouldMarkMessagesAsRead;
 
 	private int maxFetchSize = 1;
 

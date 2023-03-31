@@ -331,7 +331,7 @@ public class DeserializationTests {
 	private TcpDeserializationExceptionEvent doDeserialize(AbstractByteArraySerializer deser, String expectedMessage,
 			byte[] data, int mms) {
 		final AtomicReference<TcpDeserializationExceptionEvent> event =
-				new AtomicReference<TcpDeserializationExceptionEvent>();
+				new AtomicReference<>();
 		class Publisher implements ApplicationEventPublisher {
 
 			@Override
@@ -417,7 +417,7 @@ public class DeserializationTests {
 		assertThat(message).isNotNull();
 		assertThat(new String((byte[]) message.getPayload())).isEqualTo("Test");
 		String shortReply = reply.substring(0, reply.length() - 1);
-		((MessageChannel) message.getHeaders().getReplyChannel()).send(new GenericMessage<String>(shortReply));
+		((MessageChannel) message.getHeaders().getReplyChannel()).send(new GenericMessage<>(shortReply));
 		message = outputChannel.receive(1000);
 		assertThat(message).isNull();
 	}
@@ -467,7 +467,7 @@ public class DeserializationTests {
 		message = serverSideChannel.receive(10000);
 		assertThat(message).isNotNull();
 		assertThat(new String((byte[]) message.getPayload())).isEqualTo("Test");
-		((MessageChannel) message.getHeaders().getReplyChannel()).send(new GenericMessage<String>("reply"));
+		((MessageChannel) message.getHeaders().getReplyChannel()).send(new GenericMessage<>("reply"));
 		message = outputChannel.receive(10000);
 		assertThat(message).isNotNull();
 		assertThat(new String(((byte[]) message.getPayload()))).isEqualTo("reply");

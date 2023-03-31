@@ -136,7 +136,7 @@ public class FileWritingMessageHandler extends AbstractReplyProducingMessageHand
 
 	private String temporaryFileSuffix = ".writing";
 
-	private boolean temporaryFileSuffixSet = false;
+	private boolean temporaryFileSuffixSet;
 
 	private FileExistsMode fileExistsMode = FileExistsMode.REPLACE;
 
@@ -154,7 +154,7 @@ public class FileWritingMessageHandler extends AbstractReplyProducingMessageHand
 
 	private boolean expectReply = true;
 
-	private boolean appendNewLine = false;
+	private boolean appendNewLine;
 
 	private LockRegistry lockRegistry = new PassThruLockRegistry();
 
@@ -390,7 +390,7 @@ public class FileWritingMessageHandler extends AbstractReplyProducingMessageHand
 	 * @since 5.0
 	 */
 	public void setChmod(int chmod) {
-		Assert.isTrue(chmod >= 0 && chmod <= 0777, // NOSONAR permissions octal
+		Assert.isTrue(chmod >= 0 && chmod <= 511, // NOSONAR permissions octal
 				"'chmod' must be between 0 and 0777 (octal)");
 		if (!FileUtils.IS_POSIX) {
 			this.logger.error("'chmod' setting ignored - the file system does not support Posix attributes");
@@ -399,7 +399,7 @@ public class FileWritingMessageHandler extends AbstractReplyProducingMessageHand
 		BitSet bits = BitSet.valueOf(new byte[] {(byte) chmod, (byte) (chmod >> 8)}); // NOSONAR
 		this.permissions = bits.stream()
 				.boxed()
-				.map((b) -> POSIX_FILE_PERMISSIONS[b])
+				.map(b -> POSIX_FILE_PERMISSIONS[b])
 				.collect(Collectors.toSet());
 	}
 

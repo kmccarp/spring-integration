@@ -31,6 +31,8 @@ import org.springframework.lang.Nullable;
 @SuppressWarnings("serial")
 public class MqttConnectionFailedEvent extends MqttIntegrationEvent {
 
+	private static final long serialVersionUID = 1;
+
 	public MqttConnectionFailedEvent(Object source) {
 		super(source);
 	}

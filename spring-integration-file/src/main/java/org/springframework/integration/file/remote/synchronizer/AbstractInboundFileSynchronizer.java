@@ -137,7 +137,7 @@ public abstract class AbstractInboundFileSynchronizer<F>
 	 */
 	public AbstractInboundFileSynchronizer(SessionFactory<F> sessionFactory) {
 		Assert.notNull(sessionFactory, "sessionFactory must not be null");
-		this.remoteFileTemplate = new RemoteFileTemplate<F>(sessionFactory);
+		this.remoteFileTemplate = new RemoteFileTemplate<>(sessionFactory);
 	}
 
 	@Nullable

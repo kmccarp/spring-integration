@@ -22,8 +22,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.Reader;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
@@ -139,7 +137,7 @@ public class FileSplitterTests {
 		assertThat(receive.getHeaders().get(FileHeaders.FILENAME)).isEqualTo(file.getName());
 		assertThat(this.output.receive(1)).isNull();
 
-		this.input1.send(new GenericMessage<Reader>(new FileReader(file)));
+		this.input1.send(new GenericMessage<>(new FileReader(file)));
 		receive = this.output.receive(10000);
 		assertThat(receive).isNotNull(); //HelloWorld
 		assertThat(receive.getHeaders().get(IntegrationMessageHeaderAccessor.SEQUENCE_SIZE)).isEqualTo(2);
@@ -155,7 +153,7 @@ public class FileSplitterTests {
 		assertThat(receive).isNotNull(); //äöüß
 		assertThat(this.output.receive(1)).isNull();
 
-		this.input2.send(new GenericMessage<InputStream>(
+		this.input2.send(new GenericMessage<>(
 				new ByteArrayInputStream(SAMPLE_CONTENT.getBytes(StandardCharsets.UTF_8))));
 		receive = this.output.receive(10000);
 		assertThat(receive).isNotNull(); //HelloWorld

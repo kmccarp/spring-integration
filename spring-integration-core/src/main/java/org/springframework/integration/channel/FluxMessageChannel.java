@@ -92,7 +92,7 @@ public class FluxMessageChannel extends AbstractMessageChannel
 	@Override
 	public void subscribe(Subscriber<? super Message<?>> subscriber) {
 		this.sink.asFlux()
-				.doFinally((s) -> this.subscribedSignal.tryEmitNext(this.sink.currentSubscriberCount() > 0))
+				.doFinally(s -> this.subscribedSignal.tryEmitNext(this.sink.currentSubscriberCount() > 0))
 				.share()
 				.subscribe(subscriber);
 
@@ -100,7 +100,7 @@ public class FluxMessageChannel extends AbstractMessageChannel
 				Mono.fromCallable(() -> this.sink.currentSubscriberCount() > 0)
 						.filter(Boolean::booleanValue)
 						.doOnNext(this.subscribedSignal::tryEmitNext)
-						.repeatWhenEmpty((repeat) ->
+						.repeatWhenEmpty(repeat ->
 								this.active ? repeat.delayElements(Duration.ofMillis(100)) : repeat) // NOSONAR
 						.subscribe());
 	}

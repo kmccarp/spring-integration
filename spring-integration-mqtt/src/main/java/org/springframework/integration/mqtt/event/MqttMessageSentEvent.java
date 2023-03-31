@@ -29,6 +29,8 @@ import org.springframework.messaging.Message;
 @SuppressWarnings("serial")
 public class MqttMessageSentEvent extends MqttMessageDeliveryEvent {
 
+	private static final long serialVersionUID = 1;
+
 	private final Message<?> message;
 
 	private final String topic;

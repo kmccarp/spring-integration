@@ -63,7 +63,7 @@ public class JsonConverterCompatibilityTests {
 	@Test
 	public void testInbound() {
 		@SuppressWarnings("unchecked") final Message<String> out = (Message<String>) new ObjectToJsonTransformer()
-				.transform(new GenericMessage<Foo>(new Foo()));
+				.transform(new GenericMessage<>(new Foo()));
 		MessageProperties messageProperties = new MessageProperties();
 		DefaultAmqpHeaderMapper.outboundMapper().fromHeadersToRequest(out.getHeaders(), messageProperties);
 		final BasicProperties props = new DefaultMessagePropertiesConverter().fromMessageProperties(messageProperties,

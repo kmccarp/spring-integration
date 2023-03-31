@@ -180,13 +180,13 @@ public class AggregatorTests {
 
 	@Test
 	public void testCustomAggPerf() throws InterruptedException, ExecutionException, TimeoutException {
-		class CustomHandler extends AbstractMessageHandler {
+		final class CustomHandler extends AbstractMessageHandler {
 
 			// custom aggregator, only handles a single correlation
 
 			private final ReentrantLock lock = new ReentrantLock();
 
-			private final Collection<Message<?>> messages = new ArrayList<Message<?>>(60000);
+			private final Collection<Message<?>> messages = new ArrayList<>(60000);
 
 			private final MessageChannel outputChannel;
 
@@ -200,7 +200,7 @@ public class AggregatorTests {
 				try {
 					this.messages.add(requestMessage);
 					if (this.messages.size() == 60000) {
-						List<Object> payloads = new ArrayList<Object>(this.messages.size());
+						List<Object> payloads = new ArrayList<>(this.messages.size());
 						for (Message<?> message : this.messages) {
 							payloads.add(message.getPayload());
 						}

@@ -17,7 +17,6 @@
 package org.springframework.integration.config.xml;
 
 import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -62,7 +61,7 @@ public class StreamTransformerParserTests {
 
 	@Test
 	public void directChannelWithStringMessage() {
-		this.directInput.send(new GenericMessage<InputStream>(new ByteArrayInputStream("foo".getBytes())));
+		this.directInput.send(new GenericMessage<>(new ByteArrayInputStream("foo".getBytes())));
 		Message<?> result = output.receive(10000);
 		assertThat(result).isNotNull();
 		assertThat((byte[]) result.getPayload()).isEqualTo("foo".getBytes());
@@ -70,7 +69,7 @@ public class StreamTransformerParserTests {
 
 	@Test
 	public void queueChannelWithStringMessage() {
-		this.queueInput.send(new GenericMessage<InputStream>(new ByteArrayInputStream("foo".getBytes())));
+		this.queueInput.send(new GenericMessage<>(new ByteArrayInputStream("foo".getBytes())));
 		Message<?> result = output.receive(10000);
 		assertThat(result).isNotNull();
 		assertThat((byte[]) result.getPayload()).isEqualTo("foo".getBytes());
@@ -78,7 +77,7 @@ public class StreamTransformerParserTests {
 
 	@Test
 	public void charset() {
-		this.charsetChannel.send(new GenericMessage<InputStream>(new ByteArrayInputStream("foo".getBytes())));
+		this.charsetChannel.send(new GenericMessage<>(new ByteArrayInputStream("foo".getBytes())));
 		Message<?> result = output.receive(10000);
 		assertThat(result).isNotNull();
 		assertThat(result.getPayload()).isEqualTo("foo");

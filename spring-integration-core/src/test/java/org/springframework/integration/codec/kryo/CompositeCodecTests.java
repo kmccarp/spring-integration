@@ -55,9 +55,9 @@ public class CompositeCodecTests {
 
 	static class SomeClassWithNoDefaultConstructors {
 
-		private String val1;
+		private final String val1;
 
-		private int val2;
+		private final int val2;
 
 		SomeClassWithNoDefaultConstructors(String val1, int val2) {
 			this.val1 = val1;
@@ -70,7 +70,7 @@ public class CompositeCodecTests {
 				return false;
 			}
 			SomeClassWithNoDefaultConstructors that = (SomeClassWithNoDefaultConstructors) other;
-			return (this.val1.equals(that.val1) && this.val2 == that.val2);
+			return this.val1.equals(that.val1) && this.val2 == that.val2;
 		}
 
 		@Override

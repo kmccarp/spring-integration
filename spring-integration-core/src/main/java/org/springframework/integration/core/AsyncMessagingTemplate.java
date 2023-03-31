@@ -78,7 +78,7 @@ public class AsyncMessagingTemplate extends MessagingTemplate implements AsyncMe
 
 	@Override
 	public Future<Message<?>> asyncReceive() {
-		return this.executor.submit(() -> receive());
+		return this.executor.submit(this::receive);
 	}
 
 	@Override

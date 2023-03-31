@@ -45,12 +45,12 @@ public class SplitterAggregatorTests {
 				"splitterAggregatorTests.xml", this.getClass());
 		MessageChannel inputChannel = (MessageChannel) context.getBean("numbers");
 		PollableChannel outputChannel = (PollableChannel) context.getBean("results");
-		inputChannel.send(new GenericMessage<Numbers>(this.nextTen()));
+		inputChannel.send(new GenericMessage<>(this.nextTen()));
 		Message<?> result1 = outputChannel.receive(1000);
 		assertThat(result1).isNotNull();
 		assertThat(result1.getPayload().getClass()).isEqualTo(Integer.class);
 		assertThat(result1.getPayload()).isEqualTo(55);
-		inputChannel.send(new GenericMessage<Numbers>(this.nextTen()));
+		inputChannel.send(new GenericMessage<>(this.nextTen()));
 		Message<?> result2 = outputChannel.receive(1000);
 		assertThat(result2).isNotNull();
 		assertThat(result2.getPayload().getClass()).isEqualTo(Integer.class);
@@ -59,7 +59,7 @@ public class SplitterAggregatorTests {
 	}
 
 	private Numbers nextTen() {
-		List<Integer> values = new ArrayList<Integer>();
+		List<Integer> values = new ArrayList<>();
 		for (int i = 0; i < 10; i++) {
 			values.add(this.count.incrementAndGet());
 		}

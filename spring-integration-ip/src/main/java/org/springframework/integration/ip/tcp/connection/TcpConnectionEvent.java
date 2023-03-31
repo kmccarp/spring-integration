@@ -27,6 +27,8 @@ import org.springframework.integration.ip.event.IpIntegrationEvent;
 @SuppressWarnings("serial")
 public abstract class TcpConnectionEvent extends IpIntegrationEvent {
 
+	private static final long serialVersionUID = 1;
+
 	private final String connectionFactoryName;
 
 	public TcpConnectionEvent(TcpConnection connection,

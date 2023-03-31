@@ -122,13 +122,13 @@ public class FtpOutboundGatewayParserTests {
 		@SuppressWarnings("unchecked")
 		Set<String> options = TestUtils.getPropertyValue(gateway, "options", Set.class);
 		assertThat(options.contains(Option.PRESERVE_TIMESTAMP)).isTrue();
-		gateway.handleMessage(new GenericMessage<String>("foo"));
+		gateway.handleMessage(new GenericMessage<>("foo"));
 		assertThat(TestUtils.getPropertyValue(gateway, "requiresReply", Boolean.class)).isFalse();
 		assertThat(adviceCalled).isEqualTo(1);
 
 		//INT-3129
 		assertThat(TestUtils.getPropertyValue(gateway, "localFilenameGeneratorExpression")).isNotNull();
-		final AtomicReference<Method> genMethod = new AtomicReference<Method>();
+		final AtomicReference<Method> genMethod = new AtomicReference<>();
 		ReflectionUtils.doWithMethods(FtpOutboundGateway.class, method -> {
 			method.setAccessible(true);
 			genMethod.set(method);

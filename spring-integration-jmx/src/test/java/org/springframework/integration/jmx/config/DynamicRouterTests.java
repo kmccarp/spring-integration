@@ -73,48 +73,48 @@ public class DynamicRouterTests {
 	@Test
 	@DirtiesContext
 	public void testRouteChange() throws Exception {
-		routingChannel.send(new GenericMessage<String>("123"));
+		routingChannel.send(new GenericMessage<>("123"));
 		assertThat(processAChannel.receive(0).getPayload()).isEqualTo("123");
 		routingChannel.send(MessageBuilder.withPayload(123).build());
 		assertThat(processBChannel.receive(0).getPayload()).isEqualTo(123);
 
 		controlChannel.send(MessageBuilder.withPayload(new String[] {"java.lang.String", "processCChannel"}).build());
 
-		routingChannel.send(new GenericMessage<String>("123"));
+		routingChannel.send(new GenericMessage<>("123"));
 		assertThat(processCChannel.receive(0).getPayload()).isEqualTo("123");
 	}
 
 	@Test
 	@DirtiesContext
 	public void testRouteChangeMap() throws Exception {
-		routingChannel.send(new GenericMessage<String>("123"));
+		routingChannel.send(new GenericMessage<>("123"));
 		assertThat(processAChannel.receive(0).getPayload()).isEqualTo("123");
 		routingChannel.send(MessageBuilder.withPayload(123).build());
 		assertThat(processBChannel.receive(0).getPayload()).isEqualTo(123);
-		Map<String, Object> args = new HashMap<String, Object>();
+		Map<String, Object> args = new HashMap<>();
 		args.put("p1", "java.lang.String");
 		args.put("p2", "processCChannel");
 
 		controlChannel.send(MessageBuilder.withPayload(args).build());
 
-		routingChannel.send(new GenericMessage<String>("123"));
+		routingChannel.send(new GenericMessage<>("123"));
 		assertThat(processCChannel.receive(0).getPayload()).isEqualTo("123");
 	}
 
 	@Test
 	@DirtiesContext
 	public void testRouteChangeMapNamedArgs() throws Exception {
-		routingChannel.send(new GenericMessage<String>("123"));
+		routingChannel.send(new GenericMessage<>("123"));
 		assertThat(processAChannel.receive(0).getPayload()).isEqualTo("123");
 		routingChannel.send(MessageBuilder.withPayload(123).build());
 		assertThat(processBChannel.receive(0).getPayload()).isEqualTo(123);
-		Map<String, Object> args = new HashMap<String, Object>();
+		Map<String, Object> args = new HashMap<>();
 		args.put("key", "java.lang.String");
 		args.put("channelName", "processCChannel");
 
 		controlChannel.send(MessageBuilder.withPayload(args).build());
 
-		routingChannel.send(new GenericMessage<String>("123"));
+		routingChannel.send(new GenericMessage<>("123"));
 		assertThat(processCChannel.receive(0).getPayload()).isEqualTo("123");
 	}
 

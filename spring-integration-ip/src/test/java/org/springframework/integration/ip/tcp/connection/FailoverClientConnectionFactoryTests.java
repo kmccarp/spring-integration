@@ -95,7 +95,7 @@ public class FailoverClientConnectionFactoryTests {
 	public void testFailoverGood() throws Exception {
 		AbstractClientConnectionFactory factory1 = mock(AbstractClientConnectionFactory.class);
 		AbstractClientConnectionFactory factory2 = mock(AbstractClientConnectionFactory.class);
-		List<AbstractClientConnectionFactory> factories = new ArrayList<AbstractClientConnectionFactory>();
+		List<AbstractClientConnectionFactory> factories = new ArrayList<>();
 		factories.add(factory1);
 		factories.add(factory2);
 		TcpConnectionSupport conn1 = makeMockConnection();
@@ -109,7 +109,7 @@ public class FailoverClientConnectionFactoryTests {
 		doAnswer(invocation -> null).when(conn2).send(Mockito.any(Message.class));
 		FailoverClientConnectionFactory failoverFactory = new FailoverClientConnectionFactory(factories);
 		failoverFactory.start();
-		GenericMessage<String> message = new GenericMessage<String>("foo");
+		GenericMessage<String> message = new GenericMessage<>("foo");
 		failoverFactory.getConnection().send(message);
 		Mockito.verify(conn2).send(message);
 	}
@@ -132,7 +132,7 @@ public class FailoverClientConnectionFactoryTests {
 	private void testRefreshShared(boolean closeOnRefresh, long interval) throws Exception {
 		AbstractClientConnectionFactory factory1 = mock(AbstractClientConnectionFactory.class);
 		AbstractClientConnectionFactory factory2 = mock(AbstractClientConnectionFactory.class);
-		List<AbstractClientConnectionFactory> factories = new ArrayList<AbstractClientConnectionFactory>();
+		List<AbstractClientConnectionFactory> factories = new ArrayList<>();
 		factories.add(factory1);
 		factories.add(factory2);
 		TcpConnectionSupport conn1 = makeMockConnection();
@@ -183,7 +183,7 @@ public class FailoverClientConnectionFactoryTests {
 	public void testFailoverAllDead() throws Exception {
 		AbstractClientConnectionFactory factory1 = mock(AbstractClientConnectionFactory.class);
 		AbstractClientConnectionFactory factory2 = mock(AbstractClientConnectionFactory.class);
-		List<AbstractClientConnectionFactory> factories = new ArrayList<AbstractClientConnectionFactory>();
+		List<AbstractClientConnectionFactory> factories = new ArrayList<>();
 		factories.add(factory1);
 		factories.add(factory2);
 		TcpConnectionSupport conn1 = makeMockConnection();
@@ -198,7 +198,7 @@ public class FailoverClientConnectionFactoryTests {
 				.when(conn2).send(Mockito.any(Message.class));
 		FailoverClientConnectionFactory failoverFactory = new FailoverClientConnectionFactory(factories);
 		failoverFactory.start();
-		GenericMessage<String> message = new GenericMessage<String>("foo");
+		GenericMessage<String> message = new GenericMessage<>("foo");
 		assertThatExceptionOfType(UncheckedIOException.class).isThrownBy(() ->
 				failoverFactory.getConnection().send(message));
 		Mockito.verify(conn2).send(message);
@@ -245,7 +245,7 @@ public class FailoverClientConnectionFactoryTests {
 	public void testFailoverAllDeadButOriginalOkAgain() throws Exception {
 		AbstractClientConnectionFactory factory1 = mock(AbstractClientConnectionFactory.class);
 		AbstractClientConnectionFactory factory2 = mock(AbstractClientConnectionFactory.class);
-		List<AbstractClientConnectionFactory> factories = new ArrayList<AbstractClientConnectionFactory>();
+		List<AbstractClientConnectionFactory> factories = new ArrayList<>();
 		factories.add(factory1);
 		factories.add(factory2);
 		TcpConnectionSupport conn1 = makeMockConnection();
@@ -266,7 +266,7 @@ public class FailoverClientConnectionFactoryTests {
 				.when(conn2).send(Mockito.any(Message.class));
 		FailoverClientConnectionFactory failoverFactory = new FailoverClientConnectionFactory(factories);
 		failoverFactory.start();
-		GenericMessage<String> message = new GenericMessage<String>("foo");
+		GenericMessage<String> message = new GenericMessage<>("foo");
 		failoverFactory.getConnection().send(message);
 		Mockito.verify(conn2).send(message);
 		Mockito.verify(conn1, times(2)).send(message);
@@ -276,7 +276,7 @@ public class FailoverClientConnectionFactoryTests {
 	public void testFailoverConnectNone() throws Exception {
 		AbstractClientConnectionFactory factory1 = mock(AbstractClientConnectionFactory.class);
 		AbstractClientConnectionFactory factory2 = mock(AbstractClientConnectionFactory.class);
-		List<AbstractClientConnectionFactory> factories = new ArrayList<AbstractClientConnectionFactory>();
+		List<AbstractClientConnectionFactory> factories = new ArrayList<>();
 		factories.add(factory1);
 		factories.add(factory2);
 		when(factory1.getConnection()).thenThrow(new UncheckedIOException(new IOException("fail")));
@@ -285,7 +285,7 @@ public class FailoverClientConnectionFactoryTests {
 		when(factory2.isActive()).thenReturn(true);
 		FailoverClientConnectionFactory failoverFactory = new FailoverClientConnectionFactory(factories);
 		failoverFactory.start();
-		GenericMessage<String> message = new GenericMessage<String>("foo");
+		GenericMessage<String> message = new GenericMessage<>("foo");
 		assertThatExceptionOfType(UncheckedIOException.class).isThrownBy(() ->
 				failoverFactory.getConnection().send(message));
 	}
@@ -294,7 +294,7 @@ public class FailoverClientConnectionFactoryTests {
 	public void testFailoverConnectToFirstAfterTriedAll() throws Exception {
 		AbstractClientConnectionFactory factory1 = mock(AbstractClientConnectionFactory.class);
 		AbstractClientConnectionFactory factory2 = mock(AbstractClientConnectionFactory.class);
-		List<AbstractClientConnectionFactory> factories = new ArrayList<AbstractClientConnectionFactory>();
+		List<AbstractClientConnectionFactory> factories = new ArrayList<>();
 		factories.add(factory1);
 		factories.add(factory2);
 		TcpConnectionSupport conn1 = makeMockConnection();
@@ -308,7 +308,7 @@ public class FailoverClientConnectionFactoryTests {
 		when(factory2.isActive()).thenReturn(true);
 		FailoverClientConnectionFactory failoverFactory = new FailoverClientConnectionFactory(factories);
 		failoverFactory.start();
-		GenericMessage<String> message = new GenericMessage<String>("foo");
+		GenericMessage<String> message = new GenericMessage<>("foo");
 		failoverFactory.getConnection().send(message);
 		Mockito.verify(conn1).send(message);
 	}
@@ -317,7 +317,7 @@ public class FailoverClientConnectionFactoryTests {
 	public void testOkAgainAfterCompleteFailure() throws Exception {
 		AbstractClientConnectionFactory factory1 = mock(AbstractClientConnectionFactory.class);
 		AbstractClientConnectionFactory factory2 = mock(AbstractClientConnectionFactory.class);
-		List<AbstractClientConnectionFactory> factories = new ArrayList<AbstractClientConnectionFactory>();
+		List<AbstractClientConnectionFactory> factories = new ArrayList<>();
 		factories.add(factory1);
 		factories.add(factory2);
 		TcpConnectionSupport conn1 = makeMockConnection();
@@ -337,7 +337,7 @@ public class FailoverClientConnectionFactoryTests {
 				.when(conn2).send(Mockito.any(Message.class));
 		FailoverClientConnectionFactory failoverFactory = new FailoverClientConnectionFactory(factories);
 		failoverFactory.start();
-		GenericMessage<String> message = new GenericMessage<String>("foo");
+		GenericMessage<String> message = new GenericMessage<>("foo");
 		assertThatExceptionOfType(UncheckedIOException.class)
 				.isThrownBy(() -> failoverFactory.getConnection().send(message));
 		failoverFactory.getConnection().send(message);
@@ -441,27 +441,27 @@ public class FailoverClientConnectionFactoryTests {
 		cachingFactory2.setBeanName("cache2");
 
 		// Failover
-		List<AbstractClientConnectionFactory> factories = new ArrayList<AbstractClientConnectionFactory>();
+		List<AbstractClientConnectionFactory> factories = new ArrayList<>();
 		factories.add(cachingFactory1);
 		factories.add(cachingFactory2);
 		FailoverClientConnectionFactory failoverFactory = new FailoverClientConnectionFactory(factories);
 
 		failoverFactory.start();
 		TcpConnection conn1 = failoverFactory.getConnection();
-		conn1.send(new GenericMessage<String>("foo1"));
+		conn1.send(new GenericMessage<>("foo1"));
 		conn1.close();
 		TcpConnection conn2 = failoverFactory.getConnection();
 		assertThat((TestUtils.getPropertyValue(conn2, "delegate", TcpConnectionInterceptorSupport.class))
 				.getTheConnection())
 				.isSameAs((TestUtils.getPropertyValue(conn1, "delegate", TcpConnectionInterceptorSupport.class))
 						.getTheConnection());
-		conn2.send(new GenericMessage<String>("foo2"));
+		conn2.send(new GenericMessage<>("foo2"));
 		conn1 = failoverFactory.getConnection();
 		assertThat((TestUtils.getPropertyValue(conn2, "delegate", TcpConnectionInterceptorSupport.class))
 				.getTheConnection())
 				.isNotSameAs((TestUtils.getPropertyValue(conn1, "delegate", TcpConnectionInterceptorSupport.class))
 						.getTheConnection());
-		conn1.send(new GenericMessage<String>("foo3"));
+		conn1.send(new GenericMessage<>("foo3"));
 		conn1.close();
 		conn2.close();
 		assertThat(latch1.await(10, TimeUnit.SECONDS)).isTrue();
@@ -470,8 +470,8 @@ public class FailoverClientConnectionFactoryTests {
 		TestingUtilities.waitUntilFactoryHasThisNumberOfConnections(factory1, 0);
 		conn1 = failoverFactory.getConnection();
 		conn2 = failoverFactory.getConnection();
-		conn1.send(new GenericMessage<String>("foo4"));
-		conn2.send(new GenericMessage<String>("foo5"));
+		conn1.send(new GenericMessage<>("foo4"));
+		conn2.send(new GenericMessage<>("foo5"));
 		conn1.close();
 		conn2.close();
 		assertThat(latch2.await(10, TimeUnit.SECONDS)).isTrue();
@@ -505,7 +505,7 @@ public class FailoverClientConnectionFactoryTests {
 		cachingClient.afterPropertiesSet();
 
 		// Failover
-		List<AbstractClientConnectionFactory> clientFactories = new ArrayList<AbstractClientConnectionFactory>();
+		List<AbstractClientConnectionFactory> clientFactories = new ArrayList<>();
 		clientFactories.add(cachingClient);
 		FailoverClientConnectionFactory failoverClient = new FailoverClientConnectionFactory(clientFactories);
 		failoverClient.setSingleUse(true);
@@ -520,13 +520,13 @@ public class FailoverClientConnectionFactoryTests {
 		outbound.afterPropertiesSet();
 		outbound.start();
 
-		outbound.handleMessage(new GenericMessage<String>("foo"));
+		outbound.handleMessage(new GenericMessage<>("foo"));
 		Message<byte[]> result = (Message<byte[]>) replyChannel.receive(10000);
 		assertThat(result).isNotNull();
 		assertThat(new String(result.getPayload())).isEqualTo("foo");
 
 		// INT-4024 - second reply had bad connection id
-		outbound.handleMessage(new GenericMessage<String>("foo"));
+		outbound.handleMessage(new GenericMessage<>("foo"));
 		result = (Message<byte[]>) replyChannel.receive(10000);
 		assertThat(result).isNotNull();
 		assertThat(new String(result.getPayload())).isEqualTo("foo");
@@ -572,13 +572,13 @@ public class FailoverClientConnectionFactoryTests {
 		cachingFactory2.setBeanName("cache2");
 
 		// Failover
-		List<AbstractClientConnectionFactory> factories = new ArrayList<AbstractClientConnectionFactory>();
+		List<AbstractClientConnectionFactory> factories = new ArrayList<>();
 		factories.add(cachingFactory1);
 		factories.add(cachingFactory2);
 		FailoverClientConnectionFactory failoverFactory = new FailoverClientConnectionFactory(factories);
 		failoverFactory.start();
 		TcpConnection conn1 = failoverFactory.getConnection();
-		GenericMessage<String> message = new GenericMessage<String>("foo");
+		GenericMessage<String> message = new GenericMessage<>("foo");
 		conn1.send(message);
 		conn1.close();
 		TcpConnection conn2 = failoverFactory.getConnection();
@@ -612,7 +612,7 @@ public class FailoverClientConnectionFactoryTests {
 		client2.setBeanName("client2");
 		client1.setApplicationEventPublisher(NULL_PUBLISHER);
 		client2.setApplicationEventPublisher(NULL_PUBLISHER);
-		List<AbstractClientConnectionFactory> factories = new ArrayList<AbstractClientConnectionFactory>();
+		List<AbstractClientConnectionFactory> factories = new ArrayList<>();
 		factories.add(client1);
 		factories.add(client2);
 		FailoverClientConnectionFactory failFactory = new FailoverClientConnectionFactory(factories);
@@ -625,7 +625,7 @@ public class FailoverClientConnectionFactoryTests {
 		outGateway.start();
 		QueueChannel replyChannel = new QueueChannel();
 		outGateway.setReplyChannel(replyChannel);
-		Message<String> message = new GenericMessage<String>("foo");
+		Message<String> message = new GenericMessage<>("foo");
 		outGateway.setRemoteTimeout(120000);
 		outGateway.handleMessage(message);
 		Socket socket = null;
@@ -664,7 +664,7 @@ public class FailoverClientConnectionFactoryTests {
 		TcpInboundGateway gateway1 = new TcpInboundGateway();
 		gateway1.setConnectionFactory(server1);
 		SubscribableChannel channel = new DirectChannel();
-		final AtomicReference<String> connectionId = new AtomicReference<String>();
+		final AtomicReference<String> connectionId = new AtomicReference<>();
 		channel.subscribe(message -> {
 			connectionId.set((String) message.getHeaders().get(IpHeaders.CONNECTION_ID));
 			((MessageChannel) message.getHeaders().getReplyChannel()).send(message);

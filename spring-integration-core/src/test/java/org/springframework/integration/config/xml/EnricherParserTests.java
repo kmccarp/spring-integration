@@ -171,7 +171,7 @@ public class EnricherParserTests {
 	public void testInt3027WrongHeaderType() {
 		MessageChannel input = context.getBean("input2", MessageChannel.class);
 		try {
-			input.send(new GenericMessage<Object>("test"));
+			input.send(new GenericMessage<>("test"));
 		}
 		catch (Exception e) {
 			assertThat(e).isInstanceOf(MessageHandlingException.class);

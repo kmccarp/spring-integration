@@ -55,7 +55,7 @@ public class ApplicationEventPublishingMessageHandlerTests {
 		handler.handleMessage(message);
 		ApplicationEvent event = publisher.getLastEvent();
 		assertThat(event.getClass()).isEqualTo(TestEvent.class);
-		assertThat((event).getSource()).isEqualTo("foo");
+		assertThat(event.getSource()).isEqualTo("foo");
 	}
 
 
@@ -82,6 +82,8 @@ public class ApplicationEventPublishingMessageHandlerTests {
 
 	@SuppressWarnings("serial")
 	private static class TestEvent extends ApplicationEvent {
+
+		private static final long serialVersionUID = 1;
 
 		TestEvent(String text) {
 			super(text);

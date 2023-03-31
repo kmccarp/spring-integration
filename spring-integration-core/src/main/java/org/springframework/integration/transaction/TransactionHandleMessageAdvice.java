@@ -43,6 +43,8 @@ import org.springframework.transaction.interceptor.TransactionInterceptor;
 @SuppressWarnings("serial")
 public class TransactionHandleMessageAdvice extends TransactionInterceptor implements HandleMessageAdvice {
 
+	private static final long serialVersionUID = 1;
+
 	public TransactionHandleMessageAdvice() {
 	}
 

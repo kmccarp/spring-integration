@@ -122,7 +122,7 @@ public final class MessageHistory implements List<Properties>, Serializable {
 			else if (message instanceof AdviceMessage) {
 				IntegrationMessageHeaderAccessor headerAccessor = new IntegrationMessageHeaderAccessor(message);
 				headerAccessor.setHeader(HEADER_NAME, history);
-				message = new AdviceMessage<T>(message.getPayload(), headerAccessor.toMessageHeaders(),
+				message = new AdviceMessage<>(message.getPayload(), headerAccessor.toMessageHeaders(),
 						((AdviceMessage<?>) message).getInputMessage());
 			}
 			else {
@@ -237,7 +237,7 @@ public final class MessageHistory implements List<Properties>, Serializable {
 	public String toString() {
 		return this.components
 				.stream()
-				.map((props) -> props.getProperty(NAME_PROPERTY))
+				.map(props -> props.getProperty(NAME_PROPERTY))
 				.collect(Collectors.joining(","));
 	}
 

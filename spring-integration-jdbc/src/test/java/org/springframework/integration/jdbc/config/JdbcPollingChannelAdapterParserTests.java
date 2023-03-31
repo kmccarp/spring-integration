@@ -223,7 +223,7 @@ public class JdbcPollingChannelAdapterParserTests {
 
 	public static class Status {
 
-		private int which = 42;
+		private final int which = 42;
 
 		public int which() {
 			return this.which;

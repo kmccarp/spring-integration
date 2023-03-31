@@ -35,11 +35,11 @@ import org.springframework.integration.handler.MethodInvokingMessageProcessor;
 public class MethodInvokingRouter extends AbstractMessageProcessingRouter {
 
 	public MethodInvokingRouter(Object object, Method method) {
-		super(new MethodInvokingMessageProcessor<Object>(object, method));
+		super(new MethodInvokingMessageProcessor<>(object, method));
 	}
 
 	public MethodInvokingRouter(Object object, String methodName) {
-		super(new MethodInvokingMessageProcessor<Object>(object, methodName));
+		super(new MethodInvokingMessageProcessor<>(object, methodName));
 	}
 
 	public MethodInvokingRouter(Object object) {

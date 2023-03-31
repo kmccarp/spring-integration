@@ -54,7 +54,7 @@ public abstract class BigMGetTests {
 			fos.write(buff);
 			fos.close();
 		}
-		inbound.send(new GenericMessage<String>("/tmp/bigmget/f*"));
+		inbound.send(new GenericMessage<>("/tmp/bigmget/f*"));
 		for (int i = 0; i < FILES; i++) {
 			new File("/tmp/bigmget/file" + i).delete();
 			new File("/tmp/out/file" + i).delete();

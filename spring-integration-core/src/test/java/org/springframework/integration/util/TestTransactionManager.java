@@ -32,6 +32,8 @@ import org.springframework.transaction.support.DefaultTransactionStatus;
 @SuppressWarnings("serial")
 public class TestTransactionManager extends AbstractPlatformTransactionManager {
 
+	private static final long serialVersionUID = 1;
+
 	private final AtomicInteger commitCounter = new AtomicInteger();
 
 	private final AtomicInteger rollbackCounter = new AtomicInteger();

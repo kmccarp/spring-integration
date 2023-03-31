@@ -28,6 +28,8 @@ import org.springframework.util.Assert;
 @SuppressWarnings("serial")
 public class TcpConnectionServerExceptionEvent extends IpIntegrationEvent {
 
+	private static final long serialVersionUID = 1;
+
 	public TcpConnectionServerExceptionEvent(Object connectionFactory, Throwable cause) {
 		super(connectionFactory, cause);
 		Assert.notNull(cause, "'cause' cannot be null");

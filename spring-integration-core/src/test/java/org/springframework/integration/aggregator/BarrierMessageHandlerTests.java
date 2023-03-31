@@ -35,7 +35,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.log.LogAccessor;
 import org.springframework.integration.annotation.Poller;
-import org.springframework.integration.annotation.Publisher;
 import org.springframework.integration.annotation.ServiceActivator;
 import org.springframework.integration.channel.DirectChannel;
 import org.springframework.integration.channel.QueueChannel;
@@ -49,7 +48,6 @@ import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHandler;
 import org.springframework.messaging.MessagingException;
 import org.springframework.messaging.PollableChannel;
-import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
@@ -90,7 +88,7 @@ public class BarrierMessageHandlerTests {
 		handler.setOutputChannel(outputChannel);
 		handler.setBeanFactory(mock(BeanFactory.class));
 		handler.afterPropertiesSet();
-		final AtomicReference<Exception> dupCorrelation = new AtomicReference<Exception>();
+		final AtomicReference<Exception> dupCorrelation = new AtomicReference<>();
 		final CountDownLatch latch = new CountDownLatch(1);
 		Runnable runnable = () -> {
 			try {
@@ -210,7 +208,7 @@ public class BarrierMessageHandlerTests {
 		handler.setOutputChannel(outputChannel);
 		handler.setBeanFactory(mock(BeanFactory.class));
 		handler.afterPropertiesSet();
-		final AtomicReference<Exception> exception = new AtomicReference<Exception>();
+		final AtomicReference<Exception> exception = new AtomicReference<>();
 		final CountDownLatch latch = new CountDownLatch(1);
 		ExecutorService exec = Executors.newSingleThreadExecutor();
 		exec.execute(() -> {
@@ -287,15 +285,8 @@ public class BarrierMessageHandlerTests {
 		@ServiceActivator(inputChannel = "release", poller = @Poller(fixedDelay = "0"))
 		@Bean
 		public MessageHandler releaser() {
-			return new MessageHandler() {
-
-				@Override
-				@Publisher(channel = "publisherChannel")
-				@Payload("#args[0].payload.toUpperCase()")
-				public void handleMessage(Message<?> message) throws MessagingException {
-					barrier().trigger(message);
-				}
-
+			return message -> {
+				barrier().trigger(message);
 			};
 		}
 

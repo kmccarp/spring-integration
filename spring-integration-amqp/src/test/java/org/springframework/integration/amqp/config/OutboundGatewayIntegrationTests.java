@@ -55,7 +55,7 @@ public class OutboundGatewayIntegrationTests {
 	@Test
 	public void testOutboundInboundGateways() throws Exception {
 		String payload = "foo";
-		this.toRabbit.send(new GenericMessage<String>(payload));
+		this.toRabbit.send(new GenericMessage<>(payload));
 		Message<?> receive = this.fromRabbit.receive(10000);
 		assertThat(receive).isNotNull();
 		assertThat(receive.getPayload()).isEqualTo(payload.toUpperCase());

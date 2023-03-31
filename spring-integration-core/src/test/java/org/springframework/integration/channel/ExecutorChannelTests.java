@@ -182,7 +182,7 @@ public class ExecutorChannelTests {
 		interceptor.setMessageToReturn(expected);
 		channel.addInterceptor(interceptor);
 		channel.subscribe(handler);
-		channel.send(new GenericMessage<Object>("foo"));
+		channel.send(new GenericMessage<>("foo"));
 		verify(handler).handleMessage(expected);
 		assertThat(interceptor.getCounter().get()).isEqualTo(1);
 		assertThat(interceptor.wasAfterHandledInvoked()).isTrue();
@@ -284,7 +284,7 @@ public class ExecutorChannelTests {
 		public Message<?> beforeHandle(Message<?> message, MessageChannel channel, MessageHandler handler) {
 			assertThat(message).isNotNull();
 			this.counter.incrementAndGet();
-			return (this.messageToReturn != null ? this.messageToReturn : message);
+			return this.messageToReturn != null ? this.messageToReturn : message;
 		}
 
 		@Override

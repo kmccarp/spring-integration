@@ -62,7 +62,7 @@ public class JmsOutboundChannelAdapterParserTests {
 				"jmsOutboundWithConnectionFactoryAndDestination.xml", this.getClass());
 		EventDrivenConsumer endpoint = (EventDrivenConsumer) context.getBean("advised");
 		MessageHandler handler = TestUtils.getPropertyValue(endpoint, "handler", MessageHandler.class);
-		handler.handleMessage(new GenericMessage<String>("foo"));
+		handler.handleMessage(new GenericMessage<>("foo"));
 		assertThat(adviceCalled).isEqualTo(1);
 		context.close();
 	}

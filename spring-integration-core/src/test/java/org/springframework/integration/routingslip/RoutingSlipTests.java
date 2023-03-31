@@ -133,7 +133,7 @@ public class RoutingSlipTests {
 
 		final String[] channels = {"channel2", "channel3"};
 
-		private int i = 0;
+		private int i;
 
 		public String get(Message<?> requestMessage, Object reply) {
 			try {

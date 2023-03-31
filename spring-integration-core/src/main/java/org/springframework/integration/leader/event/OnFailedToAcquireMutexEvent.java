@@ -29,6 +29,8 @@ import org.springframework.integration.leader.Context;
 @SuppressWarnings("serial")
 public class OnFailedToAcquireMutexEvent extends AbstractLeaderEvent {
 
+	private static final long serialVersionUID = 1;
+
 	/**
 	 * Instantiate a new OnFailedToAcquireMutexEvent.
 	 * @param source the component that published the event (never {@code null})

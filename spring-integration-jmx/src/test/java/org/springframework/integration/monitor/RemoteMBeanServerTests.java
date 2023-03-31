@@ -73,7 +73,7 @@ public class RemoteMBeanServerTests {
 
 	@Test
 	public void testPublish() {
-		publishChannel.send(new GenericMessage<String>("bar"));
+		publishChannel.send(new GenericMessage<>("bar"));
 		Message<?> message = publishInChannel.receive(100000);
 		assertThat(message).isNotNull();
 		assertThat(message.getPayload() instanceof Notification).isTrue();
@@ -84,7 +84,7 @@ public class RemoteMBeanServerTests {
 
 	@Test
 	public void testOperation() {
-		opChannel.send(new GenericMessage<String>("foo"));
+		opChannel.send(new GenericMessage<>("foo"));
 		Message<?> message = opOutChannel.receive(100000);
 		assertThat(message).isNotNull();
 		assertThat(message.getPayload()).isEqualTo("bar");

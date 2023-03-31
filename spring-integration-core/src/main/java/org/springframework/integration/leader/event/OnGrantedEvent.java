@@ -28,6 +28,8 @@ import org.springframework.integration.leader.Context;
 @SuppressWarnings("serial")
 public class OnGrantedEvent extends AbstractLeaderEvent {
 
+	private static final long serialVersionUID = 1;
+
 	/**
 	 * Instantiates a new granted event.
 	 *

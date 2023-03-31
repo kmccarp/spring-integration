@@ -30,6 +30,8 @@ import org.springframework.orm.jpa.vendor.HibernateJpaDialect;
 @SuppressWarnings("serial")
 public class TestHibernateJpaDialect extends HibernateJpaDialect {
 
+	private static final long serialVersionUID = 1;
+
 	@Override
 	public Object prepareTransaction(EntityManager entityManager, boolean readOnly, String name)
 			throws PersistenceException {

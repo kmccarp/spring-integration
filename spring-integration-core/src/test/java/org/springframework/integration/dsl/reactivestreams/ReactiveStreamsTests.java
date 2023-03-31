@@ -191,7 +191,7 @@ public class ReactiveStreamsTests {
 		QueueChannel resultChannel = new QueueChannel();
 
 		IntegrationFlow integrationFlow = f -> f
-				.split((splitter) -> splitter.delimiters(","))
+				.split(splitter -> splitter.delimiters(","))
 				.<String, String>fluxTransform(flux -> flux
 						.map(Message::getPayload)
 						.map(String::toUpperCase))

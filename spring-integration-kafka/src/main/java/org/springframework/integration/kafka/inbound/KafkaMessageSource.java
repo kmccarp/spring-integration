@@ -427,7 +427,7 @@ public class KafkaMessageSource<K, V> extends AbstractMessageSource<Object> impl
 			createConsumer();
 			this.running = true;
 		}
-		if (this.pausing && !this.paused && this.assignedPartitions.size() > 0) {
+		if (this.pausing && !this.paused && !this.assignedPartitions.isEmpty()) {
 			this.consumer.pause(this.assignedPartitions);
 			this.paused = true;
 		}
@@ -766,7 +766,7 @@ public class KafkaMessageSource<K, V> extends AbstractMessageSource<Object> impl
 										return i.getRecord().offset();
 									})
 									.collect(Collectors.toList());
-					if (rewound.size() > 0) {
+					if (!rewound.isEmpty()) {
 						this.logger.warn(() -> "Rolled back " + KafkaUtils.format(record)
 								+ " later in-flight offsets "
 								+ rewound + " will also be re-fetched");
@@ -798,7 +798,7 @@ public class KafkaMessageSource<K, V> extends AbstractMessageSource<Object> impl
 								}
 							}
 						}
-						if (toCommit.size() > 0) {
+						if (!toCommit.isEmpty()) {
 							ackInformation = toCommit.get(toCommit.size() - 1);
 							KafkaAckInfo<K, V> ackInformationToLog = ackInformation;
 							this.commitLogger.log(() -> "Committing pending offsets for "

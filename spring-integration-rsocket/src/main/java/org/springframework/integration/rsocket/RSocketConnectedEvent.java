@@ -38,6 +38,8 @@ import org.springframework.messaging.rsocket.RSocketRequester;
 @SuppressWarnings("serial")
 public class RSocketConnectedEvent extends IntegrationEvent {
 
+	private static final long serialVersionUID = 1;
+
 	private final Map<String, Object> headers;
 
 	private final DataBuffer data;

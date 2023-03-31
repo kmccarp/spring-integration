@@ -31,7 +31,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.beans.factory.BeanFactory;
-import org.springframework.core.convert.converter.Converter;
 import org.springframework.core.convert.support.DefaultConversionService;
 import org.springframework.core.convert.support.GenericConversionService;
 import org.springframework.integration.annotation.Aggregator;
@@ -162,7 +161,7 @@ public class MethodInvokingMessageGroupProcessorTests {
 		class SimpleAggregator {
 
 			public String and(List<Integer> flags, @Header("foo") List<Integer> header) {
-				List<Integer> result = new ArrayList<Integer>();
+				List<Integer> result = new ArrayList<>();
 				for (int flag : flags) {
 					result.add(flag);
 				}
@@ -193,7 +192,7 @@ public class MethodInvokingMessageGroupProcessorTests {
 			public String and(@Payloads List<?> rawFlags, @Header("foo") List<Integer> header) {
 				@SuppressWarnings("unchecked")
 				List<Integer> flags = (List<Integer>) rawFlags;
-				List<Integer> result = new ArrayList<Integer>();
+				List<Integer> result = new ArrayList<>();
 				for (int flag : flags) {
 					result.add(flag);
 				}
@@ -312,14 +311,7 @@ public class MethodInvokingMessageGroupProcessorTests {
 				new MethodInvokingMessageGroupProcessor(new SimpleAggregator());
 		processor.setBeanFactory(mock(BeanFactory.class));
 		GenericConversionService conversionService = new DefaultConversionService();
-		conversionService.addConverter(new Converter<ArrayList<?>, Iterator<?>>() { // Must not be lambda
-
-			@Override
-			public Iterator<?> convert(ArrayList<?> source) {
-				return source.iterator();
-			}
-
-		});
+		conversionService.addConverter(source -> source.iterator());
 		processor.setConversionService(conversionService);
 		when(this.messageGroupMock.getMessages()).thenReturn(this.messagesUpForProcessing);
 		Object result = processor.processMessageGroup(this.messageGroupMock);

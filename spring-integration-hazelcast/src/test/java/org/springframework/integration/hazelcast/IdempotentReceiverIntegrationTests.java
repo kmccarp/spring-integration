@@ -361,7 +361,7 @@ public class IdempotentReceiverIntegrationTests {
 	@Component
 	private static class FooService {
 
-		private final List<Message<?>> messages = new ArrayList<Message<?>>();
+		private final List<Message<?>> messages = new ArrayList<>();
 
 		@ServiceActivator(inputChannel = "annotatedMethodChannel")
 		@IdempotentReceiver("idempotentReceiverInterceptor")

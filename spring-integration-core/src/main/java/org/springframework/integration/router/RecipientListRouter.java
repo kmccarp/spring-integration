@@ -315,7 +315,7 @@ public class RecipientListRouter extends AbstractMessageRouter implements Recipi
 		}
 
 		public boolean accept(Message<?> message) {
-			return (this.selector == null || this.selector.accept(message));
+			return this.selector == null || this.selector.accept(message);
 		}
 
 	}

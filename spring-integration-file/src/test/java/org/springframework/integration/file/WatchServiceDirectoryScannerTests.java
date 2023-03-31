@@ -125,7 +125,7 @@ public class WatchServiceDirectoryScannerTests {
 		File baz1 = File.createTempFile("baz", ".txt", baz);
 		files = scanner.listFiles(folder.getRoot());
 		int n = 0;
-		Set<File> accum = new HashSet<File>(files);
+		Set<File> accum = new HashSet<>(files);
 		while (n++ < 300 && accum.size() != 4) {
 			Thread.sleep(100);
 			files = scanner.listFiles(folder.getRoot());
@@ -143,7 +143,7 @@ public class WatchServiceDirectoryScannerTests {
 			}
 		*/
 		fileReadingMessageSource.start();
-		List<File> filesForOverflow = new ArrayList<File>(600);
+		List<File> filesForOverflow = new ArrayList<>(600);
 
 		for (int i = 0; i < 600; i++) {
 			filesForOverflow.add(this.folder.newFile("" + i));

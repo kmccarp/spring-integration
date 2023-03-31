@@ -52,7 +52,7 @@ public class FilterContextTests {
 
 	@Test
 	public void methodInvokingFilterRejects() {
-		this.input.send(new GenericMessage<String>("foo"));
+		this.input.send(new GenericMessage<>("foo"));
 		Message<?> reply = this.output.receive(0);
 		assertThat(reply).isNull();
 
@@ -65,7 +65,7 @@ public class FilterContextTests {
 
 	@Test
 	public void methodInvokingFilterAccepts() {
-		this.input.send(new GenericMessage<String>("foobar"));
+		this.input.send(new GenericMessage<>("foobar"));
 		Message<?> reply = this.output.receive(0);
 		assertThat(reply.getPayload()).isEqualTo("foobar");
 	}

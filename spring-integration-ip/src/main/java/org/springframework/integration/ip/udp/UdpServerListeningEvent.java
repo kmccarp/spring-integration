@@ -30,6 +30,8 @@ import org.springframework.integration.ip.event.IpIntegrationEvent;
 @SuppressWarnings("serial")
 public class UdpServerListeningEvent extends IpIntegrationEvent {
 
+	private static final long serialVersionUID = 1;
+
 	private final int port;
 
 	public UdpServerListeningEvent(Object adapter, int port) {

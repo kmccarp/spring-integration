@@ -59,7 +59,7 @@ public class LeaderInitiator implements SmartLifecycle, DisposableBean, Applicat
 
 	private static final Log logger = LogFactory.getLog(LeaderInitiator.class);
 
-	private static int threadNameCount = 0;
+	private static int threadNameCount;
 
 	private static final Context NULL_CONTEXT = new NullContext();
 
@@ -103,7 +103,7 @@ public class LeaderInitiator implements SmartLifecycle, DisposableBean, Applicat
 	 */
 	private volatile Future<Void> future;
 
-	private boolean customPublisher = false;
+	private boolean customPublisher;
 
 	private volatile boolean running;
 
@@ -271,7 +271,7 @@ public class LeaderInitiator implements SmartLifecycle, DisposableBean, Applicat
 
 		protected final String role = LeaderInitiator.this.candidate.getRole();
 
-		private volatile boolean leader = false;
+		private volatile boolean leader;
 
 		@Override
 		public Void call() {

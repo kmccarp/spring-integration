@@ -88,7 +88,7 @@ public class SmbSessionFactoryWithCIFSContextTests extends AbstractBaseTests {
 
 	class TestSmbSessionFactory extends SmbSessionFactory {
 
-		private CIFSContext context;
+		private final CIFSContext context;
 
 		protected TestSmbSessionFactory(CIFSContext _context) {
 			assertThat(_context).as("CIFSContext object is null.").isNotNull();
@@ -146,8 +146,8 @@ public class SmbSessionFactoryWithCIFSContextTests extends AbstractBaseTests {
 				when(smbSession.isOpen()).thenReturn(true);
 				return smbSession;
 			}
-			catch (Exception _ex) {
-				throw new RuntimeException("Failed to create mock session.", _ex);
+			catch (Exception ex) {
+				throw new RuntimeException("Failed to create mock session.", ex);
 			}
 		}
 

@@ -186,22 +186,17 @@ public class FileReadingMessageSourceIntegrationTests {
 		final CountDownLatch started = new CountDownLatch(numberOfThreads);
 		final CountDownLatch done = new CountDownLatch(numberOfThreads);
 		for (int i = 0; i < numberOfThreads; i++) {
-			new Thread(new Runnable() {
-
-				@Override
-				public void run() {
-					started.countDown();
-					try {
-						started.await();
-						start.await();
-					}
-					catch (InterruptedException e) {
-						Thread.currentThread().interrupt();
-					}
-					runnable.run();
-					done.countDown();
+			new Thread(() -> {
+				started.countDown();
+				try {
+					started.await();
+					start.await();
 				}
-
+				catch (InterruptedException e) {
+					Thread.currentThread().interrupt();
+				}
+				runnable.run();
+				done.countDown();
 			}).start();
 		}
 		return done;

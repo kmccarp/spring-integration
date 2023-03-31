@@ -30,6 +30,8 @@ import org.eclipse.paho.mqttv5.common.MqttException;
 @SuppressWarnings("serial")
 public class MqttProtocolErrorEvent extends MqttIntegrationEvent {
 
+	private static final long serialVersionUID = 1;
+
 	public MqttProtocolErrorEvent(Object source, MqttException exception) {
 		super(source, exception);
 	}

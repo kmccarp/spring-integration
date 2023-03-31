@@ -926,7 +926,7 @@ public abstract class AbstractRemoteFileOutboundGateway<F> extends AbstractReply
 	private RuntimeException handlePutException(Message<?> requestMessage, String subDirectory,
 			List<File> filteredFiles, List<String> replies, RuntimeException ex) {
 
-		if (replies.size() > 0 || ex instanceof PartialSuccessException) {
+		if (!replies.isEmpty() || ex instanceof PartialSuccessException) {
 			return new PartialSuccessException(requestMessage,
 					"Partially successful 'mput' operation" +
 							(subDirectory == null ? "" : (" on " + subDirectory)), ex, replies, filteredFiles);
@@ -1004,7 +1004,7 @@ public abstract class AbstractRemoteFileOutboundGateway<F> extends AbstractReply
 	private String buildRemotePath(String parent, String child) {
 		String remotePath = null;
 		if (parent != null) {
-			remotePath = (parent + child);
+			remotePath = parent + child;
 		}
 		else if (StringUtils.hasText(child)) {
 			remotePath = '.' + this.remoteFileTemplate.getRemoteFileSeparator() + child;
@@ -1223,7 +1223,7 @@ public abstract class AbstractRemoteFileOutboundGateway<F> extends AbstractReply
 	private RuntimeException processMgetException(Message<?> message, String remoteDirectory, List<File> files,
 			List<AbstractFileInfo<F>> remoteFiles, Exception ex) {
 
-		if (files.size() > 0) {
+		if (!files.isEmpty()) {
 			return new PartialSuccessException(message,
 					"Partially successful recursive 'mget' operation on "
 							+ (remoteDirectory != null ? remoteDirectory : "Client Working Directory"),
@@ -1265,7 +1265,7 @@ public abstract class AbstractRemoteFileOutboundGateway<F> extends AbstractReply
 
 		@SuppressWarnings("unchecked")
 		List<AbstractFileInfo<F>> remoteFiles = (List<AbstractFileInfo<F>>) ls(message, session, remotePath);
-		if (remoteFiles.size() == 0 && this.options.contains(Option.EXCEPTION_WHEN_EMPTY)) {
+		if (remoteFiles.isEmpty() && this.options.contains(Option.EXCEPTION_WHEN_EMPTY)) {
 			throw new MessagingException("No files found at "
 					+ (remoteDirectory != null ? remoteDirectory : "Client Working Directory")
 					+ " with pattern " + remoteFilename);

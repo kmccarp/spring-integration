@@ -142,11 +142,11 @@ public abstract class AbstractTxTimeoutMessageStoreTests {
 	public void testInt2993IdCacheConcurrency() throws InterruptedException, ExecutionException {
 		final String groupId = "testInt2993Group";
 		for (int i = 0; i < 100; i++) {
-			this.jdbcChannelMessageStore.addMessageToGroup(groupId, new GenericMessage<String>("testInt2993Message"));
+			this.jdbcChannelMessageStore.addMessageToGroup(groupId, new GenericMessage<>("testInt2993Message"));
 		}
 
 		ExecutorService executorService = Executors.newCachedThreadPool();
-		CompletionService<Boolean> completionService = new ExecutorCompletionService<Boolean>(executorService);
+		CompletionService<Boolean> completionService = new ExecutorCompletionService<>(executorService);
 
 		final int concurrency = 5;
 
@@ -195,7 +195,7 @@ public abstract class AbstractTxTimeoutMessageStoreTests {
 	@Test
 	public void testInt3181ConcurrentPolling() throws InterruptedException {
 		for (int i = 0; i < 10; i++) {
-			this.first.send(new GenericMessage<Object>("test"));
+			this.first.send(new GenericMessage<>("test"));
 		}
 
 		assertThat(this.successfulLatch.await(20, TimeUnit.SECONDS)).isTrue();
@@ -207,10 +207,10 @@ public abstract class AbstractTxTimeoutMessageStoreTests {
 	public void testMessageSequenceColumn() throws InterruptedException {
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(this.dataSource);
 		String messageGroup = "TEST_MESSAGE_GROUP";
-		this.jdbcChannelMessageStore.addMessageToGroup(messageGroup, new GenericMessage<Object>("foo"));
+		this.jdbcChannelMessageStore.addMessageToGroup(messageGroup, new GenericMessage<>("foo"));
 		// The simple sleep to to be sure that messages are stored with different 'CREATED_DATE'
 		Thread.sleep(10);
-		this.jdbcChannelMessageStore.addMessageToGroup(messageGroup, new GenericMessage<Object>("bar"));
+		this.jdbcChannelMessageStore.addMessageToGroup(messageGroup, new GenericMessage<>("bar"));
 
 		List<Map<String, Object>> result =
 				jdbcTemplate.queryForList("SELECT MESSAGE_SEQUENCE FROM INT_CHANNEL_MESSAGE " +

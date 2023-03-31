@@ -40,7 +40,6 @@ import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.core.convert.TypeDescriptor;
-import org.springframework.core.convert.converter.Converter;
 import org.springframework.core.convert.support.DefaultConversionService;
 import org.springframework.integration.channel.QueueChannel;
 import org.springframework.integration.handler.MethodInvokingMessageProcessor;
@@ -167,13 +166,7 @@ public class BeanFactoryTypeConverterTests {
 	public void testMapOfMapOfCollectionIsConverted() {
 		DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
 		DefaultConversionService conversionService = new DefaultConversionService();
-		conversionService.addConverter(new Converter<Foo, Bar>() { // Must be explicit type with generics
-
-			@Override
-			public Bar convert(Foo source) {
-				return new Bar();
-			}
-		});
+		conversionService.addConverter(source -> new Bar());
 		BeanFactoryTypeConverter typeConverter = new BeanFactoryTypeConverter(conversionService);
 		beanFactory.setConversionService(conversionService);
 		typeConverter.setBeanFactory(beanFactory);
@@ -213,13 +206,7 @@ public class BeanFactoryTypeConverterTests {
 	public void testCollectionIsConverted() {
 		DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
 		DefaultConversionService conversionService = new DefaultConversionService();
-		conversionService.addConverter(new Converter<Foo, Bar>() { // Must be explicit type with generics
-
-			@Override
-			public Bar convert(Foo source) {
-				return new Bar();
-			}
-		});
+		conversionService.addConverter(source -> new Bar());
 		BeanFactoryTypeConverter typeConverter = new BeanFactoryTypeConverter(conversionService);
 		beanFactory.setConversionService(conversionService);
 		typeConverter.setBeanFactory(beanFactory);
@@ -232,7 +219,7 @@ public class BeanFactoryTypeConverterTests {
 		ServiceActivatingHandler handler = new ServiceActivatingHandler(processor);
 		QueueChannel replyChannel = new QueueChannel();
 		handler.setOutputChannel(replyChannel);
-		handler.handleMessage(new GenericMessage<Collection<Foo>>(Collections.singletonList(new Foo())));
+		handler.handleMessage(new GenericMessage<>(Collections.singletonList(new Foo())));
 		Message<?> message = replyChannel.receive(10000);
 		assertThat(message).isNotNull();
 		assertThat(message.getPayload()).isEqualTo("baz");
@@ -270,13 +257,7 @@ public class BeanFactoryTypeConverterTests {
 	public void testEditorWithTargetFoo() {
 		DefaultConversionService conversionService = new DefaultConversionService();
 		final Foo foo = new Foo();
-		conversionService.addConverter(new Converter<String, Foo>() { // Must be explicit type with generics
-
-			@Override
-			public Foo convert(String source) {
-				return foo;
-			}
-		});
+		conversionService.addConverter(source -> foo);
 		BeanFactoryTypeConverter typeConverter = new BeanFactoryTypeConverter(conversionService);
 		UUID uuid = UUID.randomUUID();
 		Object convertedFoo = typeConverter.convertValue(uuid, TypeDescriptor.valueOf(UUID.class),

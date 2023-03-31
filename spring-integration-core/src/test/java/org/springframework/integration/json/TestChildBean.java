@@ -19,9 +19,9 @@ package org.springframework.integration.json;
 public class TestChildBean {
 	private String value = "bar";
 
-	private String baz = null;
+	private String baz;
 
-	private TestBean parent = null;
+	private TestBean parent;
 
 	public String getValue() {
 		return value;

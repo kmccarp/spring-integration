@@ -25,6 +25,8 @@ package org.springframework.integration.stomp.event;
 @SuppressWarnings("serial")
 public class StompSessionConnectedEvent extends StompIntegrationEvent {
 
+	private static final long serialVersionUID = 1;
+
 	public StompSessionConnectedEvent(Object source) {
 		super(source);
 	}

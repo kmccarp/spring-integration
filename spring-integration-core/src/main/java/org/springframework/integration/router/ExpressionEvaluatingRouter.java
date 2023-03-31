@@ -43,7 +43,7 @@ public class ExpressionEvaluatingRouter extends AbstractMessageProcessingRouter 
 	 * @param expression the expression.
 	 */
 	public ExpressionEvaluatingRouter(Expression expression) {
-		super(new ExpressionEvaluatingMessageProcessor<Object>(expression));
+		super(new ExpressionEvaluatingMessageProcessor<>(expression));
 		setPrimaryExpression(expression);
 	}
 

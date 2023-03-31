@@ -44,7 +44,7 @@ public class EnricherParserTests3 {
 		PollableChannel beanResolveOut = context.getBean("beanResolveOut", PollableChannel.class);
 		SomeBean payload = new SomeBean("foo");
 		assertThat(payload.getNested().getValue()).isEqualTo("foo");
-		beanResolveIn.send(new GenericMessage<SomeBean>(payload));
+		beanResolveIn.send(new GenericMessage<>(payload));
 		@SuppressWarnings("unchecked")
 		Message<SomeBean> out = (Message<SomeBean>) beanResolveOut.receive();
 		assertThat(out.getPayload()).isSameAs(payload);
@@ -60,7 +60,7 @@ public class EnricherParserTests3 {
 		SomeBean payload = new SomeBean("foo");
 		assertThat(payload.getNested().getValue()).isEqualTo("foo");
 		try {
-			beanResolveIn.send(new GenericMessage<SomeBean>(payload));
+			beanResolveIn.send(new GenericMessage<>(payload));
 			fail("Expected SpEL Exception");
 		}
 		catch (MessageHandlingException e) {

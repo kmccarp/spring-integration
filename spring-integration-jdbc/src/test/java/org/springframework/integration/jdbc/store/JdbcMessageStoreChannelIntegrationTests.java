@@ -168,7 +168,7 @@ public class JdbcMessageStoreChannelIntegrationTests {
 
 	protected void waitForMessage() throws InterruptedException {
 		int n = 0;
-		while (Service.messages.size() == 0) {
+		while (Service.messages.isEmpty()) {
 			if (n++ > 200) {
 				fail("Message not received by Service");
 			}
@@ -193,7 +193,7 @@ public class JdbcMessageStoreChannelIntegrationTests {
 
 					synchronized (storeLock) {
 
-						boolean result1 = input.send(new GenericMessage<String>("foo"), 500L);
+						boolean result1 = input.send(new GenericMessage<>("foo"), 500L);
 						// This will time out because the transaction has not committed yet
 						try {
 							Service.await(1000);
@@ -239,7 +239,7 @@ public class JdbcMessageStoreChannelIntegrationTests {
 
 	public static class Service {
 
-		private static boolean fail = false;
+		private static boolean fail;
 
 		private static final List<String> messages = new CopyOnWriteArrayList<>();
 

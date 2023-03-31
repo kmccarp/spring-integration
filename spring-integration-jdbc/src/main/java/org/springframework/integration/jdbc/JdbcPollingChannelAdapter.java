@@ -60,13 +60,13 @@ public class JdbcPollingChannelAdapter extends AbstractMessageSource<Object> {
 
 	private SqlParameterSource sqlQueryParameterSource;
 
-	private boolean updatePerRow = false;
+	private boolean updatePerRow;
 
 	private SqlParameterSourceFactory sqlParameterSourceFactory = new ExpressionEvaluatingSqlParameterSourceFactory();
 
 	private boolean sqlParameterSourceFactorySet;
 
-	private int maxRows = 0;
+	private int maxRows;
 
 	private volatile String selectQuery;
 

@@ -27,6 +27,8 @@ import org.springframework.integration.events.IntegrationEvent;
 @SuppressWarnings("serial")
 public abstract class IpIntegrationEvent extends IntegrationEvent {
 
+	private static final long serialVersionUID = 1;
+
 	public IpIntegrationEvent(Object source) {
 		super(source);
 	}

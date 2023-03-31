@@ -23,6 +23,8 @@ package org.springframework.integration.redis.event;
 @SuppressWarnings("serial")
 public class RedisExceptionEvent extends RedisIntegrationEvent {
 
+	private static final long serialVersionUID = 1;
+
 	public RedisExceptionEvent(Object source, Throwable cause) {
 		super(source, cause);
 	}

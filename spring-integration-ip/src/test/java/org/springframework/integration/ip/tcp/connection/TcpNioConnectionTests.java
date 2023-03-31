@@ -56,7 +56,6 @@ import org.junit.jupiter.api.TestInfo;
 import org.junit.jupiter.api.condition.DisabledIfEnvironmentVariable;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 
 import org.springframework.beans.DirectFieldAccessor;
 import org.springframework.beans.factory.DisposableBean;
@@ -505,31 +504,23 @@ public class TcpNioConnectionTests {
 		MessageConvertingTcpMessageMapper inMapper = new MessageConvertingTcpMessageMapper(inConverter);
 		inboundConnection.setMapper(inMapper);
 		final ByteArrayOutputStream written = new ByteArrayOutputStream();
-		doAnswer(new Answer<Integer>() {
-
-			@Override
-			public Integer answer(InvocationOnMock invocation) {
-				ByteBuffer buff = invocation.getArgument(0);
-				byte[] bytes = written.toByteArray();
-				buff.put(bytes);
-				return bytes.length;
-			}
+		doAnswer(invocation -> {
+			ByteBuffer buff = invocation.getArgument(0);
+			byte[] bytes = written.toByteArray();
+			buff.put(bytes);
+			return bytes.length;
 		}).when(inChannel).read(any(ByteBuffer.class));
 
 		Socket outSocket = mock(Socket.class);
 		SocketChannel outChannel = mock(SocketChannel.class);
 		when(outChannel.socket()).thenReturn(outSocket);
 		TcpNioConnection outboundConnection = new TcpNioConnection(outChannel, true, false, nullPublisher, null);
-		doAnswer(new Answer<Object>() {
-
-			@Override
-			public Object answer(InvocationOnMock invocation) throws Throwable {
-				ByteBuffer buff = invocation.getArgument(0);
-				byte[] bytes = new byte[buff.limit()];
-				buff.get(bytes);
-				written.write(bytes);
-				return null;
-			}
+		doAnswer(invocation -> {
+			ByteBuffer buff = invocation.getArgument(0);
+			byte[] bytes = new byte[buff.limit()];
+			buff.get(bytes);
+			written.write(bytes);
+			return null;
 		}).when(outChannel).write(any(ByteBuffer.class));
 
 		MapMessageConverter outConverter = new MapMessageConverter();
@@ -543,16 +534,12 @@ public class TcpNioConnectionTests {
 				.build();
 		outboundConnection.send(message);
 
-		final AtomicReference<Message<?>> inboundMessage = new AtomicReference<Message<?>>();
+		final AtomicReference<Message<?>> inboundMessage = new AtomicReference<>();
 		final CountDownLatch latch = new CountDownLatch(1);
-		TcpListener listener = new TcpListener() {
-
-			@Override
-			public boolean onMessage(Message<?> message) {
-				inboundMessage.set(message);
-				latch.countDown();
-				return false;
-			}
+		TcpListener listener = message -> {
+			inboundMessage.set(message);
+			latch.countDown();
+			return false;
 		};
 		inboundConnection.registerListener(listener);
 		inboundConnection.readPacket();
@@ -571,19 +558,14 @@ public class TcpNioConnectionTests {
 
 		factory.setSoTimeout(1000);
 		factory.setTaskExecutor(compositeExec);
-		final AtomicReference<String> threadName = new AtomicReference<String>();
+		final AtomicReference<String> threadName = new AtomicReference<>();
 		final CountDownLatch latch = new CountDownLatch(1);
-		factory.registerListener(new TcpListener() {
-
-			@Override
-			public boolean onMessage(Message<?> message) {
-				if (!(message instanceof ErrorMessage)) {
-					threadName.set(Thread.currentThread().getName());
-					latch.countDown();
-				}
-				return false;
+		factory.registerListener(message -> {
+			if (!(message instanceof ErrorMessage)) {
+				threadName.set(Thread.currentThread().getName());
+				latch.countDown();
 			}
-
+			return false;
 		});
 		factory.start();
 		TestingUtilities.waitListening(factory, null);
@@ -659,11 +641,11 @@ public class TcpNioConnectionTests {
 		}
 		Thread.sleep(1);
 		for (int i = 0; i < numberOfSockets; i++) {
-			sockets[i].getOutputStream().write(("...foo2\r\nbar1 and...").getBytes());
+			sockets[i].getOutputStream().write("...foo2\r\nbar1 and...".getBytes());
 			sockets[i].getOutputStream().flush();
 		}
 		for (int i = 0; i < numberOfSockets; i++) {
-			sockets[i].getOutputStream().write(("...bar2\r\n").getBytes());
+			sockets[i].getOutputStream().write("...bar2\r\n".getBytes());
 			sockets[i].getOutputStream().flush();
 		}
 		for (int i = 0; i < numberOfSockets; i++) {
@@ -672,11 +654,11 @@ public class TcpNioConnectionTests {
 		}
 		Thread.sleep(1);
 		for (int i = 0; i < numberOfSockets; i++) {
-			sockets[i].getOutputStream().write(("...foo4\r\nbar3 and...").getBytes());
+			sockets[i].getOutputStream().write("...foo4\r\nbar3 and...".getBytes());
 			sockets[i].getOutputStream().flush();
 		}
 		for (int i = 0; i < numberOfSockets; i++) {
-			sockets[i].getOutputStream().write(("...bar4\r\n").getBytes());
+			sockets[i].getOutputStream().write("...bar4\r\n".getBytes());
 			sockets[i].close();
 		}
 
@@ -725,18 +707,13 @@ public class TcpNioConnectionTests {
 
 		});
 		final CountDownLatch assemblerLatch = new CountDownLatch(1);
-		final AtomicReference<Thread> assembler = new AtomicReference<Thread>();
-		factory.registerListener(new TcpListener() {
-
-			@Override
-			public boolean onMessage(Message<?> message) {
-				if (!(message instanceof ErrorMessage)) {
-					assembler.set(Thread.currentThread());
-					assemblerLatch.countDown();
-				}
-				return false;
+		final AtomicReference<Thread> assembler = new AtomicReference<>();
+		factory.registerListener(message -> {
+			if (!(message instanceof ErrorMessage)) {
+				assembler.set(Thread.currentThread());
+				assemblerLatch.countDown();
 			}
-
+			return false;
 		});
 		ThreadPoolTaskExecutor te = new ThreadPoolTaskExecutor();
 		te.setCorePoolSize(3); // selector, reader, assembler
@@ -762,38 +739,26 @@ public class TcpNioConnectionTests {
 
 		final CountDownLatch readerLatch = new CountDownLatch(4); // 3 dataAvailable, 1 continuing
 		final CountDownLatch readerFinishedLatch = new CountDownLatch(1);
-		doAnswer(new Answer<Void>() {
-
-			@Override
-			public Void answer(InvocationOnMock invocation) throws Throwable {
-				invocation.callRealMethod();
-				// delay the reader thread resetting writingToPipe
-				readerLatch.await(10, TimeUnit.SECONDS);
-				Thread.sleep(100);
-				readerFinishedLatch.countDown();
-				return null;
-			}
+		doAnswer(invocation -> {
+			invocation.callRealMethod();
+			// delay the reader thread resetting writingToPipe
+			readerLatch.await(10, TimeUnit.SECONDS);
+			Thread.sleep(100);
+			readerFinishedLatch.countDown();
+			return null;
 		}).when(cis).write(any(ByteBuffer.class));
 
 		doReturn(true).when(logger).isTraceEnabled();
-		doAnswer(new Answer<Void>() {
-
-			@Override
-			public Void answer(InvocationOnMock invocation) throws Throwable {
-				invocation.callRealMethod();
-				readerLatch.countDown();
-				return null;
-			}
+		doAnswer(invocation -> {
+			invocation.callRealMethod();
+			readerLatch.countDown();
+			return null;
 		}).when(logger).trace(contains("checking data avail"));
 
-		doAnswer(new Answer<Void>() {
-
-			@Override
-			public Void answer(InvocationOnMock invocation) throws Throwable {
-				invocation.callRealMethod();
-				readerLatch.countDown();
-				return null;
-			}
+		doAnswer(invocation -> {
+			invocation.callRealMethod();
+			readerLatch.countDown();
+			return null;
 		}).when(logger).trace(contains("Nio assembler continuing"));
 
 		socket.getOutputStream().write("foo\r\n".getBytes());

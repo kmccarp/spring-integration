@@ -181,6 +181,8 @@ public class IntegrationFlowEventsTests {
 	@SuppressWarnings("serial")
 	private static final class TestApplicationEvent1 extends ApplicationEvent {
 
+		private static final long serialVersionUID = 1;
+
 		TestApplicationEvent1() {
 			super("TestApplicationEvent1");
 		}
@@ -189,6 +191,8 @@ public class IntegrationFlowEventsTests {
 
 	@SuppressWarnings("serial")
 	private static final class TestApplicationEvent2 extends ApplicationEvent {
+
+		private static final long serialVersionUID = 1;
 
 		TestApplicationEvent2() {
 			super("TestApplicationEvent2");

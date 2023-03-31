@@ -52,7 +52,7 @@ public class FixedSubscriberChannelTests {
 
 	@Test
 	public void testHappyDay() {
-		this.in.send(new GenericMessage<String>("foo"));
+		this.in.send(new GenericMessage<>("foo"));
 		Message<?> out = this.out.receive(0);
 		assertThat(out.getPayload()).isEqualTo("FOO");
 		assertThat(this.in).isInstanceOf(FixedSubscriberChannel.class);

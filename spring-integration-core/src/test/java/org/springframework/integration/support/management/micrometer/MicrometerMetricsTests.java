@@ -127,7 +127,7 @@ public class MicrometerMetricsTests {
 		this.badPoll.send(message);
 
 		assertThatExceptionOfType(RuntimeException.class)
-				.isThrownBy(() -> this.badPoll.receive())
+				.isThrownBy(this.badPoll::receive)
 				.withMessage("badPoll");
 
 		nullChannel.send(message);

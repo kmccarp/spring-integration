@@ -51,7 +51,7 @@ public class MessageHistoryParameterTests {
 
 	@Test
 	public void test() {
-		input.send(new GenericMessage<String>("foo"));
+		input.send(new GenericMessage<>("foo"));
 		assertThat(output.receive(10000)).isNotNull();
 	}
 
