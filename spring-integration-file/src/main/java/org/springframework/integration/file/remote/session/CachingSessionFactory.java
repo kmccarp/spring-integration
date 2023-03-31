@@ -166,7 +166,7 @@ public class CachingSessionFactory<F> implements SessionFactory<F>, DisposableBe
 		this.pool.removeAllIdleItems();
 	}
 
-	public class CachedSession implements Session<F> { //NOSONAR must be final, but can't for mocking in tests
+	public final class CachedSession implements Session<F> { //NOSONAR must be final, but can't for mocking in tests
 
 		private final Session<F> targetSession;
 

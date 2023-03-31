@@ -237,7 +237,7 @@ public class EnricherSpec extends ConsumerEndpointSpec<EnricherSpec, ContentEnri
 	 */
 	public <V> EnricherSpec header(String name, V value, Boolean overwrite) {
 		AbstractHeaderValueMessageProcessor<V> headerValueMessageProcessor =
-				new StaticHeaderValueMessageProcessor<V>(value);
+				new StaticHeaderValueMessageProcessor<>(value);
 		headerValueMessageProcessor.setOverwrite(overwrite);
 		return header(name, headerValueMessageProcessor);
 	}

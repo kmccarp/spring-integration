@@ -129,8 +129,8 @@ public final class StandardIntegrationFlowContext implements IntegrationFlowCont
 			builder.additionalBeans.keySet()
 					.stream()
 					.filter(SmartLifecycle.class::isInstance)
-					.filter((lifecycle) -> ((SmartLifecycle) lifecycle).isAutoStartup())
-					.forEach((lifecycle) -> ((SmartLifecycle) lifecycle).start());
+					.filter(lifecycle -> ((SmartLifecycle) lifecycle).isAutoStartup())
+					.forEach(lifecycle -> ((SmartLifecycle) lifecycle).start());
 		}
 		this.registry.put(flowId, registration);
 
@@ -268,7 +268,7 @@ public final class StandardIntegrationFlowContext implements IntegrationFlowCont
 
 		private final Map<Object, String> additionalBeans = new HashMap<>();
 
-		private IntegrationFlow integrationFlow;
+		private final IntegrationFlow integrationFlow;
 
 		private String id;
 

@@ -46,7 +46,7 @@ public class SplitterParserTests {
 		context.start();
 		MessageChannel input = (MessageChannel) context.getBean("splitterAdapterWithRefAndMethodInput");
 		PollableChannel output = (PollableChannel) context.getBean("output");
-		input.send(new GenericMessage<String>("this.is.a.test"));
+		input.send(new GenericMessage<>("this.is.a.test"));
 		Message<?> result1 = output.receive(1000);
 		assertThat(result1.getPayload()).isEqualTo("this");
 		Message<?> result2 = output.receive(1000);
@@ -66,7 +66,7 @@ public class SplitterParserTests {
 		context.start();
 		MessageChannel input = (MessageChannel) context.getBean("splitterAdapterWithRefOnlyInput");
 		PollableChannel output = (PollableChannel) context.getBean("output");
-		input.send(new GenericMessage<String>("this.is.a.test"));
+		input.send(new GenericMessage<>("this.is.a.test"));
 		Message<?> result1 = output.receive(1000);
 		assertThat(result1.getPayload()).isEqualTo("this");
 		Message<?> result2 = output.receive(1000);
@@ -86,7 +86,7 @@ public class SplitterParserTests {
 		context.start();
 		MessageChannel input = (MessageChannel) context.getBean("splitterImplementationInput");
 		PollableChannel output = (PollableChannel) context.getBean("output");
-		input.send(new GenericMessage<String>("this.is.a.test"));
+		input.send(new GenericMessage<>("this.is.a.test"));
 		Message<?> result1 = output.receive(1000);
 		assertThat(result1.getPayload()).isEqualTo("this");
 		Message<?> result2 = output.receive(1000);

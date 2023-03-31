@@ -36,7 +36,7 @@ public class PayloadSerializingTransformerTests {
 	@Test
 	public void serializeString() throws Exception {
 		PayloadSerializingTransformer transformer = new PayloadSerializingTransformer();
-		Message<?> result = transformer.transform(new GenericMessage<String>("foo"));
+		Message<?> result = transformer.transform(new GenericMessage<>("foo"));
 		Object payload = result.getPayload();
 		assertThat(payload).isNotNull();
 		assertThat(payload instanceof byte[]).isTrue();
@@ -50,7 +50,7 @@ public class PayloadSerializingTransformerTests {
 	public void serializeObject() throws Exception {
 		PayloadSerializingTransformer transformer = new PayloadSerializingTransformer();
 		TestBean testBean = new TestBean("test");
-		Message<?> result = transformer.transform(new GenericMessage<TestBean>(testBean));
+		Message<?> result = transformer.transform(new GenericMessage<>(testBean));
 		Object payload = result.getPayload();
 		assertThat(payload).isNotNull();
 		assertThat(payload instanceof byte[]).isTrue();
@@ -64,7 +64,7 @@ public class PayloadSerializingTransformerTests {
 	@Test(expected = MessageTransformationException.class)
 	public void invalidPayload() {
 		PayloadSerializingTransformer transformer = new PayloadSerializingTransformer();
-		transformer.transform(new GenericMessage<Object>(new Object()));
+		transformer.transform(new GenericMessage<>(new Object()));
 	}
 
 	@Test
@@ -78,6 +78,8 @@ public class PayloadSerializingTransformerTests {
 
 	@SuppressWarnings("serial")
 	private static class TestBean implements Serializable {
+
+		private static final long serialVersionUID = 1;
 
 		private final String name;
 

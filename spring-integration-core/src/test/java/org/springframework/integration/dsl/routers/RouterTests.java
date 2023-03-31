@@ -120,7 +120,7 @@ public class RouterTests {
 
 	@Test
 	public void testRouterWithTwoSubflows() {
-		this.routerTwoSubFlowsInput.send(new GenericMessage<Object>(Arrays.asList(1, 2, 3, 4, 5, 6)));
+		this.routerTwoSubFlowsInput.send(new GenericMessage<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
 		Message<?> receive = this.routerTwoSubFlowsOutput.receive(5000);
 		assertThat(receive).isNotNull();
 		Object payload = receive.getPayload();
@@ -615,7 +615,7 @@ public class RouterTests {
 				.containsAllEntriesOf(
 						headers1.entrySet()
 								.stream()
-								.filter((entry) ->
+								.filter(entry ->
 										!MessageHeaders.ID.equals(entry.getKey())
 												&& !MessageHeaders.TIMESTAMP.equals(entry.getKey()))
 								.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)));
@@ -748,7 +748,7 @@ public class RouterTests {
 		@Bean
 		public IntegrationFlow routeMultiMethodInvocationFlow() {
 			return IntegrationFlow.from("routerMultiInput")
-					.route(String.class, p -> p.equals("foo") || p.equals("bar")
+					.route(String.class, p -> "foo".equals(p) || "bar".equals(p)
 									? new String[] {"foo", "bar"}
 									: null,
 							s -> s.suffix("-channel"))

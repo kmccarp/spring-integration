@@ -22,7 +22,7 @@ public class TestBean {
 
 	private String value = "foo";
 
-	private boolean test = false;
+	private boolean test;
 
 	private long number = 42;
 

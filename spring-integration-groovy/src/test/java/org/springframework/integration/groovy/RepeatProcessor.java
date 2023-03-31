@@ -18,7 +18,6 @@ package org.springframework.integration.groovy;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -75,21 +74,19 @@ public class RepeatProcessor implements MethodRule {
 		return new Statement() {
 			@Override
 			public void evaluate() throws Throwable {
-				List<Future<Boolean>> results = new ArrayList<Future<Boolean>>();
+				List<Future<Boolean>> results = new ArrayList<>();
 				ExecutorService executor = Executors.newFixedThreadPool(concurrency);
 				try {
 					for (int i = 0; i < repeats; i++) {
 						final int count = i;
-						results.add(executor.submit(new Callable<Boolean>() {
-							public Boolean call() {
-								try {
-									base.evaluate();
-								}
-								catch (Throwable t) {
-									throw new IllegalStateException("Failed on iteration: " + count, t);
-								}
-								return true;
+						results.add(executor.submit(() -> {
+							try {
+								base.evaluate();
 							}
+							catch (Throwable t) {
+								throw new IllegalStateException("Failed on iteration: " + count, t);
+							}
+							return true;
 						}));
 					}
 					for (Future<Boolean> future : results) {

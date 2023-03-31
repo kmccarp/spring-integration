@@ -313,6 +313,8 @@ public class ApplicationEventListeningMessageProducerTests {
 	@SuppressWarnings("serial")
 	private static class TestApplicationEvent1 extends ApplicationEvent {
 
+		private static final long serialVersionUID = 1;
+
 		TestApplicationEvent1() {
 			super("event1");
 		}
@@ -321,6 +323,8 @@ public class ApplicationEventListeningMessageProducerTests {
 
 	@SuppressWarnings("serial")
 	private static class TestApplicationEvent2 extends ApplicationEvent {
+
+		private static final long serialVersionUID = 1;
 
 		TestApplicationEvent2() {
 			super("event2");
@@ -331,13 +335,15 @@ public class ApplicationEventListeningMessageProducerTests {
 	@SuppressWarnings("serial")
 	private static class TestMessagingEvent extends ApplicationEvent {
 
+		private static final long serialVersionUID = 1;
+
 		TestMessagingEvent(Message<?> message) {
 			super(message);
 		}
 
 	}
 
-	private static class TestApplicationListener implements ApplicationListener<ApplicationEvent> {
+	private static final class TestApplicationListener implements ApplicationListener<ApplicationEvent> {
 
 		private final AtomicInteger counter;
 

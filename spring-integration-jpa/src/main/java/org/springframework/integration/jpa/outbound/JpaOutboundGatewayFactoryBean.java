@@ -46,7 +46,7 @@ public class JpaOutboundGatewayFactoryBean extends AbstractSimpleMessageHandlerF
 
 	private long replyTimeout = IntegrationContextUtils.DEFAULT_TIMEOUT;
 
-	private boolean requiresReply = false;
+	private boolean requiresReply;
 
 	public void setJpaExecutor(JpaExecutor jpaExecutor) {
 		this.jpaExecutor = jpaExecutor;

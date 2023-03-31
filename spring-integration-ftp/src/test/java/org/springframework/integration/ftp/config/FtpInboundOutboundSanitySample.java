@@ -73,8 +73,8 @@ public class FtpInboundOutboundSanitySample {
 		File fileA = new File("local-test-dir/a.test");
 		File fileB = new File("local-test-dir/b.test");
 		MessageChannel ftpChannel = ac.getBean("ftpChannel", MessageChannel.class);
-		ftpChannel.send(new GenericMessage<File>(fileA));
-		ftpChannel.send(new GenericMessage<File>(fileB));
+		ftpChannel.send(new GenericMessage<>(fileA));
+		ftpChannel.send(new GenericMessage<>(fileB));
 		Thread.sleep(3000);
 		fileA = new File("remote-target-dir/a.test");
 		fileB = new File("remote-target-dir/b.test");

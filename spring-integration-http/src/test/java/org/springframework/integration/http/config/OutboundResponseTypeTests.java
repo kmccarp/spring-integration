@@ -142,7 +142,7 @@ public class OutboundResponseTypeTests {
 				.andExpect(method(HttpMethod.POST))
 				.andRespond(withSuccess(HttpMethod.POST.name(), MediaType.TEXT_PLAIN));
 
-		this.resTypeExpressionSetSerializationChannel.send(new GenericMessage<Class<?>>(String.class));
+		this.resTypeExpressionSetSerializationChannel.send(new GenericMessage<>(String.class));
 		Message<?> message = this.replyChannel.receive(5000);
 		assertThat(message).isNotNull();
 		assertThat(message.getPayload() instanceof String).isTrue();

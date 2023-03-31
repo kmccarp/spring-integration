@@ -80,10 +80,10 @@ public class ChannelParserTests {
 	public void testChannelWithCapacity() {
 		MessageChannel channel = (MessageChannel) context.getBean("capacityChannel");
 		for (int i = 0; i < 10; i++) {
-			boolean result = channel.send(new GenericMessage<String>("test"), 10);
+			boolean result = channel.send(new GenericMessage<>("test"), 10);
 			assertThat(result).isTrue();
 		}
-		assertThat(channel.send(new GenericMessage<String>("test"), 3)).isFalse();
+		assertThat(channel.send(new GenericMessage<>("test"), 3)).isFalse();
 	}
 
 	@Test
@@ -159,13 +159,13 @@ public class ChannelParserTests {
 	@Test
 	public void testDatatypeChannelWithCorrectType() {
 		MessageChannel channel = (MessageChannel) context.getBean("integerChannel");
-		assertThat(channel.send(new GenericMessage<Integer>(123))).isTrue();
+		assertThat(channel.send(new GenericMessage<>(123))).isTrue();
 	}
 
 	@Test(expected = MessageDeliveryException.class)
 	public void testDatatypeChannelWithIncorrectType() {
 		MessageChannel channel = (MessageChannel) context.getBean("integerChannel");
-		channel.send(new GenericMessage<String>("incorrect type"));
+		channel.send(new GenericMessage<>("incorrect type"));
 		assertThat(TestUtils.getPropertyValue(channel, "messageConverter") instanceof UselessMessageConverter).isTrue();
 	}
 
@@ -222,7 +222,7 @@ public class ChannelParserTests {
 		ConfigurableApplicationContext context =
 				new ClassPathXmlApplicationContext("channelInterceptorParserTests.xml", getClass());
 		PollableChannel channel = (PollableChannel) context.getBean("channelWithInterceptorInnerBean");
-		channel.send(new GenericMessage<String>("test"));
+		channel.send(new GenericMessage<>("test"));
 		Message<?> transformed = channel.receive(1000);
 		assertThat(transformed.getPayload()).isEqualTo("TEST");
 		context.close();

@@ -376,7 +376,7 @@ public class MethodInvokingSplitterTests {
 		ProxyFactory pf = new ProxyFactory(stream);
 		AtomicBoolean closed = new AtomicBoolean();
 		MethodInterceptor interceptor = i -> {
-			if (i.getMethod().getName().equals("close")) {
+			if ("close".equals(i.getMethod().getName())) {
 				closed.set(true);
 			}
 			return i.proceed();
@@ -574,7 +574,7 @@ public class MethodInvokingSplitterTests {
 			String[] strings = input.getPayload().toString().split("\\.");
 			List<Message<String>> messages = new ArrayList<>();
 			for (String s : strings) {
-				messages.add(new GenericMessage<String>(s));
+				messages.add(new GenericMessage<>(s));
 			}
 			return messages;
 		}
@@ -676,6 +676,8 @@ public class MethodInvokingSplitterTests {
 
 	@SuppressWarnings("serial")
 	private static class TestStringMessage extends GenericMessage<String> {
+
+		private static final long serialVersionUID = 1;
 
 		TestStringMessage(String payload) {
 			super(payload);

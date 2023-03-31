@@ -67,6 +67,8 @@ public final class ErrorMessageUtils {
 	@SuppressWarnings("serial")
 	private static class ErrorMessageAttributes extends AttributeAccessorSupport {
 
+		private static final long serialVersionUID = 1;
+
 		ErrorMessageAttributes() {
 		}
 

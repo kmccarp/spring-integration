@@ -40,7 +40,7 @@ public class SmbSessionFactory extends SmbConfig implements SessionFactory<SmbFi
 
 	private static final Log logger = LogFactory.getLog(SmbSessionFactory.class);
 
-	private CIFSContext context = null;
+	private CIFSContext context;
 
 	public SmbSessionFactory() {
 		logger.debug("New " + getClass().getName() + " created.");
@@ -61,8 +61,8 @@ public class SmbSessionFactory extends SmbConfig implements SessionFactory<SmbFi
 		try {
 			return createSession();
 		}
-		catch (Exception _ex) {
-			throw new IllegalStateException("Failed to create session.", _ex);
+		catch (Exception ex) {
+			throw new IllegalStateException("Failed to create session.", ex);
 		}
 	}
 

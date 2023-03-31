@@ -85,7 +85,7 @@ public class Jsr223TransformerTests {
 	@Test
 	public void testInt3162ScriptExecutorThreadSafety() {
 		for (int i = 0; i < 100; i++) {
-			this.int3162InputChannel.send(new GenericMessage<Object>(i));
+			this.int3162InputChannel.send(new GenericMessage<>(i));
 		}
 
 		Set<Object> result = new HashSet<>();

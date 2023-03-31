@@ -45,15 +45,15 @@ public class StubTextMessage implements TextMessage {
 
 	private String type;
 
-	private long timestamp = 0L;
+	private long timestamp;
 
-	private long expiration = 0L;
+	private long expiration;
 
 	private int priority = DEFAULT_PRIORITY;
 
 	private boolean redelivered;
 
-	private ConcurrentHashMap<String, Object> properties = new ConcurrentHashMap<String, Object>();
+	private ConcurrentHashMap<String, Object> properties = new ConcurrentHashMap<>();
 
 	private long deliveryTime;
 

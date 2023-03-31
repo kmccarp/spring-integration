@@ -119,7 +119,7 @@ public class WireTapTests {
 
 	private static class TestSelector implements MessageSelector {
 
-		private boolean shouldAccept;
+		private final boolean shouldAccept;
 
 		TestSelector(boolean shouldAccept) {
 			this.shouldAccept = shouldAccept;

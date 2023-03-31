@@ -78,7 +78,7 @@ public class PayloadTypeRouter extends AbstractMappingMessageRouter {
 				minTypeDiffWeight = typeDiffWeight;
 				// new winner, start accumulating matches from scratch
 				matches.clear();
-				matches.add((isArray) ? candidate + ARRAY_SUFFIX : candidate);
+				matches.add(isArray ? candidate + ARRAY_SUFFIX : candidate);
 			}
 			else if (typeDiffWeight == minTypeDiffWeight && typeDiffWeight != Integer.MAX_VALUE) {
 				// candidate tied with current winner, keep track

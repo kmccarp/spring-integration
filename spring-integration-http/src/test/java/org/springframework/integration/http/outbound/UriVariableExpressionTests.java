@@ -95,7 +95,7 @@ public class UriVariableExpressionTests {
 		handler.setBeanFactory(mock(BeanFactory.class));
 		handler.afterPropertiesSet();
 		try {
-			handler.handleMessage(new GenericMessage<Object>("bar"));
+			handler.handleMessage(new GenericMessage<>("bar"));
 			fail("Exception expected.");
 		}
 		catch (Exception e) {

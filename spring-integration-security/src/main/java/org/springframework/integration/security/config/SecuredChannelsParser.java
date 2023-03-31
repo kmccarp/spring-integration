@@ -68,7 +68,7 @@ public class SecuredChannelsParser extends AbstractSingleBeanDefinitionParser {
 	private BeanDefinition parseSecurityMetadataSource(Element element, ParserContext parserContext) {
 		BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(ChannelSecurityMetadataSource.class);
 		List<Element> accessPolicyElements = DomUtils.getChildElementsByTagName(element, "access-policy");
-		ManagedMap<String, BeanDefinition> patternMappings = new ManagedMap<String, BeanDefinition>();
+		ManagedMap<String, BeanDefinition> patternMappings = new ManagedMap<>();
 		for (Element accessPolicyElement : accessPolicyElements) {
 			String sendAccess = accessPolicyElement.getAttribute("send-access");
 			String receiveAccess = accessPolicyElement.getAttribute("receive-access");

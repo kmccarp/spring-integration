@@ -279,7 +279,7 @@ public class StoredProcOutboundGatewayParserTests {
 		setUp("advisedStoredProcOutboundGatewayParserTest.xml", getClass());
 
 		MessageHandler handler = TestUtils.getPropertyValue(this.outboundGateway, "handler", MessageHandler.class);
-		handler.handleMessage(new GenericMessage<String>("foo"));
+		handler.handleMessage(new GenericMessage<>("foo"));
 		assertThat(adviceCalled).isEqualTo(1);
 	}
 

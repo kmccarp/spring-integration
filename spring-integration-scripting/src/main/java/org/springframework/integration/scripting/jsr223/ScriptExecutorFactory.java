@@ -34,16 +34,16 @@ import org.springframework.util.Assert;
 public final class ScriptExecutorFactory {
 
 	public static ScriptExecutor getScriptExecutor(String language) {
-		if (language.equalsIgnoreCase("python") || language.equalsIgnoreCase("jython")) {
+		if ("python".equalsIgnoreCase(language) || "jython".equalsIgnoreCase(language)) {
 			return new PythonScriptExecutor();
 		}
-		else if (language.equalsIgnoreCase("ruby") || language.equalsIgnoreCase("jruby")) {
+		else if ("ruby".equalsIgnoreCase(language) || "jruby".equalsIgnoreCase(language)) {
 			return new RubyScriptExecutor();
 		}
-		else if (language.equalsIgnoreCase("kotlin")) {
+		else if ("kotlin".equalsIgnoreCase(language)) {
 			return new KotlinScriptExecutor();
 		}
-		else if (language.equalsIgnoreCase("js") || language.equalsIgnoreCase("javascript")) {
+		else if ("js".equalsIgnoreCase(language) || "javascript".equalsIgnoreCase(language)) {
 			return new PolyglotScriptExecutor("js");
 		}
 		return new DefaultScriptExecutor(language);
@@ -59,10 +59,10 @@ public final class ScriptExecutorFactory {
 		int index = scriptLocation.lastIndexOf('.') + 1;
 		Assert.state(index > 0, () -> "Unable to determine language for script '" + scriptLocation + "'");
 		String extension = scriptLocation.substring(index);
-		if (extension.equals("kts")) {
+		if ("kts".equals(extension)) {
 			return "kotlin";
 		}
-		else if (extension.equals("js")) {
+		else if ("js".equals(extension)) {
 			return "js";
 		}
 		ScriptEngineManager engineManager = new ScriptEngineManager();

@@ -75,7 +75,7 @@ public class GatewayInvokingMessageHandlerTests {
 			assertThat(message.getHeaders().get("foo")).isEqualTo("foo");
 			assertThat(message.getHeaders().get("name")).isEqualTo("oleg");
 		});
-		channel.send(new GenericMessage<String>("hello"));
+		channel.send(new GenericMessage<>("hello"));
 	}
 
 	@Test

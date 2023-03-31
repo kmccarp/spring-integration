@@ -111,7 +111,7 @@ class RedisQueueOutboundChannelAdapterTests implements RedisContainerTest {
 		Message<String> message = MessageBuilder.withPayload("testing").build();
 		handler.handleMessage(message);
 
-		RedisTemplate<String, Object> redisTemplate = new RedisTemplate<String, Object>();
+		RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
 		redisTemplate.setConnectionFactory(this.connectionFactory);
 		redisTemplate.setEnableDefaultSerializer(false);
 		redisTemplate.setKeySerializer(new StringRedisSerializer());
@@ -132,20 +132,20 @@ class RedisQueueOutboundChannelAdapterTests implements RedisContainerTest {
 
 		final RedisQueueOutboundChannelAdapter handler = new RedisQueueOutboundChannelAdapter(queueName,
 				this.connectionFactory);
-		handler.setSerializer(new Jackson2JsonRedisSerializer<Object>(Object.class));
+		handler.setSerializer(new Jackson2JsonRedisSerializer<>(Object.class));
 
 		RedisTemplate<String, ?> redisTemplate = new StringRedisTemplate();
 		redisTemplate.setConnectionFactory(this.connectionFactory);
 		redisTemplate.afterPropertiesSet();
 
-		handler.handleMessage(new GenericMessage<Object>(Arrays.asList("foo", "bar", "baz")));
+		handler.handleMessage(new GenericMessage<>(Arrays.asList("foo", "bar", "baz")));
 
 		Object result = redisTemplate.boundListOps(queueName).rightPop(5000, TimeUnit.MILLISECONDS);
 		assertThat(result)
 				.isNotNull()
 				.isEqualTo("[\"foo\",\"bar\",\"baz\"]");
 
-		handler.handleMessage(new GenericMessage<Object>("test"));
+		handler.handleMessage(new GenericMessage<>("test"));
 
 		result = redisTemplate.boundListOps(queueName).rightPop(5000, TimeUnit.MILLISECONDS);
 		assertThat(result)
@@ -158,7 +158,7 @@ class RedisQueueOutboundChannelAdapterTests implements RedisContainerTest {
 
 		final String queueName = "si.test.Int3017IntegrationOutbound";
 
-		GenericMessage<Object> message = new GenericMessage<Object>(queueName);
+		GenericMessage<Object> message = new GenericMessage<>(queueName);
 		this.sendChannel.send(message);
 
 		RedisTemplate<String, String> redisTemplate = new StringRedisTemplate();

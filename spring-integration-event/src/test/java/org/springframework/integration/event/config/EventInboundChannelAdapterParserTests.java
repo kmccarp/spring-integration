@@ -146,6 +146,8 @@ public class EventInboundChannelAdapterParserTests {
 	@SuppressWarnings("serial")
 	public static class SampleEvent extends ApplicationEvent {
 
+		private static final long serialVersionUID = 1;
+
 		public SampleEvent(Object source) {
 			super(source);
 		}
@@ -154,6 +156,8 @@ public class EventInboundChannelAdapterParserTests {
 
 	@SuppressWarnings("serial")
 	public static class AnotherSampleEvent extends ApplicationEvent {
+
+		private static final long serialVersionUID = 1;
 
 		public AnotherSampleEvent(Object source) {
 			super(source);

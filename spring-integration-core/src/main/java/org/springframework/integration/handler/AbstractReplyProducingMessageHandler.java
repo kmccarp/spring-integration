@@ -49,7 +49,7 @@ public abstract class AbstractReplyProducingMessageHandler extends AbstractMessa
 
 	private ClassLoader beanClassLoader = ClassUtils.getDefaultClassLoader();
 
-	private boolean requiresReply = false;
+	private boolean requiresReply;
 
 	private volatile RequestHandler advisedRequestHandler;
 
@@ -82,7 +82,7 @@ public abstract class AbstractReplyProducingMessageHandler extends AbstractMessa
 	}
 
 	protected boolean hasAdviceChain() {
-		return this.adviceChain.size() > 0;
+		return !this.adviceChain.isEmpty();
 	}
 
 	@Override

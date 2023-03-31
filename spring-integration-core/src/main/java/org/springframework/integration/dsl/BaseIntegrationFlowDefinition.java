@@ -1751,7 +1751,7 @@ public abstract class BaseIntegrationFlowDefinition<B extends BaseIntegrationFlo
 	 * @see AggregatorSpec
 	 */
 	public B aggregate(Object aggregatorProcessor) {
-		return aggregate((aggregator) -> aggregator.processor(aggregatorProcessor));
+		return aggregate(aggregator -> aggregator.processor(aggregatorProcessor));
 	}
 
 	/**

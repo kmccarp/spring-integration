@@ -45,12 +45,12 @@ public class UnicastingDispatcherTests {
 		MessageHandler errorHandler = message -> {
 			MessageChannel replyChannel = (MessageChannel) message.getHeaders().getReplyChannel();
 			assertThat(message.getPayload() instanceof MessageDeliveryException).isTrue();
-			replyChannel.send(new GenericMessage<String>("reply"));
+			replyChannel.send(new GenericMessage<>("reply"));
 		};
 		errorChannel.subscribe(errorHandler);
 
 		RequestReplyExchanger exchanger = context.getBean(RequestReplyExchanger.class);
-		Message<String> reply = (Message<String>) exchanger.exchange(new GenericMessage<String>("Hello"));
+		Message<String> reply = (Message<String>) exchanger.exchange(new GenericMessage<>("Hello"));
 		assertThat(reply.getPayload()).isEqualTo("reply");
 		context.close();
 	}

@@ -99,13 +99,13 @@ public abstract class AbstractHttpRequestExecutingMessageHandler extends Abstrac
 
 	private boolean extractPayload = true;
 
-	private boolean extractPayloadExplicitlySet = false;
+	private boolean extractPayloadExplicitlySet;
 
 	private boolean extractResponseBody = true;
 
 	private Charset charset = StandardCharsets.UTF_8;
 
-	private boolean transferCookies = false;
+	private boolean transferCookies;
 
 	private HeaderMapper<HttpHeaders> headerMapper = DefaultHttpHeaderMapper.outboundMapper();
 

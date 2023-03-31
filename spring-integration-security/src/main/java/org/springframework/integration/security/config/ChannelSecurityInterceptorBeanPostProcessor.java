@@ -50,6 +50,8 @@ import org.springframework.messaging.MessageChannel;
 @SuppressWarnings("serial")
 public class ChannelSecurityInterceptorBeanPostProcessor extends AbstractAutoProxyCreator {
 
+	private static final long serialVersionUID = 1;
+
 	private final Map<String, Set<Pattern>> securityInterceptorMappings;
 
 	private final Map<String, Map<Pattern, ChannelAccessPolicy>> accessPolicyMapping;

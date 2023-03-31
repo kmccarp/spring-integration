@@ -96,7 +96,7 @@ public class SpelTransformerIntegrationTests {
 	@Test
 	public void testInt2755ChainChildIdWithinExceptionMessage() {
 		try {
-			this.transformerChainInput.send(new GenericMessage<String>("foo"));
+			this.transformerChainInput.send(new GenericMessage<>("foo"));
 		}
 		catch (ReplyRequiredException e) {
 			assertThat(e.getMessage()).contains("No reply produced by handler 'transformerChain$child#0'");
@@ -108,7 +108,7 @@ public class SpelTransformerIntegrationTests {
 		QueueChannel outputChannel = new QueueChannel();
 		fooHandler.setOutputChannel(outputChannel);
 		Foo foo = new Foo("baz");
-		fooHandler.handleMessage(new GenericMessage<Foo>(foo));
+		fooHandler.handleMessage(new GenericMessage<>(foo));
 		Message<?> reply = outputChannel.receive(0);
 		assertThat(reply).isNotNull();
 		assertThat(reply.getPayload() instanceof String).isTrue();
@@ -121,7 +121,7 @@ public class SpelTransformerIntegrationTests {
 	public void testCustomFunction() {
 		QueueChannel outputChannel = new QueueChannel();
 		barHandler.setOutputChannel(outputChannel);
-		barHandler.handleMessage(new GenericMessage<String>("foo"));
+		barHandler.handleMessage(new GenericMessage<>("foo"));
 		Message<?> reply = outputChannel.receive(0);
 		assertThat(reply).isNotNull();
 		assertThat(reply.getPayload()).isEqualTo("bar");

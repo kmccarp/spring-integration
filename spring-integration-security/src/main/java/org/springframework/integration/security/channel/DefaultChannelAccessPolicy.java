@@ -60,7 +60,7 @@ public class DefaultChannelAccessPolicy implements ChannelAccessPolicy {
 				"At least one of 'sendAccess' and 'receiveAccess' must not be null and have at least one entry.");
 		if (sendAccessDefined) {
 			String[] sendAccessValues = StringUtils.commaDelimitedListToStringArray(sendAccess);
-			this.configAttributeDefinitionForSend = new HashSet<ConfigAttribute>();
+			this.configAttributeDefinitionForSend = new HashSet<>();
 			for (String sendAccessValue : sendAccessValues) {
 				this.configAttributeDefinitionForSend.add(new SecurityConfig(StringUtils.trimAllWhitespace(sendAccessValue)));
 			}
@@ -70,7 +70,7 @@ public class DefaultChannelAccessPolicy implements ChannelAccessPolicy {
 		}
 		if (receiveAccessDefined) {
 			String[] receiveAccessValues = StringUtils.commaDelimitedListToStringArray(receiveAccess);
-			this.configAttributeDefinitionForReceive = new HashSet<ConfigAttribute>();
+			this.configAttributeDefinitionForReceive = new HashSet<>();
 			for (String receiveAccessValue : receiveAccessValues) {
 				this.configAttributeDefinitionForReceive.add(new SecurityConfig(StringUtils.trimAllWhitespace(receiveAccessValue)));
 			}
@@ -94,7 +94,7 @@ public class DefaultChannelAccessPolicy implements ChannelAccessPolicy {
 		Assert.isTrue(sendAccessDefined || receiveAccessDefined,
 				"At least one of 'sendAccess' and 'receiveAccess' must not be null.");
 		if (sendAccessDefined) {
-			this.configAttributeDefinitionForSend = new HashSet<ConfigAttribute>();
+			this.configAttributeDefinitionForSend = new HashSet<>();
 			for (String sendAccessValue : sendAccess) {
 				this.configAttributeDefinitionForSend.add(new SecurityConfig(sendAccessValue));
 			}
@@ -103,7 +103,7 @@ public class DefaultChannelAccessPolicy implements ChannelAccessPolicy {
 			this.configAttributeDefinitionForSend = Collections.emptySet();
 		}
 		if (receiveAccessDefined) {
-			this.configAttributeDefinitionForReceive = new HashSet<ConfigAttribute>();
+			this.configAttributeDefinitionForReceive = new HashSet<>();
 			for (String receiveAccessValue : receiveAccess) {
 				this.configAttributeDefinitionForReceive.add(new SecurityConfig(receiveAccessValue));
 			}

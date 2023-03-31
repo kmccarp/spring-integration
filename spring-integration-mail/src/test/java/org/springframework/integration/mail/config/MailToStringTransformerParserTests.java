@@ -48,7 +48,7 @@ class MailToStringTransformerParserTests {
 					(PollableChannel) new BeanFactoryChannelResolver(context).resolveDestination("output");
 			MimeMessage mimeMessage = Mockito.mock(MimeMessage.class);
 			Mockito.when(mimeMessage.getContent()).thenReturn("hello");
-			input.send(new GenericMessage<jakarta.mail.Message>(mimeMessage));
+			input.send(new GenericMessage<>(mimeMessage));
 			Message<?> result = output.receive(10_000);
 			assertThat(result).isNotNull();
 			assertThat(result.getPayload()).isEqualTo("hello");
@@ -66,7 +66,7 @@ class MailToStringTransformerParserTests {
 					(PollableChannel) new BeanFactoryChannelResolver(context).resolveDestination("output");
 			MimeMessage mimeMessage = Mockito.mock(MimeMessage.class);
 			Mockito.when(mimeMessage.getContent()).thenReturn("foo");
-			input.send(new GenericMessage<jakarta.mail.Message>(mimeMessage));
+			input.send(new GenericMessage<>(mimeMessage));
 			Message<?> result = output.receive(0);
 			assertThat(result).isNotNull();
 			assertThat(result.getPayload()).isEqualTo("FOO!!!");

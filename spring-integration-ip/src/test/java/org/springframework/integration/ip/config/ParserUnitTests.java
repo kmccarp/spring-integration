@@ -409,21 +409,21 @@ public class ParserUnitTests {
 	@Test
 	public void udpAdvice() throws InterruptedException {
 		adviceCalled = new CountDownLatch(1);
-		this.udpAdviceChannel.send(new GenericMessage<String>("foo"));
+		this.udpAdviceChannel.send(new GenericMessage<>("foo"));
 		assertThat(adviceCalled.await(10, TimeUnit.SECONDS)).isTrue();
 	}
 
 	@Test
 	public void tcpAdvice() throws InterruptedException {
 		adviceCalled = new CountDownLatch(1);
-		this.tcpAdviceChannel.send(new GenericMessage<String>("foo"));
+		this.tcpAdviceChannel.send(new GenericMessage<>("foo"));
 		assertThat(adviceCalled.await(10, TimeUnit.SECONDS)).isTrue();
 	}
 
 	@Test
 	public void tcpGatewayAdvice() throws InterruptedException {
 		adviceCalled = new CountDownLatch(1);
-		this.tcpAdviceGateChannel.send(new GenericMessage<String>("foo"));
+		this.tcpAdviceGateChannel.send(new GenericMessage<>("foo"));
 		assertThat(adviceCalled.await(10, TimeUnit.SECONDS)).isTrue();
 	}
 
@@ -680,6 +680,8 @@ public class ParserUnitTests {
 	@SuppressWarnings("serial")
 	public static class EventSubclass1 extends TcpConnectionEvent {
 
+		private static final long serialVersionUID = 1;
+
 		public EventSubclass1(TcpConnectionSupport connection, String connectionFactoryName) {
 			super(connection, connectionFactoryName);
 		}
@@ -688,6 +690,8 @@ public class ParserUnitTests {
 
 	@SuppressWarnings("serial")
 	public static class EventSubclass2 extends TcpConnectionEvent {
+
+		private static final long serialVersionUID = 1;
 
 		public EventSubclass2(TcpConnectionSupport connection, String connectionFactoryName) {
 			super(connection, connectionFactoryName);

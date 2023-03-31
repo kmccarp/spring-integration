@@ -179,7 +179,7 @@ public class ParentContextTests {
 		TestPerson person = new TestPerson();
 		person.setFirstName("John");
 
-		input.send(new GenericMessage<Object>(person));
+		input.send(new GenericMessage<>(person));
 
 		Message<?> result = output.receive(1000);
 		assertThat(result).isNotNull();

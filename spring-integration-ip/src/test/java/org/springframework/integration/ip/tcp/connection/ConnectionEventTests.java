@@ -104,7 +104,7 @@ public class ConnectionEventTests {
 		assertThatExceptionOfType(Exception.class)
 				.isThrownBy(() -> conn.send(new GenericMessage<>("bar")));
 
-		assertThat(theEvent.size() > 0).isTrue();
+		assertThat(!theEvent.isEmpty()).isTrue();
 		assertThat(theEvent.get(0)).isNotNull();
 		assertThat(theEvent.get(0)).isInstanceOf(TcpConnectionExceptionEvent.class);
 		assertThat(theEvent.get(0).toString().endsWith("[factory=foo, connectionId=" + conn.getConnectionId() + "]"))
@@ -200,7 +200,7 @@ public class ConnectionEventTests {
 		});
 		gw.setConnectionFactory(scf);
 		DirectChannel requestChannel = new DirectChannel();
-		requestChannel.subscribe(message -> ((MessageChannel) message.getHeaders().getReplyChannel()).send(message));
+		requestChannel.subscribe(((MessageChannel) message.getHeaders().getReplyChannel())::send);
 		gw.setRequestChannel(requestChannel);
 		gw.start();
 		Message<String> message = MessageBuilder.withPayload("foo")
@@ -236,7 +236,7 @@ public class ConnectionEventTests {
 		});
 		gw.setConnectionFactory(ccf);
 		DirectChannel requestChannel = new DirectChannel();
-		requestChannel.subscribe(message -> ((MessageChannel) message.getHeaders().getReplyChannel()).send(message));
+		requestChannel.subscribe(((MessageChannel) message.getHeaders().getReplyChannel())::send);
 		gw.start();
 		Message<String> message = MessageBuilder.withPayload("foo")
 				.setHeader(IpHeaders.CONNECTION_ID, "bar")

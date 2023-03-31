@@ -62,7 +62,7 @@ public class PayloadSerializingTransformerParserTests {
 
 	@Test
 	public void directChannelWithStringMessage() throws Exception {
-		directInput.send(new GenericMessage<String>("foo"));
+		directInput.send(new GenericMessage<>("foo"));
 		Message<?> result = output.receive(0);
 		assertThat(result).isNotNull();
 		assertThat(result.getPayload() instanceof byte[]).isTrue();
@@ -71,7 +71,7 @@ public class PayloadSerializingTransformerParserTests {
 
 	@Test
 	public void queueChannelWithStringMessage() throws Exception {
-		queueInput.send(new GenericMessage<String>("foo"));
+		queueInput.send(new GenericMessage<>("foo"));
 		Message<?> result = output.receive(10000);
 		assertThat(result).isNotNull();
 		assertThat(result.getPayload() instanceof byte[]).isTrue();
@@ -80,7 +80,7 @@ public class PayloadSerializingTransformerParserTests {
 
 	@Test
 	public void directChannelWithObjectMessage() throws Exception {
-		directInput.send(new GenericMessage<TestBean>(new TestBean()));
+		directInput.send(new GenericMessage<>(new TestBean()));
 		Message<?> result = output.receive(0);
 		assertThat(result).isNotNull();
 		assertThat(result.getPayload() instanceof byte[]).isTrue();
@@ -91,7 +91,7 @@ public class PayloadSerializingTransformerParserTests {
 
 	@Test
 	public void queueChannelWithObjectMessage() throws Exception {
-		queueInput.send(new GenericMessage<TestBean>(new TestBean()));
+		queueInput.send(new GenericMessage<>(new TestBean()));
 		Message<?> result = output.receive(10000);
 		assertThat(result.getPayload() instanceof byte[]).isTrue();
 		Object deserialized = deserialize((byte[]) result.getPayload());
@@ -101,12 +101,12 @@ public class PayloadSerializingTransformerParserTests {
 
 	@Test(expected = MessageTransformationException.class)
 	public void invalidPayload() {
-		directInput.send(new GenericMessage<Object>(new Object()));
+		directInput.send(new GenericMessage<>(new Object()));
 	}
 
 	@Test
 	public void customSerializer() throws Exception {
-		customSerializerInput.send(new GenericMessage<String>("test"));
+		customSerializerInput.send(new GenericMessage<>("test"));
 		Message<?> result = output.receive(10000);
 		assertThat(result).isNotNull();
 		assertThat(result.getPayload().getClass()).isEqualTo(byte[].class);
@@ -123,6 +123,8 @@ public class PayloadSerializingTransformerParserTests {
 
 	@SuppressWarnings("serial")
 	private static class TestBean implements Serializable {
+
+		private static final long serialVersionUID = 1;
 
 		TestBean() {
 			super();

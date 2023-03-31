@@ -30,7 +30,6 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.integration.config.EnableIntegration;
 import org.springframework.integration.config.IntegrationConverter;
 import org.springframework.integration.core.GenericHandler;
-import org.springframework.integration.core.GenericSelector;
 import org.springframework.integration.core.GenericTransformer;
 import org.springframework.integration.handler.LambdaMessageProcessor;
 import org.springframework.messaging.Message;
@@ -63,14 +62,7 @@ public class LambdaMessageProcessorTests {
 	@Test
 	public void testMessageAsArgument() {
 		LambdaMessageProcessor lmp = new LambdaMessageProcessor(
-				new GenericTransformer<Message<?>, Message<?>>() { // Must not be lambda
-
-					@Override
-					public Message<?> transform(Message<?> source) {
-						return messageTransformer(source);
-					}
-
-				}, null);
+				source -> messageTransformer(source), null);
 		lmp.setBeanFactory(this.beanFactory);
 		GenericMessage<String> testMessage = new GenericMessage<>("foo");
 		Object result = lmp.processMessage(testMessage);
@@ -90,14 +82,7 @@ public class LambdaMessageProcessorTests {
 	@Test
 	public void testConversionToNull() {
 		LambdaMessageProcessor lmp = new LambdaMessageProcessor(
-				new GenericSelector<Date>() { // Must not be lambda
-
-					@Override
-					public boolean accept(Date payload) {
-						return payload == null;
-					}
-
-				}, Date.class);
+				Objects::isNull, Date.class);
 		lmp.setBeanFactory(this.beanFactory);
 		GenericMessage<String> testMessage = new GenericMessage<>("foo");
 		Object result = lmp.processMessage(testMessage);
@@ -132,14 +117,7 @@ public class LambdaMessageProcessorTests {
 		@Bean
 		@IntegrationConverter
 		public Converter<String, TestPojo> testPojoConverter() {
-			return new Converter<String, TestPojo>() { // Cannot be lambda for explicit generic types
-
-				@Override
-				public TestPojo convert(String source) {
-					return new TestPojo(source);
-				}
-
-			};
+			return source -> new TestPojo(source);
 		}
 
 	}

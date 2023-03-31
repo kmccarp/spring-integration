@@ -23,6 +23,8 @@ import java.util.Objects;
 @SuppressWarnings("serial")
 public class Person implements Serializable {
 
+	private static final long serialVersionUID = 1;
+
 	private Address address;
 
 	private String name;

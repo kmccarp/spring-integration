@@ -109,6 +109,8 @@ public class PayloadDeserializingTransformerTests {
 	@SuppressWarnings("serial")
 	private static class TestBean implements Serializable {
 
+		private static final long serialVersionUID = 1;
+
 		private final String name;
 
 		TestBean(String name) {

@@ -52,7 +52,7 @@ public class PollerParser extends AbstractBeanDefinitionParser {
 	@Override
 	protected String resolveId(Element element, AbstractBeanDefinition definition, ParserContext parserContext) throws BeanDefinitionStoreException {
 		String id = super.resolveId(element, definition, parserContext);
-		if (element.getAttribute("default").equals("true")) {
+		if ("true".equals(element.getAttribute("default"))) {
 			if (parserContext.getRegistry().isBeanNameInUse(PollerMetadata.DEFAULT_POLLER_METADATA_BEAN_NAME)) {
 				parserContext.getReaderContext().error(
 						"Only one default <poller/> element is allowed per context.", element);
@@ -116,7 +116,7 @@ public class PollerParser extends AbstractBeanDefinitionParser {
 		String cronAttribute = pollerElement.getAttribute("cron");
 		String timeUnit = pollerElement.getAttribute("time-unit");
 
-		List<String> triggerBeanNames = new ArrayList<String>();
+		List<String> triggerBeanNames = new ArrayList<>();
 		if (StringUtils.hasText(triggerAttribute)) {
 			trigger(pollerElement, parserContext, triggerAttribute, timeUnit, triggerBeanNames);
 		}

@@ -105,7 +105,7 @@ public class AmqpOutboundChannelAdapterParserTests {
 		MessageHandler handler = TestUtils.getPropertyValue(adapter, "handler", MessageHandler.class);
 		assertThat(handler instanceof NamedComponent).isTrue();
 		assertThat(((NamedComponent) handler).getComponentType()).isEqualTo("amqp:outbound-channel-adapter");
-		handler.handleMessage(new GenericMessage<String>("foo"));
+		handler.handleMessage(new GenericMessage<>("foo"));
 		assertThat(adviceCalled).isEqualTo(1);
 		assertThat(TestUtils.getPropertyValue(handler, "lazyConnect", Boolean.class)).isTrue();
 	}

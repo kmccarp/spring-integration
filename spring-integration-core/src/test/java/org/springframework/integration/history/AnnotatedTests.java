@@ -48,15 +48,11 @@ public class AnnotatedTests {
 	@Test
 	public void testHistoryWithAnnotatedComponents() throws Exception {
 		ClassPathXmlApplicationContext ac = new ClassPathXmlApplicationContext("annotated-config.xml", this.getClass());
-		ApplicationListener<ApplicationEvent> listener = new ApplicationListener<ApplicationEvent>() {
-
-			@Override
-			public void onApplicationEvent(ApplicationEvent event) {
-				MessageHistory history = MessageHistory.read((Message<?>) event.getSource());
-				Properties adapterHistory = history.get(1);
-				assertThat(adapterHistory.get("name")).isEqualTo("myAdapter");
-				assertThat(adapterHistory.get("type")).isEqualTo("outbound-channel-adapter");
-			}
+		ApplicationListener<ApplicationEvent> listener = event -> {
+			MessageHistory history = MessageHistory.read((Message<?>) event.getSource());
+			Properties adapterHistory = history.get(1);
+			assertThat(adapterHistory.get("name")).isEqualTo("myAdapter");
+			assertThat(adapterHistory.get("type")).isEqualTo("outbound-channel-adapter");
 		};
 		listener = spy(listener);
 		ac.addApplicationListener(listener);
@@ -67,7 +63,7 @@ public class AnnotatedTests {
 		Field handlerField = consumer.getClass().getDeclaredField("handler");
 		handlerField.setAccessible(true);
 		handlerField.set(consumer, handler);
-		channel.send(new GenericMessage<String>("hello"));
+		channel.send(new GenericMessage<>("hello"));
 		verify(listener, times(1)).onApplicationEvent((ApplicationEvent) Mockito.any());
 		ac.close();
 	}

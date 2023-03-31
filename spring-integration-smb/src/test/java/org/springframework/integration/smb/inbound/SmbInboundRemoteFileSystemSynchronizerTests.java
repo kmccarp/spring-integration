@@ -45,9 +45,9 @@ public class SmbInboundRemoteFileSystemSynchronizerTests extends AbstractBaseTes
 
 	private SmbSessionFactory smbSessionFactory;
 
-	private String testLocalDir = "test-temp/local-9/";
+	private final String testLocalDir = "test-temp/local-9/";
 
-	private String testRemoteDir = "test-temp/remote-9/";
+	private final String testRemoteDir = "test-temp/remote-9/";
 
 	@Before
 	public void prepare() {
@@ -101,7 +101,7 @@ public class SmbInboundRemoteFileSystemSynchronizerTests extends AbstractBaseTes
 		@Override
 		protected SmbSession createSession() {
 			try {
-				List<SmbFile> smbFiles = new ArrayList<SmbFile>();
+				List<SmbFile> smbFiles = new ArrayList<>();
 				for (String fileName : new File(testRemoteDir).list()) {
 					SmbFile file = smbSession.createSmbFileObject(fileName);
 					smbFiles.add(file);
@@ -122,8 +122,8 @@ public class SmbInboundRemoteFileSystemSynchronizerTests extends AbstractBaseTes
 				return smbSession;
 
 			}
-			catch (Exception _ex) {
-				throw new RuntimeException("Failed to create mock session.", _ex);
+			catch (Exception ex) {
+				throw new RuntimeException("Failed to create mock session.", ex);
 			}
 		}
 	}

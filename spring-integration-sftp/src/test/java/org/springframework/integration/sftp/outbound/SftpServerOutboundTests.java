@@ -166,7 +166,7 @@ public class SftpServerOutboundTests extends SftpTestSupport {
 		Session<?> session = this.sessionFactory.getSession();
 		String dir = "sftpSource/";
 		long modified = setModifiedOnSource1();
-		this.inboundGet.send(new GenericMessage<Object>(dir + " sftpSource1.txt"));
+		this.inboundGet.send(new GenericMessage<>(dir + " sftpSource1.txt"));
 		Message<?> result = this.output.receive(1000);
 		assertThat(result).isNotNull();
 		File localFile = (File) result.getPayload();
@@ -175,7 +175,7 @@ public class SftpServerOutboundTests extends SftpTestSupport {
 		assertPreserved(modified, localFile);
 
 		dir = "sftpSource/subSftpSource/";
-		this.inboundGet.send(new GenericMessage<Object>(dir + "subSftpSource1.txt"));
+		this.inboundGet.send(new GenericMessage<>(dir + "subSftpSource1.txt"));
 		result = this.output.receive(1000);
 		assertThat(result).isNotNull();
 		localFile = (File) result.getPayload();
@@ -188,7 +188,7 @@ public class SftpServerOutboundTests extends SftpTestSupport {
 	public void testInt2866InvalidLocalDirectoryExpression() {
 		assertThatExceptionOfType(Exception.class)
 				.isThrownBy(() ->
-						this.invalidDirExpression.send(new GenericMessage<Object>("sftpSource/ sftpSource1.txt")))
+						this.invalidDirExpression.send(new GenericMessage<>("sftpSource/ sftpSource1.txt")))
 				.withRootCauseInstanceOf(IllegalArgumentException.class)
 				.withStackTraceContaining("Failed to make local directory");
 	}
@@ -198,7 +198,7 @@ public class SftpServerOutboundTests extends SftpTestSupport {
 	public void testInt2866LocalDirectoryExpressionMGET() {
 		String dir = "sftpSource/";
 		long modified = setModifiedOnSource1();
-		this.inboundMGet.send(new GenericMessage<Object>(dir + "*.txt"));
+		this.inboundMGet.send(new GenericMessage<>(dir + "*.txt"));
 		Message<?> result = this.output.receive(1000);
 		assertThat(result).isNotNull();
 		List<File> localFiles = (List<File>) result.getPayload();
@@ -212,7 +212,7 @@ public class SftpServerOutboundTests extends SftpTestSupport {
 			}
 		}
 		dir = "sftpSource/subSftpSource/";
-		this.inboundMGet.send(new GenericMessage<Object>(dir + "*.txt"));
+		this.inboundMGet.send(new GenericMessage<>(dir + "*.txt"));
 		result = this.output.receive(1000);
 		assertThat(result).isNotNull();
 		localFiles = (List<File>) result.getPayload();
@@ -231,7 +231,7 @@ public class SftpServerOutboundTests extends SftpTestSupport {
 		long modified = setModifiedOnSource1();
 		File secondRemote = new File(getSourceRemoteDirectory(), "sftpSource2.txt");
 		secondRemote.setLastModified(System.currentTimeMillis() - 1_000_000);
-		this.inboundMGetRecursive.send(new GenericMessage<Object>(dir + "*"));
+		this.inboundMGetRecursive.send(new GenericMessage<>(dir + "*"));
 		Message<?> result = this.output.receive(1000);
 		assertThat(result).isNotNull();
 		List<File> localFiles = (List<File>) result.getPayload();
@@ -257,13 +257,13 @@ public class SftpServerOutboundTests extends SftpTestSupport {
 		FileUtils.copyInputStreamToFile(new ByteArrayInputStream("junk".getBytes()), secondRemote);
 		long newLastModified = secondRemote.lastModified();
 		secondRemote.setLastModified(oldLastModified);
-		this.inboundMGetRecursive.send(new GenericMessage<Object>(dir + "*"));
+		this.inboundMGetRecursive.send(new GenericMessage<>(dir + "*"));
 		this.output.receive(0);
 		localContents = new ByteArrayOutputStream();
 		FileUtils.copyFile(secondTarget, localContents);
 		assertThat(new String(localContents.toByteArray())).isEqualTo(localAsString);
 		secondRemote.setLastModified(newLastModified);
-		this.inboundMGetRecursive.send(new GenericMessage<Object>(dir + "*"));
+		this.inboundMGetRecursive.send(new GenericMessage<>(dir + "*"));
 		this.output.receive(0);
 		localContents = new ByteArrayOutputStream();
 		FileUtils.copyFile(secondTarget, localContents);
@@ -276,13 +276,13 @@ public class SftpServerOutboundTests extends SftpTestSupport {
 	@SuppressWarnings("unchecked")
 	void testLSRecursive() {
 		String dir = "sftpSource/";
-		this.inboundLSRecursive.send(new GenericMessage<Object>(dir));
+		this.inboundLSRecursive.send(new GenericMessage<>(dir));
 		Message<?> result = this.output.receive(1000);
 		assertThat(result).isNotNull();
 		List<SftpFileInfo> files = (List<SftpFileInfo>) result.getPayload();
 		assertThat(files).hasSize(4);
 		assertThat(files.stream()
-				.map(fi -> fi.getFilename())
+				.map(SftpFileInfo::getFilename)
 				.collect(Collectors.toList())).contains(
 				" sftpSource1.txt",
 				"sftpSource2.txt",
@@ -294,13 +294,13 @@ public class SftpServerOutboundTests extends SftpTestSupport {
 	@SuppressWarnings("unchecked")
 	void testLSRecursiveALL() {
 		String dir = "sftpSource/";
-		this.inboundLSRecursiveALL.send(new GenericMessage<Object>(dir));
+		this.inboundLSRecursiveALL.send(new GenericMessage<>(dir));
 		Message<?> result = this.output.receive(1000);
 		assertThat(result).isNotNull();
 		List<SftpFileInfo> files = (List<SftpFileInfo>) result.getPayload();
 		assertThat(files).hasSize(8);
 		assertThat(files.stream()
-				.map(fi -> fi.getFilename())
+				.map(SftpFileInfo::getFilename)
 				.collect(Collectors.toList())).contains(
 				" sftpSource1.txt",
 				"sftpSource2.txt",
@@ -316,13 +316,13 @@ public class SftpServerOutboundTests extends SftpTestSupport {
 	@SuppressWarnings("unchecked")
 	void testLSRecursiveNoDirs() throws IOException {
 		String dir = "sftpSource/";
-		this.inboundLSRecursiveNoDirs.send(new GenericMessage<Object>(dir));
+		this.inboundLSRecursiveNoDirs.send(new GenericMessage<>(dir));
 		Message<?> result = this.output.receive(1000);
 		assertThat(result).isNotNull();
 		List<SftpFileInfo> files = (List<SftpFileInfo>) result.getPayload();
 		assertThat(files).hasSize(3);
 		assertThat(files.stream()
-				.map(fi -> fi.getFilename())
+				.map(SftpFileInfo::getFilename)
 				.collect(Collectors.toList())).contains(
 				" sftpSource1.txt",
 				"sftpSource2.txt",
@@ -331,7 +331,7 @@ public class SftpServerOutboundTests extends SftpTestSupport {
 		OutputStream fos = new FileOutputStream(newDeepFile);
 		fos.write("test".getBytes());
 		fos.close();
-		this.inboundLSRecursiveNoDirs.send(new GenericMessage<Object>(dir));
+		this.inboundLSRecursiveNoDirs.send(new GenericMessage<>(dir));
 		result = this.output.receive(1000);
 		assertThat(result).isNotNull();
 		files = (List<SftpFileInfo>) result.getPayload();
@@ -357,7 +357,7 @@ public class SftpServerOutboundTests extends SftpTestSupport {
 	@SuppressWarnings("unchecked")
 	public void testInt3172LocalDirectoryExpressionMGETRecursiveFiltered() {
 		String dir = "sftpSource/";
-		this.inboundMGetRecursiveFiltered.send(new GenericMessage<Object>(dir + "*"));
+		this.inboundMGetRecursiveFiltered.send(new GenericMessage<>(dir + "*"));
 		Message<?> result = this.output.receive(1000);
 		assertThat(result).isNotNull();
 		List<File> localFiles = (List<File>) result.getPayload();
@@ -479,7 +479,7 @@ public class SftpServerOutboundTests extends SftpTestSupport {
 		new DirectFieldAccessor(session).setPropertyValue("sftpClient", sftpClient);
 
 		String dir = "sftpSource/";
-		this.inboundMGetRecursive.send(new GenericMessage<Object>(dir + "*"));
+		this.inboundMGetRecursive.send(new GenericMessage<>(dir + "*"));
 		while (output.receive(0) != null) {
 			// drain
 		}
@@ -578,7 +578,7 @@ public class SftpServerOutboundTests extends SftpTestSupport {
 	@Test
 	public void testInt3088MPutRecursive() {
 		String dir = "sftpSource/";
-		this.inboundMGetRecursive.send(new GenericMessage<Object>(dir + "*"));
+		this.inboundMGetRecursive.send(new GenericMessage<>(dir + "*"));
 		while (output.receive(0) != null) {
 			// drain
 		}
@@ -602,7 +602,7 @@ public class SftpServerOutboundTests extends SftpTestSupport {
 	@Test
 	public void testInt3088MPutRecursiveFiltered() {
 		String dir = "sftpSource/";
-		this.inboundMGetRecursive.send(new GenericMessage<Object>(dir + "*"));
+		this.inboundMGetRecursive.send(new GenericMessage<>(dir + "*"));
 		while (output.receive(0) != null) {
 			// drain
 		}
@@ -750,7 +750,7 @@ public class SftpServerOutboundTests extends SftpTestSupport {
 		public MessageChannel eventChannel() {
 			return (msg, timeout) -> {
 				if (this.latch != null) {
-					if (this.events.size() > 0 || msg.getPayload() instanceof SessionOpenedEvent) {
+					if (!this.events.isEmpty() || msg.getPayload() instanceof SessionOpenedEvent) {
 						this.events.add((ApacheMinaSftpEvent) msg.getPayload());
 						if (msg.getPayload() instanceof SessionClosedEvent) {
 							this.latch.countDown();

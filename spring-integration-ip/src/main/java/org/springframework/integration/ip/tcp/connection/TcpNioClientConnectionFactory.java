@@ -206,7 +206,7 @@ public class TcpNioClientConnectionFactory extends
 		int selectionCount = 0;
 		try {
 			long timeout = Math.max(soTimeout, 0);
-			if (getDelayedReads().size() > 0 && (timeout == 0 || getReadDelay() < timeout)) {
+			if (!getDelayedReads().isEmpty() && (timeout == 0 || getReadDelay() < timeout)) {
 				timeout = getReadDelay();
 			}
 			selectionCount = this.selector.select(timeout);

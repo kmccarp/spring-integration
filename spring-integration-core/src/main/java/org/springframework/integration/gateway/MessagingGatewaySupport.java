@@ -596,7 +596,7 @@ public abstract class MessagingGatewaySupport extends AbstractEndpoint
 						DefaultMessageRequestReplyReceiverObservationConvention.INSTANCE,
 						() -> new MessageRequestReplyReceiverContext(requestMessage, getComponentName()),
 						this.observationRegistry)
-				.<MessageRequestReplyReceiverContext, Message<?>>observeWithContext((ctx) -> {
+				.observeWithContext(ctx -> {
 					Message<?> replyMessage = doSendAndReceive(requestChannel, object, requestMessage);
 					if (replyMessage != null) {
 						ctx.setResponse(replyMessage);
@@ -836,7 +836,7 @@ public abstract class MessagingGatewaySupport extends AbstractEndpoint
 	private long sendTimeout(Message<?> requestMessage) {
 		Long sendTimeout = headerToLong(requestMessage.getHeaders()
 				.get(this.messagingTemplate.getSendTimeoutHeader()));
-		return (sendTimeout != null ? sendTimeout : this.messagingTemplate.getSendTimeout());
+		return sendTimeout != null ? sendTimeout : this.messagingTemplate.getSendTimeout();
 	}
 
 	@Nullable
@@ -987,7 +987,7 @@ public abstract class MessagingGatewaySupport extends AbstractEndpoint
 		public void subscribeTo(Publisher<? extends Message<?>> publisher) {
 			Mono.from(publisher)
 					.subscribe(
-							(value) -> this.replyMono.emitValue(value, Sinks.EmitFailureHandler.FAIL_FAST),
+							value -> this.replyMono.emitValue(value, Sinks.EmitFailureHandler.FAIL_FAST),
 							this.replyMono::tryEmitError, this.replyMono::tryEmitEmpty);
 		}
 

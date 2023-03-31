@@ -49,7 +49,7 @@ public class MessageFilterTests {
 		MessageFilter filter = new MessageFilter(message -> false);
 		QueueChannel output = new QueueChannel();
 		filter.setOutputChannel(output);
-		filter.handleMessage(new GenericMessage<String>("test"));
+		filter.handleMessage(new GenericMessage<>("test"));
 		assertThat(output.receive(0)).isNull();
 	}
 
@@ -59,7 +59,7 @@ public class MessageFilterTests {
 		filter.setThrowExceptionOnRejection(true);
 		QueueChannel output = new QueueChannel();
 		filter.setOutputChannel(output);
-		filter.handleMessage(new GenericMessage<String>("test"));
+		filter.handleMessage(new GenericMessage<>("test"));
 	}
 
 	@Test
@@ -135,9 +135,6 @@ public class MessageFilterTests {
 		Message<?> message = new GenericMessage<String>("test");
 		try {
 			assertThat(inputChannel.send(message)).isTrue();
-		}
-		catch (Exception e) {
-			throw e;
 		}
 		finally {
 			Message<?> reply = discardChannel.receive(0);

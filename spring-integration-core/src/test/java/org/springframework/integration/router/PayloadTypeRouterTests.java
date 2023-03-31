@@ -567,6 +567,7 @@ public class PayloadTypeRouterTests {
 
 	@SuppressWarnings("serial")
 	public static class C1 extends C2 implements I1A, I1B {
+		private static final long serialVersionUID = 1;
 
 	}
 

@@ -658,9 +658,9 @@ public class MethodInvokingMessageProcessorTests {
 
 		MessagingMethodInvokerHelper helper = new MessagingMethodInvokerHelper(new Foo(), (String) null, false);
 		helper.setBeanFactory(mock(BeanFactory.class));
-		assertThat(helper.process(new GenericMessage<Object>(2L))).isEqualTo("4");
-		assertThat(helper.process(new GenericMessage<Object>(1))).isEqualTo("1");
-		assertThat(helper.process(new GenericMessage<Object>(new Date()))).isEqualTo("foo");
+		assertThat(helper.process(new GenericMessage<>(2L))).isEqualTo("4");
+		assertThat(helper.process(new GenericMessage<>(1))).isEqualTo("1");
+		assertThat(helper.process(new GenericMessage<>(new Date()))).isEqualTo("foo");
 	}
 
 	@Test
@@ -711,9 +711,9 @@ public class MethodInvokingMessageProcessorTests {
 
 		MessagingMethodInvokerHelper helper = new MessagingMethodInvokerHelper(targetObject, (String) null, false);
 		helper.setBeanFactory(mock(BeanFactory.class));
-		assertThat(helper.process(new GenericMessage<Object>("foo"))).isEqualTo("foo");
-		assertThat(helper.process(new GenericMessage<Object>(1))).isEqualTo(1);
-		assertThat(helper.process(new GenericMessage<Object>(targetObject))).isEqualTo(targetObject);
+		assertThat(helper.process(new GenericMessage<>("foo"))).isEqualTo("foo");
+		assertThat(helper.process(new GenericMessage<>(1))).isEqualTo(1);
+		assertThat(helper.process(new GenericMessage<>(targetObject))).isEqualTo(targetObject);
 	}
 
 	@Test
@@ -742,9 +742,9 @@ public class MethodInvokingMessageProcessorTests {
 
 		MessagingMethodInvokerHelper helper = new MessagingMethodInvokerHelper(targetObject, (String) null, false);
 		helper.setBeanFactory(mock(BeanFactory.class));
-		assertThat(helper.process(new GenericMessage<Object>("foo"))).isEqualTo("foo");
-		assertThat(helper.process(new GenericMessage<Object>(1))).isEqualTo(1);
-		assertThat(helper.process(new GenericMessage<Object>(targetObject))).isEqualTo(targetObject);
+		assertThat(helper.process(new GenericMessage<>("foo"))).isEqualTo("foo");
+		assertThat(helper.process(new GenericMessage<>(1))).isEqualTo(1);
+		assertThat(helper.process(new GenericMessage<>(targetObject))).isEqualTo(targetObject);
 	}
 
 	@Test
@@ -774,8 +774,8 @@ public class MethodInvokingMessageProcessorTests {
 
 		MessagingMethodInvokerHelper helper = new MessagingMethodInvokerHelper(targetObject, (String) null, false);
 		helper.setBeanFactory(mock(BeanFactory.class));
-		assertThat(helper.process(new GenericMessage<Object>("foo"))).isEqualTo("foo");
-		assertThat(helper.process(new GenericMessage<Object>(targetObject))).isEqualTo("FOO");
+		assertThat(helper.process(new GenericMessage<>("foo"))).isEqualTo("foo");
+		assertThat(helper.process(new GenericMessage<>(targetObject))).isEqualTo("FOO");
 	}
 
 	@Test
@@ -1403,7 +1403,7 @@ public class MethodInvokingMessageProcessorTests {
 	@SuppressWarnings("unused")
 	private static class AmbiguousMethodBean {
 
-		private volatile Object lastArg = null;
+		private volatile Object lastArg;
 
 		AmbiguousMethodBean() {
 			super();
@@ -1420,7 +1420,7 @@ public class MethodInvokingMessageProcessorTests {
 
 		public String foo(int i) {
 			this.lastArg = i;
-			return Integer.valueOf(i).toString();
+			return Integer.toString(i);
 		}
 
 	}
@@ -1432,7 +1432,7 @@ public class MethodInvokingMessageProcessorTests {
 	@SuppressWarnings("unused")
 	private static class OverloadedMethodBean {
 
-		private volatile Object lastArg = null;
+		private volatile Object lastArg;
 
 		OverloadedMethodBean() {
 			super();
@@ -1452,7 +1452,7 @@ public class MethodInvokingMessageProcessorTests {
 
 	private static class IneligibleMethodBean {
 
-		private volatile Object lastArg = null;
+		private volatile Object lastArg;
 
 		IneligibleMethodBean() {
 			super();

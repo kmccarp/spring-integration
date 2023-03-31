@@ -85,7 +85,7 @@ public class GroovyScriptExecutingMessageProcessorTests {
 
 			@Override
 			public Map<String, Object> generateScriptVariables(Message<?> message) {
-				Map<String, Object> variables = new HashMap<String, Object>();
+				Map<String, Object> variables = new HashMap<>();
 				variables.put("date", System.nanoTime());
 				variables.put("payload", message.getPayload());
 				variables.put("headers", message.getHeaders());
@@ -201,7 +201,7 @@ public class GroovyScriptExecutingMessageProcessorTests {
 		ScriptSource scriptSource = new StaticScriptSource(script, Script.class.getName());
 		final MessageProcessor<Object> processor =
 				new GroovyScriptExecutingMessageProcessor(scriptSource, message1 -> {
-					Map<String, Object> variables = new HashMap<String, Object>(2);
+					Map<String, Object> variables = new HashMap<>(2);
 					variables.put("var1", var1);
 					variables.put("var2", var2);
 					return variables;
@@ -218,7 +218,7 @@ public class GroovyScriptExecutingMessageProcessorTests {
 
 	}
 
-	private static class TestResource extends AbstractResource {
+	private static final class TestResource extends AbstractResource {
 
 		private volatile String script;
 

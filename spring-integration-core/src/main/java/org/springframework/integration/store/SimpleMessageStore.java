@@ -72,7 +72,7 @@ public class SimpleMessageStore extends AbstractMessageGroupStore
 
 	private LockRegistry lockRegistry;
 
-	private boolean copyOnGet = false;
+	private boolean copyOnGet;
 
 	private volatile boolean isUsed;
 

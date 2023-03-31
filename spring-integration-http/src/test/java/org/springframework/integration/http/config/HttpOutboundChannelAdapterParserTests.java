@@ -258,7 +258,7 @@ public class HttpOutboundChannelAdapterParserTests {
 	@Test
 	public void withAdvice() {
 		MessageHandler handler = TestUtils.getPropertyValue(this.withAdvice, "handler", MessageHandler.class);
-		handler.handleMessage(new GenericMessage<String>("foo"));
+		handler.handleMessage(new GenericMessage<>("foo"));
 		assertThat(adviceCalled).isEqualTo(1);
 	}
 

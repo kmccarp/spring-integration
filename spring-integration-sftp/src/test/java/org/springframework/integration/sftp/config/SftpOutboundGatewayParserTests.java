@@ -127,7 +127,7 @@ public class SftpOutboundGatewayParserTests {
 
 		//INT-3129
 		assertThat(TestUtils.getPropertyValue(gateway, "localFilenameGeneratorExpression")).isNotNull();
-		final AtomicReference<Method> genMethod = new AtomicReference<Method>();
+		final AtomicReference<Method> genMethod = new AtomicReference<>();
 		ReflectionUtils.doWithMethods(SftpOutboundGateway.class, method -> {
 			method.setAccessible(true);
 			genMethod.set(method);
@@ -170,7 +170,7 @@ public class SftpOutboundGatewayParserTests {
 	public void advised() {
 		SftpOutboundGateway gateway = TestUtils.getPropertyValue(advised,
 				"handler", SftpOutboundGateway.class);
-		gateway.handleMessage(new GenericMessage<String>("foo"));
+		gateway.handleMessage(new GenericMessage<>("foo"));
 		assertThat(adviceCalled).isEqualTo(1);
 	}
 

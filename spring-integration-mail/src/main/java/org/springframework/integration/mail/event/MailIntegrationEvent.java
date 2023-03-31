@@ -27,6 +27,8 @@ import org.springframework.integration.events.IntegrationEvent;
 @SuppressWarnings("serial")
 public abstract class MailIntegrationEvent extends IntegrationEvent {
 
+	private static final long serialVersionUID = 1;
+
 	public MailIntegrationEvent(Object source) {
 		super(source);
 	}

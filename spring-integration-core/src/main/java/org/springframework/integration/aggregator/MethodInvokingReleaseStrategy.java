@@ -37,11 +37,11 @@ public class MethodInvokingReleaseStrategy implements ReleaseStrategy, BeanFacto
 
 
 	public MethodInvokingReleaseStrategy(Object object, Method method) {
-		this.adapter = new MethodInvokingMessageListProcessor<Boolean>(object, method, Boolean.class);
+		this.adapter = new MethodInvokingMessageListProcessor<>(object, method, Boolean.class);
 	}
 
 	public MethodInvokingReleaseStrategy(Object object, String methodName) {
-		this.adapter = new MethodInvokingMessageListProcessor<Boolean>(object, methodName, Boolean.class);
+		this.adapter = new MethodInvokingMessageListProcessor<>(object, methodName, Boolean.class);
 	}
 
 

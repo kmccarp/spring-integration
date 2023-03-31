@@ -137,7 +137,7 @@ public class GatewayProxyFactoryBean<T> extends AbstractEndpoint
 
 	private DestinationResolver<MessageChannel> channelResolver;
 
-	private boolean shouldTrack = false;
+	private boolean shouldTrack;
 
 	private TypeConverter typeConverter = new SimpleTypeConverter();
 

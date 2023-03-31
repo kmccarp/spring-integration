@@ -31,6 +31,8 @@ import org.springframework.messaging.simp.stomp.StompCommand;
 @SuppressWarnings("serial")
 public class StompReceiptEvent extends StompIntegrationEvent {
 
+	private static final long serialVersionUID = 1;
+
 	private final String destination;
 
 	private final String receiptId;

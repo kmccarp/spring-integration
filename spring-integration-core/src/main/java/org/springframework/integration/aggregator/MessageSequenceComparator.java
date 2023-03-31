@@ -31,6 +31,8 @@ import org.springframework.messaging.Message;
 @SuppressWarnings("serial")
 public class MessageSequenceComparator implements Comparator<Message<?>>, Serializable {
 
+	private static final long serialVersionUID = 1;
+
 	@Override
 	public int compare(Message<?> o1, Message<?> o2) {
 		int sequenceNumber1 = new IntegrationMessageHeaderAccessor(o1).getSequenceNumber();

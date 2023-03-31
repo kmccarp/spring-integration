@@ -35,21 +35,21 @@ public class ObjectToStringTransformerTests {
 	@Test
 	public void stringPayload() {
 		Transformer transformer = new ObjectToStringTransformer();
-		Message<?> result = transformer.transform(new GenericMessage<String>("foo"));
+		Message<?> result = transformer.transform(new GenericMessage<>("foo"));
 		assertThat(result.getPayload()).isEqualTo("foo");
 	}
 
 	@Test
 	public void objectPayload() {
 		Transformer transformer = new ObjectToStringTransformer();
-		Message<?> result = transformer.transform(new GenericMessage<TestBean>(new TestBean()));
+		Message<?> result = transformer.transform(new GenericMessage<>(new TestBean()));
 		assertThat(result.getPayload()).isEqualTo("test");
 	}
 
 	@Test
 	public void byteArrayPayload() throws Exception {
 		Transformer transformer = new ObjectToStringTransformer();
-		Message<?> result = transformer.transform(new GenericMessage<byte[]>(("foo" + '\u0fff').getBytes("UTF-8")));
+		Message<?> result = transformer.transform(new GenericMessage<>(("foo" + '\u0fff').getBytes("UTF-8")));
 		assertThat(result.getPayload()).isEqualTo("foo" + '\u0fff');
 	}
 
@@ -57,14 +57,14 @@ public class ObjectToStringTransformerTests {
 	public void byteArrayPayloadCharset() throws Exception {
 		String defaultCharsetName = Charset.defaultCharset().toString();
 		Transformer transformer = new ObjectToStringTransformer(defaultCharsetName);
-		Message<?> result = transformer.transform(new GenericMessage<byte[]>("foo".getBytes(defaultCharsetName)));
+		Message<?> result = transformer.transform(new GenericMessage<>("foo".getBytes(defaultCharsetName)));
 		assertThat(result.getPayload()).isEqualTo("foo");
 	}
 
 	@Test
 	public void charArrayPayload() {
 		Transformer transformer = new ObjectToStringTransformer();
-		Message<?> result = transformer.transform(new GenericMessage<char[]>("foo".toCharArray()));
+		Message<?> result = transformer.transform(new GenericMessage<>("foo".toCharArray()));
 		assertThat(result.getPayload()).isEqualTo("foo");
 	}
 

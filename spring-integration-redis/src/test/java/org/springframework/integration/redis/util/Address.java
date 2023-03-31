@@ -22,6 +22,8 @@ import java.util.Objects;
 @SuppressWarnings("serial")
 public class Address implements Serializable {
 
+	private static final long serialVersionUID = 1;
+
 	private String address;
 
 	public String getAddress() {

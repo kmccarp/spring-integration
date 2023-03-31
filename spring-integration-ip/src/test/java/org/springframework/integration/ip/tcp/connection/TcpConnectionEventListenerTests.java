@@ -117,6 +117,8 @@ public class TcpConnectionEventListenerTests {
 	@SuppressWarnings("serial")
 	private class FooEvent extends TcpConnectionOpenEvent {
 
+		private static final long serialVersionUID = 1;
+
 		FooEvent(TcpConnectionSupport connection, String connectionFactoryName) {
 			super(connection, connectionFactoryName);
 		}
@@ -125,6 +127,8 @@ public class TcpConnectionEventListenerTests {
 
 	@SuppressWarnings("serial")
 	private class BarEvent extends TcpConnectionOpenEvent {
+
+		private static final long serialVersionUID = 1;
 
 		BarEvent(TcpConnectionSupport connection, String connectionFactoryName) {
 			super(connection, connectionFactoryName);

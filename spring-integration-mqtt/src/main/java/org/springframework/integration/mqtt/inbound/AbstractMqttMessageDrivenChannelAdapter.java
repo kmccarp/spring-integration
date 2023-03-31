@@ -111,7 +111,7 @@ public abstract class AbstractMqttMessageDrivenChannelAdapter<T, C> extends Mess
 		Assert.noNullElements(topic, "'topics' cannot have null elements");
 
 		return Arrays.stream(topic)
-				.collect(Collectors.toMap(Function.identity(), (key) -> 1, (x, y) -> y, LinkedHashMap::new));
+				.collect(Collectors.toMap(Function.identity(), key -> 1, (x, y) -> y, LinkedHashMap::new));
 	}
 
 	public void setConverter(MqttMessageConverter converter) {

@@ -30,7 +30,7 @@ import org.springframework.integration.handler.ExpressionEvaluatingMessageProces
 public class ExpressionEvaluatingTransformer extends AbstractMessageProcessingTransformer {
 
 	public ExpressionEvaluatingTransformer(Expression expression) {
-		super(new ExpressionEvaluatingMessageProcessor<Object>(expression));
+		super(new ExpressionEvaluatingMessageProcessor<>(expression));
 	}
 
 }

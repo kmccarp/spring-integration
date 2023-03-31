@@ -142,7 +142,7 @@ public class ChannelTests {
 			synchronized (consumersMonitor) {
 				if (!consumers.isEmpty()) {
 					BlockingQueueConsumer newConsumer = consumers.iterator().next();
-					if (newConsumer != consumer && newConsumer.getConsumerTags().size() > 0) {
+					if (newConsumer != consumer && !newConsumer.getConsumerTags().isEmpty()) {
 						break;
 					}
 				}

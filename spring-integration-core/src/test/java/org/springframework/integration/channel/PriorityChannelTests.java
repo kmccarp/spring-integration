@@ -88,7 +88,7 @@ public class PriorityChannelTests {
 		final Message<String> message = new GenericMessage<>("hello");
 		for (int i = 0; i < 1000; i++) {
 			channel.send(message);
-			new Thread(() -> channel.receive()).start();
+			new Thread(channel::receive).start();
 			new Thread(() -> message.getHeaders().toString()).start();
 		}
 	}
@@ -244,7 +244,7 @@ public class PriorityChannelTests {
 		final AtomicBoolean sentSecondMessage = new AtomicBoolean(false);
 		final CountDownLatch latch = new CountDownLatch(1);
 		ExecutorService executor = Executors.newSingleThreadScheduledExecutor();
-		channel.send(new GenericMessage<String>("test-1"));
+		channel.send(new GenericMessage<>("test-1"));
 		executor.execute(() -> {
 			sentSecondMessage.set(channel.send(new GenericMessage<>("test-2"), 3000));
 			latch.countDown();
@@ -267,7 +267,7 @@ public class PriorityChannelTests {
 		final PriorityChannel channel = new PriorityChannel(1);
 		final AtomicBoolean sentSecondMessage = new AtomicBoolean(false);
 		ExecutorService executor = Executors.newSingleThreadScheduledExecutor();
-		channel.send(new GenericMessage<String>("test-1"));
+		channel.send(new GenericMessage<>("test-1"));
 		executor.execute(() -> sentSecondMessage.set(channel.send(new GenericMessage<>("test-2"), -1)));
 		assertThat(sentSecondMessage.get()).isFalse();
 		Thread.sleep(10);

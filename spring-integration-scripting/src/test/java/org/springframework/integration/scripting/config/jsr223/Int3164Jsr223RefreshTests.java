@@ -76,13 +76,13 @@ public class Int3164Jsr223RefreshTests {
 
 	@Test
 	public void testRefreshingScript() throws Exception {
-		this.referencedScriptInput.send(new GenericMessage<Object>("test"));
+		this.referencedScriptInput.send(new GenericMessage<>("test"));
 		assertThat(this.outputChannel.receive(100).getPayload()).isEqualTo(1);
 
 		FileCopyUtils.copy("2".getBytes(), scriptFile);
 		scriptFile.setLastModified(System.currentTimeMillis() + 10000); // force refresh
 
-		this.referencedScriptInput.send(new GenericMessage<Object>("test"));
+		this.referencedScriptInput.send(new GenericMessage<>("test"));
 		assertThat(this.outputChannel.receive(100).getPayload()).isEqualTo(2);
 	}
 

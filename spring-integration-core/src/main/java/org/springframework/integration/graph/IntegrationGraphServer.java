@@ -68,7 +68,7 @@ import org.springframework.messaging.PollableChannel;
 @ImportRuntimeHints(IntegrationGraphRuntimeHints.class)
 public class IntegrationGraphServer implements ApplicationContextAware, ApplicationListener<ContextRefreshedEvent> {
 
-	private static final float GRAPH_VERSION = 1.2f;
+	private static final float GRAPH_VERSION = 1.2F;
 
 	private final NodeFactory nodeFactory = new NodeFactory(this::enhance);
 

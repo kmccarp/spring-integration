@@ -58,11 +58,11 @@ public class ThreadLocalChannelParserTests {
 
 	@Test
 	public void testSendInAnotherThread() throws Exception {
-		simpleChannel.send(new GenericMessage<String>("test"));
+		simpleChannel.send(new GenericMessage<>("test"));
 		Executor otherThreadExecutor = Executors.newSingleThreadExecutor();
 		final CountDownLatch latch = new CountDownLatch(1);
 		otherThreadExecutor.execute(() -> {
-			simpleChannel.send(new GenericMessage<String>("crap"));
+			simpleChannel.send(new GenericMessage<>("crap"));
 			latch.countDown();
 		});
 		assertThat(latch.await(10, TimeUnit.SECONDS)).isTrue();
@@ -73,13 +73,13 @@ public class ThreadLocalChannelParserTests {
 
 	@Test
 	public void testReceiveInAnotherThread() throws Exception {
-		simpleChannel.send(new GenericMessage<String>("test-1.1"));
-		simpleChannel.send(new GenericMessage<String>("test-1.2"));
-		simpleChannel.send(new GenericMessage<String>("test-1.3"));
-		channelWithInterceptor.send(new GenericMessage<String>("test-2.1"));
-		channelWithInterceptor.send(new GenericMessage<String>("test-2.2"));
+		simpleChannel.send(new GenericMessage<>("test-1.1"));
+		simpleChannel.send(new GenericMessage<>("test-1.2"));
+		simpleChannel.send(new GenericMessage<>("test-1.3"));
+		channelWithInterceptor.send(new GenericMessage<>("test-2.1"));
+		channelWithInterceptor.send(new GenericMessage<>("test-2.2"));
 		Executor otherThreadExecutor = Executors.newSingleThreadExecutor();
-		final List<Object> otherThreadResults = new ArrayList<Object>();
+		final List<Object> otherThreadResults = new ArrayList<>();
 		final CountDownLatch latch = new CountDownLatch(2);
 		otherThreadExecutor.execute(() -> {
 			otherThreadResults.add(simpleChannel.receive(0));
@@ -105,7 +105,7 @@ public class ThreadLocalChannelParserTests {
 	@Test
 	public void testInterceptor() {
 		int before = interceptor.getSendCount();
-		channelWithInterceptor.send(new GenericMessage<String>("test"));
+		channelWithInterceptor.send(new GenericMessage<>("test"));
 		assertThat(interceptor.getSendCount()).isEqualTo(before + 1);
 	}
 

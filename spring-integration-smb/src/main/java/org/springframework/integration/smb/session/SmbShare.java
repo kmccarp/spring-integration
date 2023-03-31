@@ -54,14 +54,14 @@ public class SmbShare extends SmbFile {
 
 	/**
 	 * Initializes the jCIFS library with default properties.
-	 * @param _smbConfig the SMB share configuration
+	 * @param smbConfig the SMB share configuration
 	 * @throws IOException if an invalid SMB URL was constructed by jCIFS
 	 */
-	public SmbShare(SmbConfig _smbConfig) throws IOException {
-		super(StringUtils.cleanPath(_smbConfig.validate().getUrl()),
+	public SmbShare(SmbConfig smbConfig) throws IOException {
+		super(StringUtils.cleanPath(smbConfig.validate().getUrl()),
 				SingletonContext.getInstance().withCredentials(
 						new NtlmPasswordAuthenticator(
-								_smbConfig.getDomain(), _smbConfig.getUsername(), _smbConfig.getPassword())));
+								smbConfig.getDomain(), smbConfig.getUsername(), smbConfig.getPassword())));
 	}
 
 	/**
@@ -79,13 +79,13 @@ public class SmbShare extends SmbFile {
 	 * 'jcifs.smb.client.minVersion' and 'jcifs.smb.client.maxVersion'
 	 * for setting the minimum/maximum SMB supported versions.
 	 * @param _smbConfig the SMB share configuration
-	 * @param _props the custom property set for jCIFS to initialize
+	 * @param props the custom property set for jCIFS to initialize
 	 * @throws IOException if an invalid property was set or an invalid SMB URL was constructed by jCIFS
 	 */
-	public SmbShare(SmbConfig _smbConfig, Properties _props) throws IOException {
+	public SmbShare(SmbConfig _smbConfig, Properties props) throws IOException {
 		super(StringUtils.cleanPath(_smbConfig.validate().getUrl()),
 				new BaseContext(
-						new PropertyConfiguration(_props)).withCredentials(
+						new PropertyConfiguration(props)).withCredentials(
 						new NtlmPasswordAuthenticator(
 								_smbConfig.getDomain(), _smbConfig.getUsername(), _smbConfig.getPassword())));
 
@@ -101,7 +101,7 @@ public class SmbShare extends SmbFile {
 			}
 			canRead = canRead();
 		}
-		catch (SmbException _ex) {
+		catch (SmbException ex) {
 			if (this.closeContext.get()) {
 				try {
 					getContext().close();
@@ -110,7 +110,7 @@ public class SmbShare extends SmbFile {
 					logger.error("Unable to close share: " + this);
 				}
 			}
-			throw new IOException("Unable to initialize share: " + this, _ex);
+			throw new IOException("Unable to initialize share: " + this, ex);
 		}
 		Assert.isTrue(canRead, "Share is not accessible " + this);
 		this.open.set(true);

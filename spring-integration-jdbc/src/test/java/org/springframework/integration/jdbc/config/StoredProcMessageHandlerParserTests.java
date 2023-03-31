@@ -165,7 +165,7 @@ public class StoredProcMessageHandlerParserTests {
 		setUp("advisedStoredProcOutboundChannelAdapterTest.xml", getClass());
 
 		MessageHandler handler = TestUtils.getPropertyValue(this.consumer, "handler", MessageHandler.class);
-		handler.handleMessage(new GenericMessage<String>("foo"));
+		handler.handleMessage(new GenericMessage<>("foo"));
 		assertThat(adviceCalled).isEqualTo(1);
 	}
 

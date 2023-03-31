@@ -69,9 +69,9 @@ public class DefaultJmsHeaderMapper extends JmsHeaderMapper {
 
 	private volatile boolean mapInboundPriority = true;
 
-	private volatile boolean mapInboundDeliveryMode = false;
+	private volatile boolean mapInboundDeliveryMode;
 
-	private volatile boolean mapInboundExpiration = false;
+	private volatile boolean mapInboundExpiration;
 
 	/**
 	 * Suppress the mapping of inbound priority by using this setter with 'false'.

@@ -33,6 +33,8 @@ import org.springframework.lang.Nullable;
 @SuppressWarnings("serial")
 public abstract class IntegrationEvent extends ApplicationEvent {
 
+	private static final long serialVersionUID = 1;
+
 	protected final Throwable cause; // NOSONAR protected final
 
 	public IntegrationEvent(Object source) {

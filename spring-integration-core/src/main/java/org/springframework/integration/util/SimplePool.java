@@ -275,6 +275,8 @@ public class SimplePool<T> implements Pool<T> {
 	@SuppressWarnings("serial")
 	private static class PoolSemaphore extends Semaphore {
 
+		private static final long serialVersionUID = 1;
+
 		PoolSemaphore(int permits) {
 			super(permits);
 		}

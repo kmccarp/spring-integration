@@ -133,7 +133,7 @@ public final class RedisLockRegistry implements ExpirableLockRegistry, Disposabl
 
 	private volatile boolean unlinkAvailable = true;
 
-	private volatile boolean isRunningRedisMessageListenerContainer = false;
+	private volatile boolean isRunningRedisMessageListenerContainer;
 
 	/**
 	 * It is set via lazy initialization when it is a {@link RedisLockType#PUB_SUB_LOCK}.

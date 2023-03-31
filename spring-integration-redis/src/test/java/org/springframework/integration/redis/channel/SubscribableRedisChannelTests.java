@@ -69,9 +69,9 @@ class SubscribableRedisChannelTests implements RedisContainerTest {
 		MessageHandler handler = message -> latch.countDown();
 		channel.subscribe(handler);
 
-		channel.send(new GenericMessage<String>("1"));
-		channel.send(new GenericMessage<String>("2"));
-		channel.send(new GenericMessage<String>("3"));
+		channel.send(new GenericMessage<>("1"));
+		channel.send(new GenericMessage<>("2"));
+		channel.send(new GenericMessage<>("3"));
 		assertThat(latch.await(20, TimeUnit.SECONDS)).isTrue();
 	}
 

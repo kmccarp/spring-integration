@@ -119,18 +119,18 @@ public class FileWritingMessageHandlerTests {
 	public void permissions() {
 		if (FileUtils.IS_POSIX) {
 			FileWritingMessageHandler handler = new FileWritingMessageHandler(mock(Expression.class));
-			handler.setChmod(0421);
+			handler.setChmod(273);
 			Set<?> permissions = TestUtils.getPropertyValue(handler, "permissions", Set.class);
 			assertThat(permissions.size()).isEqualTo(3);
 			assertThat(permissions.contains(PosixFilePermission.OWNER_READ)).isTrue();
 			assertThat(permissions.contains(PosixFilePermission.GROUP_WRITE)).isTrue();
 			assertThat(permissions.contains(PosixFilePermission.OTHERS_EXECUTE)).isTrue();
-			handler.setChmod(0600);
+			handler.setChmod(384);
 			permissions = TestUtils.getPropertyValue(handler, "permissions", Set.class);
 			assertThat(permissions.size()).isEqualTo(2);
 			assertThat(permissions.contains(PosixFilePermission.OWNER_READ)).isTrue();
 			assertThat(permissions.contains(PosixFilePermission.OWNER_WRITE)).isTrue();
-			handler.setChmod(0777);
+			handler.setChmod(511);
 			permissions = TestUtils.getPropertyValue(handler, "permissions", Set.class);
 			assertThat(permissions.size()).isEqualTo(9);
 		}
@@ -139,7 +139,7 @@ public class FileWritingMessageHandlerTests {
 	@Test
 	public void supportedTypeAndPermissions() throws Exception {
 		if (FileUtils.IS_POSIX) {
-			handler.setChmod(0777);
+			handler.setChmod(511);
 		}
 		handler.setOutputChannel(new NullChannel());
 		handler.handleMessage(new GenericMessage<>("test"));
@@ -494,13 +494,13 @@ public class FileWritingMessageHandlerTests {
 		assertThat(file.length()).isEqualTo(12L);
 		handler.setFlushInterval(100);
 		handler.start();
-		handler.handleMessage(new GenericMessage<InputStream>(new ByteArrayInputStream("fiz".getBytes())));
+		handler.handleMessage(new GenericMessage<>(new ByteArrayInputStream("fiz".getBytes())));
 		int n = 0;
 		while (n++ < 100 && file.length() < 15) {
 			Thread.sleep(100);
 		}
 		assertThat(file.length()).isEqualTo(15L);
-		handler.handleMessage(new GenericMessage<InputStream>(new ByteArrayInputStream("buz".getBytes())));
+		handler.handleMessage(new GenericMessage<>(new ByteArrayInputStream("buz".getBytes())));
 		handler.trigger(new GenericMessage<>(Matcher.quoteReplacement(file.getAbsolutePath())));
 		assertThat(file.length()).isEqualTo(18L);
 		assertThat(TestUtils.getPropertyValue(handler, "fileStates", Map.class).size()).isEqualTo(0);
@@ -511,12 +511,12 @@ public class FileWritingMessageHandlerTests {
 			called.set(true);
 			return true;
 		});
-		handler.handleMessage(new GenericMessage<InputStream>(new ByteArrayInputStream("box".getBytes())));
+		handler.handleMessage(new GenericMessage<>(new ByteArrayInputStream("box".getBytes())));
 		handler.trigger(new GenericMessage<>("foo"));
 		assertThat(file.length()).isEqualTo(21L);
 		assertThat(called.get()).isTrue();
 
-		handler.handleMessage(new GenericMessage<InputStream>(new ByteArrayInputStream("bux".getBytes())));
+		handler.handleMessage(new GenericMessage<>(new ByteArrayInputStream("bux".getBytes())));
 		called.set(false);
 		handler.flushIfNeeded((fileAbsolutePath, firstWrite, lastWrite) -> {
 			called.set(true);

@@ -24,6 +24,8 @@ package org.springframework.integration.mqtt.event;
 @SuppressWarnings("serial")
 public class MqttSubscribedEvent extends MqttIntegrationEvent {
 
+	private static final long serialVersionUID = 1;
+
 	private final String message;
 
 	public MqttSubscribedEvent(Object source, String message) {

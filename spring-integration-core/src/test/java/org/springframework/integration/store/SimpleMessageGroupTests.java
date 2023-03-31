@@ -101,7 +101,7 @@ public class SimpleMessageGroupTests {
 	public void testPerformance() {
 		Collection<Message<?>> messages = new ArrayList<>();
 		for (int i = 0; i < 100000; i++) {
-			messages.add(new GenericMessage<Object>("foo"));
+			messages.add(new GenericMessage<>("foo"));
 		}
 		SimpleMessageGroup group = new SimpleMessageGroup(messages, this.key);
 		StopWatch watch = new StopWatch();

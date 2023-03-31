@@ -337,6 +337,7 @@ public abstract class Transformers {
 
 	@SuppressWarnings("serial")
 	private static class RequestMessageHolder extends AtomicReference<Message<?>> {
+		private static final long serialVersionUID = 1;
 
 	}
 

@@ -54,7 +54,7 @@ public class ForeignClassloaderTests {
 	public void testThreadHasWrongClassLoader() {
 		Thread t = new Thread(() -> {
 			try {
-				foo.send(new GenericMessage<String>("foo"));
+				foo.send(new GenericMessage<>("foo"));
 			}
 			catch (Exception e) {
 				e.printStackTrace();

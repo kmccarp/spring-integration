@@ -53,7 +53,7 @@ public class WireTap implements ChannelInterceptor, ManageableLifecycle, VetoCap
 
 	private String channelName;
 
-	private long timeout = 0;
+	private long timeout;
 
 	private BeanFactory beanFactory;
 

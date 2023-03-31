@@ -157,7 +157,7 @@ public class HeaderEnricherOverwriteTests {
 		MessageChannel channel = this.context.getBean("priorityExplicitOverwriteTrueInput", MessageChannel.class);
 		MessagingTemplate template = new MessagingTemplate();
 		template.setDefaultDestination(channel);
-		Message<?> result = template.sendAndReceive(new GenericMessage<String>("test"));
+		Message<?> result = template.sendAndReceive(new GenericMessage<>("test"));
 		assertThat(result).isNotNull();
 		assertThat(new IntegrationMessageHeaderAccessor(result).getPriority()).isEqualTo(42);
 	}

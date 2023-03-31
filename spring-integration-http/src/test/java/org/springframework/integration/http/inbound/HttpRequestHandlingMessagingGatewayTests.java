@@ -309,7 +309,7 @@ public class HttpRequestHandlingMessagingGatewayTests extends AbstractHttpInboun
 				.hasSize(1)
 				.element(0)
 				.isInstanceOf(TestBean.class)
-				.satisfies((actual) -> {
+				.satisfies(actual -> {
 					TestBean bean = (TestBean) actual;
 					assertThat(bean).extracting(TestBean::getName).isEqualTo("T. Bean");
 					assertThat(bean).extracting(TestBean::getAge).isEqualTo(42);
@@ -527,6 +527,8 @@ public class HttpRequestHandlingMessagingGatewayTests extends AbstractHttpInboun
 
 	@SuppressWarnings("serial")
 	public static class TestBean implements Serializable {
+
+		private static final long serialVersionUID = 1;
 
 		String name;
 

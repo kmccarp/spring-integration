@@ -30,6 +30,8 @@ import org.springframework.integration.leader.Context;
 @SuppressWarnings("serial")
 public abstract class AbstractLeaderEvent extends ApplicationEvent {
 
+	private static final long serialVersionUID = 1;
+
 	private final Context context;
 
 	private final String role;

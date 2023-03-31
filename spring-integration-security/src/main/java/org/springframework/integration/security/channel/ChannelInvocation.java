@@ -51,7 +51,7 @@ public class ChannelInvocation {
 		Assert.isAssignable(MessageChannel.class, methodInvocation.getThis().getClass(),
 				"MethodInvocation must be on a MessageChannel");
 		this.channel = (MessageChannel) methodInvocation.getThis();
-		if (methodInvocation.getMethod().getName().equals("send")) {
+		if ("send".equals(methodInvocation.getMethod().getName())) {
 			if (methodInvocation.getArguments().length < 1 || !(methodInvocation.getArguments()[0] instanceof Message<?>)) {
 				throw new IllegalStateException("expected a Message as the first parameter of the channel's send method");
 			}

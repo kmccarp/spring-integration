@@ -30,6 +30,8 @@ import org.springframework.integration.events.IntegrationEvent;
 @SuppressWarnings("serial")
 public abstract class FileServerEvent extends IntegrationEvent {
 
+	private static final long serialVersionUID = 1;
+
 	public FileServerEvent(Object source) {
 		super(source);
 	}

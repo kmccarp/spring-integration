@@ -41,7 +41,7 @@ public class TopLevelSelectorParserTests {
 	@Test
 	public void topLevelSelector() {
 		MessageSelector selector = (MessageSelector) context.getBean("selector");
-		assertThat(selector.accept(new GenericMessage<String>("test"))).isTrue();
+		assertThat(selector.accept(new GenericMessage<>("test"))).isTrue();
 	}
 
 }

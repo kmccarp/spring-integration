@@ -46,7 +46,7 @@ public class GroovyScriptPayloadMessageProcessorTests {
 	@Rule
 	public RepeatProcessor repeater = new RepeatProcessor(4);
 
-	private AtomicInteger countHolder = new AtomicInteger();
+	private final AtomicInteger countHolder = new AtomicInteger();
 
 	private GroovyCommandMessageProcessor processor;
 

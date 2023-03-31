@@ -133,7 +133,7 @@ public class UdpUnicastEndToEndTests implements Runnable {
 		}
 		try {
 			testingIpText = ">>>>>>> Testing IP " + new Date();
-			inputChannel.send(new GenericMessage<String>(testingIpText));
+			inputChannel.send(new GenericMessage<>(testingIpText));
 			sentFirst.countDown();
 			try {
 				Thread.sleep(hangAroundFor); // give some time for console interaction
@@ -178,9 +178,6 @@ public class UdpUnicastEndToEndTests implements Runnable {
 					throw new RuntimeException("Failed to start listening");
 				}
 			}
-		}
-		catch (RuntimeException e) {
-			throw e;
 		}
 		catch (InterruptedException e) {
 			Thread.currentThread().interrupt();

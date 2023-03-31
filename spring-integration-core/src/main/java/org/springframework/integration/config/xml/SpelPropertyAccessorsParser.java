@@ -42,7 +42,7 @@ import org.springframework.util.StringUtils;
  */
 public class SpelPropertyAccessorsParser implements BeanDefinitionParser {
 
-	private final Map<String, Object> propertyAccessors = new ManagedMap<String, Object>();
+	private final Map<String, Object> propertyAccessors = new ManagedMap<>();
 
 	@Override
 	public BeanDefinition parse(Element element, ParserContext parserContext) {

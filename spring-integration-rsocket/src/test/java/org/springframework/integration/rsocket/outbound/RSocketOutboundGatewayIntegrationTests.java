@@ -250,7 +250,7 @@ public class RSocketOutboundGatewayIntegrationTests {
 								Flux.from(resultChannel)
 										.next()
 										.map(Message::getPayload)
-										.flatMapMany((payload) -> (Flux<String>) payload))
+										.flatMapMany(payload -> (Flux<String>) payload))
 						.expectNext("Hello 0").expectNextCount(6).expectNext("Hello 7")
 						.thenCancel()
 						.verifyLater();
@@ -284,7 +284,7 @@ public class RSocketOutboundGatewayIntegrationTests {
 								Flux.from(resultChannel)
 										.next()
 										.map(Message::getPayload)
-										.flatMapMany((payload) -> (Flux<String>) payload))
+										.flatMapMany(payload -> (Flux<String>) payload))
 						.expectNext("Hello 1 async").expectNextCount(8).expectNext("Hello 10 async")
 						.thenCancel()
 						.verifyLater();
@@ -472,7 +472,7 @@ public class RSocketOutboundGatewayIntegrationTests {
 				.isInstanceOf(ErrorMessage.class)
 				.extracting(Message::getPayload)
 				.isInstanceOf(MessageHandlingException.class)
-				.satisfies((ex) -> assertThat((Exception) ex)
+				.satisfies(ex -> assertThat((Exception) ex)
 						.hasStackTraceContaining(
 								"ApplicationErrorException (0x201): No handler for destination 'invalid'"));
 
@@ -490,10 +490,10 @@ public class RSocketOutboundGatewayIntegrationTests {
 		public RSocketOutboundGateway rsocketOutboundGateway() {
 			RSocketOutboundGateway rsocketOutboundGateway =
 					new RSocketOutboundGateway(
-							new FunctionExpression<Message<?>>((m) ->
+							new FunctionExpression<Message<?>>(m ->
 									m.getHeaders().get(ROUTE_HEADER)));
 			rsocketOutboundGateway.setInteractionModelExpression(
-					new FunctionExpression<Message<?>>((m) -> m.getHeaders().get(INTERACTION_MODEL_HEADER)));
+					new FunctionExpression<Message<?>>(m -> m.getHeaders().get(INTERACTION_MODEL_HEADER)));
 			return rsocketOutboundGateway;
 		}
 
@@ -608,7 +608,7 @@ public class RSocketOutboundGatewayIntegrationTests {
 
 		@MessageMapping("void-return-value")
 		Mono<Void> voidReturnValue(String payload) {
-			return !payload.equals("bad") ?
+			return !"bad".equals(payload) ?
 					Mono.delay(Duration.ofMillis(10)).then(Mono.empty()) :
 					Mono.error(new IllegalStateException("bad"));
 		}

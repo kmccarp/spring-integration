@@ -47,13 +47,13 @@ public class ExceptionTypeRouterParserTests {
 	public void testExceptionTypeRouterConfig() {
 		MessageChannel inputChannel = this.context.getBean("inChannel", MessageChannel.class);
 
-		inputChannel.send(new GenericMessage<Throwable>(new NullPointerException()));
+		inputChannel.send(new GenericMessage<>(new NullPointerException()));
 		QueueChannel nullPointerChannel = this.context.getBean("nullPointerChannel", QueueChannel.class);
 		Message<Throwable> npeMessage = (Message<Throwable>) nullPointerChannel.receive(1000);
 		assertThat(npeMessage).isNotNull();
 		assertThat(npeMessage.getPayload() instanceof NullPointerException).isTrue();
 
-		inputChannel.send(new GenericMessage<Throwable>(new IllegalArgumentException()));
+		inputChannel.send(new GenericMessage<>(new IllegalArgumentException()));
 		QueueChannel illegalArgumentChannel = this.context.getBean("illegalArgumentChannel", QueueChannel.class);
 		Message<Throwable> iaMessage = (Message<Throwable>) illegalArgumentChannel.receive(1000);
 		assertThat(iaMessage).isNotNull();

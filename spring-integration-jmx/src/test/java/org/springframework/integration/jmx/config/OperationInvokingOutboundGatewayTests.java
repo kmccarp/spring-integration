@@ -88,36 +88,36 @@ public class OperationInvokingOutboundGatewayTests {
 
 	@Test
 	public void gatewayWithReplyChannel() throws Exception {
-		withReplyChannel.send(new GenericMessage<String>("1"));
+		withReplyChannel.send(new GenericMessage<>("1"));
 		assertThat(((List<?>) withReplyChannelOutput.receive().getPayload()).size()).isEqualTo(1);
-		withReplyChannel.send(new GenericMessage<String>("2"));
+		withReplyChannel.send(new GenericMessage<>("2"));
 		assertThat(((List<?>) withReplyChannelOutput.receive().getPayload()).size()).isEqualTo(2);
-		withReplyChannel.send(new GenericMessage<String>("3"));
+		withReplyChannel.send(new GenericMessage<>("3"));
 		assertThat(((List<?>) withReplyChannelOutput.receive().getPayload()).size()).isEqualTo(3);
 		assertThat(adviceCalled).isEqualTo(3);
 	}
 
 	@Test
 	public void gatewayWithPrimitiveArgs() throws Exception {
-		primitiveChannel.send(new GenericMessage<Object[]>(new Object[] {true, 0L, 1}));
+		primitiveChannel.send(new GenericMessage<>(new Object[] {true, 0L, 1}));
 		assertThat(testBean.messages.size()).isEqualTo(1);
-		List<Object> argList = new ArrayList<Object>();
+		List<Object> argList = new ArrayList<>();
 		argList.add(false);
 		argList.add(123L);
 		argList.add(42);
-		primitiveChannel.send(new GenericMessage<List<Object>>(argList));
+		primitiveChannel.send(new GenericMessage<>(argList));
 		assertThat(testBean.messages.size()).isEqualTo(2);
-		Map<String, Object> argMap = new HashMap<String, Object>();
+		Map<String, Object> argMap = new HashMap<>();
 		argMap.put("p1", true);
 		argMap.put("p2", 0L);
 		argMap.put("p3", 42);
-		primitiveChannel.send(new GenericMessage<Map<String, Object>>(argMap));
+		primitiveChannel.send(new GenericMessage<>(argMap));
 		assertThat(testBean.messages.size()).isEqualTo(3);
 		argMap.put("p2", true);
 		argMap.put("p1", 0L);
 		argMap.put("p3", 42);
 		try {
-			primitiveChannel.send(new GenericMessage<Map<String, Object>>(argMap));
+			primitiveChannel.send(new GenericMessage<>(argMap));
 			fail("Expected Exception");
 		}
 		catch (Exception e) {
@@ -125,21 +125,21 @@ public class OperationInvokingOutboundGatewayTests {
 			assertThat(e.getMessage()).contains("failed to find JMX operation");
 		}
 		// Args are named starting with Spring 3.2.3
-		argMap = new HashMap<String, Object>();
+		argMap = new HashMap<>();
 		argMap.put("bool", true);
 		argMap.put("time", 0L);
 		argMap.put("foo", 42);
-		primitiveChannel.send(new GenericMessage<Map<String, Object>>(argMap));
+		primitiveChannel.send(new GenericMessage<>(argMap));
 		assertThat(testBean.messages.size()).isEqualTo(4);
 	}
 
 	@Test
 	public void gatewayWithNoReplyChannel() throws Exception {
-		withNoReplyChannel.send(new GenericMessage<String>("1"));
+		withNoReplyChannel.send(new GenericMessage<>("1"));
 		assertThat(testBean.messages.size()).isEqualTo(1);
-		withNoReplyChannel.send(new GenericMessage<String>("2"));
+		withNoReplyChannel.send(new GenericMessage<>("2"));
 		assertThat(testBean.messages.size()).isEqualTo(2);
-		withNoReplyChannel.send(new GenericMessage<String>("3"));
+		withNoReplyChannel.send(new GenericMessage<>("3"));
 		assertThat(testBean.messages.size()).isEqualTo(3);
 	}
 

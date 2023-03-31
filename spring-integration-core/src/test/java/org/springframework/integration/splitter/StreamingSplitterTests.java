@@ -208,35 +208,28 @@ public class StreamingSplitterTests {
 
 		@Splitter
 		public Iterable<String> annotatedMethod(String input) {
-			return new Iterable<String>() {
+			return () -> new Iterator<String>() {
 
 				@Override
-				public Iterator<String> iterator() {
-
-					return new Iterator<String>() {
-
-						@Override
-						public boolean hasNext() {
-							return counter.get() < max;
-						}
-
-						@Override
-						public String next() {
-							if (!hasNext()) {
-								throw new IllegalStateException(
-										"Last element reached!");
-							}
-							return String.valueOf(counter.incrementAndGet());
-						}
-
-						@Override
-						public void remove() {
-							throw new AssertionError("not implemented!");
-
-						}
-
-					};
+				public boolean hasNext() {
+					return counter.get() < max;
 				}
+
+				@Override
+				public String next() {
+					if (!hasNext()) {
+						throw new IllegalStateException(
+								"Last element reached!");
+					}
+					return String.valueOf(counter.incrementAndGet());
+				}
+
+				@Override
+				public void remove() {
+					throw new AssertionError("not implemented!");
+
+				}
+
 			};
 		}
 
