@@ -137,7 +137,7 @@ public class AdvisedMessageHandlerTests {
 		advice.setOnSuccessExpressionString("'foo'");
 		advice.setOnFailureExpressionString("'bar:' + #exception.message");
 
-		List<Advice> adviceChain = new ArrayList<Advice>();
+		List<Advice> adviceChain = new ArrayList<>();
 		adviceChain.add(advice);
 		final AtomicReference<String> compName = new AtomicReference<>();
 		adviceChain.add(new AbstractRequestHandlerAdvice() {
@@ -237,7 +237,7 @@ public class AdvisedMessageHandlerTests {
 		advice.setOnSuccessExpressionString("1/0");
 		advice.setOnFailureExpressionString("1/0");
 
-		List<Advice> adviceChain = new ArrayList<Advice>();
+		List<Advice> adviceChain = new ArrayList<>();
 		adviceChain.add(advice);
 		handler.setAdviceChain(adviceChain);
 		handler.setBeanFactory(mock(BeanFactory.class));
@@ -301,7 +301,7 @@ public class AdvisedMessageHandlerTests {
 		advice.setOnSuccessExpressionString("1/0");
 		advice.setOnFailureExpressionString("1/0");
 
-		List<Advice> adviceChain = new ArrayList<Advice>();
+		List<Advice> adviceChain = new ArrayList<>();
 		adviceChain.add(advice);
 		handler.setAdviceChain(adviceChain);
 		handler.setBeanFactory(mock(BeanFactory.class));
@@ -936,7 +936,7 @@ public class AdvisedMessageHandlerTests {
 		final QueueChannel discardChannel = new QueueChannel();
 		filter.setDiscardChannel(discardChannel);
 		List<Advice> adviceChain = new ArrayList<>();
-		final AtomicReference<Message<?>> discardedWithinAdvice = new AtomicReference<Message<?>>();
+		final AtomicReference<Message<?>> discardedWithinAdvice = new AtomicReference<>();
 		adviceChain.add(new AbstractRequestHandlerAdvice() {
 
 			@Override
@@ -960,7 +960,7 @@ public class AdvisedMessageHandlerTests {
 		final QueueChannel discardChannel = new QueueChannel();
 		filter.setDiscardChannel(discardChannel);
 		List<Advice> adviceChain = new ArrayList<>();
-		final AtomicReference<Message<?>> discardedWithinAdvice = new AtomicReference<Message<?>>();
+		final AtomicReference<Message<?>> discardedWithinAdvice = new AtomicReference<>();
 		final AtomicBoolean adviceCalled = new AtomicBoolean();
 		adviceChain.add(new AbstractRequestHandlerAdvice() {
 

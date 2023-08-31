@@ -149,7 +149,7 @@ public class BroadcastingDispatcher extends AbstractDispatcher implements BeanFa
 		int dispatched = 0;
 		int sequenceNumber = 1;
 		Collection<MessageHandler> handlers = this.getHandlers();
-		if (this.requireSubscribers && handlers.size() == 0) {
+		if (this.requireSubscribers && handlers.isEmpty()) {
 			throw new MessageDispatchingException(message, "Dispatcher has no subscribers");
 		}
 		int sequenceSize = handlers.size();

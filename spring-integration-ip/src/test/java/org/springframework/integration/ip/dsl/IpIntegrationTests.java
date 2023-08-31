@@ -267,7 +267,7 @@ public class IpIntegrationTests {
 									.errorChannel("inTcpGatewayErrorFlow.input"))
 					.handle(this, "captureId")
 					.transform(Transformers.objectToString())
-					.<String>filter((payload) -> !"junk".equals(payload))
+					.<String>filter(payload -> !"junk".equals(payload))
 					.<String, String>transform(String::toUpperCase)
 					.get();
 		}
@@ -284,7 +284,7 @@ public class IpIntegrationTests {
 
 		@Bean
 		public IntegrationFlow inTcpGatewayErrorFlow() {
-			return (flow) -> flow
+			return flow -> flow
 					.<Exception>handle((payload, headers) -> {
 						if (payload instanceof MessageTimeoutException) {
 							return "error:non-convertible";

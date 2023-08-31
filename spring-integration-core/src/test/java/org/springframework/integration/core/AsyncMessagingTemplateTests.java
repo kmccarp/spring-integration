@@ -446,7 +446,7 @@ public class AsyncMessagingTemplateTests {
 				});
 	}
 
-	private static class EchoHandler extends AbstractReplyProducingMessageHandler {
+	private static final class EchoHandler extends AbstractReplyProducingMessageHandler {
 
 		private final long delay;
 
@@ -456,7 +456,7 @@ public class AsyncMessagingTemplateTests {
 
 		private EchoHandler(long delay) {
 			this.delay = delay;
-			this.shouldFail = (this.delay < 0);
+			this.shouldFail = this.delay < 0;
 		}
 
 		@Override

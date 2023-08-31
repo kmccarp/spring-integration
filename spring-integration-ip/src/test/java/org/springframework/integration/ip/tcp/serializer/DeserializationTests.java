@@ -331,7 +331,7 @@ public class DeserializationTests {
 	private TcpDeserializationExceptionEvent doDeserialize(AbstractByteArraySerializer deser, String expectedMessage,
 			byte[] data, int mms) {
 		final AtomicReference<TcpDeserializationExceptionEvent> event =
-				new AtomicReference<TcpDeserializationExceptionEvent>();
+				new AtomicReference<>();
 		class Publisher implements ApplicationEventPublisher {
 
 			@Override

@@ -172,7 +172,7 @@ public class ResourceInboundChannelAdapterParserTests {
 
 	public static class TestCollectionFilter implements CollectionFilter<Resource> {
 
-		private volatile boolean invoked = false;
+		private volatile boolean invoked;
 
 		@Override
 		public Collection<Resource> filter(Collection<Resource> unfilteredResources) {

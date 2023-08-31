@@ -126,7 +126,7 @@ public class ScatterGatherHandler extends AbstractReplyProducingMessageHandler i
 		BeanFactory beanFactory = getBeanFactory();
 		if (this.gatherChannel == null) {
 			this.gatherChannel =
-					new FixedSubscriberChannel((message) ->
+					new FixedSubscriberChannel(message ->
 							this.gatherer.handleMessage(enhanceScatterReplyMessage(message)));
 		}
 		else {
@@ -164,7 +164,7 @@ public class ScatterGatherHandler extends AbstractReplyProducingMessageHandler i
 		}
 
 		((MessageProducer) this.gatherer)
-				.setOutputChannel(new FixedSubscriberChannel((message) -> {
+				.setOutputChannel(new FixedSubscriberChannel(message -> {
 					MessageHeaders headers = message.getHeaders();
 					MessageChannel gatherResultChannel = headers.get(GATHER_RESULT_CHANNEL, MessageChannel.class);
 					if (gatherResultChannel != null) {

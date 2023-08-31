@@ -31,10 +31,8 @@ public class PresenceInboundChannelAdapterParserTests {
 	@Test
 	public void testPresenceInboundChannelAdapterParser() {
 		assertThatNoException()
-				.isThrownBy(() ->
-						new ClassPathXmlApplicationContext("PresenceInboundChannelAdapterParserTests-context.xml",
-								this.getClass())
-								.close());
+				.isThrownBy(new ClassPathXmlApplicationContext("PresenceInboundChannelAdapterParserTests-context.xml",
+								this.getClass())::close);
 	}
 
 }

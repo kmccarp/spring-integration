@@ -57,7 +57,7 @@ public class PartitionedChannelTests {
 	@Test
 	void messagesAreProperlyPartitioned() throws InterruptedException {
 		PartitionedChannel partitionedChannel =
-				new PartitionedChannel(2, (message) -> message.getHeaders().get("partitionKey"));
+				new PartitionedChannel(2, message -> message.getHeaders().get("partitionKey"));
 		partitionedChannel.setBeanFactory(mock(BeanFactory.class));
 		partitionedChannel.setBeanName("testPartitionedChannel");
 
@@ -75,7 +75,7 @@ public class PartitionedChannelTests {
 
 		MultiValueMap<String, Message<?>> partitionedMessages = new LinkedMultiValueMap<>();
 
-		partitionedChannel.subscribe((message) -> partitionedMessages.add(Thread.currentThread().getName(), message));
+		partitionedChannel.subscribe(message -> partitionedMessages.add(Thread.currentThread().getName(), message));
 
 		partitionedChannel.send(MessageBuilder.withPayload("test1").setHeader("partitionKey", "1").build());
 		partitionedChannel.send(MessageBuilder.withPayload("test2").setHeader("partitionKey", "2").build());

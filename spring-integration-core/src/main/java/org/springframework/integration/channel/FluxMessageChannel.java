@@ -97,7 +97,7 @@ public class FluxMessageChannel extends AbstractMessageChannel
 	@Override
 	public void subscribe(Subscriber<? super Message<?>> subscriber) {
 		this.sink.asFlux()
-				.doFinally((s) -> this.subscribedSignal.tryEmitNext(this.sink.currentSubscriberCount() > 0))
+				.doFinally(s -> this.subscribedSignal.tryEmitNext(this.sink.currentSubscriberCount() > 0))
 				.share()
 				.subscribe(subscriber);
 
@@ -105,7 +105,7 @@ public class FluxMessageChannel extends AbstractMessageChannel
 				Mono.fromCallable(() -> this.sink.currentSubscriberCount() > 0)
 						.filter(Boolean::booleanValue)
 						.doOnNext(this.subscribedSignal::tryEmitNext)
-						.repeatWhenEmpty((repeat) ->
+						.repeatWhenEmpty(repeat ->
 								this.active ? repeat.delayElements(Duration.ofMillis(100)) : repeat); // NOSONAR
 
 		addPublisherToSubscribe(Flux.from(subscribersBarrier));
@@ -140,7 +140,7 @@ public class FluxMessageChannel extends AbstractMessageChannel
 				Flux.from(publisher)
 						.delaySubscription(this.subscribedSignal.asFlux().filter(Boolean::booleanValue).next())
 						.publishOn(this.scheduler)
-						.flatMap((message) ->
+						.flatMap(message ->
 								Mono.just(message)
 										.handle((messageToHandle, syncSink) -> sendReactiveMessage(messageToHandle))
 										.contextWrite(StaticMessageHeaderAccessor.getReactorContext(message)))

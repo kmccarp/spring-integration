@@ -104,7 +104,7 @@ public class ConsumerEndpointFactoryBean
 
 	private Boolean autoStartup;
 
-	private int phase = 0;
+	private int phase;
 
 	private boolean isPhaseSet;
 

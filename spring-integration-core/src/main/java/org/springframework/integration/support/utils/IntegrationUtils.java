@@ -202,7 +202,7 @@ public final class IntegrationUtils {
 	public static String obtainComponentName(NamedComponent component) {
 		String name = component.getComponentName();
 		if (name.charAt(0) == '_' && name.startsWith(INTERNAL_COMPONENT_PREFIX)) {
-			name = name.substring((INTERNAL_COMPONENT_PREFIX).length() + 1);
+			name = name.substring(INTERNAL_COMPONENT_PREFIX.length() + 1);
 		}
 		return name;
 	}

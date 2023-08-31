@@ -678,20 +678,20 @@ class RedisLockRegistryTests implements RedisContainerTest {
 
 		String lockKey = "test-1";
 
-		Lock obtainLock_1 = registry1.obtain(lockKey);
-		Lock obtainLock_2 = registry2.obtain(lockKey);
+		Lock obtainLock1 = registry1.obtain(lockKey);
+		Lock obtainLock2 = registry2.obtain(lockKey);
 
 		CountDownLatch registry1Lock = new CountDownLatch(1);
 		CountDownLatch endDownLatch = new CountDownLatch(2);
 
 		CompletableFuture<Void> future1 = CompletableFuture.runAsync(() -> {
 			try {
-				obtainLock_1.lock();
+				obtainLock1.lock();
 				//				for (int i = 0; i < 10; i++) {
 				//					Thread.sleep(1000);
 				//				}
 				registry1Lock.countDown();
-				obtainLock_1.unlock();
+				obtainLock1.unlock();
 				endDownLatch.countDown();
 			}
 			catch (Exception ignore) {
@@ -705,8 +705,8 @@ class RedisLockRegistryTests implements RedisContainerTest {
 			}
 			catch (InterruptedException ignore) {
 			}
-			obtainLock_2.lock();
-			obtainLock_2.unlock();
+			obtainLock2.lock();
+			obtainLock2.unlock();
 			endDownLatch.countDown();
 		});
 
@@ -727,25 +727,24 @@ class RedisLockRegistryTests implements RedisContainerTest {
 		final ExecutorService executorService = Executors.newFixedThreadPool(lockRegistryNum * 2);
 		final AtomicInteger atomicInteger = new AtomicInteger(0);
 		final List<Callable<Boolean>> collect = IntStream.range(0, lockRegistryNum)
-				.mapToObj((num) -> new RedisLockRegistry(
+				.mapToObj(num -> new RedisLockRegistry(
 						redisConnectionFactory, registryKey, expireAfter))
-				.map((registry) -> {
+				.map(registry -> {
 					registry.setRedisLockType(testRedisLockType);
-					final Callable<Boolean> callable = () -> {
+					return () -> {
 						Lock obtain = registry.obtain(testKey);
 						obtain.lock();
 						obtain.unlock();
 						atomicInteger.incrementAndGet();
 						return true;
 					};
-					return callable;
 				})
 				.collect(Collectors.toList());
 
 		final int testCnt = 3;
 		for (int i = 0; i < testCnt; i++) {
-			List<Future<Boolean>> futures_1 = executorService.invokeAll(collect);
-			for (Future<Boolean> fu : futures_1) {
+			List<Future<Boolean>> futures1 = executorService.invokeAll(collect);
+			for (Future<Boolean> fu : futures1) {
 				fu.get();
 			}
 		}
@@ -884,7 +883,7 @@ class RedisLockRegistryTests implements RedisContainerTest {
 	private void waitForExpire(String key) throws Exception {
 		StringRedisTemplate template = createTemplate();
 		int n = 0;
-		while (n++ < 100 && template.keys(this.registryKey + ":" + key).size() > 0) {
+		while (n++ < 100 && !template.keys(this.registryKey + ":" + key).isEmpty()) {
 			Thread.sleep(100);
 		}
 		assertThat(n < 100).as(key + " key did not expire").isTrue();

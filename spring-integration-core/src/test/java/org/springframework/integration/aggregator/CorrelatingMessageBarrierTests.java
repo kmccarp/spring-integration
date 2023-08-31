@@ -134,7 +134,7 @@ public class CorrelatingMessageBarrierTests {
 	 */
 	private static class OneMessagePerKeyReleaseStrategy implements ReleaseStrategy {
 
-		private final ConcurrentMap<Object, Semaphore> keyLocks = new ConcurrentHashMap<Object, Semaphore>();
+		private final ConcurrentMap<Object, Semaphore> keyLocks = new ConcurrentHashMap<>();
 
 		OneMessagePerKeyReleaseStrategy() {
 			super();

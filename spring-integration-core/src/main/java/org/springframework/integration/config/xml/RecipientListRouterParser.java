@@ -46,7 +46,7 @@ public class RecipientListRouterParser extends AbstractRouterParser {
 		BeanDefinitionBuilder recipientListRouterBuilder =
 				BeanDefinitionBuilder.genericBeanDefinition(RecipientListRouter.class);
 		List<Element> childElements = DomUtils.getChildElementsByTagName(element, "recipient");
-		ManagedList<BeanDefinition> recipientList = new ManagedList<BeanDefinition>();
+		ManagedList<BeanDefinition> recipientList = new ManagedList<>();
 		for (Element childElement : childElements) {
 			BeanDefinitionBuilder recipientBuilder = BeanDefinitionBuilder.genericBeanDefinition(Recipient.class);
 			recipientBuilder.addConstructorArgReference(childElement.getAttribute("channel"));
@@ -59,7 +59,7 @@ public class RecipientListRouterParser extends AbstractRouterParser {
 			}
 			recipientList.add(recipientBuilder.getBeanDefinition());
 		}
-		if (recipientList.size() > 0) {
+		if (!recipientList.isEmpty()) {
 			recipientListRouterBuilder.addPropertyValue("recipients", recipientList);
 		}
 		return recipientListRouterBuilder.getBeanDefinition();

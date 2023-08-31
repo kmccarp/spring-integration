@@ -283,13 +283,13 @@ class RedisMessageGroupStoreTests implements RedisContainerTest {
 		while (messageGroups.hasNext()) {
 			MessageGroup group = messageGroups.next();
 			String groupId = (String) group.getGroupId();
-			if (groupId.equals("1")) {
+			if ("1".equals(groupId)) {
 				assertThat(group.getMessages().size()).isEqualTo(1);
 			}
-			else if (groupId.equals("2")) {
+			else if ("2".equals(groupId)) {
 				assertThat(group.getMessages().size()).isEqualTo(1);
 			}
-			else if (groupId.equals("3")) {
+			else if ("3".equals(groupId)) {
 				assertThat(group.getMessages().size()).isEqualTo(2);
 			}
 			counter++;
@@ -334,7 +334,7 @@ class RedisMessageGroupStoreTests implements RedisContainerTest {
 			executor.execute(() -> {
 				store2.removeMessagesFromGroup(this.groupId, message);
 				MessageGroup group = store2.getMessageGroup(this.groupId);
-				if (group.getMessages().size() != 0) {
+				if (!group.getMessages().isEmpty()) {
 					failures.add("REMOVE");
 					throw new AssertionFailedError("Failed on Remove");
 				}
@@ -391,7 +391,7 @@ class RedisMessageGroupStoreTests implements RedisContainerTest {
 	@Test
 	void testAddAndRemoveMessagesFromMessageGroup() {
 		RedisMessageStore messageStore = new RedisMessageStore(redisConnectionFactory);
-		List<Message<?>> messages = new ArrayList<Message<?>>();
+		List<Message<?>> messages = new ArrayList<>();
 		for (int i = 0; i < 25; i++) {
 			Message<String> message = MessageBuilder.withPayload("foo").setCorrelationId(this.groupId).build();
 			messageStore.addMessagesToGroup(this.groupId, message);

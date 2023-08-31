@@ -88,7 +88,7 @@ public class CachingClientConnectionFactory extends AbstractClientConnectionFact
 			}
 
 		}
-		this.pool = new SimplePool<TcpConnectionSupport>(poolSize, new Callback());
+		this.pool = new SimplePool<>(poolSize, new Callback());
 	}
 
 	/**
@@ -460,7 +460,7 @@ public class CachingClientConnectionFactory extends AbstractClientConnectionFact
 		public boolean onMessage(Message<?> message) {
 			Message<?> modifiedMessage;
 			if (message instanceof ErrorMessage) {
-				Map<String, Object> headers = new HashMap<String, Object>(message.getHeaders());
+				Map<String, Object> headers = new HashMap<>(message.getHeaders());
 				headers.put(IpHeaders.CONNECTION_ID, getConnectionId());
 				if (headers.get(IpHeaders.ACTUAL_CONNECTION_ID) == null) {
 					headers.put(IpHeaders.ACTUAL_CONNECTION_ID,

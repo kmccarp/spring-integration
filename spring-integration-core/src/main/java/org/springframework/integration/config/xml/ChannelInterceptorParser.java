@@ -44,7 +44,7 @@ public class ChannelInterceptorParser {
 
 
 	public ChannelInterceptorParser() {
-		this.parsers = new HashMap<String, BeanDefinitionRegisteringParser>();
+		this.parsers = new HashMap<>();
 		this.parsers.put("wire-tap", new WireTapParser());
 	}
 
