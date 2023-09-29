@@ -70,13 +70,13 @@ public abstract class AbstractBaseTests {
 
 	/**
 	 * Constructs the Spring application context XML file name from simple class name and suffix '-context.xml'.
-	 * @param _suffix optional suffix
+	 * @param suffix optional suffix
 	 * @return application context XML file name
 	 */
-	protected final String getApplicationContextXmlFile(String _suffix) {
+	protected final String getApplicationContextXmlFile(String suffix) {
 		String fn = getClass().getSimpleName();
-		if (StringUtils.hasText(_suffix)) {
-			fn += _suffix;
+		if (StringUtils.hasText(suffix)) {
+			fn += suffix;
 		}
 		fn += "-context.xml";
 		getLogger().debug("Returning application context xml file [" + fn + "] for class [" + getClass().getName() + "].");
@@ -97,24 +97,24 @@ public abstract class AbstractBaseTests {
 
 	/**
 	 * Writes the specified input stream to file.
-	 * @param _inputStream input stream
-	 * @param _path output file path
+	 * @param inputStream input stream
+	 * @param path output file path
 	 * @throws IOException in case of I/O errors
 	 */
-	public static void writeToFile(InputStream _inputStream, String _path) throws IOException {
-		try (FileOutputStream fos = new FileOutputStream(_path)) {
-			FileCopyUtils.copy(_inputStream, fos);
+	public static void writeToFile(InputStream inputStream, String path) throws IOException {
+		try (FileOutputStream fos = new FileOutputStream(path)) {
+			FileCopyUtils.copy(inputStream, fos);
 		}
 	}
 
 	/**
 	 * Writes the specified byte array to the output stream.
-	 * @param _bytes byte array
-	 * @param _outputStream output stream
+	 * @param bytes byte array
+	 * @param outputStream output stream
 	 * @throws IOException in case of I/O errors
 	 */
-	public static void writeToFile(byte[] _bytes, OutputStream _outputStream) throws IOException {
-		FileCopyUtils.copy(_bytes, _outputStream);
+	public static void writeToFile(byte[] bytes, OutputStream outputStream) throws IOException {
+		FileCopyUtils.copy(bytes, outputStream);
 	}
 
 	/**
@@ -151,10 +151,10 @@ public abstract class AbstractBaseTests {
 
 	/**
 	 * Deletes one or more files or directories.
-	 * @param _files file or directories
+	 * @param files file or directories
 	 */
-	protected void delete(String... _files) {
-		for (String fileName : _files) {
+	protected void delete(String... files) {
+		for (String fileName : files) {
 			if (fileName == null) {
 				continue;
 			}
@@ -182,12 +182,12 @@ public abstract class AbstractBaseTests {
 
 	/**
 	 * Retrieves class name and method name at the specified stacktrace index.
-	 * @param _index stacktrace index
+	 * @param index stacktrace index
 	 * @return fully qualified method name
 	 */
-	private static String getStackTraceString(int _index) {
+	private static String getStackTraceString(int index) {
 		StackTraceElement[] arrStackTraceElems = new Throwable().fillInStackTrace().getStackTrace();
-		final int lIndex = Math.min(arrStackTraceElems.length - 1, Math.max(0, _index));
+		final int lIndex = Math.min(arrStackTraceElems.length - 1, Math.max(0, index));
 		return arrStackTraceElems[lIndex].getClassName() + "." + arrStackTraceElems[lIndex].getMethodName();
 	}
 
@@ -244,19 +244,19 @@ public abstract class AbstractBaseTests {
 	/**
 	 * Invokes one or more test methods on the specified test class.
 	 * Catches exceptions during test setup (using reflection) and test invocation.
-	 * @param _testClass test class object
-	 * @param _methodNames String method names to invoke in order, no parameters expected
+	 * @param testClass test class object
+	 * @param methodNames String method names to invoke in order, no parameters expected
 	 */
-	protected static void runTests(Class<? extends AbstractBaseTests> _testClass, String... _methodNames)
+	protected static void runTests(Class<? extends AbstractBaseTests> testClass, String... methodNames)
 			throws Exception {
 
 		AbstractBaseTests test;
-		Method[] methods = new Method[_methodNames.length];
+		Method[] methods = new Method[methodNames.length];
 
-		test = _testClass.getDeclaredConstructor().newInstance();
-		for (int i = 0; i < _methodNames.length; i++) {
-			String methodName = _methodNames[i];
-			methods[i] = _testClass.getMethod(methodName, (Class<?>[]) null);
+		test = testClass.getDeclaredConstructor().newInstance();
+		for (int i = 0; i < methodNames.length; i++) {
+			String methodName = methodNames[i];
+			methods[i] = testClass.getMethod(methodName, (Class<?>[]) null);
 		}
 
 		for (Method method : methods) {

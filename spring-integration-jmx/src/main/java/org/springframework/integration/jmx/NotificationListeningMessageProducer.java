@@ -204,7 +204,7 @@ public class NotificationListeningMessageProducer extends MessageProducerSupport
 			catch (IOException e) {
 				throw new IllegalStateException("IOException on MBeanServerConnection.", e);
 			}
-			if (mBeanInfos.size() == 0) {
+			if (mBeanInfos.isEmpty()) {
 				this.logger.debug(() -> "No MBeans found matching pattern: " + pattern);
 			}
 			for (ObjectInstance instance : mBeanInfos) {

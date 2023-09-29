@@ -142,7 +142,7 @@ public class ChannelTests {
 			synchronized (consumersMonitor) {
 				if (!consumers.isEmpty()) {
 					BlockingQueueConsumer newConsumer = consumers.iterator().next();
-					if (newConsumer != consumer && newConsumer.getConsumerTags().size() > 0) {
+					if (newConsumer != consumer && !newConsumer.getConsumerTags().isEmpty()) {
 						break;
 					}
 				}
@@ -276,7 +276,7 @@ public class ChannelTests {
 		public int hashCode() {
 			final int prime = 31;
 			int result = 1;
-			result = prime * result + ((this.bar == null) ? 0 : this.bar.hashCode());
+			result = prime * result + (this.bar == null ? 0 : this.bar.hashCode());
 			return result;
 		}
 

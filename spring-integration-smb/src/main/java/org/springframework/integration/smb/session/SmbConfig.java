@@ -163,7 +163,7 @@ public class SmbConfig {
 		this.smbMaxVersion = _smbMaxVersion;
 	}
 
-	String getDomainUserPass(boolean _includePassword) {
+	String getDomainUserPass(boolean includePassword) {
 		String domainUserPass;
 		if (StringUtils.hasText(this.domain)) {
 			domainUserPass = String.format("%s;%s", this.domain, this.username);
@@ -172,7 +172,7 @@ public class SmbConfig {
 			domainUserPass = this.username;
 		}
 		if (StringUtils.hasText(this.password)) {
-			domainUserPass += ":" + (_includePassword ? this.password : "********");
+			domainUserPass += ":" + (includePassword ? this.password : "********");
 		}
 		return domainUserPass;
 	}

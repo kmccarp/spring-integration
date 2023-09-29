@@ -217,7 +217,7 @@ public class WebFluxRequestExecutingMessageHandler extends AbstractHttpRequestEx
 
 	@Override
 	public String getComponentType() {
-		return (isExpectReply() ? "webflux:outbound-gateway" : "webflux:outbound-channel-adapter");
+		return isExpectReply() ? "webflux:outbound-gateway" : "webflux:outbound-channel-adapter";
 	}
 
 	@Override

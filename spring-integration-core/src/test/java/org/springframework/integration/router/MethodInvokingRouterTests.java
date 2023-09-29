@@ -635,7 +635,7 @@ public class MethodInvokingRouterTests {
 
 		public List<String> routePayload(String name) {
 			List<String> results = new ArrayList<>();
-			if (name.equals("foo") || name.equals("bar")) {
+			if ("foo".equals(name) || "bar".equals(name)) {
 				results.add("foo-channel");
 				results.add("bar-channel");
 			}
@@ -699,7 +699,7 @@ public class MethodInvokingRouterTests {
 
 		public List<MessageChannel> routePayload(String name) {
 			List<MessageChannel> results = new ArrayList<>();
-			if (name.equals("foo") || name.equals("bar")) {
+			if ("foo".equals(name) || "bar".equals(name)) {
 				results.add(channelResolver.resolveDestination("foo-channel"));
 				results.add(channelResolver.resolveDestination("bar-channel"));
 			}

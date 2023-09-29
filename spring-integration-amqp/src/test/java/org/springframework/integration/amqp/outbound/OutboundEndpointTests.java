@@ -190,10 +190,10 @@ public class OutboundEndpointTests {
 				.containsEntry(JsonHeaders.RESOLVABLE_TYPE, ResolvableType.forClass(String.class));
 	}
 
-	/**
-	 * Increase method visibility
-	 */
-	private class TestRabbitTemplate extends RabbitTemplate {
+    /**
+     * Increase method visibility
+     */
+    private final class TestRabbitTemplate extends RabbitTemplate {
 
 		private TestRabbitTemplate(ConnectionFactory connectionFactory) {
 			super(connectionFactory);

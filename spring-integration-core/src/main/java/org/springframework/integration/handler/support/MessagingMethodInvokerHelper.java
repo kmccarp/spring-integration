@@ -783,7 +783,7 @@ public class MessagingMethodInvokerHelper extends AbstractExpressionEvaluator im
 		return !(method.isSynthetic() ||
 				ReflectionUtils.isObjectMethod(method) ||
 				AnnotatedElementUtils.isAnnotated(method, "groovy.transform.Generated") ||
-				declaringClass.getName().equals("groovy.lang.GroovyObject") ||
+				"groovy.lang.GroovyObject".equals(declaringClass.getName()) ||
 				declaringClass.equals(Proxy.class) ||
 				(this.requiresReply && void.class.equals(method.getReturnType())) ||
 				(this.methodName != null && !this.methodName.equals(method.getName())) ||
@@ -1064,7 +1064,7 @@ public class MessagingMethodInvokerHelper extends AbstractExpressionEvaluator im
 		// The number of times InvocableHandlerMethod was attempted and failed - enables us to eventually
 		// give up trying to call it when it just doesn't seem to be possible.
 		// Switching to 'spelOnly' afterwards forever.
-		private volatile int failedAttempts = 0;
+		private volatile int failedAttempts;
 
 		HandlerMethod(Method method, boolean canProcessMessageList) {
 			this.method = method;

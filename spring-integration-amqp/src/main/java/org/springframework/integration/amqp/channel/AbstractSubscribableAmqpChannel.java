@@ -173,7 +173,7 @@ abstract class AbstractSubscribableAmqpChannel extends AbstractAmqpChannel
 		setMaxSubscribers(this.maxSubscribers);
 		String queue = obtainQueueName(this.channelName);
 		this.container.setQueueNames(queue);
-		MessageConverter converter = (this.getAmqpTemplate() instanceof RabbitTemplate)
+		MessageConverter converter = this.getAmqpTemplate() instanceof RabbitTemplate
 				? ((RabbitTemplate) this.getAmqpTemplate()).getMessageConverter()
 				: new SimpleMessageConverter();
 		MessageListener listener = new DispatchingMessageListener(converter,
@@ -196,7 +196,7 @@ abstract class AbstractSubscribableAmqpChannel extends AbstractAmqpChannel
 
 	@Override
 	public int getPhase() {
-		return (this.container != null) ? this.container.getPhase() : 0;
+		return this.container != null ? this.container.getPhase() : 0;
 	}
 
 	@Override
@@ -289,7 +289,7 @@ abstract class AbstractSubscribableAmqpChannel extends AbstractAmqpChannel
 			Message<?> messageToSend = null;
 			try {
 				Object converted = this.converter.fromMessage(message);
-				messageToSend = (converted instanceof Message<?>) ? (Message<?>) converted
+				messageToSend = converted instanceof Message<?> ? (Message<?>) converted
 						: buildMessage(message, converted);
 				this.dispatcher.dispatch(messageToSend);
 			}

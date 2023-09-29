@@ -101,7 +101,7 @@ public class DebeziumDslTests implements DebeziumMySqlTestContainer {
 		private final CountDownLatch batchLatch = new CountDownLatch(52);
 		private final List<String> bachPayloads = new ArrayList<>();
 		private final List<List<String>> batchHeaderKeys = new ArrayList<>();
-		private int batchMessageCount = 0;
+		private int batchMessageCount;
 
 		@Bean
 		public IntegrationFlow streamFlowFromBuilder(DebeziumEngine.Builder<ChangeEvent<byte[], byte[]>> builder) {

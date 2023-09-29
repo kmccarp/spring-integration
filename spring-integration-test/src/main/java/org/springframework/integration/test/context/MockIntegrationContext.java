@@ -250,7 +250,7 @@ public class MockIntegrationContext implements BeanPostProcessor, SmartInitializ
 
 		if (endpoint instanceof ReactiveStreamsConsumer) {
 			ReactiveMessageHandler reactiveMessageHandler =
-					(message) -> Mono.fromRunnable(() -> mockMessageHandler.handleMessage(message));
+					message -> Mono.fromRunnable(() -> mockMessageHandler.handleMessage(message));
 			directFieldAccessor.setPropertyValue(REACTIVE_MESSAGE_HANDLER, reactiveMessageHandler);
 		}
 

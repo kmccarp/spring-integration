@@ -162,7 +162,7 @@ public abstract class AbstractKeyValueMessageStore extends AbstractMessageGroupS
 	@ManagedAttribute
 	public long getMessageCount() {
 		Collection<?> messageIds = doListKeys(this.messagePrefix + '*');
-		return (messageIds != null) ? messageIds.size() : 0;
+		return messageIds != null ? messageIds.size() : 0;
 	}
 
 

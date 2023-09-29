@@ -70,18 +70,16 @@ public class DeriveLanguageFromExtensionTests {
 	@Test
 	public void testBadExtension() {
 		assertThatExceptionOfType(BeanDefinitionStoreException.class)
-				.isThrownBy(() ->
-						new ClassPathXmlApplicationContext(getClass().getSimpleName() + "-fail1-context.xml",
-								getClass()).close())
+				.isThrownBy(new ClassPathXmlApplicationContext(getClass().getSimpleName() + "-fail1-context.xml",
+								getClass())::close)
 				.withStackTraceContaining("No suitable scripting engine found for extension 'xx'");
 	}
 
 	@Test
 	public void testNoExtension() {
 		assertThatExceptionOfType(BeanDefinitionStoreException.class)
-				.isThrownBy(() ->
-						new ClassPathXmlApplicationContext(getClass().getSimpleName() + "-fail2-context.xml",
-								getClass()).close())
+				.isThrownBy(new ClassPathXmlApplicationContext(getClass().getSimpleName() + "-fail2-context.xml",
+								getClass())::close)
 				.withStackTraceContaining("Unable to determine language for script 'foo'");
 	}
 

@@ -34,7 +34,7 @@ public class AggregatedXmlMessageValidationException extends RuntimeException {
 
 
 	public AggregatedXmlMessageValidationException(List<Throwable> exceptions) {
-		this.exceptions = (exceptions != null) ? exceptions : Collections.emptyList();
+		this.exceptions = exceptions != null ? exceptions : Collections.emptyList();
 	}
 
 	@Override

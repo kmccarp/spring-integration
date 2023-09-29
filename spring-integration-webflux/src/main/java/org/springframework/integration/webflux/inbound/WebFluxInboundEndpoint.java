@@ -135,7 +135,7 @@ public class WebFluxInboundEndpoint extends BaseHttpInboundEndpoint implements W
 
 	@Override
 	public Mono<Void> handle(ServerWebExchange exchange) {
-		return Mono.deferContextual((context) -> {
+		return Mono.deferContextual(context -> {
 			if (isRunning()) {
 				return doHandle(exchange, context);
 			}
@@ -220,7 +220,7 @@ public class WebFluxInboundEndpoint extends BaseHttpInboundEndpoint implements W
 				resolvedType != null
 						? this.adapterRegistry.getAdapter(resolvedType)
 						: null;
-		ResolvableType elementType = (adapter != null ? bodyType.getGeneric() : bodyType);
+		ResolvableType elementType = adapter != null ? bodyType.getGeneric() : bodyType;
 
 		HttpMessageReader<?> httpMessageReader = this.codecConfigurer
 				.getReaders()
@@ -488,7 +488,7 @@ public class WebFluxInboundEndpoint extends BaseHttpInboundEndpoint implements W
 
 	private List<MediaType> getAcceptableTypes(ServerWebExchange exchange) {
 		List<MediaType> mediaTypes = this.requestedContentTypeResolver.resolveMediaTypes(exchange);
-		return (mediaTypes.isEmpty() ? Collections.singletonList(MediaType.ALL) : mediaTypes);
+		return mediaTypes.isEmpty() ? Collections.singletonList(MediaType.ALL) : mediaTypes;
 	}
 
 	private Mono<Void> setStatusCode(ServerWebExchange exchange, RequestEntity<?> requestEntity) {
@@ -518,7 +518,7 @@ public class WebFluxInboundEndpoint extends BaseHttpInboundEndpoint implements W
 			Supplier<List<MediaType>> producibleTypesSupplier) {
 
 		Set<MediaType> mediaTypes = exchange.getAttribute(HandlerMapping.PRODUCIBLE_MEDIA_TYPES_ATTRIBUTE);
-		return (mediaTypes != null ? new ArrayList<>(mediaTypes) : producibleTypesSupplier.get());
+		return mediaTypes != null ? new ArrayList<>(mediaTypes) : producibleTypesSupplier.get();
 	}
 
 	private static Mono<?> queryParams(ServerHttpRequest request) {
