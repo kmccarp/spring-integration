@@ -122,7 +122,7 @@ class IntegrationReactiveUtilsTests {
 	void testPublisherPayloadWithNullChannel() throws InterruptedException {
 		NullChannel nullChannel = new NullChannel();
 		CountDownLatch publisherSubscribed = new CountDownLatch(1);
-		Mono<Object> mono = Mono.empty().doOnSubscribe((s) -> publisherSubscribed.countDown());
+		Mono<Object> mono = Mono.empty().doOnSubscribe(s -> publisherSubscribed.countDown());
 		nullChannel.send(new GenericMessage<>(mono));
 		assertThat(publisherSubscribed.await(10, TimeUnit.SECONDS)).isTrue();
 	}

@@ -27,7 +27,7 @@ import org.springframework.messaging.MessageHandler;
  */
 public class TestHandler implements MessageHandler {
 
-	public List<Message<?>> sentMessages = new ArrayList<Message<?>>();
+	public List<Message<?>> sentMessages = new ArrayList<>();
 
 	public void handleMessage(Message<?> message) {
 		sentMessages.add(message);

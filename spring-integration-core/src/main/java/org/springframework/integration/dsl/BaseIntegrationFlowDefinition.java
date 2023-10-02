@@ -549,7 +549,7 @@ public abstract class BaseIntegrationFlowDefinition<B extends BaseIntegrationFlo
 	 * @see ExpressionEvaluatingTransformer
 	 */
 	public B transform(String expression) {
-		return transformWith((transformerSpec) -> transformerSpec.expression(expression));
+		return transformWith(transformerSpec -> transformerSpec.expression(expression));
 	}
 
 	/**
@@ -602,7 +602,7 @@ public abstract class BaseIntegrationFlowDefinition<B extends BaseIntegrationFlo
 	 * @see MethodInvokingTransformer
 	 */
 	public B transform(Object service, @Nullable String methodName) {
-		return transformWith((transformerSpec) -> transformerSpec.ref(service).method(methodName));
+		return transformWith(transformerSpec -> transformerSpec.ref(service).method(methodName));
 	}
 
 	/**
@@ -620,7 +620,7 @@ public abstract class BaseIntegrationFlowDefinition<B extends BaseIntegrationFlo
 	 * @see MethodInvokingTransformer
 	 */
 	public B transform(String beanName, @Nullable String methodName) {
-		return transformWith((transformerSpec) -> transformerSpec.refName(beanName).method(methodName));
+		return transformWith(transformerSpec -> transformerSpec.refName(beanName).method(methodName));
 	}
 
 	/**
@@ -667,7 +667,7 @@ public abstract class BaseIntegrationFlowDefinition<B extends BaseIntegrationFlo
 	 * @see MethodInvokingTransformer
 	 */
 	public B transform(MessageProcessorSpec<?> messageProcessorSpec) {
-		return transformWith((transformerSpec) -> transformerSpec.processor(messageProcessorSpec));
+		return transformWith(transformerSpec -> transformerSpec.processor(messageProcessorSpec));
 	}
 
 	/**
@@ -726,7 +726,7 @@ public abstract class BaseIntegrationFlowDefinition<B extends BaseIntegrationFlo
 	 * @see LambdaMessageProcessor
 	 */
 	public <P, T> B transform(@Nullable Class<P> expectedType, GenericTransformer<P, T> genericTransformer) {
-		return transformWith((transformerSpec) ->
+		return transformWith(transformerSpec ->
 				transformerSpec.transformer(genericTransformer).expectedType(expectedType));
 	}
 
@@ -1405,7 +1405,7 @@ public abstract class BaseIntegrationFlowDefinition<B extends BaseIntegrationFlo
 	 * @return the current {@link BaseIntegrationFlowDefinition}.
 	 */
 	public B split() {
-		return splitWith((splitterSpec) -> { });
+		return splitWith(splitterSpec -> { });
 	}
 
 	/**
@@ -1460,7 +1460,7 @@ public abstract class BaseIntegrationFlowDefinition<B extends BaseIntegrationFlo
 	 * @see SplitterSpec
 	 */
 	public B split(String expression) {
-		return splitWith((splitterSpec) -> splitterSpec.expression(expression));
+		return splitWith(splitterSpec -> splitterSpec.expression(expression));
 	}
 
 	/**
@@ -1501,7 +1501,7 @@ public abstract class BaseIntegrationFlowDefinition<B extends BaseIntegrationFlo
 	 * @see MethodInvokingSplitter
 	 */
 	public B split(Object service, @Nullable String methodName) {
-		return splitWith((splitterSpec) -> splitterSpec.ref(service).method(methodName));
+		return splitWith(splitterSpec -> splitterSpec.ref(service).method(methodName));
 	}
 
 	/**
@@ -1540,7 +1540,7 @@ public abstract class BaseIntegrationFlowDefinition<B extends BaseIntegrationFlo
 	 * @return the current {@link BaseIntegrationFlowDefinition}.
 	 */
 	public B split(String beanName, @Nullable String methodName) {
-		return splitWith((splitterSpec) -> splitterSpec.refName(beanName).method(methodName));
+		return splitWith(splitterSpec -> splitterSpec.refName(beanName).method(methodName));
 	}
 
 	/**
@@ -1578,7 +1578,7 @@ public abstract class BaseIntegrationFlowDefinition<B extends BaseIntegrationFlo
 	 * @see SplitterSpec
 	 */
 	public B split(MessageProcessorSpec<?> messageProcessorSpec) {
-		return splitWith((splitterSpec) -> splitterSpec.ref(messageProcessorSpec));
+		return splitWith(splitterSpec -> splitterSpec.ref(messageProcessorSpec));
 	}
 
 	/**
@@ -1633,7 +1633,7 @@ public abstract class BaseIntegrationFlowDefinition<B extends BaseIntegrationFlo
 	 * @see LambdaMessageProcessor
 	 */
 	public <P> B split(Class<P> expectedType, Function<P, ?> splitter) {
-		return splitWith((splitterSpec) -> splitterSpec.function(splitter).expectedType(expectedType));
+		return splitWith(splitterSpec -> splitterSpec.function(splitter).expectedType(expectedType));
 	}
 
 	/**
@@ -1684,7 +1684,7 @@ public abstract class BaseIntegrationFlowDefinition<B extends BaseIntegrationFlo
 	 * @see SplitterSpec
 	 */
 	public <S extends AbstractMessageSplitter> B split(MessageHandlerSpec<?, S> splitterMessageHandlerSpec) {
-		return splitWith((splitterSpec) -> splitterSpec.ref(splitterMessageHandlerSpec));
+		return splitWith(splitterSpec -> splitterSpec.ref(splitterMessageHandlerSpec));
 	}
 
 	/**
@@ -1714,7 +1714,7 @@ public abstract class BaseIntegrationFlowDefinition<B extends BaseIntegrationFlo
 	 * @see SplitterSpec
 	 */
 	public B split(AbstractMessageSplitter splitter) {
-		return splitWith((splitterSpec) -> splitterSpec.ref(splitter));
+		return splitWith(splitterSpec -> splitterSpec.ref(splitter));
 	}
 
 	/**
@@ -1757,7 +1757,7 @@ public abstract class BaseIntegrationFlowDefinition<B extends BaseIntegrationFlo
 	 */
 	@Deprecated(since = "6.2", forRemoval = true)
 	public B headerFilter(String headersToRemove, boolean patternMatch) {
-		return headerFilter((headerFilterSpec) -> headerFilterSpec
+		return headerFilter(headerFilterSpec -> headerFilterSpec
 				.headersToRemove(StringUtils.delimitedListToStringArray(headersToRemove, ",", " "))
 				.patternMatch(patternMatch));
 	}
@@ -1900,7 +1900,7 @@ public abstract class BaseIntegrationFlowDefinition<B extends BaseIntegrationFlo
 	 * @see AggregatorSpec
 	 */
 	public B aggregate(Object aggregatorProcessor) {
-		return aggregate((aggregator) -> aggregator.processor(aggregatorProcessor));
+		return aggregate(aggregator -> aggregator.processor(aggregatorProcessor));
 	}
 
 	/**
@@ -3018,7 +3018,7 @@ public abstract class BaseIntegrationFlowDefinition<B extends BaseIntegrationFlo
 						.stream()
 						.reduce((first, second) -> second)
 						.filter(WireTapSpec.class::isInstance)
-						.ifPresent((wireTap) -> bridge());
+						.ifPresent(wireTap -> bridge());
 			}
 
 			this.integrationFlow = new StandardIntegrationFlow(components);

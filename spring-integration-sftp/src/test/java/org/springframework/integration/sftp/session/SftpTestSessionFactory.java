@@ -27,7 +27,7 @@ import static org.mockito.Mockito.spy;
  * @author Gary Russell
  *
  */
-public class SftpTestSessionFactory {
+public final class SftpTestSessionFactory {
 
 	private SftpTestSessionFactory() {
 		super();

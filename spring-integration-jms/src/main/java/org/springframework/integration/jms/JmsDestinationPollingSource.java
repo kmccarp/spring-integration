@@ -138,7 +138,7 @@ public class JmsDestinationPollingSource extends AbstractMessageSource<Object> {
 				}
 			}
 			AbstractIntegrationMessageBuilder<?> builder =
-					(object instanceof Message)
+					object instanceof Message
 							? getMessageBuilderFactory().fromMessage((Message<?>) object)
 							: getMessageBuilderFactory().withPayload(object);
 			return builder.copyHeadersIfAbsent(mappedHeaders);

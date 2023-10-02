@@ -203,7 +203,7 @@ class KafkaDslKotlinTests {
 
 		val replyContainerLatch = CountDownLatch(1)
 
-		var fromSource: Any? = null
+		var fromSource: Any?
 
 		@Value("\${spring.global.embedded.kafka.brokers}")
 		lateinit var embeddedKafkaBrokers: String

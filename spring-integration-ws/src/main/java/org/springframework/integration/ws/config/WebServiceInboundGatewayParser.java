@@ -38,7 +38,7 @@ public class WebServiceInboundGatewayParser extends AbstractInboundGatewayParser
 
 	@Override
 	protected String getBeanClassName(Element element) {
-		String simpleClassName = (StringUtils.hasText(element.getAttribute("marshaller"))) ?
+		String simpleClassName = StringUtils.hasText(element.getAttribute("marshaller")) ?
 				"MarshallingWebServiceInboundGateway" : "SimpleWebServiceInboundGateway";
 		return "org.springframework.integration.ws." + simpleClassName;
 	}
@@ -46,8 +46,8 @@ public class WebServiceInboundGatewayParser extends AbstractInboundGatewayParser
 	@Override
 	protected boolean isEligibleAttribute(String attributeName) {
 		return !(attributeName.endsWith("marshaller")) &&
-				!(attributeName.equals("mapped-reply-headers")) &&
-				!(attributeName.equals("mapped-request-headers")) &&
+				!("mapped-reply-headers".equals(attributeName)) &&
+				!("mapped-request-headers".equals(attributeName)) &&
 				super.isEligibleAttribute(attributeName);
 	}
 

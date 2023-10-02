@@ -153,7 +153,7 @@ public class SpelSplitterIntegrationTests {
 
 	static class TestBean {
 
-		private final List<Integer> numbers = new ArrayList<Integer>();
+		private final List<Integer> numbers = new ArrayList<>();
 
 		TestBean() {
 			for (int i = 1; i <= 10; i++) {

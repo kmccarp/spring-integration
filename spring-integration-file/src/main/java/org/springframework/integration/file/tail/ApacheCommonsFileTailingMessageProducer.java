@@ -40,7 +40,7 @@ public class ApacheCommonsFileTailingMessageProducer extends FileTailingMessageP
 
 	private boolean end = true;
 
-	private boolean reopen = false;
+	private boolean reopen;
 
 	private volatile Tailer tailer;
 

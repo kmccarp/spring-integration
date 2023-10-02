@@ -555,7 +555,7 @@ public class InboundEndpointTests {
 		Message<?> received = out.receive(0);
 		assertThat(received).isNotNull();
 		assertThat(((List<Message<String>>) received.getPayload()))
-				.extracting(message -> message.getPayload())
+				.extracting(org.springframework.messaging.Message::getPayload)
 				.contains("test1", "test2");
 	}
 

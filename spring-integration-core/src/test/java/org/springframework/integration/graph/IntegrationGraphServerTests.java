@@ -195,7 +195,7 @@ public class IntegrationGraphServerTests {
 		sourceJson = jsonArray.toString();
 		assertThat(sourceJson).contains("\"receiveCounters\":{\"successes\":2,\"failures\":0");
 
-		assertThatIllegalStateException().isThrownBy(() -> this.testSource.receive());
+		assertThatIllegalStateException().isThrownBy(this.testSource::receive);
 		baos = new ByteArrayOutputStream();
 		objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
 		objectMapper.writeValue(baos, graph);
@@ -270,7 +270,7 @@ public class IntegrationGraphServerTests {
 		IntegrationNode myFilter =
 				graph.getNodes()
 						.stream()
-						.filter(node -> node.getName().equals("myFilter"))
+						.filter(node -> "myFilter".equals(node.getName()))
 						.findFirst()
 						.get();
 

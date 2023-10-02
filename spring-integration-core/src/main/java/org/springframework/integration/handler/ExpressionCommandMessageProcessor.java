@@ -121,7 +121,7 @@ public class ExpressionCommandMessageProcessor extends AbstractMessageProcessor<
 		}
 
 		private void validateMethod(Object targetObject, String name, int argumentCount) {
-			Class<?> type = (targetObject instanceof Class ? (Class<?>) targetObject : targetObject.getClass());
+			Class<?> type = targetObject instanceof Class ? (Class<?>) targetObject : targetObject.getClass();
 			Method[] methods = type.getMethods();
 			List<Method> candidates = new ArrayList<>();
 			for (Method method : methods) {
@@ -130,8 +130,8 @@ public class ExpressionCommandMessageProcessor extends AbstractMessageProcessor<
 				}
 			}
 			List<Method> supportedMethods = this.methodFilter.filter(candidates);
-			if (supportedMethods.size() == 0) {
-				String methodDescription = (candidates.size() > 0) ? candidates.get(0).toString() : name;
+			if (supportedMethods.isEmpty()) {
+				String methodDescription = !candidates.isEmpty() ? candidates.get(0).toString() : name;
 				throw new EvaluationException("The method '" + methodDescription +
 						"' is not supported by this command processor. " +
 						"If using the Control Bus, consider adding @ManagedOperation or @ManagedAttribute.");

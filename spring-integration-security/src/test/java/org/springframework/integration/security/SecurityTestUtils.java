@@ -29,7 +29,7 @@ import org.springframework.security.core.context.SecurityContextImpl;
  * @author Oleg Zhurakousky
  * @author Gary Russell
  */
-public class SecurityTestUtils {
+public final class SecurityTestUtils {
 
 	private SecurityTestUtils() {
 		super();

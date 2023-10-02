@@ -162,7 +162,7 @@ public class MethodInvokingMessageGroupProcessorTests {
 		class SimpleAggregator {
 
 			public String and(List<Integer> flags, @Header("foo") List<Integer> header) {
-				List<Integer> result = new ArrayList<Integer>();
+				List<Integer> result = new ArrayList<>();
 				for (int flag : flags) {
 					result.add(flag);
 				}
@@ -193,7 +193,7 @@ public class MethodInvokingMessageGroupProcessorTests {
 			public String and(@Payloads List<?> rawFlags, @Header("foo") List<Integer> header) {
 				@SuppressWarnings("unchecked")
 				List<Integer> flags = (List<Integer>) rawFlags;
-				List<Integer> result = new ArrayList<Integer>();
+				List<Integer> result = new ArrayList<>();
 				for (int flag : flags) {
 					result.add(flag);
 				}

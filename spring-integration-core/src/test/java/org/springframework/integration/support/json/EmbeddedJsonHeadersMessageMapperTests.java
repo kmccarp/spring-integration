@@ -57,7 +57,7 @@ public class EmbeddedJsonHeadersMessageMapperTests {
 
 		ObjectMapper objectMapper = new ObjectMapper();
 		Map<String, Object> encodedMessageToCheck =
-				objectMapper.readValue(encodedMessage, new TypeReference<Map<String, Object>>() {
+				objectMapper.readValue(encodedMessage, new TypeReference<>() {
 
 				});
 
@@ -140,7 +140,7 @@ public class EmbeddedJsonHeadersMessageMapperTests {
 
 		ObjectMapper objectMapper = new ObjectMapper();
 		Map<String, Object> encodedMessageToCheck =
-				objectMapper.readValue(encodedMessage, new TypeReference<Map<String, Object>>() {
+				objectMapper.readValue(encodedMessage, new TypeReference<>() {
 
 				});
 

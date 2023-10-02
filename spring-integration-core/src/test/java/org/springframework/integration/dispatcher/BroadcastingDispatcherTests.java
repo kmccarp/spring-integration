@@ -202,7 +202,7 @@ public class BroadcastingDispatcherTests {
 	@Test
 	public void applySequenceDisabledByDefault() {
 		BroadcastingDispatcher dispatcher = new BroadcastingDispatcher();
-		final List<Message<?>> messages = Collections.synchronizedList(new ArrayList<Message<?>>());
+		final List<Message<?>> messages = Collections.synchronizedList(new ArrayList<>());
 		MessageHandler target1 = new MessageStoringTestEndpoint(messages);
 		MessageHandler target2 = new MessageStoringTestEndpoint(messages);
 		dispatcher.addHandler(target1);
@@ -219,7 +219,7 @@ public class BroadcastingDispatcherTests {
 	public void applySequenceEnabled() {
 		BroadcastingDispatcher dispatcher = new BroadcastingDispatcher();
 		dispatcher.setApplySequence(true);
-		final List<Message<?>> messages = Collections.synchronizedList(new ArrayList<Message<?>>());
+		final List<Message<?>> messages = Collections.synchronizedList(new ArrayList<>());
 		MessageHandler target1 = new MessageStoringTestEndpoint(messages);
 		MessageHandler target2 = new MessageStoringTestEndpoint(messages);
 		MessageHandler target3 = new MessageStoringTestEndpoint(messages);

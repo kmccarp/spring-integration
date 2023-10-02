@@ -115,7 +115,7 @@ public class LockRegistryLeaderInitiator implements SmartLifecycle, DisposableBe
 	 */
 	private long heartBeatMillis = DEFAULT_HEART_BEAT_TIME;
 
-	private boolean publishFailedEvents = false;
+	private boolean publishFailedEvents;
 
 	private LeaderSelector leaderSelector;
 
@@ -350,9 +350,9 @@ public class LockRegistryLeaderInitiator implements SmartLifecycle, DisposableBe
 
 		private final LockContext context = new LockContext();
 
-		private volatile boolean locked = false;
+		private volatile boolean locked;
 
-		private volatile boolean yielding = false;
+		private volatile boolean yielding;
 
 		LeaderSelector(String lockKey) {
 			this.lock = LockRegistryLeaderInitiator.this.locks.obtain(lockKey);

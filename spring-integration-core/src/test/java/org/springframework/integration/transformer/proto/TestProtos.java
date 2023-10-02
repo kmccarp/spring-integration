@@ -29,8 +29,8 @@ public final class TestProtos {
 			getDescriptor() {
 		return descriptor;
 	}
-	private static  com.google.protobuf.Descriptors.FileDescriptor
-			descriptor;
+    private static final  com.google.protobuf.Descriptors.FileDescriptor
+            descriptor;
 	static {
 		java.lang.String[] descriptorData = {
 			"\n\017ProtoTest.proto\022\010tutorial\"&\n\nTestClass" +

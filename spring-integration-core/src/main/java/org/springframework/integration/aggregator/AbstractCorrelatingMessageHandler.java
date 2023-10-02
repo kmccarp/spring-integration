@@ -132,7 +132,7 @@ public abstract class AbstractCorrelatingMessageHandler extends AbstractMessageP
 
 	private LockRegistry lockRegistry = new DefaultLockRegistry();
 
-	private boolean lockRegistrySet = false;
+	private boolean lockRegistrySet;
 
 	private long minimumTimeoutForEmptyGroups;
 

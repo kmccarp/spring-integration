@@ -88,7 +88,7 @@ public class WatchServiceDirectoryScannerTests {
 		fileReadingMessageSource.setWatchEvents(FileReadingMessageSource.WatchEventType.CREATE,
 				FileReadingMessageSource.WatchEventType.MODIFY,
 				FileReadingMessageSource.WatchEventType.DELETE);
-		fileReadingMessageSource.setWatchDirPredicate(path -> !path.getFileName().toString().equals("skipped"));
+		fileReadingMessageSource.setWatchDirPredicate(path -> !"skipped".equals(path.getFileName().toString()));
 		fileReadingMessageSource.setBeanFactory(mock(BeanFactory.class));
 
 		final CountDownLatch removeFileLatch = new CountDownLatch(1);

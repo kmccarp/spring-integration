@@ -75,7 +75,7 @@ public class RepeatProcessor implements MethodRule {
 		return new Statement() {
 			@Override
 			public void evaluate() throws Throwable {
-				List<Future<Boolean>> results = new ArrayList<Future<Boolean>>();
+				List<Future<Boolean>> results = new ArrayList<>();
 				ExecutorService executor = Executors.newFixedThreadPool(concurrency);
 				try {
 					for (int i = 0; i < repeats; i++) {

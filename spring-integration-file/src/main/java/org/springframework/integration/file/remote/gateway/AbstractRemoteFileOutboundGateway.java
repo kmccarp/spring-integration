@@ -865,7 +865,7 @@ public abstract class AbstractRemoteFileOutboundGateway<F> extends AbstractReply
 					"Only File or String payloads (or Collection of File/String) allowed for 'mput', received: "
 							+ payload.getClass());
 		}
-		if ((payload instanceof Collection)) {
+		if (payload instanceof Collection) {
 			return ((Collection<?>) payload).stream()
 					.map(p -> doMput(new MutableMessage<>(p, requestMessage.getHeaders())))
 					.collect(Collectors.toList());
@@ -926,7 +926,7 @@ public abstract class AbstractRemoteFileOutboundGateway<F> extends AbstractReply
 	private RuntimeException handlePutException(Message<?> requestMessage, String subDirectory,
 			List<File> filteredFiles, List<String> replies, RuntimeException ex) {
 
-		if (replies.size() > 0 || ex instanceof PartialSuccessException) {
+		if (!replies.isEmpty() || ex instanceof PartialSuccessException) {
 			return new PartialSuccessException(requestMessage,
 					"Partially successful 'mput' operation" +
 							(subDirectory == null ? "" : (" on " + subDirectory)), ex, replies, filteredFiles);
@@ -1004,7 +1004,7 @@ public abstract class AbstractRemoteFileOutboundGateway<F> extends AbstractReply
 	private String buildRemotePath(String parent, String child) {
 		String remotePath = null;
 		if (parent != null) {
-			remotePath = (parent + child);
+			remotePath = parent + child;
 		}
 		else if (StringUtils.hasText(child)) {
 			remotePath = '.' + this.remoteFileTemplate.getRemoteFileSeparator() + child;
@@ -1013,7 +1013,7 @@ public abstract class AbstractRemoteFileOutboundGateway<F> extends AbstractReply
 	}
 
 	protected final List<F> filterFiles(F[] files) {
-		return (this.filter != null) ? this.filter.filterFiles(files) : Arrays.asList(files);
+		return this.filter != null ? this.filter.filterFiles(files) : Arrays.asList(files);
 	}
 
 	protected final F filterFile(F file) {
@@ -1062,7 +1062,7 @@ public abstract class AbstractRemoteFileOutboundGateway<F> extends AbstractReply
 		if (files == null) {
 			return Collections.emptyList();
 		}
-		return (this.mputFilter != null) ? this.mputFilter.filterFiles(files) : Arrays.asList(files);
+		return this.mputFilter != null ? this.mputFilter.filterFiles(files) : Arrays.asList(files);
 	}
 
 	protected void purgeLinks(List<F> lsFiles) {
@@ -1223,7 +1223,7 @@ public abstract class AbstractRemoteFileOutboundGateway<F> extends AbstractReply
 	private RuntimeException processMgetException(Message<?> message, String remoteDirectory, List<File> files,
 			List<AbstractFileInfo<F>> remoteFiles, Exception ex) {
 
-		if (files.size() > 0) {
+		if (!files.isEmpty()) {
 			return new PartialSuccessException(message,
 					"Partially successful recursive 'mget' operation on "
 							+ (remoteDirectory != null ? remoteDirectory : "Client Working Directory"),
@@ -1265,7 +1265,7 @@ public abstract class AbstractRemoteFileOutboundGateway<F> extends AbstractReply
 
 		@SuppressWarnings("unchecked")
 		List<AbstractFileInfo<F>> remoteFiles = (List<AbstractFileInfo<F>>) ls(message, session, remotePath);
-		if (remoteFiles.size() == 0 && this.options.contains(Option.EXCEPTION_WHEN_EMPTY)) {
+		if (remoteFiles.isEmpty() && this.options.contains(Option.EXCEPTION_WHEN_EMPTY)) {
 			throw new MessagingException("No files found at "
 					+ (remoteDirectory != null ? remoteDirectory : "Client Working Directory")
 					+ " with pattern " + remoteFilename);

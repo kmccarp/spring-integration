@@ -368,7 +368,7 @@ public class ChannelPublishingJmsMessageListener
 
 			Map<String, Object> headers = this.headerMapper.toHeaders(jmsMessage);
 			requestMessage =
-					(result instanceof Message<?>) ?
+					result instanceof Message<?> ?
 							this.messageBuilderFactory.fromMessage((Message<?>) result).copyHeaders(headers).build() :
 							this.messageBuilderFactory.withPayload(result).copyHeaders(headers).build();
 		}
@@ -440,7 +440,7 @@ public class ChannelPublishingJmsMessageListener
 			jakarta.jms.Message replyMessage) throws JMSException {
 
 		if (this.correlationKey != null) {
-			if (this.correlationKey.equals("JMSCorrelationID")) {
+			if ("JMSCorrelationID".equals(this.correlationKey)) {
 				replyMessage.setJMSCorrelationID(requestMessage.getJMSCorrelationID());
 			}
 			else {

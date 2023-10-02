@@ -177,7 +177,7 @@ public final class MessagingAnnotationUtils {
 		Set<Annotation> visited = new HashSet<>();
 
 		recursiveFindAnnotation(annotationType, messagingAnnotation, annotationChain, visited);
-		if (annotationChain.size() > 0) {
+		if (!annotationChain.isEmpty()) {
 			Collections.reverse(annotationChain);
 		}
 

@@ -50,10 +50,8 @@ public class XmppConnectionFactoryBeanTests {
 	@Test
 	public void testXmppConnectionFactoryBeanViaConfig() {
 		assertThatNoException()
-				.isThrownBy(() ->
-						new ClassPathXmlApplicationContext("XmppConnectionFactoryBeanTests-context.xml",
-								this.getClass())
-								.close());
+				.isThrownBy(new ClassPathXmlApplicationContext("XmppConnectionFactoryBeanTests-context.xml",
+								this.getClass())::close);
 	}
 
 	@Test

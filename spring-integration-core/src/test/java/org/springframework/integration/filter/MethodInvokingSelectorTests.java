@@ -108,7 +108,7 @@ public class MethodInvokingSelectorTests {
 		}
 
 		public boolean acceptString(Message<?> message) {
-			return (message.getPayload() instanceof String);
+			return message.getPayload() instanceof String;
 		}
 
 		public void returnVoid(Message<?> message) {

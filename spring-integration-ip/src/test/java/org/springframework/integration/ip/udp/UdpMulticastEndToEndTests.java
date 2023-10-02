@@ -75,7 +75,7 @@ public class UdpMulticastEndToEndTests implements Runnable {
 
 	private volatile int receiverPort;
 
-	private static long hangAroundFor = 0;
+	private static long hangAroundFor;
 
 
 	@Test
@@ -168,9 +168,6 @@ public class UdpMulticastEndToEndTests implements Runnable {
 					throw new RuntimeException("Failed to start listening");
 				}
 			}
-		}
-		catch (RuntimeException e) {
-			throw e;
 		}
 		catch (InterruptedException e) {
 			Thread.currentThread().interrupt();

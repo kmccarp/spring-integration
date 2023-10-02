@@ -39,7 +39,7 @@ private static final long serialVersionUID = 0L;
 		if (extensionRegistry == null) {
 			throw new java.lang.NullPointerException();
 		}
-		int mutable_bitField0_ = 0;
+		int mutableBitField0 = 0;
 		com.google.protobuf.UnknownFieldSet.Builder unknownFields =
 				com.google.protobuf.UnknownFieldSet.newBuilder();
 		try {
@@ -80,7 +80,7 @@ private static final long serialVersionUID = 0L;
 			makeExtensionsImmutable();
 		}
 	}
-	public static final com.google.protobuf.Descriptors.Descriptor
+	public static com.google.protobuf.Descriptors.Descriptor
 			getDescriptor() {
 		return org.springframework.integration.transformer.proto.TestProtos.internal_static_tutorial_TestClass1_descriptor;
 	}
@@ -101,7 +101,7 @@ private static final long serialVersionUID = 0L;
 	 * @return Whether the bar field is set.
 	 */
 	public boolean hasBar() {
-		return ((bitField0_ & 0x00000001) != 0);
+		return (bitField0_ & 0x00000001) != 0;
 	}
 	/**
 	 * <code>optional string bar = 1;</code>
@@ -146,7 +146,7 @@ private static final long serialVersionUID = 0L;
 	 * @return Whether the qux field is set.
 	 */
 	public boolean hasQux() {
-		return ((bitField0_ & 0x00000002) != 0);
+		return (bitField0_ & 0x00000002) != 0;
 	}
 	/**
 	 * <code>optional int32 qux = 2;</code>
@@ -160,8 +160,12 @@ private static final long serialVersionUID = 0L;
 	@java.lang.Override
 	public final boolean isInitialized() {
 		byte isInitialized = memoizedIsInitialized;
-		if (isInitialized == 1) return true;
-		if (isInitialized == 0) return false;
+        if (isInitialized == 1) {
+            return true;
+        }
+        if (isInitialized == 0) {
+            return false;
+        }
 
 		memoizedIsInitialized = 1;
 		return true;
@@ -170,10 +174,10 @@ private static final long serialVersionUID = 0L;
 	@java.lang.Override
 	public void writeTo(com.google.protobuf.CodedOutputStream output)
 											throws java.io.IOException {
-		if (((bitField0_ & 0x00000001) != 0)) {
+		if ((bitField0_ & 0x00000001) != 0) {
 			com.google.protobuf.GeneratedMessageV3.writeString(output, 1, bar_);
 		}
-		if (((bitField0_ & 0x00000002) != 0)) {
+		if ((bitField0_ & 0x00000002) != 0) {
 			output.writeInt32(2, qux_);
 		}
 		unknownFields.writeTo(output);
@@ -182,13 +186,15 @@ private static final long serialVersionUID = 0L;
 	@java.lang.Override
 	public int getSerializedSize() {
 		int size = memoizedSize;
-		if (size != -1) return size;
+        if (size != -1) {
+            return size;
+        }
 
 		size = 0;
-		if (((bitField0_ & 0x00000001) != 0)) {
+		if ((bitField0_ & 0x00000001) != 0) {
 			size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, bar_);
 		}
-		if (((bitField0_ & 0x00000002) != 0)) {
+		if ((bitField0_ & 0x00000002) != 0) {
 			size += com.google.protobuf.CodedOutputStream
 				.computeInt32Size(2, qux_);
 		}
@@ -207,18 +213,25 @@ private static final long serialVersionUID = 0L;
 		}
 		org.springframework.integration.transformer.proto.TestClass1 other = (org.springframework.integration.transformer.proto.TestClass1) obj;
 
-		if (hasBar() != other.hasBar()) return false;
+        if (hasBar() != other.hasBar()) {
+            return false;
+        }
 		if (hasBar()) {
-			if (!getBar()
-					.equals(other.getBar())) return false;
+            if (!getBar()
+                    .equals(other.getBar())) {
+                return false;
+            }
 		}
-		if (hasQux() != other.hasQux()) return false;
+        if (hasQux() != other.hasQux()) {
+            return false;
+        }
 		if (hasQux()) {
-			if (getQux()
-					!= other.getQux()) return false;
+            if (getQux()
+                    != other.getQux()) {
+                return false;
+            }
 		}
-		if (!unknownFields.equals(other.unknownFields)) return false;
-		return true;
+        return unknownFields.equals(other.unknownFields);
 	}
 
 	@java.lang.Override
@@ -328,8 +341,7 @@ private static final long serialVersionUID = 0L;
 	@java.lang.Override
 	protected Builder newBuilderForType(
 			com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-		Builder builder = new Builder(parent);
-		return builder;
+		return new Builder(parent);
 	}
 	/**
 	 * Protobuf type {@code tutorial.TestClass1}
@@ -338,7 +350,7 @@ private static final long serialVersionUID = 0L;
 			com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
 			// @@protoc_insertion_point(builder_implements:tutorial.TestClass1)
 			org.springframework.integration.transformer.proto.TestClass1OrBuilder {
-		public static final com.google.protobuf.Descriptors.Descriptor
+		public static com.google.protobuf.Descriptors.Descriptor
 				getDescriptor() {
 			return org.springframework.integration.transformer.proto.TestProtos.internal_static_tutorial_TestClass1_descriptor;
 		}
@@ -362,17 +374,14 @@ private static final long serialVersionUID = 0L;
 			maybeForceBuilderInitialization();
 		}
 		private void maybeForceBuilderInitialization() {
-			if (com.google.protobuf.GeneratedMessageV3
-							.alwaysUseFieldBuilders) {
-			}
 		}
 		@java.lang.Override
 		public Builder clear() {
 			super.clear();
 			bar_ = "";
-			bitField0_ = (bitField0_ & ~0x00000001);
+			bitField0_ = bitField0_ & ~0x00000001;
 			qux_ = 0;
-			bitField0_ = (bitField0_ & ~0x00000002);
+			bitField0_ = bitField0_ & ~0x00000002;
 			return this;
 		}
 
@@ -399,17 +408,17 @@ private static final long serialVersionUID = 0L;
 		@java.lang.Override
 		public org.springframework.integration.transformer.proto.TestClass1 buildPartial() {
 			org.springframework.integration.transformer.proto.TestClass1 result = new org.springframework.integration.transformer.proto.TestClass1(this);
-			int from_bitField0_ = bitField0_;
-			int to_bitField0_ = 0;
-			if (((from_bitField0_ & 0x00000001) != 0)) {
-				to_bitField0_ |= 0x00000001;
+			int fromBitField0 = bitField0_;
+			int toBitField0 = 0;
+			if ((fromBitField0 & 0x00000001) != 0) {
+				toBitField0 |= 0x00000001;
 			}
 			result.bar_ = bar_;
-			if (((from_bitField0_ & 0x00000002) != 0)) {
+			if ((fromBitField0 & 0x00000002) != 0) {
 				result.qux_ = qux_;
-				to_bitField0_ |= 0x00000002;
+				toBitField0 |= 0x00000002;
 			}
-			result.bitField0_ = to_bitField0_;
+			result.bitField0_ = toBitField0;
 			onBuilt();
 			return result;
 		}
@@ -457,7 +466,9 @@ private static final long serialVersionUID = 0L;
 		}
 
 		public Builder mergeFrom(org.springframework.integration.transformer.proto.TestClass1 other) {
-			if (other == org.springframework.integration.transformer.proto.TestClass1.getDefaultInstance()) return this;
+            if (other == org.springframework.integration.transformer.proto.TestClass1.getDefaultInstance()) {
+                return this;
+            }
 			if (other.hasBar()) {
 				bitField0_ |= 0x00000001;
 				bar_ = other.bar_;
@@ -502,7 +513,7 @@ private static final long serialVersionUID = 0L;
 		 * @return Whether the bar field is set.
 		 */
 		public boolean hasBar() {
-			return ((bitField0_ & 0x00000001) != 0);
+			return (bitField0_ & 0x00000001) != 0;
 		}
 		/**
 		 * <code>optional string bar = 1;</code>
@@ -559,7 +570,7 @@ private static final long serialVersionUID = 0L;
 		 * @return This builder for chaining.
 		 */
 		public Builder clearBar() {
-			bitField0_ = (bitField0_ & ~0x00000001);
+			bitField0_ = bitField0_ & ~0x00000001;
 			bar_ = getDefaultInstance().getBar();
 			onChanged();
 			return this;
@@ -586,7 +597,7 @@ private static final long serialVersionUID = 0L;
 		 * @return Whether the qux field is set.
 		 */
 		public boolean hasQux() {
-			return ((bitField0_ & 0x00000002) != 0);
+			return (bitField0_ & 0x00000002) != 0;
 		}
 		/**
 		 * <code>optional int32 qux = 2;</code>
@@ -611,7 +622,7 @@ private static final long serialVersionUID = 0L;
 		 * @return This builder for chaining.
 		 */
 		public Builder clearQux() {
-			bitField0_ = (bitField0_ & ~0x00000002);
+			bitField0_ = bitField0_ & ~0x00000002;
 			qux_ = 0;
 			onChanged();
 			return this;
@@ -643,7 +654,7 @@ private static final long serialVersionUID = 0L;
 	}
 
 	public static final com.google.protobuf.Parser<TestClass1>
-			PARSER = new com.google.protobuf.AbstractParser<TestClass1>() {
+			PARSER = new com.google.protobuf.AbstractParser<>() {
 		@java.lang.Override
 		public TestClass1 parsePartialFrom(
 				com.google.protobuf.CodedInputStream input,

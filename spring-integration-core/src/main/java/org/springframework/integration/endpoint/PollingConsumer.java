@@ -213,7 +213,7 @@ public class PollingConsumer extends AbstractPollingEndpoint implements Integrat
 
 	@Override
 	protected Message<?> receiveMessage() {
-		return (this.receiveTimeout >= 0)
+		return this.receiveTimeout >= 0
 				? this.inputChannel.receive(this.receiveTimeout)
 				: this.inputChannel.receive();
 	}
