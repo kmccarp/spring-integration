@@ -39,7 +39,7 @@ public class ExpressionEvaluatingMessageSourceTests {
 	public void literalExpression() {
 		Expression expression = new LiteralExpression("foo");
 		ExpressionEvaluatingMessageSource<String> source =
-				new ExpressionEvaluatingMessageSource<String>(expression, String.class);
+				new ExpressionEvaluatingMessageSource<>(expression, String.class);
 		source.setBeanFactory(mock(BeanFactory.class));
 		Message<?> message = source.receive();
 		assertThat(message).isNotNull();
@@ -50,7 +50,7 @@ public class ExpressionEvaluatingMessageSourceTests {
 	public void unexpectedType() {
 		Expression expression = new LiteralExpression("foo");
 		ExpressionEvaluatingMessageSource<Integer> source =
-				new ExpressionEvaluatingMessageSource<Integer>(expression, Integer.class);
+				new ExpressionEvaluatingMessageSource<>(expression, Integer.class);
 		source.setBeanFactory(mock(BeanFactory.class));
 		source.receive();
 	}

@@ -817,7 +817,7 @@ public class FtpServerOutboundTests extends FtpTestSupport {
 		@EventListener
 		public void handleEvent(ApacheMinaFtpEvent event) {
 			if (this.latch != null) {
-				if (this.events.size() > 0 || event instanceof SessionOpenedEvent) {
+				if (!this.events.isEmpty() || event instanceof SessionOpenedEvent) {
 					if (event instanceof SessionOpenedEvent) {
 						this.clientAddress = event.getSession().getClientAddress();
 						this.events.add(event);

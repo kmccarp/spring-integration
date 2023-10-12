@@ -137,7 +137,7 @@ public abstract class AbstractInboundFileSynchronizer<F>
 	 */
 	public AbstractInboundFileSynchronizer(SessionFactory<F> sessionFactory) {
 		Assert.notNull(sessionFactory, "sessionFactory must not be null");
-		this.remoteFileTemplate = new RemoteFileTemplate<F>(sessionFactory);
+		this.remoteFileTemplate = new RemoteFileTemplate<>(sessionFactory);
 	}
 
 	@Nullable
@@ -306,7 +306,7 @@ public abstract class AbstractInboundFileSynchronizer<F>
 	}
 
 	protected final List<F> filterFiles(F[] files) {
-		return (this.filter != null) ? this.filter.filterFiles(files) : Arrays.asList(files);
+		return this.filter != null ? this.filter.filterFiles(files) : Arrays.asList(files);
 	}
 
 	protected String getTemporaryFileSuffix() {

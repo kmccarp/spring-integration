@@ -78,15 +78,15 @@ public class SimpleMessageConverter implements MessageConverter, BeanFactoryAwar
 
 
 	public final void setInboundMessageMapper(InboundMessageMapper<?> inboundMessageMapper) {
-		this.inboundMessageMapper = (inboundMessageMapper != null)
+		this.inboundMessageMapper = inboundMessageMapper != null
 				? inboundMessageMapper
 				: new DefaultInboundMessageMapper();
 	}
 
 	public final void setOutboundMessageMapper(OutboundMessageMapper<?> outboundMessageMapper) {
-		this.outboundMessageMapper = (outboundMessageMapper != null
+		this.outboundMessageMapper = outboundMessageMapper != null
 				? outboundMessageMapper
-				: new DefaultOutboundMessageMapper());
+				: new DefaultOutboundMessageMapper();
 	}
 
 	@Override
@@ -156,7 +156,7 @@ public class SimpleMessageConverter implements MessageConverter, BeanFactoryAwar
 
 		@Override
 		public Object fromMessage(@Nullable Message<?> message) {
-			return (message != null) ? message.getPayload() : null;
+			return message != null ? message.getPayload() : null;
 		}
 
 	}

@@ -46,7 +46,7 @@ class PublisherIntegrationFlow<T> extends StandardIntegrationFlow implements Pub
 						.doOnTerminate(this::stop);
 
 		if (autoStartOnSubscribe) {
-			flux = flux.doOnSubscribe((sub) -> start());
+			flux = flux.doOnSubscribe(sub -> start());
 			for (Object component : integrationComponents.keySet()) {
 				if (component instanceof EndpointSpec) {
 					((EndpointSpec<?, ?, ?>) component).autoStartup(false);

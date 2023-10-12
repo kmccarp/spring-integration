@@ -110,7 +110,7 @@ public class FtpTestSupport extends RemoteFileTestSupport {
 		return FTPLET;
 	}
 
-	private static class TestUserManager implements UserManager {
+    private static final class TestUserManager implements UserManager {
 
 		private final BaseUser testUser;
 
@@ -159,7 +159,7 @@ public class FtpTestSupport extends RemoteFileTestSupport {
 
 		@Override
 		public boolean isAdmin(String s) {
-			return s.equals("admin");
+			return "admin".equals(s);
 		}
 
 	}

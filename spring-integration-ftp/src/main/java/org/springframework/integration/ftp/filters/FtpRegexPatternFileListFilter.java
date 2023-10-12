@@ -42,7 +42,7 @@ public class FtpRegexPatternFileListFilter extends AbstractRegexPatternFileListF
 
 	@Override
 	protected String getFilename(FTPFile file) {
-		return (file != null) ? file.getName() : null;
+		return file != null ? file.getName() : null;
 	}
 
 	@Override

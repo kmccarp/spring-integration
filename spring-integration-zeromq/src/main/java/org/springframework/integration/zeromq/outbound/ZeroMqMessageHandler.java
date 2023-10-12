@@ -77,7 +77,7 @@ public class ZeroMqMessageHandler extends AbstractReactiveMessageHandler
 
 	private OutboundMessageMapper<byte[]> messageMapper;
 
-	private Consumer<ZMQ.Socket> socketConfigurer = (socket) -> {
+	private Consumer<ZMQ.Socket> socketConfigurer = socket -> {
 	};
 
 	private Expression topicExpression = new SupplierExpression<>(() -> null);
@@ -136,8 +136,8 @@ public class ZeroMqMessageHandler extends AbstractReactiveMessageHandler
 		this.socketMono =
 				Mono.just(context.createSocket(socketType))
 						.publishOn(this.publisherScheduler)
-						.doOnNext((socket) -> this.socketConfigurer.accept(socket))
-						.doOnNext((socket) -> socket.connect(connectUrl.get()))
+						.doOnNext(this.socketConfigurer::accept)
+						.doOnNext(socket -> socket.connect(connectUrl.get()))
 						.cache()
 						.publishOn(this.publisherScheduler);
 	}
@@ -234,7 +234,7 @@ public class ZeroMqMessageHandler extends AbstractReactiveMessageHandler
 	protected Mono<Void> handleMessageInternal(Message<?> message) {
 		Assert.state(this.initialized, "the message handler is not initialized yet or already destroyed");
 		return this.socketMono
-				.doOnNext((socket) -> {
+				.doOnNext(socket -> {
 					ZMsg msg;
 					if (message.getPayload() instanceof ZMsg) {
 						msg = (ZMsg) message.getPayload();

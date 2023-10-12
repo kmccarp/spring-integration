@@ -129,15 +129,15 @@ public class SmbInboundOutboundSample extends AbstractBaseTests {
 
 	}
 
-	private static String[] createTestFileNames(int _nbTestFiles) {
-		String[] fileNames = new String[_nbTestFiles];
+	private static String[] createTestFileNames(int nbTestFiles) {
+		String[] fileNames = new String[nbTestFiles];
 		for (int i = 0; i < fileNames.length; i++) {
 			fileNames[i] = "test-file-" + i + ".txt";
 		}
 		return fileNames;
 	}
 
-	public static void main(String[] _args) throws Exception {
+	public static void main(String[] args) throws Exception {
 		runTests(SmbInboundOutboundSample.class, "testSmbOutboundChannelAdapter", "testSmbInboundChannelAdapter");
 	}
 

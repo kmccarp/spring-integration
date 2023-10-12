@@ -284,7 +284,7 @@ public class FeedEntryMessageSource extends AbstractMessageSource<SyndEntry> {
 	}
 
 	private static Date getLastModifiedDate(SyndEntry entry) {
-		return (entry.getUpdatedDate() != null) ? entry.getUpdatedDate() : entry.getPublishedDate();
+		return entry.getUpdatedDate() != null ? entry.getUpdatedDate() : entry.getPublishedDate();
 	}
 
 }

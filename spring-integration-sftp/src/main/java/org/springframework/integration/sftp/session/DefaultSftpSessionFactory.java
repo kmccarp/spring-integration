@@ -85,7 +85,7 @@ public class DefaultSftpSessionFactory implements SessionFactory<SftpClient.DirE
 
 	private final Lock sharedSessionLock;
 
-	private boolean isInnerClient = false;
+	private boolean isInnerClient;
 
 	private String host;
 
@@ -105,7 +105,7 @@ public class DefaultSftpSessionFactory implements SessionFactory<SftpClient.DirE
 
 	private UserInteraction userInteraction;
 
-	private boolean allowUnknownKeys = false;
+	private boolean allowUnknownKeys;
 
 	private Integer timeout;
 

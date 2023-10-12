@@ -40,7 +40,7 @@ public class SimpleMetadataStore implements ConcurrentMetadataStore {
 	 * Instantiate a {@link SimpleMetadataStore} using an in-memory {@link ConcurrentHashMap}.
 	 */
 	public SimpleMetadataStore() {
-		this(new ConcurrentHashMap<String, String>());
+		this(new ConcurrentHashMap<>());
 	}
 
 	/**

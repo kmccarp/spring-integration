@@ -70,8 +70,8 @@ public class IntegrationObservabilityZipkinTests extends SampleTestRunner {
 			observationRegistry.observationConfig()
 					.observationPredicate((name, context) ->
 							!(context instanceof MessageRequestReplyReceiverContext messageRequestReplyReceiverContext)
-									|| !messageRequestReplyReceiverContext.getGatewayName()
-									.equals("skippedObservationInboundGateway"));
+									|| !"skippedObservationInboundGateway"
+									.equals(messageRequestReplyReceiverContext.getGatewayName()));
 
 			try (AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext()) {
 				applicationContext.registerBean(ObservationRegistry.class, () -> observationRegistry);

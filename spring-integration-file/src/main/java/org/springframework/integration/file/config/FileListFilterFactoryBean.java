@@ -112,7 +112,7 @@ public class FileListFilterFactoryBean implements FactoryBean<FileListFilter<Fil
 
 	@Override
 	public Class<?> getObjectType() {
-		return (this.result != null) ? this.result.getClass() : FileListFilter.class;
+		return this.result != null ? this.result.getClass() : FileListFilter.class;
 	}
 
 	@Override
@@ -128,7 +128,7 @@ public class FileListFilterFactoryBean implements FactoryBean<FileListFilter<Fil
 
 		validate();
 
-		final List<FileListFilter<File>> filtersNeeded = new ArrayList<FileListFilter<File>>();
+		final List<FileListFilter<File>> filtersNeeded = new ArrayList<>();
 
 		if (!Boolean.FALSE.equals(this.ignoreHidden)) {
 			filtersNeeded.add(new IgnoreHiddenFileListFilter());
@@ -146,17 +146,17 @@ public class FileListFilterFactoryBean implements FactoryBean<FileListFilter<Fil
 
 		// no filters are provided
 		else if (Boolean.FALSE.equals(this.preventDuplicates)) {
-			filtersNeeded.add(new AcceptAllFileListFilter<File>());
+			filtersNeeded.add(new AcceptAllFileListFilter<>());
 		}
 		else { // preventDuplicates is either TRUE or NULL
-			filtersNeeded.add(new AcceptOnceFileListFilter<File>());
+			filtersNeeded.add(new AcceptOnceFileListFilter<>());
 		}
 
 		if (filtersNeeded.size() == 1) {
 			createdFilter = filtersNeeded.get(0);
 		}
 		else {
-			createdFilter = new CompositeFileListFilter<File>(filtersNeeded);
+			createdFilter = new CompositeFileListFilter<>(filtersNeeded);
 		}
 
 		this.result = createdFilter;
@@ -176,7 +176,7 @@ public class FileListFilterFactoryBean implements FactoryBean<FileListFilter<Fil
 
 	private void filter(final List<FileListFilter<File>> filtersNeeded) {
 		if (Boolean.TRUE.equals(this.preventDuplicates)) {
-			filtersNeeded.add(new AcceptOnceFileListFilter<File>());
+			filtersNeeded.add(new AcceptOnceFileListFilter<>());
 			filtersNeeded.add(this.filter);
 		}
 		else { // preventDuplicates is either FALSE or NULL
@@ -187,7 +187,7 @@ public class FileListFilterFactoryBean implements FactoryBean<FileListFilter<Fil
 	private void pattern(final List<FileListFilter<File>> filtersNeeded) {
 		if (!Boolean.FALSE.equals(this.preventDuplicates)) {
 			//preventDuplicates is either null or true
-			filtersNeeded.add(new AcceptOnceFileListFilter<File>());
+			filtersNeeded.add(new AcceptOnceFileListFilter<>());
 		}
 		if (this.filenamePattern != null) {
 			SimplePatternFileListFilter patternFilter = new SimplePatternFileListFilter(this.filenamePattern);

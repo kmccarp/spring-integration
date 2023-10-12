@@ -624,8 +624,8 @@ public class IntegrationFlowTests {
 
 		@Bean
 		public IntegrationFlow controlBusFlow() {
-			return IntegrationFlow.from(ControlBusGateway.class, (gateway) -> gateway.beanName("controlBusGateway"))
-					.controlBus((endpoint) -> endpoint.id("controlBus"))
+			return IntegrationFlow.from(ControlBusGateway.class, gateway -> gateway.beanName("controlBusGateway"))
+					.controlBus(endpoint -> endpoint.id("controlBus"))
 					.get();
 		}
 
@@ -673,7 +673,7 @@ public class IntegrationFlowTests {
 		@Bean
 		public IntegrationFlow flow2() {
 			return IntegrationFlow.from(this.inputChannel)
-					.filter(p -> p instanceof String, e -> e
+					.filter(String.class::isInstance, e -> e
 							.id("filter")
 							.discardFlow(df -> df
 									.transform(String.class, "Discarded: "::concat)
@@ -735,7 +735,7 @@ public class IntegrationFlowTests {
 		public IntegrationFlow wireTapFlow1() {
 			return IntegrationFlow.from("tappedChannel1")
 					.wireTap("tapChannel", wt -> wt.selector(m -> m.getPayload().equals("foo")))
-					.handleReactive((message) -> Mono.just(message).log().then());
+					.handleReactive(message -> Mono.just(message).log().then());
 		}
 
 		@Bean
@@ -884,7 +884,7 @@ public class IntegrationFlowTests {
 
 		@Bean
 		public IntegrationFlow errorRecovererFlow() {
-			return IntegrationFlow.from(Function.class, (gateway) -> gateway.beanName("errorRecovererFunction"))
+			return IntegrationFlow.from(Function.class, gateway -> gateway.beanName("errorRecovererFunction"))
 					.<Object>handle((p, h) -> {
 								throw new RuntimeException("intentional");
 							},
@@ -967,7 +967,7 @@ public class IntegrationFlowTests {
 		@Bean
 		public IntegrationFlow globalErrorChannelResolutionFlow(@Qualifier("taskScheduler") TaskExecutor taskExecutor) {
 			return IntegrationFlow.from(Consumer.class,
-							(gateway) -> gateway.beanName("globalErrorChannelResolutionFunction"))
+							gateway -> gateway.beanName("globalErrorChannelResolutionFunction"))
 					.channel(c -> c.executor(taskExecutor))
 					.handle((p, h) -> {
 						throw new RuntimeException("intentional");

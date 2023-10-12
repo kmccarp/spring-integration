@@ -38,8 +38,8 @@ public class SmbInboundFileSynchronizingMessageSource extends AbstractInboundFil
 	}
 
 	public SmbInboundFileSynchronizingMessageSource(AbstractInboundFileSynchronizer<SmbFile> _synchronizer,
-			Comparator<File> _comparator) {
-		super(_synchronizer, _comparator);
+			Comparator<File> comparator) {
+		super(_synchronizer, comparator);
 	}
 
 	@Override

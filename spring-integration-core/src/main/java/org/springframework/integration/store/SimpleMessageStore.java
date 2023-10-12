@@ -72,7 +72,7 @@ public class SimpleMessageStore extends AbstractMessageGroupStore
 
 	private LockRegistry lockRegistry;
 
-	private boolean copyOnGet = false;
+	private boolean copyOnGet;
 
 	private volatile boolean isUsed;
 
@@ -196,7 +196,7 @@ public class SimpleMessageStore extends AbstractMessageGroupStore
 
 	@Override
 	public Message<?> getMessage(UUID key) {
-		return (key != null) ? this.idToMessage.get(key) : null;
+		return key != null ? this.idToMessage.get(key) : null;
 	}
 
 	@Override
