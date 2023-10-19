@@ -113,7 +113,7 @@ public class SimpleMessageStoreTests {
 	@Test
 	public void shouldTimeoutAfterWaitIfCapacity() {
 		SimpleMessageStore store2 = new SimpleMessageStore(1, 1, 10);
-		store2.addMessage(new GenericMessage<Object>("foo"));
+		store2.addMessage(new GenericMessage<>("foo"));
 		assertThatExceptionOfType(MessagingException.class)
 				.isThrownBy(() -> store2.addMessage(new GenericMessage<Object>("foo")));
 	}

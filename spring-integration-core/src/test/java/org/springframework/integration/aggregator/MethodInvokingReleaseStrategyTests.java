@@ -63,7 +63,7 @@ public class MethodInvokingReleaseStrategyTests {
 
 			@SuppressWarnings("unused")
 			public boolean checkCompletenessOnNonParameterizedListOfMessages(List<Message<?>> messages) {
-				assertThat(messages.size() > 0).isTrue();
+				assertThat(!messages.isEmpty()).isTrue();
 				return messages.size() >
 						new IntegrationMessageHeaderAccessor(messages.iterator().next()).getSequenceSize();
 			}
@@ -82,7 +82,7 @@ public class MethodInvokingReleaseStrategyTests {
 
 			@SuppressWarnings("unused")
 			public boolean checkCompletenessOnListOfMessagesParametrizedWithWildcard(List<Message<?>> messages) {
-				assertThat(messages.size() > 0).isTrue();
+				assertThat(!messages.isEmpty()).isTrue();
 				return messages.size() >
 						new IntegrationMessageHeaderAccessor(messages.iterator().next()).getSequenceSize();
 			}
@@ -101,7 +101,7 @@ public class MethodInvokingReleaseStrategyTests {
 
 			@SuppressWarnings("unused")
 			public boolean checkCompletenessOnListOfMessagesParametrizedWithString(List<Message<String>> messages) {
-				assertThat(messages.size() > 0).isTrue();
+				assertThat(!messages.isEmpty()).isTrue();
 				return messages.size() > new IntegrationMessageHeaderAccessor(messages.iterator().next())
 						.getSequenceSize();
 			}

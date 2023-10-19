@@ -281,7 +281,7 @@ public class HttpRequestHandlingMessagingGatewayTests extends AbstractHttpInboun
 		HttpRequestHandlingMessagingGateway gateway = new HttpRequestHandlingMessagingGateway(false);
 		gateway.setBeanFactory(mock(BeanFactory.class));
 		ParameterizedTypeReference<List<TestBean>> parameterizedTypeReference =
-				new ParameterizedTypeReference<List<TestBean>>() {
+				new ParameterizedTypeReference<>() {
 
 				};
 		gateway.setRequestPayloadType(ResolvableType.forType(parameterizedTypeReference));
@@ -309,7 +309,7 @@ public class HttpRequestHandlingMessagingGatewayTests extends AbstractHttpInboun
 				.hasSize(1)
 				.element(0)
 				.isInstanceOf(TestBean.class)
-				.satisfies((actual) -> {
+				.satisfies(actual -> {
 					TestBean bean = (TestBean) actual;
 					assertThat(bean).extracting(TestBean::getName).isEqualTo("T. Bean");
 					assertThat(bean).extracting(TestBean::getAge).isEqualTo(42);

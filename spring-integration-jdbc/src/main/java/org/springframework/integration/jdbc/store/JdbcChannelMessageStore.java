@@ -150,7 +150,7 @@ public class JdbcChannelMessageStore implements PriorityCapableChannelMessageSto
 
 	private MessageGroupFactory messageGroupFactory = new SimpleMessageGroupFactory();
 
-	private boolean usingIdCache = false;
+	private boolean usingIdCache;
 
 	private boolean priorityEnabled;
 
@@ -468,7 +468,7 @@ public class JdbcChannelMessageStore implements PriorityCapableChannelMessageSto
 	public MessageGroup addMessageToGroup(Object groupId, final Message<?> message) {
 		try {
 			this.jdbcTemplate.update(getQuery(Query.CREATE_MESSAGE,
-							() -> this.channelMessageStoreQueryProvider.getCreateMessageQuery()),
+							this.channelMessageStoreQueryProvider::getCreateMessageQuery),
 					ps -> this.preparedStatementSetter.setValues(ps, message, groupId, this.region,
 							this.priorityEnabled));
 		}
@@ -534,7 +534,7 @@ public class JdbcChannelMessageStore implements PriorityCapableChannelMessageSto
 		final String key = getKey(groupId);
 		return this.jdbcTemplate.queryForObject(// NOSONAR query never returns null
 				getQuery(Query.GROUP_SIZE,
-						() -> this.channelMessageStoreQueryProvider.getCountAllMessagesInGroupQuery()),
+						this.channelMessageStoreQueryProvider::getCountAllMessagesInGroupQuery),
 				Integer.class, key, this.region);
 	}
 
@@ -542,7 +542,7 @@ public class JdbcChannelMessageStore implements PriorityCapableChannelMessageSto
 	public void removeMessageGroup(Object groupId) {
 		this.jdbcTemplate.update(
 				getQuery(Query.DELETE_GROUP,
-						() -> this.channelMessageStoreQueryProvider.getDeleteMessageGroupQuery()),
+						this.channelMessageStoreQueryProvider::getDeleteMessageGroupQuery),
 				getKey(groupId), this.region);
 	}
 
@@ -583,21 +583,21 @@ public class JdbcChannelMessageStore implements PriorityCapableChannelMessageSto
 			if (this.usingIdCache && !this.idCache.isEmpty()) {
 				if (this.priorityEnabled) {
 					query = getQuery(Query.PRIORITY_WITH_EXCLUSIONS,
-							() -> this.channelMessageStoreQueryProvider.getPriorityPollFromGroupExcludeIdsQuery());
+							this.channelMessageStoreQueryProvider::getPriorityPollFromGroupExcludeIdsQuery);
 				}
 				else {
 					query = getQuery(Query.POLL_WITH_EXCLUSIONS,
-							() -> this.channelMessageStoreQueryProvider.getPollFromGroupExcludeIdsQuery());
+							this.channelMessageStoreQueryProvider::getPollFromGroupExcludeIdsQuery);
 				}
 				parameters.addValue("message_ids", this.idCache);
 			}
 			else {
 				if (this.priorityEnabled) {
 					query = getQuery(Query.PRIORITY,
-							() -> this.channelMessageStoreQueryProvider.getPriorityPollFromGroupQuery());
+							this.channelMessageStoreQueryProvider::getPriorityPollFromGroupQuery);
 				}
 				else {
-					query = getQuery(Query.POLL, () -> this.channelMessageStoreQueryProvider.getPollFromGroupQuery());
+					query = getQuery(Query.POLL, this.channelMessageStoreQueryProvider::getPollFromGroupQuery);
 				}
 			}
 			messages = namedParameterJdbcTemplate.query(query, parameters, this.messageRowMapper);
@@ -609,7 +609,7 @@ public class JdbcChannelMessageStore implements PriorityCapableChannelMessageSto
 
 		Assert.state(messages.size() < 2,
 				() -> "The query must return zero or 1 row; got " + messages.size() + " rows");
-		if (messages.size() > 0) {
+		if (!messages.isEmpty()) {
 
 			final Message<?> message = messages.get(0);
 			UUID id = message.getHeaders().getId();
@@ -635,7 +635,7 @@ public class JdbcChannelMessageStore implements PriorityCapableChannelMessageSto
 	private boolean doRemoveMessageFromGroup(Object groupId, Message<?> messageToRemove) {
 		UUID id = messageToRemove.getHeaders().getId();
 		int updated = this.jdbcTemplate.update(
-				getQuery(Query.DELETE_MESSAGE, () -> this.channelMessageStoreQueryProvider.getDeleteMessageQuery()),
+				getQuery(Query.DELETE_MESSAGE, this.channelMessageStoreQueryProvider::getDeleteMessageQuery),
 				new Object[] {getKey(id), getKey(groupId), this.region},
 				new int[] {Types.VARCHAR, Types.VARCHAR, Types.VARCHAR});
 

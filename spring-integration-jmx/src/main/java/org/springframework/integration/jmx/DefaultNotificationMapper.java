@@ -57,7 +57,7 @@ class DefaultNotificationMapper implements OutboundMessageMapper<Notification> {
 		String type = resolveNotificationType(message);
 		Assert.hasText(type, "No notification type header is available, and no default has been provided.");
 		Object payload = message.getPayload();
-		String notificationMessage = (payload instanceof String) ? (String) payload : null;
+		String notificationMessage = payload instanceof String ? (String) payload : null;
 		Notification notification = new Notification(type, this.sourceObjectName,
 				this.sequence.incrementAndGet(), System.currentTimeMillis(), notificationMessage);
 		if (!(payload instanceof String)) {
@@ -68,7 +68,7 @@ class DefaultNotificationMapper implements OutboundMessageMapper<Notification> {
 
 	private String resolveNotificationType(Message<?> message) {
 		String type = message.getHeaders().get(JmxHeaders.NOTIFICATION_TYPE, String.class);
-		return (type != null) ? type : this.defaultNotificationType;
+		return type != null ? type : this.defaultNotificationType;
 	}
 
 }
