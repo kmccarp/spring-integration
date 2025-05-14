@@ -16,19 +16,18 @@
 
 package org.springframework.integration.file.transformer;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.io.File;
 import java.io.FileOutputStream;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
 import org.springframework.integration.file.FileHeaders;
 import org.springframework.integration.support.MessageBuilder;
 import org.springframework.messaging.Message;
 import org.springframework.util.FileCopyUtils;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Alex Peters

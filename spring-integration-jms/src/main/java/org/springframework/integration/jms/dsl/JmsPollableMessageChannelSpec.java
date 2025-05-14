@@ -18,7 +18,6 @@ package org.springframework.integration.jms.dsl;
 
 import jakarta.jms.ConnectionFactory;
 import jakarta.jms.Destination;
-
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.integration.dsl.MessageChannelSpec;

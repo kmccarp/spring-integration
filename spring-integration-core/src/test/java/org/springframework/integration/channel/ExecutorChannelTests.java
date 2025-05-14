@@ -16,6 +16,12 @@
 
 package org.springframework.integration.channel;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
+import static org.mockito.BDDMockito.willThrow;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -25,7 +31,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import org.assertj.core.api.InstanceOfAssertFactories;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.core.task.SimpleAsyncTaskExecutor;
 import org.springframework.core.task.SyncTaskExecutor;
@@ -39,12 +44,6 @@ import org.springframework.messaging.support.ExecutorChannelInterceptor;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.scheduling.concurrent.ConcurrentTaskExecutor;
 import org.springframework.scheduling.concurrent.CustomizableThreadFactory;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
-import static org.mockito.BDDMockito.willThrow;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 
 /**
  * @author Mark Fisher
@@ -289,7 +288,7 @@ public class ExecutorChannelTests {
 		public Message<?> beforeHandle(Message<?> message, MessageChannel channel, MessageHandler handler) {
 			assertThat(message).isNotNull();
 			this.counter.incrementAndGet();
-			return (this.messageToReturn != null ? this.messageToReturn : message);
+			return this.messageToReturn != null ? this.messageToReturn : message;
 		}
 
 		@Override

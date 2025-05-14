@@ -17,7 +17,6 @@
 package org.springframework.integration.xmpp.core;
 
 import org.jivesoftware.smack.XMPPConnection;
-
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.integration.handler.AbstractMessageHandler;
 import org.springframework.util.Assert;
@@ -34,10 +33,10 @@ public abstract class AbstractXmppConnectionAwareMessageHandler extends Abstract
 
 	private volatile boolean initialized;
 
-	public AbstractXmppConnectionAwareMessageHandler() {
+	protected AbstractXmppConnectionAwareMessageHandler() {
 	}
 
-	public AbstractXmppConnectionAwareMessageHandler(XMPPConnection xmppConnection) {
+	protected AbstractXmppConnectionAwareMessageHandler(XMPPConnection xmppConnection) {
 		Assert.notNull(xmppConnection, "XMPPConnection must not be null");
 		this.xmppConnection = xmppConnection;
 	}

@@ -16,6 +16,12 @@
 
 package org.springframework.integration.amqp.dsl;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,7 +31,6 @@ import com.rabbitmq.stream.ConsumerBuilder;
 import com.rabbitmq.stream.Environment;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.amqp.core.AnonymousQueue;
 import org.springframework.amqp.core.MessageDeliveryMode;
@@ -77,12 +82,6 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.rabbit.stream.listener.ConsumerCustomizer;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 
 /**
  * @author Artem Bilan
@@ -251,7 +250,7 @@ public class AmqpTests {
 						.from(Amqp.inboundGateway(this.rabbitConnectionFactory, this.amqpQueue2)
 								.replyHeadersMappedLast(true))
 						.transform(Transformers.fromJson())
-						.enrich((enricher) -> enricher.property("REPLY_KEY", "REPLY_VALUE"))
+						.enrich(enricher -> enricher.property("REPLY_KEY", "REPLY_VALUE"))
 						.transform(Transformers.toJson())
 						.get();
 

@@ -19,7 +19,6 @@ package org.springframework.integration.jms;
 import java.util.Map;
 
 import jakarta.jms.Destination;
-
 import org.springframework.integration.endpoint.AbstractMessageSource;
 import org.springframework.integration.jms.util.JmsAdapterUtils;
 import org.springframework.integration.support.AbstractIntegrationMessageBuilder;
@@ -137,7 +136,7 @@ public class JmsDestinationPollingSource extends AbstractMessageSource<Object> {
 				}
 			}
 			AbstractIntegrationMessageBuilder<?> builder =
-					(object instanceof Message<?> message)
+					object instanceof Message<?> message
 							? getMessageBuilderFactory().fromMessage(message)
 							: getMessageBuilderFactory().withPayload(object);
 			return builder.copyHeadersIfAbsent(mappedHeaders);

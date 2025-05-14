@@ -16,15 +16,14 @@
 
 package org.springframework.integration.json;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.GenericMessage;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Artem Bilan

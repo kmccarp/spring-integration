@@ -16,6 +16,10 @@
 
 package org.springframework.integration.zeromq.inbound;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.awaitility.Awaitility.await;
+import static org.mockito.Mockito.mock;
+
 import java.time.Duration;
 
 import org.assertj.core.api.InstanceOfAssertFactories;
@@ -28,16 +32,11 @@ import org.zeromq.ZMQ;
 import org.zeromq.ZMsg;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
-
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.integration.channel.FluxMessageChannel;
 import org.springframework.integration.test.util.TestUtils;
 import org.springframework.integration.zeromq.ZeroMqHeaders;
 import org.springframework.messaging.support.GenericMessage;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.awaitility.Awaitility.await;
-import static org.mockito.Mockito.mock;
 
 /**
  * @author Artem Bilan
@@ -60,8 +59,8 @@ public class ZeroMqMessageProducerTests {
 
 		StepVerifier stepVerifier =
 				StepVerifier.create(outputChannel)
-						.assertNext((message) -> assertThat(message.getPayload()).isEqualTo("test"))
-						.assertNext((message) -> assertThat(message.getPayload()).isEqualTo("test2"))
+						.assertNext(message -> assertThat(message.getPayload()).isEqualTo("test"))
+						.assertNext(message -> assertThat(message.getPayload()).isEqualTo("test2"))
 						.thenCancel()
 						.verifyLater();
 
@@ -105,12 +104,12 @@ public class ZeroMqMessageProducerTests {
 
 		StepVerifier stepVerifier =
 				StepVerifier.create(outputChannel)
-						.assertNext((message) ->
+						.assertNext(message ->
 								assertThat(message.getPayload())
 										.asInstanceOf(InstanceOfAssertFactories.type(ZMsg.class))
 										.extracting(ZMsg::unwrap)
 										.isEqualTo(new ZFrame("testTopic")))
-						.assertNext((message) ->
+						.assertNext(message ->
 								assertThat(message.getPayload())
 										.asInstanceOf(InstanceOfAssertFactories.type(ZMsg.class))
 										.extracting(ZMsg::unwrap)
@@ -158,7 +157,7 @@ public class ZeroMqMessageProducerTests {
 
 		StepVerifier stepVerifier =
 				StepVerifier.create(outputChannel)
-						.assertNext((message) -> assertThat(message.getHeaders()).containsEntry(ZeroMqHeaders.TOPIC, "testTopicWithNonWrappedTopic"))
+						.assertNext(message -> assertThat(message.getHeaders()).containsEntry(ZeroMqHeaders.TOPIC, "testTopicWithNonWrappedTopic"))
 						.thenCancel()
 						.verifyLater();
 

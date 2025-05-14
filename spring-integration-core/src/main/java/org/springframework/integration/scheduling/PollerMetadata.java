@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.concurrent.Executor;
 
 import org.aopalliance.aop.Advice;
-
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.integration.transaction.TransactionSynchronizationFactory;
 import org.springframework.scheduling.Trigger;

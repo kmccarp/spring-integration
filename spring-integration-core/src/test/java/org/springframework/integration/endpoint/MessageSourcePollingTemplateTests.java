@@ -16,23 +16,22 @@
 
 package org.springframework.integration.endpoint;
 
-import java.util.Collections;
-
-import org.junit.jupiter.api.Test;
-
-import org.springframework.integration.IntegrationMessageHeaderAccessor;
-import org.springframework.integration.acks.AcknowledgmentCallback;
-import org.springframework.integration.acks.AcknowledgmentCallback.Status;
-import org.springframework.integration.core.MessageSource;
-import org.springframework.messaging.MessageHandlingException;
-import org.springframework.messaging.support.GenericMessage;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
+
+import java.util.Collections;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.integration.IntegrationMessageHeaderAccessor;
+import org.springframework.integration.acks.AcknowledgmentCallback;
+import org.springframework.integration.acks.AcknowledgmentCallback.Status;
+import org.springframework.integration.core.MessageSource;
+import org.springframework.messaging.MessageHandlingException;
+import org.springframework.messaging.support.GenericMessage;
 
 /**
  * @author Gary Russell

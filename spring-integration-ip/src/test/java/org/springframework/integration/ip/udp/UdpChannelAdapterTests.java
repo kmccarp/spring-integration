@@ -16,6 +16,10 @@
 
 package org.springframework.integration.ip.udp;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
+import static org.mockito.Mockito.mock;
+
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -31,7 +35,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -45,10 +48,6 @@ import org.springframework.integration.support.MessageBuilder;
 import org.springframework.integration.test.condition.LogLevels;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.SubscribableChannel;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.fail;
-import static org.mockito.Mockito.mock;
 
 /**
  *
@@ -180,7 +179,7 @@ public class UdpChannelAdapterTests {
 		packet.setSocketAddress(new InetSocketAddress("localhost", port));
 		final DatagramSocket socket = new DatagramSocket(0);
 		socket.send(packet);
-		final AtomicReference<DatagramPacket> theAnswer = new AtomicReference<DatagramPacket>();
+		final AtomicReference<DatagramPacket> theAnswer = new AtomicReference<>();
 		final CountDownLatch receiverReadyLatch = new CountDownLatch(1);
 		final CountDownLatch replyReceivedLatch = new CountDownLatch(1);
 		//main thread sends the reply using the headers, this thread will receive it

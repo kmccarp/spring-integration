@@ -16,12 +16,13 @@
 
 package org.springframework.integration.scripting.jsr223;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.integration.scripting.ScriptExecutor;
@@ -29,8 +30,6 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.scripting.ScriptSource;
 import org.springframework.scripting.support.ResourceScriptSource;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author David Turanski

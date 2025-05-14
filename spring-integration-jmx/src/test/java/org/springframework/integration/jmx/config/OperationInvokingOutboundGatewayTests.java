@@ -16,6 +16,9 @@
 
 package org.springframework.integration.jmx.config;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -24,7 +27,6 @@ import java.util.Map;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.integration.handler.advice.AbstractRequestHandlerAdvice;
@@ -40,9 +42,6 @@ import org.springframework.messaging.support.GenericMessage;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.fail;
 
 /**
  * @author Oleg Zhurakousky
@@ -99,13 +98,13 @@ public class OperationInvokingOutboundGatewayTests {
 	public void gatewayWithPrimitiveArgs() throws Exception {
 		primitiveChannel.send(new GenericMessage<Object[]>(new Object[] {true, 0L, 1}));
 		assertThat(testBean.messages.size()).isEqualTo(1);
-		List<Object> argList = new ArrayList<Object>();
+		List<Object> argList = new ArrayList<>();
 		argList.add(false);
 		argList.add(123L);
 		argList.add(42);
 		primitiveChannel.send(new GenericMessage<List<Object>>(argList));
 		assertThat(testBean.messages.size()).isEqualTo(2);
-		Map<String, Object> argMap = new HashMap<String, Object>();
+		Map<String, Object> argMap = new HashMap<>();
 		argMap.put("p1", true);
 		argMap.put("p2", 0L);
 		argMap.put("p3", 42);
@@ -123,7 +122,7 @@ public class OperationInvokingOutboundGatewayTests {
 			assertThat(e.getMessage()).contains("failed to find JMX operation");
 		}
 		// Args are named starting with Spring 3.2.3
-		argMap = new HashMap<String, Object>();
+		argMap = new HashMap<>();
 		argMap.put("bool", true);
 		argMap.put("time", 0L);
 		argMap.put("foo", 42);

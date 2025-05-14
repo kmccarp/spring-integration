@@ -243,7 +243,7 @@ public class SourcePollingChannelAdapterFactoryBean implements FactoryBean<Sourc
 
 	@Override
 	public int getPhase() {
-		return (this.adapter != null) ? this.adapter.getPhase() : 0;
+		return this.adapter != null ? this.adapter.getPhase() : 0;
 	}
 
 	@Override

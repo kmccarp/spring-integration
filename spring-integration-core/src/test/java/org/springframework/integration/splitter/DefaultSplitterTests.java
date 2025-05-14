@@ -16,6 +16,8 @@
 
 package org.springframework.integration.splitter;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.Collections;
@@ -25,7 +27,6 @@ import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Flux;
 import reactor.test.StepVerifier;
-
 import org.springframework.integration.IntegrationMessageHeaderAccessor;
 import org.springframework.integration.channel.DirectChannel;
 import org.springframework.integration.channel.FluxMessageChannel;
@@ -34,8 +35,6 @@ import org.springframework.integration.endpoint.EventDrivenConsumer;
 import org.springframework.integration.support.MessageBuilder;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.GenericMessage;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Mark Fisher

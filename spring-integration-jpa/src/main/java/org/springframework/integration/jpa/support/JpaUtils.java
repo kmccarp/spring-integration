@@ -22,7 +22,6 @@ import java.util.regex.Pattern;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
-
 import org.springframework.util.Assert;
 
 /**

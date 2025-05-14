@@ -43,7 +43,6 @@ import java.util.function.Function;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.dao.CannotAcquireLockException;
 import org.springframework.data.redis.connection.Message;
@@ -156,7 +155,7 @@ public final class RedisLockRegistry implements ExpirableLockRegistry, Disposabl
 
 	private volatile boolean unlinkAvailable = true;
 
-	private volatile boolean isRunningRedisMessageListenerContainer = false;
+	private volatile boolean isRunningRedisMessageListenerContainer;
 
 	/**
 	 * It is set via lazy initialization when it is a {@link RedisLockType#PUB_SUB_LOCK}.
@@ -627,7 +626,7 @@ public final class RedisLockRegistry implements ExpirableLockRegistry, Disposabl
 			final int prime = 31;
 			int result = 1;
 			result = prime * result + getOuterType().hashCode();
-			result = prime * result + ((this.lockKey == null) ? 0 : this.lockKey.hashCode());
+			result = prime * result + (this.lockKey == null ? 0 : this.lockKey.hashCode());
 			result = prime * result + Long.hashCode(this.lockedAt);
 			result = prime * result + RedisLockRegistry.this.clientId.hashCode();
 			return result;

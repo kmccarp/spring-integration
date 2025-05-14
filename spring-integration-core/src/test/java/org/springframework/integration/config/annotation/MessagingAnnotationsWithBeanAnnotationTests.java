@@ -16,6 +16,9 @@
 
 package org.springframework.integration.config.annotation;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
@@ -31,7 +34,6 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Sinks;
 import reactor.test.StepVerifier;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.support.BeanDefinitionValidationException;
@@ -89,9 +91,6 @@ import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 /**
  * @author Artem Bilan
@@ -442,7 +441,7 @@ public class MessagingAnnotationsWithBeanAnnotationTests {
 		@Bean
 		@ServiceActivator(inputChannel = "functionMessageServiceChannel")
 		public Function<Message<String>, String> messageFunctionAsService() {
-			return (message) -> message.getPayload().toLowerCase();
+			return message -> message.getPayload().toLowerCase();
 		}
 
 		@Bean
@@ -472,7 +471,7 @@ public class MessagingAnnotationsWithBeanAnnotationTests {
 		@Bean
 		@ServiceActivator(inputChannel = "reactiveMessageHandlerChannel")
 		public ReactiveMessageHandler reactiveMessageHandlerService() {
-			return (message) -> {
+			return message -> {
 				messageMono.tryEmitValue(message);
 				return Mono.empty();
 			};

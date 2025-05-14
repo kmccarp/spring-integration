@@ -16,11 +16,12 @@
 
 package org.springframework.integration.amqp.config;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
 import org.springframework.amqp.core.MessageDeliveryMode;
 import org.springframework.amqp.rabbit.listener.DirectMessageListenerContainer;
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
@@ -37,8 +38,6 @@ import org.springframework.messaging.support.ChannelInterceptor;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Mark Fisher

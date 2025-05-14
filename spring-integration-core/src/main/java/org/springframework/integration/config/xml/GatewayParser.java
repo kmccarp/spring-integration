@@ -22,7 +22,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.w3c.dom.Element;
-
 import org.springframework.beans.factory.BeanDefinitionStoreException;
 import org.springframework.beans.factory.annotation.AnnotatedGenericBeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinition;

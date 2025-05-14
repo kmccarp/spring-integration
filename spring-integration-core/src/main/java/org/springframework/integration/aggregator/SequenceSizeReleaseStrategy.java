@@ -22,7 +22,6 @@ import java.util.Comparator;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.springframework.integration.StaticMessageHeaderAccessor;
 import org.springframework.integration.store.MessageGroup;
 import org.springframework.messaging.Message;

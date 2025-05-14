@@ -16,6 +16,9 @@
 
 package org.springframework.integration.endpoint;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+
 import java.time.Duration;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -25,7 +28,6 @@ import java.util.stream.IntStream;
 import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Flux;
 import reactor.test.StepVerifier;
-
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.integration.IntegrationMessageHeaderAccessor;
 import org.springframework.integration.acks.AcknowledgmentCallback;
@@ -33,9 +35,6 @@ import org.springframework.integration.channel.FluxMessageChannel;
 import org.springframework.integration.core.MessageSource;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
 
 /**
  * @author Artem Bilan

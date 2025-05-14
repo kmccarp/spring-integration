@@ -16,12 +16,13 @@
 
 package org.springframework.integration.ftp.config;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.lang.reflect.Method;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.expression.Expression;
 import org.springframework.integration.endpoint.AbstractEndpoint;
@@ -44,8 +45,6 @@ import org.springframework.messaging.support.GenericMessage;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.util.ReflectionUtils;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Gary Russell
@@ -128,7 +127,7 @@ public class FtpOutboundGatewayParserTests {
 
 		//INT-3129
 		assertThat(TestUtils.getPropertyValue(gateway, "localFilenameGeneratorExpression")).isNotNull();
-		final AtomicReference<Method> genMethod = new AtomicReference<Method>();
+		final AtomicReference<Method> genMethod = new AtomicReference<>();
 		ReflectionUtils.doWithMethods(FtpOutboundGateway.class, method -> {
 			method.setAccessible(true);
 			genMethod.set(method);

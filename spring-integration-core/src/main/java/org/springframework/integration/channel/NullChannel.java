@@ -21,7 +21,6 @@ import java.util.concurrent.TimeUnit;
 import org.reactivestreams.Publisher;
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
-
 import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.core.log.LogAccessor;
 import org.springframework.integration.IntegrationPattern;
@@ -211,7 +210,7 @@ public class NullChannel implements PollableChannel,
 
 	@Override
 	public String toString() {
-		return (this.beanName != null) ? this.beanName : super.toString();
+		return this.beanName != null ? this.beanName : super.toString();
 	}
 
 	@Override

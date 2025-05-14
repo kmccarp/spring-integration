@@ -16,8 +16,10 @@
 
 package org.springframework.integration.xml.source;
 
-import java.io.StringReader;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.xmlunit.assertj3.XmlAssert.assertThat;
 
+import java.io.StringReader;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.Source;
 import javax.xml.transform.dom.DOMSource;
@@ -26,12 +28,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
-
 import org.springframework.integration.xml.util.XmlTestUtil;
 import org.springframework.messaging.MessagingException;
-
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.xmlunit.assertj3.XmlAssert.assertThat;
 
 /**
  * @author Jonas Partner

@@ -16,6 +16,25 @@
 
 package org.springframework.integration.mqtt;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.fail;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.willAnswer;
+import static org.mockito.BDDMockito.willReturn;
+import static org.mockito.BDDMockito.willThrow;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import java.lang.reflect.Method;
 import java.util.Properties;
 import java.util.concurrent.BlockingQueue;
@@ -24,7 +43,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Supplier;
-
 import javax.net.SocketFactory;
 
 import org.aopalliance.intercept.MethodInterceptor;
@@ -40,7 +58,6 @@ import org.eclipse.paho.client.mqttv3.MqttToken;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatchers;
-
 import org.springframework.aop.framework.ProxyFactoryBean;
 import org.springframework.beans.DirectFieldAccessor;
 import org.springframework.beans.factory.BeanFactory;
@@ -72,25 +89,6 @@ import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.support.ErrorMessage;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.util.ReflectionUtils;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
-import static org.assertj.core.api.Assertions.fail;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.BDDMockito.willAnswer;
-import static org.mockito.BDDMockito.willReturn;
-import static org.mockito.BDDMockito.willThrow;
-import static org.mockito.Mockito.atLeastOnce;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 /**
  * @author Gary Russell
@@ -447,13 +445,13 @@ public class MqttAdapterTests {
 		ReflectionUtils.doWithMethods(MqttPahoMessageDrivenChannelAdapter.class, m -> {
 			m.setAccessible(true);
 			method.set(m);
-		}, m -> m.getName().equals("connect"));
+		}, m -> "connect".equals(m.getName()));
 		assertThat(method.get()).isNotNull();
 		method.get().invoke(adapter);
 		ReflectionUtils.doWithMethods(MqttPahoMessageDrivenChannelAdapter.class, m -> {
 			m.setAccessible(true);
 			method.set(m);
-		}, m -> m.getName().equals("subscribe"));
+		}, m -> "subscribe".equals(m.getName()));
 		assertThat(method.get()).isNotNull();
 		ApplicationEventPublisher eventPublisher = mock(ApplicationEventPublisher.class);
 		adapter.setApplicationEventPublisher(eventPublisher);
@@ -494,13 +492,13 @@ public class MqttAdapterTests {
 		ReflectionUtils.doWithMethods(MqttPahoMessageDrivenChannelAdapter.class, m -> {
 			m.setAccessible(true);
 			method.set(m);
-		}, m -> m.getName().equals("connect"));
+		}, m -> "connect".equals(m.getName()));
 		assertThat(method.get()).isNotNull();
 		method.get().invoke(adapter);
 		ReflectionUtils.doWithMethods(MqttPahoMessageDrivenChannelAdapter.class, m -> {
 			m.setAccessible(true);
 			method.set(m);
-		}, m -> m.getName().equals("subscribe"));
+		}, m -> "subscribe".equals(m.getName()));
 		assertThat(method.get()).isNotNull();
 		LogAccessor logger = spy(TestUtils.getPropertyValue(adapter, "logger", LogAccessor.class));
 		new DirectFieldAccessor(adapter).setPropertyValue("logger", logger);

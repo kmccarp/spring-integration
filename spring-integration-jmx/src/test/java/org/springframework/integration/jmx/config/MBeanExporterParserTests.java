@@ -16,20 +16,18 @@
 
 package org.springframework.integration.jmx.config;
 
-import java.util.Properties;
+import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.Properties;
 import javax.management.MBeanServer;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.integration.monitor.IntegrationMBeanExporter;
 import org.springframework.integration.test.util.TestUtils;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Mark Fisher

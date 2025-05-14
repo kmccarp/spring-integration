@@ -17,7 +17,6 @@
 package org.springframework.integration.jdbc.store.channel;
 
 import org.junit.Ignore;
-
 import org.springframework.test.context.ContextConfiguration;
 
 /**

@@ -19,7 +19,6 @@ package org.springframework.integration.ftp.dsl;
 import java.util.function.Function;
 
 import org.apache.commons.net.ftp.FTPFile;
-
 import org.springframework.expression.Expression;
 import org.springframework.integration.expression.FunctionExpression;
 import org.springframework.integration.file.dsl.RemoteFileOutboundGatewaySpec;

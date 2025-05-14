@@ -105,7 +105,7 @@ public class MessageGroupMetadata implements Serializable {
 	 * @return the list of messages ids stored in the group
 	 */
 	public List<UUID> getMessageIds() {
-		return new LinkedList<UUID>(this.messageIds);
+		return new LinkedList<>(this.messageIds);
 	}
 
 	public void complete() {

@@ -51,7 +51,7 @@ public final class PatternMatchUtils {
 		if (patterns != null) {
 			return smartMatch(str.toLowerCase(Locale.ROOT),
 					Arrays.stream(patterns)
-							.map((pattern) -> pattern.toLowerCase(Locale.ROOT))
+							.map(pattern -> pattern.toLowerCase(Locale.ROOT))
 							.toArray(String[]::new));
 		}
 

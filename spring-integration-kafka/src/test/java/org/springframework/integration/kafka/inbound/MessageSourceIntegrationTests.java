@@ -16,6 +16,11 @@
 
 package org.springframework.integration.kafka.inbound;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.awaitility.Awaitility.await;
+import static org.mockito.Mockito.mock;
+
 import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.CountDownLatch;
@@ -27,7 +32,6 @@ import org.apache.kafka.common.TopicPartition;
 import org.apache.kafka.common.serialization.Deserializer;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.integration.channel.NullChannel;
 import org.springframework.integration.history.MessageHistory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
@@ -40,11 +44,6 @@ import org.springframework.kafka.test.utils.KafkaTestUtils;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.util.ClassUtils;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.awaitility.Awaitility.await;
-import static org.mockito.Mockito.mock;
 
 /**
  * @author Gary Russell

@@ -16,6 +16,12 @@
 
 package org.springframework.integration.ip.tcp.serializer;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatException;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.assertThatIOException;
+import static org.mockito.Mockito.mock;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -25,11 +31,9 @@ import java.net.Socket;
 import java.nio.ByteBuffer;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicReference;
-
 import javax.net.ServerSocketFactory;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.core.serializer.DefaultDeserializer;
 import org.springframework.core.task.SimpleAsyncTaskExecutor;
@@ -44,12 +48,6 @@ import org.springframework.integration.support.MessageBuilder;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.support.GenericMessage;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatException;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.assertj.core.api.Assertions.assertThatIOException;
-import static org.mockito.Mockito.mock;
 
 /**
  * @author Gary Russell
@@ -291,7 +289,7 @@ public class DeserializationTests {
 		assertThatException()
 				.isThrownBy(() -> deser.deserialize(bais))
 				.withMessageContaining(expectedMessage)
-				.satisfies((ex) -> {
+				.satisfies(ex -> {
 					assertThat(event.get()).isNotNull();
 					assertThat(event.get().getCause()).isSameAs(ex);
 				});

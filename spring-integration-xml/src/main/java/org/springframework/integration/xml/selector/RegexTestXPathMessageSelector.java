@@ -19,7 +19,6 @@ package org.springframework.integration.xml.selector;
 import java.util.Map;
 
 import org.w3c.dom.Node;
-
 import org.springframework.messaging.Message;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;

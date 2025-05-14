@@ -17,7 +17,6 @@
 package org.springframework.integration.jms.dsl;
 
 import jakarta.jms.ConnectionFactory;
-
 import org.springframework.integration.dsl.IntegrationComponentSpec;
 import org.springframework.jms.support.destination.DestinationResolver;
 import org.springframework.jms.support.destination.JmsDestinationAccessor;

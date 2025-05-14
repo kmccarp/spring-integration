@@ -16,15 +16,14 @@
 
 package org.springframework.integration.xml.selector;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.junit.jupiter.api.Test;
 import org.w3c.dom.Document;
-
 import org.springframework.integration.xml.util.XmlTestUtil;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.xml.xpath.XPathExpression;
 import org.springframework.xml.xpath.XPathExpressionFactory;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Jonas Partner

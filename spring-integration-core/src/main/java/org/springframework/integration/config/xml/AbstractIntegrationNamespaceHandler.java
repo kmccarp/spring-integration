@@ -19,7 +19,6 @@ package org.springframework.integration.config.xml;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.w3c.dom.Element;
-
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinitionHolder;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;

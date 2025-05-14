@@ -17,7 +17,6 @@
 package org.springframework.integration.amqp.config;
 
 import org.w3c.dom.Element;
-
 import org.springframework.beans.factory.BeanDefinitionStoreException;
 import org.springframework.beans.factory.config.BeanDefinitionHolder;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;

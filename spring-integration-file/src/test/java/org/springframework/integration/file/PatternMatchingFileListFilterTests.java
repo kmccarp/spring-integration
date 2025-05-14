@@ -16,18 +16,17 @@
 
 package org.springframework.integration.file;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.io.File;
 import java.util.List;
 import java.util.regex.Pattern;
 
 import org.junit.Test;
-
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.integration.file.filters.FileListFilter;
 import org.springframework.integration.file.filters.RegexPatternFileListFilter;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Mark Fisher

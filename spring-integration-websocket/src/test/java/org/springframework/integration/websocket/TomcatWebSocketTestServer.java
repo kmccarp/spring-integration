@@ -23,7 +23,6 @@ import org.apache.catalina.Context;
 import org.apache.catalina.Wrapper;
 import org.apache.catalina.startup.Tomcat;
 import org.apache.tomcat.websocket.server.WsContextListener;
-
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;

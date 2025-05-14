@@ -16,13 +16,12 @@
 
 package org.springframework.integration.config.xml;
 
-import org.junit.jupiter.api.Test;
-
-import org.springframework.beans.factory.BeanCreationException;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.Assertions.assertThatNoException;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.BeanCreationException;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  *

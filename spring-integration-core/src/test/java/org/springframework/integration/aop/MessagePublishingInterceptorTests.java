@@ -16,13 +16,14 @@
 
 package org.springframework.integration.aop;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.expression.Expression;
@@ -31,8 +32,6 @@ import org.springframework.integration.support.channel.BeanFactoryChannelResolve
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.core.DestinationResolver;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Mark Fisher

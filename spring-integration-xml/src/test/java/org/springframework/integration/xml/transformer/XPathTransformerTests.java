@@ -16,9 +16,10 @@
 
 package org.springframework.integration.xml.transformer;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.io.StringReader;
 import java.util.List;
-
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.Source;
 
@@ -28,7 +29,6 @@ import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
-
 import org.springframework.integration.support.MessageBuilder;
 import org.springframework.integration.xml.XmlPayloadConverter;
 import org.springframework.integration.xml.xpath.XPathEvaluationType;
@@ -36,8 +36,6 @@ import org.springframework.messaging.Message;
 import org.springframework.xml.xpath.NodeMapper;
 import org.springframework.xml.xpath.XPathExpression;
 import org.springframework.xml.xpath.XPathExpressionFactory;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Mark Fisher

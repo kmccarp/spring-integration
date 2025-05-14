@@ -17,7 +17,6 @@
 package org.springframework.integration.kafka.config.xml;
 
 import org.w3c.dom.Element;
-
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.config.xml.AbstractInboundGatewayParser;
 import org.springframework.integration.config.xml.IntegrationNamespaceUtils;
@@ -61,8 +60,8 @@ public class KafkaInboundGatewayParser extends AbstractInboundGatewayParser {
 	@Override
 	protected boolean isEligibleAttribute(String attributeName) {
 		return super.isEligibleAttribute(attributeName)
-				&& !attributeName.equals("listener-container")
-				&& !attributeName.equals("kafka-template");
+				&& !"listener-container".equals(attributeName)
+				&& !"kafka-template".equals(attributeName);
 	}
 
 }

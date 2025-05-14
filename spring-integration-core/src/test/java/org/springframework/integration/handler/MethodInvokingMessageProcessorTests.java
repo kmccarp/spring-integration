@@ -16,6 +16,16 @@
 
 package org.springframework.integration.handler;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
+import static org.assertj.core.api.Assertions.fail;
+import static org.mockito.AdditionalAnswers.returnsFirstArg;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.BDDMockito.willAnswer;
+import static org.mockito.Mockito.mock;
+
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Collections;
@@ -38,7 +48,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.beans.DirectFieldAccessor;
 import org.springframework.beans.factory.BeanFactory;
@@ -80,16 +89,6 @@ import org.springframework.messaging.handler.annotation.support.MessageHandlerMe
 import org.springframework.messaging.handler.invocation.HandlerMethodArgumentResolver;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.util.StopWatch;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
-import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
-import static org.assertj.core.api.Assertions.fail;
-import static org.mockito.AdditionalAnswers.returnsFirstArg;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.BDDMockito.willAnswer;
-import static org.mockito.Mockito.mock;
 
 /**
  * @author Mark Fisher
@@ -781,9 +780,9 @@ public class MethodInvokingMessageProcessorTests {
 			@SuppressWarnings("unused")
 			public void optionalHeaders(Optional<String> foo, @Header(value = "foo", required = false) String foo1,
 					@Header("foo") Optional<String> foo2) {
-				this.arguments.put("foo", (foo.isPresent() ? foo.get() : null));
+				this.arguments.put("foo", foo.isPresent() ? foo.get() : null);
 				this.arguments.put("foo1", foo1);
-				this.arguments.put("foo2", (foo2.isPresent() ? foo2.get() : null));
+				this.arguments.put("foo2", foo2.isPresent() ? foo2.get() : null);
 			}
 
 		}
@@ -1384,7 +1383,7 @@ public class MethodInvokingMessageProcessorTests {
 	@SuppressWarnings("unused")
 	private static class AmbiguousMethodBean {
 
-		private volatile Object lastArg = null;
+		private volatile Object lastArg;
 
 		AmbiguousMethodBean() {
 			super();
@@ -1401,7 +1400,7 @@ public class MethodInvokingMessageProcessorTests {
 
 		public String foo(int i) {
 			this.lastArg = i;
-			return Integer.valueOf(i).toString();
+			return Integer.toString(i);
 		}
 
 	}
@@ -1413,7 +1412,7 @@ public class MethodInvokingMessageProcessorTests {
 	@SuppressWarnings("unused")
 	private static class OverloadedMethodBean {
 
-		private volatile Object lastArg = null;
+		private volatile Object lastArg;
 
 		OverloadedMethodBean() {
 			super();
@@ -1433,7 +1432,7 @@ public class MethodInvokingMessageProcessorTests {
 
 	private static class IneligibleMethodBean {
 
-		private volatile Object lastArg = null;
+		private volatile Object lastArg;
 
 		IneligibleMethodBean() {
 			super();

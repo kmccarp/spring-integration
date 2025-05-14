@@ -16,11 +16,12 @@
 
 package org.springframework.integration.store;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.integration.store.MessageGroupStore.MessageGroupCallback;
@@ -31,8 +32,6 @@ import org.springframework.messaging.PollableChannel;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Dave Syer
@@ -85,7 +84,7 @@ public class MessageStoreReaperTests {
 
 	@Test
 	public void testSmartLifecycle() throws Exception {
-		GenericMessage<String> testMessage = new GenericMessage<String>("foo");
+		GenericMessage<String> testMessage = new GenericMessage<>("foo");
 
 		messageStore2.addMessageToGroup("FOO", testMessage);
 		assertThat(messageStore2.getMessageGroup("FOO").size()).isEqualTo(1);
@@ -134,7 +133,7 @@ public class MessageStoreReaperTests {
 
 	public static class ExpiryCallback implements MessageGroupCallback {
 
-		public final List<MessageGroup> groups = new ArrayList<MessageGroup>();
+		public final List<MessageGroup> groups = new ArrayList<>();
 
 		@Override
 		public void execute(MessageGroupStore messageGroupStore, MessageGroup group) {

@@ -21,7 +21,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.camel.Message;
-
 import org.springframework.core.log.LogAccessor;
 import org.springframework.core.log.LogMessage;
 import org.springframework.integration.mapping.HeaderMapper;

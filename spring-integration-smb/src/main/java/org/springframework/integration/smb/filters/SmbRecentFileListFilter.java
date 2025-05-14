@@ -20,7 +20,6 @@ import java.time.Duration;
 import java.time.Instant;
 
 import jcifs.smb.SmbFile;
-
 import org.springframework.integration.file.filters.AbstractRecentFileListFilter;
 
 /**

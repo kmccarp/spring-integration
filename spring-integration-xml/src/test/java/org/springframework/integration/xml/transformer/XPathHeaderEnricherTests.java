@@ -16,19 +16,18 @@
 
 package org.springframework.integration.xml.transformer;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TimeZone;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.integration.support.MessageBuilder;
 import org.springframework.integration.xml.transformer.support.XPathExpressionEvaluatingHeaderValueMessageProcessor;
 import org.springframework.integration.xml.xpath.XPathEvaluationType;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageHeaders;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Jonas Partner

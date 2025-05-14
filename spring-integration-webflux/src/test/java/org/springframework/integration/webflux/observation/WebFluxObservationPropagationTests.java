@@ -16,6 +16,9 @@
 
 package org.springframework.integration.webflux.observation;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.awaitility.Awaitility.await;
+
 import java.util.stream.Collectors;
 
 import brave.Tracing;
@@ -37,7 +40,6 @@ import io.micrometer.tracing.test.simple.SpansAssert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Mono;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
@@ -64,9 +66,6 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.web.reactive.config.EnableWebFlux;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.server.adapter.WebHttpHandlerBuilder;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.awaitility.Awaitility.await;
 
 /**
  * @author Artem Bilan
@@ -199,7 +198,7 @@ public class WebFluxObservationPropagationTests {
 		IntegrationFlow webFluxFlow() {
 			return IntegrationFlow
 					.from(WebFlux.inboundChannelAdapter("/test")
-							.requestMapping((mapping) -> mapping.methods(HttpMethod.POST))
+							.requestMapping(mapping -> mapping.methods(HttpMethod.POST))
 							.requestPayloadType(String.class)
 							.id("webFluxInbound"))
 					.channel(c -> c.flux("requestChannel"))

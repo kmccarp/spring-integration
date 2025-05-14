@@ -32,7 +32,6 @@ import com.hazelcast.replicatedmap.ReplicatedMap;
 import com.hazelcast.topic.ITopic;
 import com.hazelcast.topic.Message;
 import com.hazelcast.topic.MessageListener;
-
 import org.springframework.integration.hazelcast.HazelcastHeaders;
 import org.springframework.integration.hazelcast.HazelcastIntegrationDefinitionValidator;
 import org.springframework.util.Assert;

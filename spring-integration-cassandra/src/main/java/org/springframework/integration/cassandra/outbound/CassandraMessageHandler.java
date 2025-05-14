@@ -29,7 +29,6 @@ import com.datastax.oss.driver.api.core.cql.Statement;
 import com.datastax.oss.driver.api.querybuilder.QueryBuilder;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.cassandra.ReactiveResultSet;
 import org.springframework.data.cassandra.ReactiveSession;
@@ -321,7 +320,7 @@ public class CassandraMessageHandler extends AbstractReplyProducingMessageHandle
 		/**
 		 * Set a {@link CassandraMessageHandler} into a {@code statement} mode.
 		 */
-		STATEMENT;
+		STATEMENT
 
 	}
 

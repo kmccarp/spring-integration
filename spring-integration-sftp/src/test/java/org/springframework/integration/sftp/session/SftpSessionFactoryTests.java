@@ -16,6 +16,11 @@
 
 package org.springframework.integration.sftp.session;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatNoException;
+import static org.assertj.core.api.Assertions.fail;
+import static org.awaitility.Awaitility.await;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.UncheckedIOException;
@@ -48,13 +53,7 @@ import org.apache.sshd.sftp.client.SftpVersionSelector;
 import org.apache.sshd.sftp.client.impl.AbstractSftpClient;
 import org.apache.sshd.sftp.server.SftpSubsystemFactory;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.core.task.SimpleAsyncTaskExecutor;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatNoException;
-import static org.assertj.core.api.Assertions.fail;
-import static org.awaitility.Awaitility.await;
 
 /**
  * @author Gary Russell
@@ -107,7 +106,7 @@ public class SftpSessionFactoryTests {
 			}
 
 			n = 0;
-			while (n++ < 100 && server.getActiveSessions().size() > 0) {
+			while (n++ < 100 && !server.getActiveSessions().isEmpty()) {
 				Thread.sleep(100);
 			}
 
@@ -237,7 +236,7 @@ public class SftpSessionFactoryTests {
 			sftpSessionFactory.setPassword("pass");
 			sftpSessionFactory.setAllowUnknownKeys(true);
 			sftpSessionFactory.setTimeout(15_000);
-			sftpSessionFactory.setSshClientConfigurer((sshClient) -> {
+			sftpSessionFactory.setSshClientConfigurer(sshClient -> {
 				sshClient.setNioWorkers(27);
 				PropertyResolverUtils.updateProperty(sshClient, CoreModuleProperties.MAX_PACKET_SIZE.getName(), 48 * 1024);
 			});

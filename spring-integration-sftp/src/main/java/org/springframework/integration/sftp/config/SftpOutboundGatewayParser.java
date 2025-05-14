@@ -17,7 +17,6 @@
 package org.springframework.integration.sftp.config;
 
 import org.w3c.dom.Element;
-
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.config.xml.IntegrationNamespaceUtils;
 import org.springframework.integration.file.config.AbstractRemoteFileOutboundGatewayParser;

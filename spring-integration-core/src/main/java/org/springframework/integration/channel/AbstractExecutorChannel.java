@@ -66,7 +66,7 @@ public abstract class AbstractExecutorChannel extends AbstractSubscribableChanne
 
 	protected int executorInterceptorsSize; // NOSONAR
 
-	public AbstractExecutorChannel(@Nullable Executor executor) {
+	protected AbstractExecutorChannel(@Nullable Executor executor) {
 		this.executor = executor;
 	}
 

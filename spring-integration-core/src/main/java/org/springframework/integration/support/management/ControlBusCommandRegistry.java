@@ -145,7 +145,7 @@ public class ControlBusCommandRegistry
 							.entrySet()
 							.stream()
 							.collect(Collectors.toMap(Map.Entry::getKey,
-									(commandEntry) -> commandEntry.getValue().getExpressionString()));
+									commandEntry -> commandEntry.getValue().getExpressionString()));
 			commands.put(beanEntry.getKey(), commandEntries);
 		}
 		return Collections.unmodifiableMap(commands);
@@ -178,13 +178,13 @@ public class ControlBusCommandRegistry
 		String methodName = matcher.group("methodName");
 
 		CommandMethod commandMethod = new CommandMethod(beanName, methodName, parameterTypes);
-		return populateCommandMethod(commandMethod, (key) -> buildExpressionForMethodToCall(commandMethod));
+		return populateCommandMethod(commandMethod, key -> buildExpressionForMethodToCall(commandMethod));
 	}
 
 	private void populateExpressionForCommand(String beanName, Method methodForCommand) {
 		CommandMethod commandMethod =
 				new CommandMethod(beanName, methodForCommand.getName(), methodForCommand.getParameterTypes());
-		populateCommandMethod(commandMethod, (key) -> buildExpressionForMethodToCall(commandMethod, methodForCommand));
+		populateCommandMethod(commandMethod, key -> buildExpressionForMethodToCall(commandMethod, methodForCommand));
 	}
 
 	private Expression populateCommandMethod(CommandMethod commandMethod,
@@ -193,7 +193,7 @@ public class ControlBusCommandRegistry
 		String beanName = commandMethod.beanName;
 
 		Map<CommandMethod, Expression> beanControlBusCommands =
-				this.controlBusCommands.computeIfAbsent(beanName, (key) -> new HashMap<>());
+				this.controlBusCommands.computeIfAbsent(beanName, key -> new HashMap<>());
 
 		try {
 			return beanControlBusCommands.computeIfAbsent(commandMethod, mappingFunction);

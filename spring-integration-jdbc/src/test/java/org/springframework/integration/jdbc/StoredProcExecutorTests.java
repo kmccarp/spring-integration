@@ -16,15 +16,18 @@
 
 package org.springframework.integration.jdbc;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.fail;
+import static org.mockito.Mockito.mock;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.sql.DataSource;
 
 import org.junit.Test;
-
 import org.springframework.beans.DirectFieldAccessor;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.expression.Expression;
@@ -34,11 +37,6 @@ import org.springframework.integration.support.MessageBuilder;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.SqlParameter;
 import org.springframework.jdbc.core.simple.SimpleJdbcCallOperations;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
-import static org.assertj.core.api.Assertions.fail;
-import static org.mockito.Mockito.mock;
 
 /**
  * @author Gunnar Hillert
@@ -137,7 +135,7 @@ public class StoredProcExecutorTests {
 		DataSource datasource = mock(DataSource.class);
 		StoredProcExecutor storedProcExecutor = new StoredProcExecutor(datasource);
 
-		Map<String, RowMapper<?>> rowmappers = new HashMap<String, RowMapper<?>>();
+		Map<String, RowMapper<?>> rowmappers = new HashMap<>();
 
 		storedProcExecutor.setReturningResultSetRowMappers(rowmappers);
 

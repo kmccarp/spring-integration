@@ -29,7 +29,6 @@ import java.util.stream.Stream;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.springframework.messaging.Message;
 import org.springframework.util.Assert;
 
@@ -327,7 +326,7 @@ public class MessageGroupQueue extends AbstractQueue<Message<?>> implements Bloc
 		lock.lockInterruptibly();
 
 		try {
-			while (this.size() == 0) {
+			while (this.isEmpty()) {
 				this.messageStoreNotEmpty.await();
 			}
 			message = doPoll();

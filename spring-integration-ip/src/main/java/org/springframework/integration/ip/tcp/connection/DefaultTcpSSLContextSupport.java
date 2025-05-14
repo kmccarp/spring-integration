@@ -19,7 +19,6 @@ package org.springframework.integration.ip.tcp.connection;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.security.KeyStore;
-
 import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManagerFactory;

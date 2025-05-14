@@ -22,7 +22,6 @@ import java.util.function.Function;
 import org.reactivestreams.Publisher;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
 import org.springframework.core.convert.ConversionFailedException;
 import org.springframework.data.redis.connection.ReactiveRedisConnectionFactory;
 import org.springframework.data.redis.connection.stream.Consumer;
@@ -313,7 +312,7 @@ public class ReactiveRedisStreamMessageProducer extends MessageProducerSupport {
 		}
 
 		Flux<? extends Message<?>> messageFlux =
-				events.map((record) -> buildMessageFromRecord(record, this.extractPayload));
+				events.map(record -> buildMessageFromRecord(record, this.extractPayload));
 		subscribeToPublisher(messageFlux);
 	}
 

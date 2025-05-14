@@ -23,7 +23,6 @@ import java.util.Map;
 
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
-
 import org.springframework.integration.router.AbstractMappingMessageRouter;
 import org.springframework.integration.xml.DefaultXmlPayloadConverter;
 import org.springframework.integration.xml.XmlPayloadConverter;
@@ -47,7 +46,7 @@ public class XPathRouter extends AbstractMappingMessageRouter {
 
 	private XmlPayloadConverter converter = new DefaultXmlPayloadConverter();
 
-	private boolean evaluateAsString = false;
+	private boolean evaluateAsString;
 
 	/**
 	 * Create a router that uses an XPath expression. The expression may

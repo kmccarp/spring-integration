@@ -30,7 +30,6 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.springframework.context.ResourceLoaderAware;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
@@ -218,7 +217,7 @@ public class ReloadableResourceBundleExpressionSource implements ExpressionSourc
 	 * @param cacheSeconds The cache seconds.
 	 */
 	public void setCacheSeconds(int cacheSeconds) {
-		this.cacheMillis = (cacheSeconds * 1000); // NOSONAR
+		this.cacheMillis = cacheSeconds * 1000; // NOSONAR
 	}
 
 	/**
@@ -229,7 +228,7 @@ public class ReloadableResourceBundleExpressionSource implements ExpressionSourc
 	 */
 	public void setPropertiesPersister(@Nullable PropertiesPersister propertiesPersister) {
 		this.propertiesPersister =
-				(propertiesPersister != null ? propertiesPersister : new DefaultPropertiesPersister());
+				propertiesPersister != null ? propertiesPersister : new DefaultPropertiesPersister();
 	}
 
 	/**
@@ -243,7 +242,7 @@ public class ReloadableResourceBundleExpressionSource implements ExpressionSourc
 	 */
 	@Override
 	public void setResourceLoader(@Nullable ResourceLoader resourceLoader) {
-		this.resourceLoader = (resourceLoader != null ? resourceLoader : new DefaultResourceLoader());
+		this.resourceLoader = resourceLoader != null ? resourceLoader : new DefaultResourceLoader();
 	}
 
 	/**
@@ -429,7 +428,7 @@ public class ReloadableResourceBundleExpressionSource implements ExpressionSourc
 	 */
 	private PropertiesHolder refreshProperties(String filename, @Nullable PropertiesHolder propHolderArg) {
 		PropertiesHolder propHolder = propHolderArg;
-		long refreshTimestamp = (this.cacheMillis < 0) ? -1 : System.currentTimeMillis();
+		long refreshTimestamp = this.cacheMillis < 0 ? -1 : System.currentTimeMillis();
 
 		Resource resource = getResource(filename);
 

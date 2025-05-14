@@ -17,7 +17,6 @@
 package org.springframework.integration.mongodb.store;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.integration.store.MessageStore;
 
 /**

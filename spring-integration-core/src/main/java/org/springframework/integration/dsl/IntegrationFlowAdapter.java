@@ -22,7 +22,6 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 import org.reactivestreams.Publisher;
-
 import org.springframework.integration.context.ComponentSourceAware;
 import org.springframework.integration.core.MessageSource;
 import org.springframework.integration.endpoint.MessageProducerSupport;

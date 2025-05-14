@@ -126,7 +126,7 @@ public abstract class AbstractRemoteFileOutboundGateway<F> extends AbstractReply
 	 * @param sessionFactory the session factory.
 	 * @param messageSessionCallback the callback.
 	 */
-	public AbstractRemoteFileOutboundGateway(SessionFactory<F> sessionFactory,
+	protected AbstractRemoteFileOutboundGateway(SessionFactory<F> sessionFactory,
 			MessageSessionCallback<F, ?> messageSessionCallback) {
 
 		this(new RemoteFileTemplate<>(sessionFactory), messageSessionCallback);
@@ -139,7 +139,7 @@ public abstract class AbstractRemoteFileOutboundGateway<F> extends AbstractReply
 	 * @param remoteFileTemplate the remote file template.
 	 * @param messageSessionCallback the callback.
 	 */
-	public AbstractRemoteFileOutboundGateway(RemoteFileTemplate<F> remoteFileTemplate,
+	protected AbstractRemoteFileOutboundGateway(RemoteFileTemplate<F> remoteFileTemplate,
 			MessageSessionCallback<F, ?> messageSessionCallback) {
 
 		Assert.notNull(remoteFileTemplate, "'remoteFileTemplate' cannot be null");
@@ -162,7 +162,7 @@ public abstract class AbstractRemoteFileOutboundGateway<F> extends AbstractReply
 	 * @param command the command.
 	 * @param expression the remote path.
 	 */
-	public AbstractRemoteFileOutboundGateway(SessionFactory<F> sessionFactory, String command,
+	protected AbstractRemoteFileOutboundGateway(SessionFactory<F> sessionFactory, String command,
 			@Nullable String expression) {
 
 		this(sessionFactory, Command.toCommand(command), expression);
@@ -179,7 +179,7 @@ public abstract class AbstractRemoteFileOutboundGateway<F> extends AbstractReply
 	 * @param command the command.
 	 * @param expression the remote path.
 	 */
-	public AbstractRemoteFileOutboundGateway(SessionFactory<F> sessionFactory, Command command,
+	protected AbstractRemoteFileOutboundGateway(SessionFactory<F> sessionFactory, Command command,
 			@Nullable String expression) {
 
 		this(new RemoteFileTemplate<>(sessionFactory), command, expression);
@@ -197,7 +197,7 @@ public abstract class AbstractRemoteFileOutboundGateway<F> extends AbstractReply
 	 * @param command the command.
 	 * @param expression the remote path.
 	 */
-	public AbstractRemoteFileOutboundGateway(RemoteFileTemplate<F> remoteFileTemplate, String command,
+	protected AbstractRemoteFileOutboundGateway(RemoteFileTemplate<F> remoteFileTemplate, String command,
 			@Nullable String expression) {
 
 		this(remoteFileTemplate, Command.toCommand(command), expression);
@@ -214,7 +214,7 @@ public abstract class AbstractRemoteFileOutboundGateway<F> extends AbstractReply
 	 * @param command the command.
 	 * @param expressionArg the remote path.
 	 */
-	public AbstractRemoteFileOutboundGateway(RemoteFileTemplate<F> remoteFileTemplate, Command command,
+	protected AbstractRemoteFileOutboundGateway(RemoteFileTemplate<F> remoteFileTemplate, Command command,
 			@Nullable String expressionArg) {
 
 		Assert.notNull(remoteFileTemplate, "'remoteFileTemplate' cannot be null");
@@ -548,7 +548,7 @@ public abstract class AbstractRemoteFileOutboundGateway<F> extends AbstractReply
 		}
 
 		if (Command.MGET.equals(this.command)) {
-			Assert.isTrue(!(this.options.contains(Option.SUBDIRS)),
+			Assert.isTrue(!this.options.contains(Option.SUBDIRS),
 					() -> "Cannot use " + Option.SUBDIRS.toString() + " when using 'mget' use " +
 							Option.RECURSIVE.toString() + " to obtain files in subdirectories");
 		}
@@ -884,7 +884,7 @@ public abstract class AbstractRemoteFileOutboundGateway<F> extends AbstractReply
 		}
 		if (payload instanceof Collection<?> files) {
 			return files.stream()
-					.map((filePayload) -> mputItemMessage(filePayload, requestMessage.getHeaders()))
+					.map(filePayload -> mputItemMessage(filePayload, requestMessage.getHeaders()))
 					.map(this::doMput)
 					.collect(Collectors.toList());
 		}
@@ -1029,7 +1029,7 @@ public abstract class AbstractRemoteFileOutboundGateway<F> extends AbstractReply
 	private String buildRemotePath(String parent, String child) {
 		String remotePath = null;
 		if (parent != null) {
-			remotePath = (parent + child);
+			remotePath = parent + child;
 		}
 		else if (StringUtils.hasText(child)) {
 			remotePath = '.' + this.remoteFileTemplate.getRemoteFileSeparator() + child;
@@ -1038,7 +1038,7 @@ public abstract class AbstractRemoteFileOutboundGateway<F> extends AbstractReply
 	}
 
 	protected final List<F> filterFiles(F[] files) {
-		return (this.filter != null) ? this.filter.filterFiles(files) : Arrays.asList(files);
+		return this.filter != null ? this.filter.filterFiles(files) : Arrays.asList(files);
 	}
 
 	protected final F filterFile(F file) {
@@ -1091,7 +1091,7 @@ public abstract class AbstractRemoteFileOutboundGateway<F> extends AbstractReply
 		if (files == null) {
 			return Collections.emptyList();
 		}
-		return (this.mputFilter != null) ? this.mputFilter.filterFiles(files) : Arrays.asList(files);
+		return this.mputFilter != null ? this.mputFilter.filterFiles(files) : Arrays.asList(files);
 	}
 
 	protected void purgeLinks(List<F> lsFiles) {
@@ -1214,7 +1214,7 @@ public abstract class AbstractRemoteFileOutboundGateway<F> extends AbstractReply
 			String remoteFilename) throws IOException {
 
 		if (this.options.contains(Option.RECURSIVE)) {
-			if (!("*".equals(remoteFilename))) {
+			if (!"*".equals(remoteFilename)) {
 				logger.warn("File name pattern must be '*' when using recursion");
 			}
 			this.options.remove(Option.NAME_ONLY);

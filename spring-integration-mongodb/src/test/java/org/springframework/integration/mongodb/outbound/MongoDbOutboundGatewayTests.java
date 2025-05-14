@@ -16,6 +16,10 @@
 
 package org.springframework.integration.mongodb.outbound;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.fail;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
@@ -24,7 +28,6 @@ import org.bson.Document;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.MongoDatabaseFactory;
@@ -43,10 +46,6 @@ import org.springframework.integration.test.util.TestUtils;
 import org.springframework.messaging.Message;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
-import static org.assertj.core.api.Assertions.fail;
 
 /**
  * @author Xavier Padro
@@ -74,7 +73,7 @@ class MongoDbOutboundGatewayTests implements MongoDbContainerTest {
 	private MongoConverter mongoConverter;
 
 	@Autowired
-	private MongoDatabaseFactory MONGO_DATABASE_FACTORY;
+	private MongoDatabaseFactory mongoDatabaseFactory;
 
 	@BeforeEach
 	public void setUp() {
@@ -160,7 +159,7 @@ class MongoDbOutboundGatewayTests implements MongoDbContainerTest {
 
 	@Test
 	void testListOfResultsWithQueryExpressionNotInitialized() {
-		MongoDbOutboundGateway gateway = new MongoDbOutboundGateway(MONGO_DATABASE_FACTORY);
+		MongoDbOutboundGateway gateway = new MongoDbOutboundGateway(mongoDatabaseFactory);
 		gateway.setBeanFactory(beanFactory);
 		gateway.setMongoConverter(mongoConverter);
 		try {
@@ -247,7 +246,7 @@ class MongoDbOutboundGatewayTests implements MongoDbContainerTest {
 
 	@Test
 	void testWithNullCollectionNameExpression() {
-		MongoDbOutboundGateway gateway = new MongoDbOutboundGateway(MONGO_DATABASE_FACTORY);
+		MongoDbOutboundGateway gateway = new MongoDbOutboundGateway(mongoDatabaseFactory);
 		gateway.setBeanFactory(beanFactory);
 		gateway.setQueryExpression(new LiteralExpression("{name : 'Xavi'}"));
 		gateway.setExpectSingleResult(true);
@@ -312,7 +311,7 @@ class MongoDbOutboundGatewayTests implements MongoDbContainerTest {
 
 		List<Person> persons = this.mongoTemplate.find(new Query(), Person.class, COLLECTION_NAME);
 		assertThat(persons).hasSize(5);
-		assertThat(persons.stream().anyMatch(p -> p.getName().equals("Mike"))).isTrue();
+		assertThat(persons.stream().anyMatch(p -> "Mike".equals(p.getName()))).isTrue();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -321,7 +320,7 @@ class MongoDbOutboundGatewayTests implements MongoDbContainerTest {
 	}
 
 	private MongoDbOutboundGateway createGateway() {
-		MongoDbOutboundGateway gateway = new MongoDbOutboundGateway(MONGO_DATABASE_FACTORY);
+		MongoDbOutboundGateway gateway = new MongoDbOutboundGateway(mongoDatabaseFactory);
 		gateway.setBeanFactory(beanFactory);
 		gateway.setCollectionNameExpression(new LiteralExpression("data"));
 

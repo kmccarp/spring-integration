@@ -16,13 +16,12 @@
 
 package org.springframework.integration.channel.config;
 
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
+import org.junit.jupiter.api.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.integration.channel.RendezvousChannel;
 import org.springframework.messaging.MessageChannel;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Mark Fisher

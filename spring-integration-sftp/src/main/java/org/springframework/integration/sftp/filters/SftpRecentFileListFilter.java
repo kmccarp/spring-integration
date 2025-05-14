@@ -20,7 +20,6 @@ import java.time.Duration;
 import java.time.Instant;
 
 import org.apache.sshd.sftp.client.SftpClient;
-
 import org.springframework.integration.file.filters.AbstractRecentFileListFilter;
 
 /**

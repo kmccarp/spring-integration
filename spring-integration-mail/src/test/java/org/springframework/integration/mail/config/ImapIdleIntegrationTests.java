@@ -16,6 +16,14 @@
 
 package org.springframework.integration.mail.config;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
+
 import java.lang.reflect.Field;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -24,20 +32,11 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import jakarta.mail.Folder;
 import jakarta.mail.Message;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.integration.mail.ImapIdleChannelAdapter;
 import org.springframework.integration.mail.ImapMailReceiver;
 import org.springframework.integration.test.util.TestUtils;
 import org.springframework.util.ReflectionUtils;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
 
 /**
  * @author Oleg Zhurakousky

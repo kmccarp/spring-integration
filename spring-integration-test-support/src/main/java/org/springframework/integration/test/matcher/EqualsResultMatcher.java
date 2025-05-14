@@ -20,7 +20,6 @@ import java.util.function.Supplier;
 
 import org.hamcrest.Description;
 import org.hamcrest.DiagnosingMatcher;
-
 import org.springframework.util.ObjectUtils;
 
 /**

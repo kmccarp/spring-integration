@@ -16,6 +16,12 @@
 
 package org.springframework.integration.aggregator;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +33,6 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
-
 import org.springframework.beans.DirectFieldAccessor;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,12 +57,6 @@ import org.springframework.messaging.PollableChannel;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.fail;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
 
 /**
  * @author Gary Russell
@@ -89,7 +88,7 @@ public class BarrierMessageHandlerTests {
 		handler.setOutputChannel(outputChannel);
 		handler.setBeanFactory(mock(BeanFactory.class));
 		handler.afterPropertiesSet();
-		final AtomicReference<Exception> dupCorrelation = new AtomicReference<Exception>();
+		final AtomicReference<Exception> dupCorrelation = new AtomicReference<>();
 		final CountDownLatch latch = new CountDownLatch(1);
 		Runnable runnable = () -> {
 			try {
@@ -209,7 +208,7 @@ public class BarrierMessageHandlerTests {
 		handler.setOutputChannel(outputChannel);
 		handler.setBeanFactory(mock(BeanFactory.class));
 		handler.afterPropertiesSet();
-		final AtomicReference<Exception> exception = new AtomicReference<Exception>();
+		final AtomicReference<Exception> exception = new AtomicReference<>();
 		final CountDownLatch latch = new CountDownLatch(1);
 		ExecutorService exec = Executors.newSingleThreadExecutor();
 		exec.execute(() -> {

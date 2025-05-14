@@ -20,7 +20,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import reactor.core.publisher.Mono;
-
 import org.springframework.data.r2dbc.core.R2dbcEntityOperations;
 import org.springframework.data.r2dbc.core.StatementMapper;
 import org.springframework.data.relational.core.query.Criteria;
@@ -68,7 +67,7 @@ public class R2dbcMessageHandler extends AbstractReactiveMessageHandler {
 	@Nullable
 	private Expression criteriaExpression;
 
-	private volatile boolean initialized = false;
+	private volatile boolean initialized;
 
 	/**
 	 * Construct this instance using a fully created and initialized instance of provided

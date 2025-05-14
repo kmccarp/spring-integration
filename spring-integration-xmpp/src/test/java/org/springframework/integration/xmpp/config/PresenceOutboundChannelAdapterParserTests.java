@@ -16,10 +16,11 @@
 
 package org.springframework.integration.xmpp.config;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.integration.dispatcher.UnicastingDispatcher;
@@ -34,8 +35,6 @@ import org.springframework.messaging.SubscribableChannel;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Oleg Zhurakousky

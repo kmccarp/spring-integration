@@ -39,7 +39,7 @@ public abstract class AbstractSimplePatternFileListFilter<F> extends AbstractDir
 
 	private final String path;
 
-	public AbstractSimplePatternFileListFilter(String path) {
+	protected AbstractSimplePatternFileListFilter(String path) {
 		this.path = path;
 	}
 

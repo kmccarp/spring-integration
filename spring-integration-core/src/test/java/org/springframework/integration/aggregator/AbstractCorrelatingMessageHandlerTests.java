@@ -16,6 +16,14 @@
 
 package org.springframework.integration.aggregator;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.awaitility.Awaitility.await;
+import static org.mockito.Mockito.atLeast;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+
 import java.lang.reflect.Method;
 import java.time.Duration;
 import java.util.ArrayList;
@@ -30,7 +38,6 @@ import java.util.concurrent.TimeUnit;
 import org.assertj.core.api.InstanceOfAssertFactories;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.DirectFieldAccessor;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.integration.IntegrationMessageHeaderAccessor;
@@ -44,14 +51,6 @@ import org.springframework.integration.test.util.TestUtils;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.awaitility.Awaitility.await;
-import static org.mockito.Mockito.atLeast;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
 
 /**
  * @author Gary Russell
@@ -527,7 +526,7 @@ public class AbstractCorrelatingMessageHandlerTests {
 		handler.start();
 		Message<?> receive = discardChannel.receive(10000);
 		assertThat(receive).isNotNull();
-		await().until(groupStore::getMessageGroupCount, (count) -> count == 0);
+		await().until(groupStore::getMessageGroupCount, count -> count == 0);
 		verify(groupStore, atLeast(2)).expireMessageGroups(100);
 		taskScheduler.destroy();
 	}

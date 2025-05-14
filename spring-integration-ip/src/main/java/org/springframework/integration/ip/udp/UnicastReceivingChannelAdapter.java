@@ -64,7 +64,7 @@ public class UnicastReceivingChannelAdapter extends AbstractInternetProtocolRece
 
 	private int soSendBufferSize = -1;
 
-	private SocketCustomizer socketCustomizer = (aSocket) -> {
+	private SocketCustomizer socketCustomizer = aSocket -> {
 	};
 
 	/**
@@ -171,7 +171,7 @@ public class UnicastReceivingChannelAdapter extends AbstractInternetProtocolRece
 			return;
 		}
 		byte[] ack = id.toString().getBytes();
-		String ackAddress = (headers.get(IpHeaders.ACK_ADDRESS, String.class)).trim(); // NOSONAR caller checks header
+		String ackAddress = headers.get(IpHeaders.ACK_ADDRESS, String.class).trim(); // NOSONAR caller checks header
 		Matcher mat = ADDRESS_PATTERN.matcher(ackAddress);
 		if (!mat.matches()) {
 			throw new MessagingException(message,

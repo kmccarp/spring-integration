@@ -21,7 +21,6 @@ import java.nio.charset.Charset;
 
 import jakarta.mail.Multipart;
 import jakarta.mail.Part;
-
 import org.springframework.integration.support.AbstractIntegrationMessageBuilder;
 import org.springframework.integration.transformer.MessageTransformationException;
 import org.springframework.util.Assert;

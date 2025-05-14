@@ -16,6 +16,9 @@
 
 package org.springframework.integration.websocket;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
+
 import java.net.URI;
 import java.util.Collections;
 import java.util.HashMap;
@@ -32,7 +35,6 @@ import org.apache.tomcat.websocket.Constants;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.http.HttpHeaders;
 import org.springframework.integration.test.util.TestUtils;
 import org.springframework.web.socket.CloseStatus;
@@ -44,9 +46,6 @@ import org.springframework.web.socket.WebSocketMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.client.standard.StandardWebSocketClient;
 import org.springframework.web.socket.handler.ConcurrentWebSocketSessionDecorator;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
 
 /**
  * @author Artem Bilan

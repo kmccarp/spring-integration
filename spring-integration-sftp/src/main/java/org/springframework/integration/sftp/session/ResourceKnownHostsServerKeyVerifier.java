@@ -38,7 +38,6 @@ import org.apache.sshd.common.config.keys.KeyUtils;
 import org.apache.sshd.common.config.keys.PublicKeyEntryResolver;
 import org.apache.sshd.common.util.GenericUtils;
 import org.apache.sshd.common.util.net.SshdSocketAddress;
-
 import org.springframework.core.io.Resource;
 import org.springframework.util.Assert;
 

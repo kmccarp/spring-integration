@@ -16,6 +16,8 @@
 
 package org.springframework.integration.jdbc.store.channel;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletionService;
@@ -26,14 +28,12 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
-
 import javax.sql.DataSource;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.integration.IntegrationMessageHeaderAccessor;
@@ -53,8 +53,6 @@ import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.support.TransactionCallbackWithoutResult;
 import org.springframework.transaction.support.TransactionTemplate;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Gunnar Hillert
@@ -146,7 +144,7 @@ public abstract class AbstractTxTimeoutMessageStoreTests {
 		}
 
 		ExecutorService executorService = Executors.newCachedThreadPool();
-		CompletionService<Boolean> completionService = new ExecutorCompletionService<Boolean>(executorService);
+		CompletionService<Boolean> completionService = new ExecutorCompletionService<>(executorService);
 
 		final int concurrency = 5;
 

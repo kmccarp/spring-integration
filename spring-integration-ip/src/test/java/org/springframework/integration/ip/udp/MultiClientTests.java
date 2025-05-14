@@ -16,17 +16,16 @@
 
 package org.springframework.integration.ip.udp;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.integration.channel.QueueChannel;
 import org.springframework.integration.ip.util.SocketTestUtils;
 import org.springframework.integration.support.MessageBuilder;
 import org.springframework.messaging.Message;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  *

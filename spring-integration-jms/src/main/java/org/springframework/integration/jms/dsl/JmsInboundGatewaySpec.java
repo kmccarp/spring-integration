@@ -21,7 +21,6 @@ import java.util.function.Consumer;
 import jakarta.jms.Destination;
 import jakarta.jms.JMSException;
 import jakarta.jms.Message;
-
 import org.springframework.expression.Expression;
 import org.springframework.integration.dsl.MessagingGatewaySpec;
 import org.springframework.integration.expression.FunctionExpression;

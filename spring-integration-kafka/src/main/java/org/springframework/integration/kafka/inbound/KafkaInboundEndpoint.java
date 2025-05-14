@@ -18,7 +18,6 @@ package org.springframework.integration.kafka.inbound;
 
 import org.apache.kafka.clients.consumer.Consumer;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
-
 import org.springframework.core.AttributeAccessor;
 import org.springframework.kafka.KafkaException;
 import org.springframework.kafka.support.Acknowledgment;

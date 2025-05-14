@@ -16,12 +16,13 @@
 
 package org.springframework.integration.scripting.config.jsr223;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.beans.PropertyEditorSupport;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.AbstractResource;
 import org.springframework.integration.channel.QueueChannel;
@@ -29,8 +30,6 @@ import org.springframework.integration.support.MessageBuilder;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Mark Fisher

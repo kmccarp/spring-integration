@@ -16,6 +16,8 @@
 
 package org.springframework.integration.rsocket.inbound;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.time.Duration;
 
 import io.rsocket.core.RSocketServer;
@@ -31,7 +33,6 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Sinks;
 import reactor.test.StepVerifier;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -49,8 +50,6 @@ import org.springframework.messaging.PollableChannel;
 import org.springframework.messaging.rsocket.RSocketRequester;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Artem Bilan

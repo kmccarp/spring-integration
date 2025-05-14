@@ -16,8 +16,9 @@
 
 package org.springframework.integration.handler.advice;
 
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.classify.ClassifierSupport;
 import org.springframework.integration.support.MessageBuilder;
@@ -25,8 +26,6 @@ import org.springframework.messaging.Message;
 import org.springframework.retry.RetryState;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Gary Russell

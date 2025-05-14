@@ -32,7 +32,6 @@ import groovy.lang.Script;
 import groovy.transform.CompileStatic;
 import org.codehaus.groovy.control.CompilerConfiguration;
 import org.codehaus.groovy.control.customizers.ASTTransformationCustomizer;
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.InitializingBean;
@@ -163,7 +162,7 @@ public class GroovyScriptExecutingMessageProcessor extends AbstractScriptExecuti
 		Assert.notNull(scriptSource, "scriptSource must not be null");
 		parseScriptIfNecessary(scriptSource);
 		Object result = execute(variables);
-		return (result instanceof GString) ? result.toString() : result;
+		return result instanceof GString ? result.toString() : result;
 	}
 
 	private void parseScriptIfNecessary(ScriptSource scriptSource) {

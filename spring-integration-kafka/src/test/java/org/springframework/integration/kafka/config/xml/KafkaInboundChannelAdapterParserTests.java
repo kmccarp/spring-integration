@@ -16,9 +16,10 @@
 
 package org.springframework.integration.kafka.config.xml;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
@@ -27,8 +28,6 @@ import org.springframework.integration.test.util.TestUtils;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Gary Russell

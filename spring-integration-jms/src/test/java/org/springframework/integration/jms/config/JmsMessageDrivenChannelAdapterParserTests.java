@@ -16,10 +16,11 @@
 
 package org.springframework.integration.jms.config;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.Properties;
 
 import org.junit.Test;
-
 import org.springframework.beans.DirectFieldAccessor;
 import org.springframework.beans.NotReadablePropertyException;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -31,8 +32,6 @@ import org.springframework.jms.listener.DefaultMessageListenerContainer;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.PollableChannel;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Mark Fisher

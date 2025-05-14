@@ -16,12 +16,13 @@
 
 package org.springframework.integration.redis.inbound;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -31,8 +32,6 @@ import org.springframework.integration.endpoint.SourcePollingChannelAdapter;
 import org.springframework.integration.redis.RedisContainerTest;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.SubscribableChannel;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Oleg Zhurakousky
@@ -95,7 +94,7 @@ class RedisStoreInboundChannelAdapterIntegrationTests implements RedisContainerT
 		assertThat(message).isNull();
 
 		int n = 0;
-		while (n++ < 100 && template.keys("bar").size() == 0) {
+		while (n++ < 100 && template.keys("bar").isEmpty()) {
 			Thread.sleep(100);
 		}
 		assertThat(n < 100).as("Rename didn't occur").isTrue();
@@ -127,7 +126,7 @@ class RedisStoreInboundChannelAdapterIntegrationTests implements RedisContainerT
 		spca.start();
 		assertThat(latch.await(10, TimeUnit.SECONDS)).isTrue();
 		int n = 0;
-		while (n++ < 100 && template.keys("baz").size() == 0) {
+		while (n++ < 100 && template.keys("baz").isEmpty()) {
 			Thread.sleep(100);
 		}
 		assertThat(n < 100).as("Rename didn't occur").isTrue();
@@ -161,7 +160,7 @@ class RedisStoreInboundChannelAdapterIntegrationTests implements RedisContainerT
 		assertThat(message).isNull();
 
 		int n = 0;
-		while (n++ < 100 && template.keys("bar").size() == 0) {
+		while (n++ < 100 && template.keys("bar").isEmpty()) {
 			Thread.sleep(100);
 		}
 		assertThat(n < 100).as("Rename didn't occur").isTrue();

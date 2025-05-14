@@ -37,7 +37,6 @@ import org.apache.ftpserver.usermanager.impl.TransferRatePermission;
 import org.apache.ftpserver.usermanager.impl.WritePermission;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
-
 import org.springframework.integration.file.remote.RemoteFileTestSupport;
 import org.springframework.integration.file.remote.session.CachingSessionFactory;
 import org.springframework.integration.file.remote.session.SessionFactory;
@@ -109,7 +108,7 @@ public class FtpTestSupport extends RemoteFileTestSupport {
 		return FTPLET;
 	}
 
-	private static class TestUserManager implements UserManager {
+	private static final class TestUserManager implements UserManager {
 
 		private final BaseUser testUser;
 
@@ -157,7 +156,7 @@ public class FtpTestSupport extends RemoteFileTestSupport {
 
 		@Override
 		public boolean isAdmin(String s) {
-			return s.equals("admin");
+			return "admin".equals(s);
 		}
 
 	}

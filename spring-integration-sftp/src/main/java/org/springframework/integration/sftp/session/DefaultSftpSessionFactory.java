@@ -51,7 +51,6 @@ import org.apache.sshd.sftp.client.SftpMessage;
 import org.apache.sshd.sftp.client.SftpVersionSelector;
 import org.apache.sshd.sftp.client.impl.AbstractSftpClient;
 import org.apache.sshd.sftp.client.impl.DefaultSftpClient;
-
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.core.io.Resource;
 import org.springframework.integration.context.IntegrationContextUtils;
@@ -95,7 +94,7 @@ public class DefaultSftpSessionFactory
 
 	private final Lock sharedSessionLock;
 
-	private boolean isInnerClient = false;
+	private boolean isInnerClient;
 
 	private String host;
 
@@ -115,7 +114,7 @@ public class DefaultSftpSessionFactory
 
 	private UserInteraction userInteraction;
 
-	private boolean allowUnknownKeys = false;
+	private boolean allowUnknownKeys;
 
 	private Integer timeout = (int) IntegrationContextUtils.DEFAULT_TIMEOUT;
 
@@ -123,7 +122,7 @@ public class DefaultSftpSessionFactory
 
 	private volatile SftpClient sharedSftpClient;
 
-	private Consumer<SshClient> sshClientConfigurer = (sshClient) -> {
+	private Consumer<SshClient> sshClientConfigurer = sshClient -> {
 	};
 
 	public DefaultSftpSessionFactory() {

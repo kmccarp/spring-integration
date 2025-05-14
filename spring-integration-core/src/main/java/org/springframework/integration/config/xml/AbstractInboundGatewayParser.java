@@ -17,7 +17,6 @@
 package org.springframework.integration.config.xml;
 
 import org.w3c.dom.Element;
-
 import org.springframework.beans.factory.BeanDefinitionStoreException;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
@@ -51,9 +50,9 @@ public abstract class AbstractInboundGatewayParser extends AbstractSimpleBeanDef
 
 	@Override
 	protected boolean isEligibleAttribute(String attributeName) {
-		return !attributeName.equals("name") && !attributeName.equals("request-channel") // NOSONAR boolean complexity
-				&& !attributeName.equals("error-channel")
-				&& !attributeName.equals("reply-channel") && super.isEligibleAttribute(attributeName);
+		return !"name".equals(attributeName) && !"request-channel".equals(attributeName) // NOSONAR boolean complexity
+				&& !"error-channel".equals(attributeName)
+				&& !"reply-channel".equals(attributeName) && super.isEligibleAttribute(attributeName);
 	}
 
 	@Override

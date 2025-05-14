@@ -17,7 +17,6 @@
 package org.springframework.integration.handler.advice;
 
 import org.aopalliance.intercept.MethodInvocation;
-
 import org.springframework.integration.IntegrationMessageHeaderAccessor;
 import org.springframework.integration.MessageRejectedException;
 import org.springframework.integration.core.MessageSelector;

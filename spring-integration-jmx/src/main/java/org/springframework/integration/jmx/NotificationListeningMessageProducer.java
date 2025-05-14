@@ -23,7 +23,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
-
 import javax.management.InstanceNotFoundException;
 import javax.management.ListenerNotFoundException;
 import javax.management.MBeanServerConnection;
@@ -148,7 +147,7 @@ public class NotificationListeningMessageProducer extends MessageProducerSupport
 		Assert.notNull(this.mBeanObjectNames, "An ObjectName is required.");
 		try {
 			Collection<ObjectName> objectNames = this.retrieveMBeanNames();
-			if (objectNames.size() < 1) {
+			if (objectNames.isEmpty()) {
 				this.logger.error(() -> "No MBeans found matching ObjectName pattern(s): " +
 						Arrays.toString(this.mBeanObjectNames));
 			}
@@ -203,7 +202,7 @@ public class NotificationListeningMessageProducer extends MessageProducerSupport
 			catch (IOException e) {
 				throw new IllegalStateException("IOException on MBeanServerConnection.", e);
 			}
-			if (mBeanInfos.size() == 0) {
+			if (mBeanInfos.isEmpty()) {
 				this.logger.debug(() -> "No MBeans found matching pattern: " + pattern);
 			}
 			for (ObjectInstance instance : mBeanInfos) {

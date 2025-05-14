@@ -16,10 +16,12 @@
 
 package org.springframework.integration.core;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+
 import java.util.Properties;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.integration.history.MessageHistory;
 import org.springframework.integration.message.AdviceMessage;
 import org.springframework.integration.support.MessageBuilder;
@@ -28,9 +30,6 @@ import org.springframework.integration.support.context.NamedComponent;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.ErrorMessage;
 import org.springframework.messaging.support.GenericMessage;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 /**
  * @author Mark Fisher

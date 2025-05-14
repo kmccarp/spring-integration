@@ -16,6 +16,8 @@
 
 package org.springframework.integration.hazelcast.inbound;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.LifecycleEvent;
 import com.hazelcast.core.LifecycleEvent.LifecycleState;
@@ -24,7 +26,6 @@ import org.junit.AfterClass;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.integration.hazelcast.inbound.util.HazelcastInboundChannelAdapterTestUtils;
 import org.springframework.messaging.Message;
@@ -32,8 +33,6 @@ import org.springframework.messaging.PollableChannel;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Hazelcast Cluster Monitor Inbound Channel Adapter Unit Test Class

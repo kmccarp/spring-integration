@@ -16,6 +16,8 @@
 
 package org.springframework.integration.ftp.inbound;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.util.ArrayList;
@@ -30,7 +32,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInfo;
-
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -58,8 +59,6 @@ import org.springframework.integration.ftp.filters.FtpPersistentAcceptOnceFileLi
 import org.springframework.integration.ftp.session.FtpRemoteFileTemplate;
 import org.springframework.integration.metadata.SimpleMetadataStore;
 import org.springframework.messaging.Message;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Gary Russell
@@ -92,7 +91,7 @@ public class RotatingServersTests extends FtpTestSupport {
 
 	@BeforeEach
 	public void extraSetup(TestInfo info) {
-		if (info.getTestMethod().get().getName().equals("testFairStreaming")) {
+		if ("testFairStreaming".equals(info.getTestMethod().get().getName())) {
 			FtpRemoteFileTemplate rft = new FtpRemoteFileTemplate(sessionFactory());
 			rft.execute(s -> {
 				ByteArrayInputStream bais = new ByteArrayInputStream("foo".getBytes());
@@ -118,7 +117,7 @@ public class RotatingServersTests extends FtpTestSupport {
 	public void extraCleanUp(TestInfo info) {
 		FtpRemoteFileTemplate rft = new FtpRemoteFileTemplate(sessionFactory());
 		rft.execute(s -> {
-			if (info.getTestMethod().get().getName().equals("testFairStreaming")) {
+			if ("testFairStreaming".equals(info.getTestMethod().get().getName())) {
 				s.remove("foo/f4");
 				s.remove("baz/f5");
 				s.remove("fiz/f6");

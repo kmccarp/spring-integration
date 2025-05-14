@@ -16,17 +16,16 @@
 
 package org.springframework.integration.xml.source;
 
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.xmlunit.assertj3.XmlAssert.assertThat;
+
 import java.io.BufferedReader;
 
 import org.junit.jupiter.api.Test;
 import org.w3c.dom.Document;
-
 import org.springframework.integration.xml.util.XmlTestUtil;
 import org.springframework.messaging.MessagingException;
 import org.springframework.xml.transform.StringSource;
-
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.xmlunit.assertj3.XmlAssert.assertThat;
 
 /**
  * @author Jonas Partner

@@ -27,11 +27,11 @@ import org.springframework.integration.events.IntegrationEvent;
 @SuppressWarnings("serial")
 public abstract class RedisIntegrationEvent extends IntegrationEvent {
 
-	public RedisIntegrationEvent(Object source) {
+	protected RedisIntegrationEvent(Object source) {
 		super(source);
 	}
 
-	public RedisIntegrationEvent(Object source, Throwable cause) {
+	protected RedisIntegrationEvent(Object source, Throwable cause) {
 		super(source, cause);
 	}
 

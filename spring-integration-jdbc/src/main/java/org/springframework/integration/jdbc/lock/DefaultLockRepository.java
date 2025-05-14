@@ -22,7 +22,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicBoolean;
-
 import javax.sql.DataSource;
 
 import org.springframework.beans.BeansException;

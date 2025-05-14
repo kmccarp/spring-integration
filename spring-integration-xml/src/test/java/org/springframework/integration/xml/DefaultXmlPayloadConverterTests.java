@@ -16,11 +16,13 @@
 
 package org.springframework.integration.xml;
 
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.xmlunit.assertj3.XmlAssert.assertThat;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringReader;
-
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.Source;
 import javax.xml.transform.dom.DOMSource;
@@ -33,12 +35,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
-
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.messaging.MessagingException;
-
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.xmlunit.assertj3.XmlAssert.assertThat;
 
 /**
  *

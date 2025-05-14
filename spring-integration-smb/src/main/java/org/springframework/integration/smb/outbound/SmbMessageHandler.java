@@ -17,7 +17,6 @@
 package org.springframework.integration.smb.outbound;
 
 import jcifs.smb.SmbFile;
-
 import org.springframework.integration.file.remote.handler.FileTransferringMessageHandler;
 import org.springframework.integration.file.remote.session.SessionFactory;
 import org.springframework.integration.file.support.FileExistsMode;

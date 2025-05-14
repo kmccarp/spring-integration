@@ -16,21 +16,20 @@
 
 package org.springframework.integration.scripting.jsr223;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.HashMap;
 import java.util.Map;
 
 import org.assertj.core.api.InstanceOfAssertFactories;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.integration.scripting.PolyglotScriptExecutor;
 import org.springframework.integration.scripting.ScriptExecutor;
 import org.springframework.scripting.ScriptSource;
 import org.springframework.scripting.support.ResourceScriptSource;
 import org.springframework.scripting.support.StaticScriptSource;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author David Turanski

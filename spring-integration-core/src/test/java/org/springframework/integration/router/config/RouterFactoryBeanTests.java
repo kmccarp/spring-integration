@@ -16,15 +16,14 @@
 
 package org.springframework.integration.router.config;
 
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
+import org.junit.jupiter.api.Test;
 import org.springframework.integration.channel.QueueChannel;
 import org.springframework.integration.config.RouterFactoryBean;
 import org.springframework.integration.test.util.TestUtils;
 import org.springframework.messaging.MessageHandler;
 import org.springframework.messaging.support.GenericMessage;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Gary Russell

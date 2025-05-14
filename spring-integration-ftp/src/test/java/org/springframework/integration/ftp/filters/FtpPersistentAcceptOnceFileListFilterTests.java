@@ -16,16 +16,15 @@
 
 package org.springframework.integration.ftp.filters;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
 import org.apache.commons.net.ftp.FTPFile;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.integration.metadata.SimpleMetadataStore;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Gary Russell

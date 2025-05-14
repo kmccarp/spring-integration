@@ -16,14 +16,14 @@
 
 package org.springframework.integration.jdbc.store.channel;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-
 import javax.sql.DataSource;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.serializer.support.SerializingConverter;
 import org.springframework.integration.jdbc.store.JdbcChannelMessageStore;
@@ -37,8 +37,6 @@ import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.support.TransactionCallbackWithoutResult;
 import org.springframework.transaction.support.TransactionTemplate;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Gunnar Hillert

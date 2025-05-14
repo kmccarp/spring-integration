@@ -37,7 +37,6 @@ import org.eclipse.paho.mqttv5.common.MqttException;
 import org.eclipse.paho.mqttv5.common.MqttMessage;
 import org.eclipse.paho.mqttv5.common.MqttSubscription;
 import org.eclipse.paho.mqttv5.common.packet.MqttProperties;
-
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.integration.IntegrationMessageHeaderAccessor;
@@ -375,7 +374,7 @@ public class Mqttv5PahoMessageDrivenChannelAdapter
 			}
 			super.removeTopic(topic);
 			if (!CollectionUtils.isEmpty(this.subscriptions)) {
-				this.subscriptions.removeIf((sub) -> ObjectUtils.containsElement(topic, sub.getTopic()));
+				this.subscriptions.removeIf(sub -> ObjectUtils.containsElement(topic, sub.getTopic()));
 			}
 		}
 		catch (MqttException ex) {

@@ -16,15 +16,14 @@
 
 package org.springframework.integration.event.outbound;
 
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
+import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.integration.event.core.MessagingEvent;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.GenericMessage;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Mark Fisher
@@ -70,7 +69,7 @@ public class ApplicationEventPublishingMessageHandlerTests {
 		handler.handleMessage(message);
 		Object event = publisher.getLastEvent();
 		assertThat(event.getClass()).isEqualTo(String.class);
-		assertThat(((String) event)).isEqualTo("testing");
+		assertThat((String) event).isEqualTo("testing");
 	}
 
 	private static class TestApplicationEventPublisher implements ApplicationEventPublisher {

@@ -24,7 +24,6 @@ import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
-
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.integration.mqtt.core.ClientManager;
 import org.springframework.integration.mqtt.core.DefaultMqttPahoClientFactory;

@@ -16,6 +16,9 @@
 
 package org.springframework.integration.jms.request_reply;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+
 import java.util.concurrent.CountDownLatch;
 
 import jakarta.jms.ConnectionFactory;
@@ -25,7 +28,6 @@ import jakarta.jms.Message;
 import jakarta.jms.MessageProducer;
 import jakarta.jms.TextMessage;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.integration.MessageTimeoutException;
 import org.springframework.integration.gateway.RequestReplyExchanger;
@@ -39,9 +41,6 @@ import org.springframework.jms.listener.DefaultMessageListenerContainer;
 import org.springframework.jms.listener.SessionAwareMessageListener;
 import org.springframework.jms.support.converter.SimpleMessageConverter;
 import org.springframework.messaging.support.GenericMessage;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 /**
  * @author Oleg Zhurakousky

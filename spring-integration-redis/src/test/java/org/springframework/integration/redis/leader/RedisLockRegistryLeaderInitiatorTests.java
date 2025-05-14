@@ -16,6 +16,8 @@
 
 package org.springframework.integration.redis.leader;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
@@ -23,7 +25,6 @@ import java.util.concurrent.TimeUnit;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.core.task.SimpleAsyncTaskExecutor;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.integration.leader.Context;
@@ -33,8 +34,6 @@ import org.springframework.integration.redis.RedisContainerTest;
 import org.springframework.integration.redis.util.RedisLockRegistry;
 import org.springframework.integration.support.leader.LockRegistryLeaderInitiator;
 import org.springframework.integration.test.condition.LogLevels;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Artem Bilan

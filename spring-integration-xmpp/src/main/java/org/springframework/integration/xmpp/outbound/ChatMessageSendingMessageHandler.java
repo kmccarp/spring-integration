@@ -28,7 +28,6 @@ import org.jivesoftware.smack.util.PacketParserUtils;
 import org.jivesoftware.smack.xml.XmlPullParser;
 import org.jxmpp.jid.Jid;
 import org.jxmpp.jid.impl.JidCreate;
-
 import org.springframework.integration.xmpp.XmppHeaders;
 import org.springframework.integration.xmpp.core.AbstractXmppConnectionAwareMessageHandler;
 import org.springframework.integration.xmpp.support.DefaultXmppHeaderMapper;

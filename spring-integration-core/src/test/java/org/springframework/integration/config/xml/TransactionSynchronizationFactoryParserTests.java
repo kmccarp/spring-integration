@@ -16,8 +16,9 @@
 
 package org.springframework.integration.config.xml;
 
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
+import org.junit.jupiter.api.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.expression.Expression;
 import org.springframework.expression.spel.standard.SpelExpression;
@@ -26,8 +27,6 @@ import org.springframework.integration.transaction.DefaultTransactionSynchroniza
 import org.springframework.integration.transaction.ExpressionEvaluatingTransactionSynchronizationProcessor;
 import org.springframework.integration.transaction.TransactionSynchronizationProcessor;
 import org.springframework.messaging.MessageChannel;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Oleg Zhurakousky

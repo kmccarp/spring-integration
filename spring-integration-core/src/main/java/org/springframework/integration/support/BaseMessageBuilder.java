@@ -23,7 +23,6 @@ import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.springframework.integration.IntegrationMessageHeaderAccessor;
 import org.springframework.lang.Nullable;
 import org.springframework.messaging.Message;
@@ -76,7 +75,7 @@ public abstract class BaseMessageBuilder<T, B extends BaseMessageBuilder<T, B>>
 		this.originalMessage = originalMessage;
 		this.headerAccessor = new IntegrationMessageHeaderAccessor(originalMessage);
 		if (originalMessage != null) {
-			this.modified = (!this.payload.equals(originalMessage.getPayload()));
+			this.modified = !this.payload.equals(originalMessage.getPayload());
 		}
 	}
 

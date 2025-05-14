@@ -20,7 +20,6 @@ import java.util.Collection;
 import java.util.List;
 
 import org.w3c.dom.Element;
-
 import org.springframework.beans.factory.BeanDefinitionStoreException;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.ConstructorArgumentValues;

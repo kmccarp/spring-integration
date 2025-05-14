@@ -50,7 +50,7 @@ public abstract class AbstractInternetProtocolSendingMessageHandler extends Abst
 
 	private volatile boolean running;
 
-	public AbstractInternetProtocolSendingMessageHandler(String host, int port) {
+	protected AbstractInternetProtocolSendingMessageHandler(String host, int port) {
 		Assert.notNull(host, "host must not be null");
 		this.destinationAddress = new InetSocketAddress(host, port);
 		this.host = host;

@@ -16,22 +16,21 @@
 
 package org.springframework.integration.config;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.ListableBeanFactory;
 import org.springframework.integration.channel.interceptor.GlobalChannelInterceptorWrapper;
 import org.springframework.messaging.support.ChannelInterceptor;
 import org.springframework.messaging.support.InterceptableChannel;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 /**
  * @author Meherzad Lahewala

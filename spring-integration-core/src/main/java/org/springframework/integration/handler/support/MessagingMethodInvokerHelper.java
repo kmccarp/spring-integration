@@ -40,7 +40,6 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 import org.apache.commons.logging.LogFactory;
-
 import org.springframework.aop.framework.Advised;
 import org.springframework.aop.framework.AopProxyUtils;
 import org.springframework.aop.support.AopUtils;
@@ -428,7 +427,7 @@ public class MessagingMethodInvokerHelper extends AbstractExpressionEvaluator im
 						new FixedMethodFilter(ClassUtils.getMostSpecificMethod(this.method, targetType)));
 				if (this.expectedType != null) {
 					Assert.state(context.getTypeConverter()
-									.canConvert(TypeDescriptor.valueOf((this.method).getReturnType()), this.expectedType),
+									.canConvert(TypeDescriptor.valueOf(this.method.getReturnType()), this.expectedType),
 							() -> "Cannot convert to expected type (" + this.expectedType + ") from " + this.method);
 				}
 			}
@@ -556,9 +555,9 @@ public class MessagingMethodInvokerHelper extends AbstractExpressionEvaluator im
 		}
 		else {
 			String compilerMode = resolveExpression(candidate.useSpelInvoker.compilerMode()).toUpperCase();
-			parser = !StringUtils.hasText(compilerMode)
-					? EXPRESSION_PARSER_DEFAULT
-					: SPEL_COMPILERS.get(SpelCompilerMode.valueOf(compilerMode));
+			parser = StringUtils.hasText(compilerMode)
+					? SPEL_COMPILERS.get(SpelCompilerMode.valueOf(compilerMode))
+					: EXPRESSION_PARSER_DEFAULT;
 		}
 		candidate.expression = parser.parseExpression(candidate.expressionString);
 		if (!this.useSpelInvoker && !candidate.spelOnly) {
@@ -786,7 +785,7 @@ public class MessagingMethodInvokerHelper extends AbstractExpressionEvaluator im
 		return !(method.isSynthetic() ||
 				ReflectionUtils.isObjectMethod(method) ||
 				AnnotatedElementUtils.isAnnotated(method, "groovy.transform.Generated") ||
-				declaringClass.getName().equals("groovy.lang.GroovyObject") ||
+				"groovy.lang.GroovyObject".equals(declaringClass.getName()) ||
 				declaringClass.equals(Proxy.class) ||
 				(this.requiresReply && void.class.equals(method.getReturnType())) ||
 				(this.methodName != null && !this.methodName.equals(method.getName())) ||
@@ -1067,7 +1066,7 @@ public class MessagingMethodInvokerHelper extends AbstractExpressionEvaluator im
 		// The number of times InvocableHandlerMethod was attempted and failed - enables us to eventually
 		// give up trying to call it when it just doesn't seem to be possible.
 		// Switching to 'spelOnly' afterwards forever.
-		private volatile int failedAttempts = 0;
+		private volatile int failedAttempts;
 
 		HandlerMethod(Method method, boolean canProcessMessageList) {
 			this.method = method;

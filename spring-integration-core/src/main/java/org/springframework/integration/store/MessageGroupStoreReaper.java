@@ -20,7 +20,6 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.SmartLifecycle;
@@ -43,11 +42,11 @@ public class MessageGroupStoreReaper implements Runnable, DisposableBean, Initia
 
 	private MessageGroupStore messageGroupStore;
 
-	private boolean expireOnDestroy = false;
+	private boolean expireOnDestroy;
 
 	private long timeout = -1;
 
-	private int phase = 0;
+	private int phase;
 
 	private boolean autoStartup = true;
 

@@ -16,17 +16,16 @@
 
 package org.springframework.integration.support;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.io.Serial;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.lang.Nullable;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.GenericMessage;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Gary Russell
@@ -112,7 +111,7 @@ public class MessageBuilderTests {
 		private static Map<String, Object> maskHeaders(Map<String, Object> headers) {
 			return headers.entrySet()
 					.stream()
-					.map((entry) -> entry.getKey().equals("password") ? Map.entry(entry.getKey(), "******") : entry)
+					.map(entry -> "password".equals(entry.getKey()) ? Map.entry(entry.getKey(), "******") : entry)
 					.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 		}
 

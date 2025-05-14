@@ -16,6 +16,8 @@
 
 package org.springframework.integration.r2dbc.inbound;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
@@ -25,7 +27,6 @@ import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -38,8 +39,6 @@ import org.springframework.integration.r2dbc.entity.Person;
 import org.springframework.r2dbc.core.DatabaseClient;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Rohan Mukesh
@@ -263,7 +262,7 @@ public class R2dbcMessageSourceTests {
 				(DatabaseClient.GenericExecuteSpec bindSpec, Person o) -> bindSpec.bind("id", o.getId()));
 
 		StepVerifier.create(defaultR2dbcMessageSource.receive().getPayload())
-				.expectErrorMatches(throwable -> throwable instanceof ClassCastException)
+				.expectErrorMatches(ClassCastException.class::isInstance)
 				.verify();
 
 	}

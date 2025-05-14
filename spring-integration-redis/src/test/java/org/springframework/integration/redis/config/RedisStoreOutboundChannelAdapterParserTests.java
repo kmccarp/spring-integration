@@ -16,8 +16,9 @@
 
 package org.springframework.integration.redis.config;
 
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
+import org.junit.jupiter.api.Test;
 import org.springframework.aop.framework.Advised;
 import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +34,6 @@ import org.springframework.integration.redis.outbound.RedisStoreWritingMessageHa
 import org.springframework.integration.test.util.TestUtils;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  *
@@ -58,7 +57,7 @@ public class RedisStoreOutboundChannelAdapterParserTests {
 				RedisStoreWritingMessageHandler.class);
 		assertThat(((LiteralExpression) TestUtils.getPropertyValue(withStringTemplate,
 				"keyExpression")).getExpressionString()).isEqualTo("pepboys");
-		assertThat((TestUtils.getPropertyValue(withStringTemplate, "collectionType")).toString())
+		assertThat(TestUtils.getPropertyValue(withStringTemplate, "collectionType").toString())
 				.isEqualTo("PROPERTIES");
 		assertThat(TestUtils.getPropertyValue(withStringTemplate, "redisTemplate") instanceof StringRedisTemplate)
 				.isTrue();
@@ -82,7 +81,7 @@ public class RedisStoreOutboundChannelAdapterParserTests {
 						RedisStoreWritingMessageHandler.class);
 		assertThat(((LiteralExpression) TestUtils.getPropertyValue(withStringObjectTemplate,
 				"keyExpression")).getExpressionString()).isEqualTo("pepboys");
-		assertThat((TestUtils.getPropertyValue(withStringObjectTemplate, "collectionType")).toString())
+		assertThat(TestUtils.getPropertyValue(withStringObjectTemplate, "collectionType").toString())
 				.isEqualTo("PROPERTIES");
 		assertThat(TestUtils.getPropertyValue(withStringObjectTemplate, "redisTemplate") instanceof StringRedisTemplate)
 				.isFalse();
@@ -103,7 +102,7 @@ public class RedisStoreOutboundChannelAdapterParserTests {
 						RedisStoreWritingMessageHandler.class);
 		assertThat(((LiteralExpression) TestUtils.getPropertyValue(withExternalTemplate,
 				"keyExpression")).getExpressionString()).isEqualTo("pepboys");
-		assertThat((TestUtils.getPropertyValue(withExternalTemplate, "collectionType")).toString())
+		assertThat(TestUtils.getPropertyValue(withExternalTemplate, "collectionType").toString())
 				.isEqualTo("PROPERTIES");
 		assertThat(TestUtils.getPropertyValue(withExternalTemplate, "redisTemplate")).isSameAs(redisTemplate);
 	}

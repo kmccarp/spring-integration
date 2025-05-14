@@ -16,13 +16,13 @@
 
 package org.springframework.integration.transformer;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.Date;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import org.junit.jupiter.api.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Gary Russell

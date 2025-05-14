@@ -16,12 +16,15 @@
 
 package org.springframework.integration.handler;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
+import static org.mockito.Mockito.mock;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanInitializationException;
 import org.springframework.integration.support.MessageBuilder;
@@ -30,10 +33,6 @@ import org.springframework.integration.transformer.support.StaticHeaderValueMess
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.handler.annotation.Payload;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.fail;
-import static org.mockito.Mockito.mock;
 
 /**
  * @author Mark Fisher
@@ -122,7 +121,7 @@ public class MethodInvokingHeaderEnricherTests {
 	public static class TestBean {
 
 		public Map<String, Object> process(@Payload("toUpperCase()") String s) {
-			Map<String, Object> map = new HashMap<String, Object>();
+			Map<String, Object> map = new HashMap<>();
 			map.put("foo", s);
 			map.put("bar", "ABC");
 			return map;

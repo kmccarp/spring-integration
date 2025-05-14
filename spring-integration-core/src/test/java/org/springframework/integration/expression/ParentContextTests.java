@@ -16,6 +16,9 @@
 
 package org.springframework.integration.expression;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -24,7 +27,6 @@ import java.util.Map;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
@@ -48,9 +50,6 @@ import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.PollableChannel;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.util.ClassUtils;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 /**
  * @author Gary Russell
@@ -102,7 +101,7 @@ public class ParentContextTests {
 		assertThat(childFunctions.containsKey("fooFunc")).isTrue();
 		jsonPath = childFunctions.get("jsonPath");
 		assertThat(jsonPath).isNotNull();
-		assertThat(jsonPath).isNotIn(Arrays.asList((JsonPathUtils.class.getMethods())));
+		assertThat(jsonPath).isNotIn(Arrays.asList(JsonPathUtils.class.getMethods()));
 		assertThat(evalContexts.size()).isEqualTo(3);
 		assertThat(evalContexts.get(1).getBeanResolver()).isSameAs(evalContexts.get(0).getBeanResolver());
 

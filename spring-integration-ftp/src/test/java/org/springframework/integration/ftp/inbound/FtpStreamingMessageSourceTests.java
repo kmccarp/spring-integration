@@ -16,6 +16,8 @@
 
 package org.springframework.integration.ftp.inbound;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.io.Closeable;
 import java.io.InputStream;
 import java.time.Duration;
@@ -26,7 +28,6 @@ import java.util.concurrent.ConcurrentMap;
 
 import org.apache.commons.net.ftp.FTPFile;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -54,8 +55,6 @@ import org.springframework.messaging.Message;
 import org.springframework.scheduling.support.PeriodicTrigger;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Gary Russell

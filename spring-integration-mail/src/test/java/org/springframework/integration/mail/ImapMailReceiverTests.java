@@ -16,6 +16,21 @@
 
 package org.springframework.integration.mail;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.willAnswer;
+import static org.mockito.BDDMockito.willDoNothing;
+import static org.mockito.Mockito.atLeast;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.reflect.Field;
@@ -64,7 +79,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-
 import org.springframework.beans.DirectFieldAccessor;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,21 +102,6 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.util.MimeTypeUtils;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.BDDMockito.willAnswer;
-import static org.mockito.BDDMockito.willDoNothing;
-import static org.mockito.Mockito.atLeast;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 /**
  * @author Oleg Zhurakousky
@@ -903,7 +902,7 @@ public class ImapMailReceiverTests {
 		final Message[] messages1 = new Message[] {null, null, message1};
 		final Message[] messages2 = new Message[] {message2};
 		final SearchTermStrategy searchTermStrategy = mock(SearchTermStrategy.class);
-		class TestReceiver extends ImapMailReceiver {
+		final class TestReceiver extends ImapMailReceiver {
 
 			private boolean firstDone;
 
@@ -917,7 +916,7 @@ public class ImapMailReceiverTests {
 				given(folder.isOpen()).willReturn(true);
 				try {
 					given(folder.getMessages())
-							.willReturn(!this.firstDone ? messages1 : messages2);
+							.willReturn(this.firstDone ? messages2 : messages1);
 				}
 				catch (MessagingException ignored) {
 				}
@@ -1048,7 +1047,7 @@ public class ImapMailReceiverTests {
 
 	}
 
-	private static class TestThrowingMimeMessage extends MimeMessage {
+	private static final class TestThrowingMimeMessage extends MimeMessage {
 
 		protected final AtomicBoolean throwExceptionBeforeWrite = new AtomicBoolean(true);
 

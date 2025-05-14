@@ -41,7 +41,7 @@ public abstract class AbstractMessageProcessingSelector
 
 	private final MessageProcessor<Boolean> messageProcessor;
 
-	public AbstractMessageProcessingSelector(MessageProcessor<Boolean> messageProcessor) {
+	protected AbstractMessageProcessingSelector(MessageProcessor<Boolean> messageProcessor) {
 		Assert.notNull(messageProcessor, "messageProcessor must not be null");
 		this.messageProcessor = messageProcessor;
 	}

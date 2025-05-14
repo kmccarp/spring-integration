@@ -16,10 +16,11 @@
 
 package org.springframework.integration.expression;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.function.Supplier;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.support.RootBeanDefinition;
 import org.springframework.context.support.ConversionServiceFactoryBean;
 import org.springframework.context.support.GenericApplicationContext;
@@ -30,8 +31,6 @@ import org.springframework.integration.config.IntegrationEvaluationContextFactor
 import org.springframework.integration.context.IntegrationContextUtils;
 import org.springframework.integration.support.utils.IntegrationUtils;
 import org.springframework.integration.test.util.TestUtils;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Gary Russell

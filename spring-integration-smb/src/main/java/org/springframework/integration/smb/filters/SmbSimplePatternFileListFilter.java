@@ -20,7 +20,6 @@ import java.io.UncheckedIOException;
 
 import jcifs.smb.SmbException;
 import jcifs.smb.SmbFile;
-
 import org.springframework.integration.file.filters.AbstractSimplePatternFileListFilter;
 
 /**
@@ -45,7 +44,7 @@ public class SmbSimplePatternFileListFilter extends AbstractSimplePatternFileLis
 	 */
 	@Override
 	protected String getFilename(SmbFile file) {
-		return (file != null) ? file.getName() : null;
+		return file != null ? file.getName() : null;
 	}
 
 	@Override

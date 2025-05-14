@@ -79,7 +79,7 @@ public abstract class AbstractMqttMessageDrivenChannelAdapter<T, C> extends Mess
 
 	private MqttMessageConverter converter;
 
-	public AbstractMqttMessageDrivenChannelAdapter(@Nullable String url, String clientId, String... topic) {
+	protected AbstractMqttMessageDrivenChannelAdapter(@Nullable String url, String clientId, String... topic) {
 		Assert.hasText(clientId, "'clientId' cannot be null or empty");
 		this.url = url;
 		this.clientId = clientId;
@@ -87,7 +87,7 @@ public abstract class AbstractMqttMessageDrivenChannelAdapter<T, C> extends Mess
 		this.clientManager = null;
 	}
 
-	public AbstractMqttMessageDrivenChannelAdapter(ClientManager<T, C> clientManager, String... topic) {
+	protected AbstractMqttMessageDrivenChannelAdapter(ClientManager<T, C> clientManager, String... topic) {
 		Assert.notNull(clientManager, "'clientManager' cannot be null");
 		this.clientManager = clientManager;
 		this.topics = initTopics(topic);
@@ -99,7 +99,7 @@ public abstract class AbstractMqttMessageDrivenChannelAdapter<T, C> extends Mess
 		validateTopics(topics);
 
 		return Arrays.stream(topics)
-				.collect(Collectors.toMap(Function.identity(), (key) -> 1, (x, y) -> y, LinkedHashMap::new));
+				.collect(Collectors.toMap(Function.identity(), key -> 1, (x, y) -> y, LinkedHashMap::new));
 	}
 
 	private static void validateTopics(String[] topics) {

@@ -17,7 +17,6 @@
 package org.springframework.integration.xml.transformer;
 
 import org.w3c.dom.Node;
-
 import org.springframework.integration.transformer.AbstractTransformer;
 import org.springframework.integration.xml.DefaultXmlPayloadConverter;
 import org.springframework.integration.xml.XmlPayloadConverter;

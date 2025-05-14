@@ -16,6 +16,9 @@
 
 package org.springframework.integration.zeromq.channel;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.awaitility.Awaitility.await;
+
 import java.time.Duration;
 import java.util.Map;
 import java.util.concurrent.BlockingQueue;
@@ -31,15 +34,11 @@ import org.zeromq.ZCert;
 import org.zeromq.ZContext;
 import org.zeromq.ZMQ;
 import reactor.core.publisher.Mono;
-
 import org.springframework.integration.support.json.EmbeddedJsonHeadersMessageMapper;
 import org.springframework.integration.test.util.TestUtils;
 import org.springframework.integration.zeromq.ZeroMqProxy;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.GenericMessage;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.awaitility.Awaitility.await;
 
 /**
  * @author Artem Bilan

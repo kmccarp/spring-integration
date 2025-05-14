@@ -16,6 +16,10 @@
 
 package org.springframework.integration.aggregator;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.mockito.Mockito.mock;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -30,7 +34,6 @@ import org.apache.commons.logging.LogFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.integration.channel.DirectChannel;
 import org.springframework.integration.channel.QueueChannel;
@@ -48,10 +51,6 @@ import org.springframework.messaging.MessageHandlingException;
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.util.StopWatch;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.mockito.Mockito.mock;
 
 /**
  * @author Mark Fisher
@@ -178,7 +177,7 @@ public class AggregatorTests {
 
 	@Test
 	public void testCustomAggPerf() throws InterruptedException, ExecutionException, TimeoutException {
-		class CustomHandler extends AbstractMessageHandler {
+		final class CustomHandler extends AbstractMessageHandler {
 
 			// custom aggregator, only handles a single correlation
 
@@ -198,7 +197,7 @@ public class AggregatorTests {
 				try {
 					this.messages.add(requestMessage);
 					if (this.messages.size() == 60000) {
-						List<Object> payloads = new ArrayList<Object>(this.messages.size());
+						List<Object> payloads = new ArrayList<>(this.messages.size());
 						for (Message<?> message : this.messages) {
 							payloads.add(message.getPayload());
 						}
@@ -524,7 +523,7 @@ public class AggregatorTests {
 
 		Message<?> reply = replyChannel.receive(10000);
 		assertThat(reply).as("A message should be aggregated").isNotNull();
-		assertThat((reply.getPayload())).isEqualTo(105);
+		assertThat(reply.getPayload()).isEqualTo(105);
 	}
 
 	@Test
@@ -544,7 +543,7 @@ public class AggregatorTests {
 
 		Message<?> reply = replyChannel.receive(10000);
 		assertThat(reply).as("A message should be aggregated").isNotNull();
-		assertThat((reply.getPayload())).isEqualTo(105);
+		assertThat(reply.getPayload()).isEqualTo(105);
 	}
 
 	private static Message<?> createMessage(Object payload, Object correlationId, int sequenceSize, int sequenceNumber,

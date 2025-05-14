@@ -17,7 +17,6 @@
 package org.springframework.integration.xml.xpath;
 
 import org.w3c.dom.Node;
-
 import org.springframework.xml.xpath.XPathExpression;
 
 /**

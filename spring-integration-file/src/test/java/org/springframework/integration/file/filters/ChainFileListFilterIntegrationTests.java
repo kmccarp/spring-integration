@@ -16,14 +16,14 @@
 
 package org.springframework.integration.file.filters;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Aaron Grant
@@ -35,9 +35,9 @@ public class ChainFileListFilterIntegrationTests {
 
 	private static final String PATTERN_ANY_TEXT_FILES = "*.txt";
 
-	private File[] noFiles = new File[0];
+	private final File[] noFiles = new File[0];
 
-	private File[] oneFile = new File[] {new MockOldFile("file.txt")};
+	private final File[] oneFile = new File[]{new MockOldFile("file.txt")};
 
 	@Test
 	public void singleModifiedFilterNoFiles() throws IOException {

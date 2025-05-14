@@ -20,7 +20,6 @@ import java.util.Properties;
 import java.util.function.Consumer;
 
 import jakarta.activation.FileTypeMap;
-
 import org.springframework.integration.dsl.MessageHandlerSpec;
 import org.springframework.integration.mail.MailSendingMessageHandler;
 import org.springframework.integration.support.PropertiesBuilder;

@@ -16,9 +16,15 @@
 
 package org.springframework.integration.ws;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import java.io.StringWriter;
 import java.util.Locale;
-
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamResult;
@@ -26,7 +32,6 @@ import javax.xml.transform.stream.StreamResult;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.w3c.dom.Element;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.Lifecycle;
 import org.springframework.context.annotation.Bean;
@@ -58,13 +63,6 @@ import org.springframework.ws.soap.SoapMessage;
 import org.springframework.ws.soap.server.SoapMessageDispatcher;
 import org.springframework.ws.transport.WebServiceMessageReceiver;
 import org.springframework.xml.transform.StringSource;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 /**
  * @author Artem Bilan

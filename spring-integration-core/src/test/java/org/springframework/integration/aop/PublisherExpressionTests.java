@@ -16,10 +16,11 @@
 
 package org.springframework.integration.aop;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.context.support.StaticApplicationContext;
 import org.springframework.expression.EvaluationContext;
@@ -30,8 +31,6 @@ import org.springframework.integration.context.IntegrationContextUtils;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.Payload;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Mark Fisher

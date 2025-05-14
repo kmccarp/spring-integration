@@ -20,7 +20,6 @@ import java.util.Collections;
 import java.util.Set;
 
 import com.fasterxml.jackson.databind.JsonNode;
-
 import org.springframework.core.convert.TypeDescriptor;
 import org.springframework.core.convert.converter.GenericConverter;
 import org.springframework.integration.json.JsonPropertyAccessor.JsonNodeWrapper;

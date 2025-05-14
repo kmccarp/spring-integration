@@ -16,6 +16,8 @@
 
 package org.springframework.integration.file;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -24,10 +26,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
-
 import org.springframework.integration.file.filters.AcceptOnceFileListFilter;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Iwein Fuld

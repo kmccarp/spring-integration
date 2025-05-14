@@ -49,7 +49,7 @@ public abstract class AbstractKafkaChannel extends AbstractMessageChannel {
 	 * @param template the template.
 	 * @param topic the topic.
 	 */
-	public AbstractKafkaChannel(KafkaOperations<?, ?> template, String topic) {
+	protected AbstractKafkaChannel(KafkaOperations<?, ?> template, String topic) {
 		Assert.notNull(template, "'template' cannot be null");
 		Assert.notNull(topic, "'topic' cannot be null");
 		this.template = template;

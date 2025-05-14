@@ -17,7 +17,6 @@
 package org.springframework.integration.sftp.dsl;
 
 import org.apache.sshd.sftp.client.SftpClient;
-
 import org.springframework.integration.file.dsl.FileTransferringMessageHandlerSpec;
 import org.springframework.integration.file.remote.session.SessionFactory;
 import org.springframework.integration.file.support.FileExistsMode;

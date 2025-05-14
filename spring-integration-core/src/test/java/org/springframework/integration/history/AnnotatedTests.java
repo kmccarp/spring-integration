@@ -16,12 +16,16 @@
 
 package org.springframework.integration.history;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+
 import java.lang.reflect.Field;
 import java.util.Properties;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -31,11 +35,6 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHandler;
 import org.springframework.messaging.support.GenericMessage;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 
 /**
  * @author Oleg Zhurakousky
@@ -48,7 +47,7 @@ public class AnnotatedTests {
 	@Test
 	public void testHistoryWithAnnotatedComponents() throws Exception {
 		ClassPathXmlApplicationContext ac = new ClassPathXmlApplicationContext("annotated-config.xml", this.getClass());
-		ApplicationListener<ApplicationEvent> listener = new ApplicationListener<ApplicationEvent>() {
+		ApplicationListener<ApplicationEvent> listener = new ApplicationListener<>() {
 
 			@Override
 			public void onApplicationEvent(ApplicationEvent event) {

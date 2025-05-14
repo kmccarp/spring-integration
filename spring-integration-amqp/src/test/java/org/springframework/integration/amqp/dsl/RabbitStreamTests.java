@@ -16,9 +16,10 @@
 
 package org.springframework.integration.amqp.dsl;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import com.rabbitmq.stream.Environment;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.core.QueueBuilder;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
@@ -40,8 +41,6 @@ import org.springframework.messaging.support.GenericMessage;
 import org.springframework.rabbit.stream.config.SuperStream;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Artem Bilan

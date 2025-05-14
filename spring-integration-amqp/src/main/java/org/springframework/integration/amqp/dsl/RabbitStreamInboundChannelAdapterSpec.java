@@ -20,7 +20,6 @@ import java.util.function.Consumer;
 
 import com.rabbitmq.stream.Codec;
 import com.rabbitmq.stream.Environment;
-
 import org.springframework.lang.Nullable;
 import org.springframework.rabbit.stream.listener.StreamListenerContainer;
 

@@ -26,7 +26,6 @@ import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.instance.EndpointQualifier;
 import com.hazelcast.multimap.MultiMap;
-
 import org.springframework.integration.hazelcast.HazelcastLocalInstanceRegistrar;
 
 /**

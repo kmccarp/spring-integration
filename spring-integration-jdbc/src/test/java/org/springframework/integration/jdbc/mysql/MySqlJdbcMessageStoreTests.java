@@ -16,11 +16,12 @@
 
 package org.springframework.integration.jdbc.mysql;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Properties;
 import java.util.UUID;
-
 import javax.sql.DataSource;
 
 import org.apache.commons.logging.Log;
@@ -28,7 +29,6 @@ import org.apache.commons.logging.LogFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -55,8 +55,6 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionTemplate;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Gunnar Hillert
@@ -263,7 +261,7 @@ public class MySqlJdbcMessageStoreTests implements MySqlContainerTest {
 
 		String uuidGroupId = UUIDConverter.getUUID(groupId).toString();
 		assertThat(template.queryForList(
-				"SELECT * from INT_GROUP_TO_MESSAGE where GROUP_KEY = '" + uuidGroupId + "'").size() == 0).isTrue();
+				"SELECT * from INT_GROUP_TO_MESSAGE where GROUP_KEY = '" + uuidGroupId + "'").isEmpty()).isTrue();
 	}
 
 	@Test

@@ -20,7 +20,6 @@ import java.io.File;
 import java.util.Comparator;
 
 import org.apache.sshd.sftp.client.SftpClient;
-
 import org.springframework.integration.file.remote.synchronizer.AbstractInboundFileSynchronizer;
 import org.springframework.integration.file.remote.synchronizer.AbstractInboundFileSynchronizingMessageSource;
 

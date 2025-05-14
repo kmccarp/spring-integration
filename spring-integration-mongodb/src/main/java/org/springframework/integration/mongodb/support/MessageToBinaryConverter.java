@@ -17,7 +17,6 @@
 package org.springframework.integration.mongodb.support;
 
 import org.bson.types.Binary;
-
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.core.serializer.support.SerializingConverter;
 import org.springframework.data.convert.WritingConverter;

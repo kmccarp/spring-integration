@@ -16,6 +16,9 @@
 
 package org.springframework.integration.jdbc.store;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.lang.reflect.Method;
@@ -28,7 +31,6 @@ import java.util.Properties;
 import java.util.UUID;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
-
 import javax.sql.DataSource;
 
 import org.apache.commons.dbcp2.DataSourceConnectionFactory;
@@ -42,7 +44,6 @@ import org.assertj.core.api.InstanceOfAssertFactories;
 import org.hsqldb.HsqlException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.context.ApplicationContextException;
@@ -65,9 +66,6 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 /**
  * @author Dave Syer
@@ -262,7 +260,7 @@ public class JdbcMessageStoreTests {
 
 		String uuidGroupId = UUIDConverter.getUUID(groupId).toString();
 		assertThat(template.queryForList(
-				"SELECT * from INT_GROUP_TO_MESSAGE where GROUP_KEY = ?", uuidGroupId).size() == 0).isTrue();
+				"SELECT * from INT_GROUP_TO_MESSAGE where GROUP_KEY = ?", uuidGroupId).isEmpty()).isTrue();
 	}
 
 	@Test

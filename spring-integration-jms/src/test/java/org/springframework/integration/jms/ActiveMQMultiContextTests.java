@@ -27,7 +27,6 @@ import org.apache.activemq.artemis.jms.client.ActiveMQConnectionFactory;
 import org.apache.activemq.artemis.utils.ObjectInputStreamWithClassLoader;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
-
 import org.springframework.jms.connection.CachingConnectionFactory;
 
 /**

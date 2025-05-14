@@ -16,6 +16,8 @@
 
 package org.springframework.integration.mapping;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -23,7 +25,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.integration.mapping.AbstractHeaderMapper.CompositeHeaderMatcher;
 import org.springframework.integration.mapping.AbstractHeaderMapper.ContentBasedHeaderMatcher;
 import org.springframework.integration.mapping.AbstractHeaderMapper.HeaderMatcher;
@@ -33,8 +34,6 @@ import org.springframework.integration.mapping.AbstractHeaderMapper.SinglePatter
 import org.springframework.lang.Nullable;
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.util.StringUtils;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Stephane Nicoll
@@ -244,7 +243,7 @@ public class HeaderMapperTests {
 	public void fromHeadersToRequestWithStandardRequestPatternAndNegatives() {
 		this.mapper.setRequestHeaderNames("foo", "!foo", "bar", "!baz", "\\!qux", "!fiz*",
 				GenericTestHeaderMapper.STANDARD_REQUEST_HEADER_NAME_PATTERN);
-		Map<String, Object> headers = new HashMap<String, Object>();
+		Map<String, Object> headers = new HashMap<>();
 		headers.put(GenericTestHeaders.APP_ID, "myAppId");
 		headers.put(GenericTestHeaders.REDELIVERED, true);
 		headers.put(GenericTestHeaders.REQUEST_ONLY, "request-456");
@@ -528,7 +527,7 @@ public class HeaderMapperTests {
 
 		private String replyOnly;
 
-		private final Map<String, Object> userDefinedHeaders = new HashMap<String, Object>();
+		private final Map<String, Object> userDefinedHeaders = new HashMap<>();
 
 		GenericTestProperties() {
 			super();

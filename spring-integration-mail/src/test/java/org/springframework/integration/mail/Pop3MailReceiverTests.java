@@ -16,6 +16,12 @@
 
 package org.springframework.integration.mail;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
+
 import java.lang.reflect.Field;
 
 import com.icegreen.greenmail.util.GreenMailUtil;
@@ -24,15 +30,8 @@ import jakarta.mail.Flags.Flag;
 import jakarta.mail.Folder;
 import jakarta.mail.Message;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.DirectFieldAccessor;
 import org.springframework.beans.factory.BeanFactory;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
 
 /**
  * @author Oleg Zhurakousky

@@ -16,6 +16,8 @@
 
 package org.springframework.integration.file.locking;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -25,11 +27,8 @@ import java.util.Map;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
-
 import org.springframework.integration.file.filters.FileListFilter;
 import org.springframework.integration.test.util.TestUtils;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Iwein Fuld
@@ -61,8 +60,8 @@ public class NioFileLockerTests {
 		filter.unlock(testFile);
 		Field channelCache = FileChannelCache.class.getDeclaredField("channelCache");
 		channelCache.setAccessible(true);
-		assertThat(((Map<?, ?>) channelCache.get(null))).isEmpty();
-		assertThat(((Map<?, ?>) TestUtils.getPropertyValue(filter, "lockCache", Map.class))).isEmpty();
+		assertThat((Map<?, ?>) channelCache.get(null)).isEmpty();
+		assertThat((Map<?, ?>) TestUtils.getPropertyValue(filter, "lockCache", Map.class)).isEmpty();
 	}
 
 	@Test

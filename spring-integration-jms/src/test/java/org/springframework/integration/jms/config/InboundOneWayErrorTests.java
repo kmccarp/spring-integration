@@ -16,6 +16,8 @@
 
 package org.springframework.integration.jms.config;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -23,7 +25,6 @@ import jakarta.jms.ConnectionFactory;
 import jakarta.jms.Destination;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.integration.jms.ActiveMQMultiContextTests;
@@ -34,8 +35,6 @@ import org.springframework.messaging.PollableChannel;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.util.ErrorHandler;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Mark Fisher

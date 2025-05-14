@@ -17,7 +17,6 @@
 package org.springframework.integration.handler;
 
 import reactor.core.publisher.Mono;
-
 import org.springframework.core.log.LogMessage;
 import org.springframework.integration.history.MessageHistory;
 import org.springframework.messaging.Message;
@@ -51,7 +50,7 @@ public abstract class AbstractReactiveMessageHandler extends MessageHandlerSuppo
 			messageToUse = message;
 		}
 		return handleMessageInternal(messageToUse)
-				.doOnError((ex) -> this.logger.error(ex,
+				.doOnError(ex -> this.logger.error(ex,
 						LogMessage.format("An error occurred in message handler [%s] on message [%s]", this, messageToUse)));
 	}
 

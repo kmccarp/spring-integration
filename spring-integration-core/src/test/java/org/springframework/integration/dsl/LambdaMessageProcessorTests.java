@@ -16,12 +16,14 @@
 
 package org.springframework.integration.dsl;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+
 import java.util.Date;
 import java.util.Objects;
 import java.util.function.Function;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -37,9 +39,6 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 /**
  * @author Gary Russell
@@ -131,7 +130,7 @@ public class LambdaMessageProcessorTests {
 		@Bean
 		@IntegrationConverter
 		public Converter<String, TestPojo> testPojoConverter() {
-			return new Converter<String, TestPojo>() { // Cannot be lambda for explicit generic types
+			return new Converter<>() { // Cannot be lambda for explicit generic types
 
 				@Override
 				public TestPojo convert(String source) {

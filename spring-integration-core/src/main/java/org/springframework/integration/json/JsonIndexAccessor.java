@@ -17,7 +17,6 @@
 package org.springframework.integration.json;
 
 import com.fasterxml.jackson.databind.node.ArrayNode;
-
 import org.springframework.expression.AccessException;
 import org.springframework.expression.EvaluationContext;
 import org.springframework.expression.IndexAccessor;
@@ -48,7 +47,7 @@ public class JsonIndexAccessor implements IndexAccessor {
 
 	@Override
 	public boolean canRead(EvaluationContext context, Object target, Object index) {
-		return (target instanceof ArrayNode && index instanceof Integer);
+		return target instanceof ArrayNode && index instanceof Integer;
 	}
 
 	@Override

@@ -25,7 +25,6 @@ import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryo.io.Input;
 import com.esotericsoftware.kryo.io.Output;
 import com.esotericsoftware.kryo.util.Pool;
-
 import org.springframework.integration.codec.Codec;
 import org.springframework.util.Assert;
 
@@ -64,7 +63,7 @@ public abstract class AbstractKryoCodec implements Codec {
 		Assert.notNull(outputStream, "'outputSteam' cannot be null");
 
 		Kryo kryo = this.pool.obtain();
-		try (Output output = (outputStream instanceof Output castOutput ? castOutput : new Output(outputStream))) {
+		try (Output output = outputStream instanceof Output castOutput ? castOutput : new Output(outputStream)) {
 			doEncode(kryo, object, output);
 		}
 		finally {
@@ -87,7 +86,7 @@ public abstract class AbstractKryoCodec implements Codec {
 		Assert.notNull(type, "'type' cannot be null");
 
 		Kryo kryo = this.pool.obtain();
-		try (Input input = (inputStream instanceof Input castInput ? castInput : new Input(inputStream))) {
+		try (Input input = inputStream instanceof Input castInput ? castInput : new Input(inputStream)) {
 			return doDecode(kryo, input, type);
 		}
 		finally {

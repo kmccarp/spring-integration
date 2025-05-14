@@ -17,7 +17,6 @@
 package org.springframework.integration.smb.dsl;
 
 import jcifs.smb.SmbFile;
-
 import org.springframework.integration.file.dsl.RemoteFileOutboundGatewaySpec;
 import org.springframework.integration.smb.filters.SmbRegexPatternFileListFilter;
 import org.springframework.integration.smb.filters.SmbSimplePatternFileListFilter;

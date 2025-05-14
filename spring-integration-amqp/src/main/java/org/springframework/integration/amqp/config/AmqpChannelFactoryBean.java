@@ -21,7 +21,6 @@ import java.util.List;
 import java.util.concurrent.Executor;
 
 import org.aopalliance.aop.Advice;
-
 import org.springframework.amqp.core.AcknowledgeMode;
 import org.springframework.amqp.core.AmqpAdmin;
 import org.springframework.amqp.core.AmqpTemplate;
@@ -348,7 +347,7 @@ public class AmqpChannelFactoryBean extends AbstractFactoryBean<AbstractAmqpChan
 
 	@Override
 	public Class<?> getObjectType() {
-		return (this.channel != null) ? this.channel.getClass() : AbstractAmqpChannel.class;
+		return this.channel != null ? this.channel.getClass() : AbstractAmqpChannel.class;
 	}
 
 	@Override
@@ -446,7 +445,7 @@ public class AmqpChannelFactoryBean extends AbstractFactoryBean<AbstractAmqpChan
 
 	@Override
 	public int getPhase() {
-		return (this.channel instanceof SmartLifecycle smartLifecycle) ?
+		return this.channel instanceof SmartLifecycle smartLifecycle ?
 			smartLifecycle.getPhase() : 0;
 	}
 

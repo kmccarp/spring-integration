@@ -16,6 +16,10 @@
 
 package org.springframework.integration.http.outbound;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
+import static org.mockito.Mockito.mock;
+
 import java.net.URI;
 import java.util.Collections;
 import java.util.HashMap;
@@ -23,7 +27,6 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.junit.Test;
-
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.context.support.AbstractApplicationContext;
@@ -35,10 +38,6 @@ import org.springframework.integration.support.MessageBuilder;
 import org.springframework.integration.test.util.TestUtils;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.GenericMessage;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.fail;
-import static org.mockito.Mockito.mock;
 
 /**
  * @author Dave Syer

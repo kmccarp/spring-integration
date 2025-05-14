@@ -16,6 +16,11 @@
 
 package org.springframework.integration.config.xml;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.fail;
+import static org.springframework.integration.test.util.TestUtils.getPropertyValue;
+
 import java.io.ByteArrayInputStream;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +28,6 @@ import java.util.Properties;
 import java.util.function.BiPredicate;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.config.BeanPostProcessor;
@@ -43,11 +47,6 @@ import org.springframework.integration.selector.MetadataStoreSelector;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.assertj.core.api.Assertions.fail;
-import static org.springframework.integration.test.util.TestUtils.getPropertyValue;
 
 /**
  * @author Artem Bilan

@@ -115,7 +115,7 @@ public class FileReadingMessageSource extends AbstractMessageSource<File> implem
 
 	private boolean autoCreateDirectory = true;
 
-	private boolean scanEachPoll = false;
+	private boolean scanEachPoll;
 
 	private FileListFilter<File> filter;
 

@@ -16,6 +16,8 @@
 
 package org.springframework.integration.jms;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.Date;
 import java.util.Map;
 
@@ -25,7 +27,6 @@ import jakarta.jms.JMSException;
 import jakarta.jms.Session;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-
 import org.springframework.integration.IntegrationMessageHeaderAccessor;
 import org.springframework.integration.support.MessageBuilder;
 import org.springframework.jms.support.JmsHeaders;
@@ -33,8 +34,6 @@ import org.springframework.jms.support.converter.MappingJackson2MessageConverter
 import org.springframework.jms.support.converter.MessageType;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageHeaders;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Mark Fisher
@@ -317,7 +316,7 @@ public class DefaultJmsHeaderMapperTests {
 
 			@Override
 			public void setObjectProperty(String name, Object value) throws JMSException {
-				if (name.equals("bad")) {
+				if ("bad".equals(name)) {
 					throw new JMSException("illegal property");
 				}
 				super.setObjectProperty(name, value);
@@ -345,7 +344,7 @@ public class DefaultJmsHeaderMapperTests {
 
 			@Override
 			public void setObjectProperty(String name, Object value) throws JMSException {
-				if (name.equals("bad")) {
+				if ("bad".equals(name)) {
 					throw new IllegalArgumentException("illegal property");
 				}
 				super.setObjectProperty(name, value);

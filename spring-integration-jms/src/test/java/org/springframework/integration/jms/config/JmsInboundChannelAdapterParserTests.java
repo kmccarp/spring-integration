@@ -16,10 +16,11 @@
 
 package org.springframework.integration.jms.config;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.Properties;
 
 import org.junit.Test;
-
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.beans.factory.BeanDefinitionStoreException;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
@@ -30,8 +31,6 @@ import org.springframework.integration.test.util.TestUtils;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.PollableChannel;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Mark Fisher

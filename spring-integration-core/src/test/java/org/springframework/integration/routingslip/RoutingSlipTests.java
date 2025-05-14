@@ -16,6 +16,9 @@
 
 package org.springframework.integration.routingslip;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
@@ -26,7 +29,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Flux;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -51,9 +53,6 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.test.context.support.GenericXmlContextLoader;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 /**
  * @author Artem Bilan
@@ -132,7 +131,7 @@ public class RoutingSlipTests {
 
 		final String[] channels = {"channel2", "channel3"};
 
-		private int i = 0;
+		private int i;
 
 		public String get(Message<?> requestMessage, Object reply) {
 			try {
@@ -151,7 +150,7 @@ public class RoutingSlipTests {
 
 		@Override
 		public Object getNextPath(Message<?> requestMessage, Object reply) {
-			return !invoked.getAndSet(true) ? "channel4" : null;
+			return invoked.getAndSet(true) ? null : "channel4";
 		}
 
 	}

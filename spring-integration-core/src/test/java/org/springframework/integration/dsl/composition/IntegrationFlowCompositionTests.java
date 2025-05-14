@@ -16,8 +16,11 @@
 
 package org.springframework.integration.dsl.composition;
 
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -36,10 +39,6 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 /**
  * @author Artem Bilan
@@ -150,7 +149,7 @@ public class IntegrationFlowCompositionTests {
 		@Bean
 		IntegrationFlow mainFlow(IntegrationFlow otherFlow) {
 			return f -> f
-					.<String, String>transform(String::toUpperCase)
+					.transform(String::toUpperCase)
 					.to(otherFlow);
 		}
 
@@ -164,7 +163,7 @@ public class IntegrationFlowCompositionTests {
 		@Bean
 		IntegrationFlow requestReplyMainFlow(IntegrationFlow templateFlow) {
 			return f -> f
-					.<String, String>transform(String::toLowerCase)
+					.transform(String::toLowerCase)
 					.to(templateFlow);
 		}
 
@@ -198,7 +197,7 @@ public class IntegrationFlowCompositionTests {
 		@Bean
 		IntegrationFlow middleFlow(IntegrationFlow firstFlow, IntegrationFlow lastFlow) {
 			return IntegrationFlow.from(firstFlow)
-					.<String, String>transform(p -> p + ", and middle flow")
+					.transform(p -> p + ", and middle flow")
 					.to(lastFlow);
 		}
 

@@ -16,6 +16,8 @@
 
 package org.springframework.integration.jdbc;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -23,7 +25,6 @@ import org.apache.commons.logging.LogFactory;
 import org.junit.ClassRule;
 import org.junit.Test;
 import org.mockito.Mockito;
-
 import org.springframework.integration.store.MessageGroup;
 import org.springframework.integration.store.MessageGroupQueue;
 import org.springframework.integration.store.MessageGroupStore;
@@ -31,8 +32,6 @@ import org.springframework.integration.store.SimpleMessageStore;
 import org.springframework.integration.test.support.LongRunningIntegrationTest;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.GenericMessage;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Oleg Zhurakousky
@@ -48,7 +47,7 @@ public class MessageGroupQueueTests {
 
 		final MessageGroupQueue queue = new MessageGroupQueue(new SimpleMessageStore(), 1, 1);
 
-		final AtomicReference<InterruptedException> exceptionHolder = new AtomicReference<InterruptedException>();
+		final AtomicReference<InterruptedException> exceptionHolder = new AtomicReference<>();
 
 		Thread t = new Thread(() -> {
 			queue.offer(new GenericMessage<String>("hello"));
@@ -69,7 +68,7 @@ public class MessageGroupQueueTests {
 	@Test
 	public void testConcurrentReadWrite() throws Exception {
 		final MessageGroupQueue queue = new MessageGroupQueue(new SimpleMessageStore(), 1, 1);
-		final AtomicReference<Message<?>> messageHolder = new AtomicReference<Message<?>>();
+		final AtomicReference<Message<?>> messageHolder = new AtomicReference<>();
 
 		Thread t1 = new Thread(() -> {
 			try {
@@ -96,7 +95,7 @@ public class MessageGroupQueueTests {
 	@Test
 	public void testConcurrentWriteRead() throws Exception {
 		final MessageGroupQueue queue = new MessageGroupQueue(new SimpleMessageStore(), 1, 1);
-		final AtomicReference<Message<?>> messageHolder = new AtomicReference<Message<?>>();
+		final AtomicReference<Message<?>> messageHolder = new AtomicReference<>();
 
 		queue.offer(new GenericMessage<String>("hello"), 1000, TimeUnit.SECONDS);
 
@@ -122,15 +121,15 @@ public class MessageGroupQueueTests {
 		Thread.sleep(1000);
 		t2.start();
 		Thread.sleep(1000);
-		assertThat(messageHolder.get().getPayload().equals("Hi")).isTrue();
+		assertThat("Hi".equals(messageHolder.get().getPayload())).isTrue();
 	}
 
 	@Test
 	public void testConcurrentReadersWithTimeout() throws Exception {
 		final MessageGroupQueue queue = new MessageGroupQueue(new SimpleMessageStore(), 1, 1);
-		final AtomicReference<Message<?>> messageHolder1 = new AtomicReference<Message<?>>();
-		final AtomicReference<Message<?>> messageHolder2 = new AtomicReference<Message<?>>();
-		final AtomicReference<Message<?>> messageHolder3 = new AtomicReference<Message<?>>();
+		final AtomicReference<Message<?>> messageHolder1 = new AtomicReference<>();
+		final AtomicReference<Message<?>> messageHolder2 = new AtomicReference<>();
+		final AtomicReference<Message<?>> messageHolder3 = new AtomicReference<>();
 
 		Thread t1 = new Thread(() -> {
 			try {
@@ -181,9 +180,9 @@ public class MessageGroupQueueTests {
 	@Test
 	public void testConcurrentWritersWithTimeout() throws Exception {
 		final MessageGroupQueue queue = new MessageGroupQueue(new SimpleMessageStore(), 1, 1);
-		final AtomicReference<Boolean> booleanHolder1 = new AtomicReference<Boolean>(true);
-		final AtomicReference<Boolean> booleanHolder2 = new AtomicReference<Boolean>(true);
-		final AtomicReference<Boolean> booleanHolder3 = new AtomicReference<Boolean>(true);
+		final AtomicReference<Boolean> booleanHolder1 = new AtomicReference<>(true);
+		final AtomicReference<Boolean> booleanHolder2 = new AtomicReference<>(true);
+		final AtomicReference<Boolean> booleanHolder3 = new AtomicReference<>(true);
 
 		Thread t1 = new Thread(() -> {
 			try {
@@ -225,7 +224,7 @@ public class MessageGroupQueueTests {
 	@Test
 	public void testConcurrentWriteReadMulti() throws Exception {
 		final MessageGroupQueue queue = new MessageGroupQueue(new SimpleMessageStore(), 1, 4);
-		final AtomicReference<Message<?>> messageHolder = new AtomicReference<Message<?>>();
+		final AtomicReference<Message<?>> messageHolder = new AtomicReference<>();
 
 		queue.offer(new GenericMessage<String>("hello"), 1000, TimeUnit.SECONDS);
 
@@ -255,7 +254,7 @@ public class MessageGroupQueueTests {
 		Thread.sleep(1000);
 		t2.start();
 		Thread.sleep(1000);
-		assertThat(messageHolder.get().getPayload().equals("Hi")).isTrue();
+		assertThat("Hi".equals(messageHolder.get().getPayload())).isTrue();
 		assertThat(queue.poll(5, TimeUnit.SECONDS)).isNull();
 	}
 
@@ -274,7 +273,7 @@ public class MessageGroupQueueTests {
 
 		final MessageGroupQueue queue = new MessageGroupQueue(mgs, 1, 1);
 
-		final AtomicReference<InterruptedException> exceptionHolder = new AtomicReference<InterruptedException>();
+		final AtomicReference<InterruptedException> exceptionHolder = new AtomicReference<>();
 
 		Thread t1 = new Thread(() -> queue.offer(new GenericMessage<String>("hello")));
 		t1.start();

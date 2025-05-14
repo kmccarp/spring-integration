@@ -16,26 +16,6 @@
 
 package org.springframework.integration.support.leader;
 
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.atomic.AtomicReference;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import org.springframework.beans.DirectFieldAccessor;
-import org.springframework.core.task.SyncTaskExecutor;
-import org.springframework.core.task.support.TaskExecutorAdapter;
-import org.springframework.integration.leader.Context;
-import org.springframework.integration.leader.DefaultCandidate;
-import org.springframework.integration.leader.event.DefaultLeaderEventPublisher;
-import org.springframework.integration.leader.event.LeaderEventPublisher;
-import org.springframework.integration.support.locks.DefaultLockRegistry;
-import org.springframework.integration.support.locks.LockRegistry;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -45,6 +25,25 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.willAnswer;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
+
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.DirectFieldAccessor;
+import org.springframework.core.task.SyncTaskExecutor;
+import org.springframework.core.task.support.TaskExecutorAdapter;
+import org.springframework.integration.leader.Context;
+import org.springframework.integration.leader.DefaultCandidate;
+import org.springframework.integration.leader.event.DefaultLeaderEventPublisher;
+import org.springframework.integration.leader.event.LeaderEventPublisher;
+import org.springframework.integration.support.locks.DefaultLockRegistry;
+import org.springframework.integration.support.locks.LockRegistry;
 
 /**
  * @author Dave Syer
@@ -57,9 +56,9 @@ import static org.mockito.Mockito.spy;
  */
 public class LockRegistryLeaderInitiatorTests {
 
-	private CountDownLatch granted = new CountDownLatch(1);
+	private final CountDownLatch granted = new CountDownLatch(1);
 
-	private CountDownLatch revoked = new CountDownLatch(1);
+	private final CountDownLatch revoked = new CountDownLatch(1);
 
 	private final LockRegistry registry = new DefaultLockRegistry();
 

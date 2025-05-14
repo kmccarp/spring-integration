@@ -23,7 +23,6 @@ import java.util.UUID;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-
 import javax.net.ssl.SSLSession;
 
 import org.springframework.core.serializer.Deserializer;
@@ -71,7 +70,7 @@ public class FailoverClientConnectionFactory extends AbstractClientConnectionFac
 		this.factories = new ArrayList<>(factories);
 		this.cachingDelegates =
 				factories.stream()
-						.anyMatch(factory -> factory instanceof CachingClientConnectionFactory);
+						.anyMatch(CachingClientConnectionFactory.class::isInstance);
 	}
 
 	/**

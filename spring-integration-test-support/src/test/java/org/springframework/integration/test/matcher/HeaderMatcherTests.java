@@ -25,7 +25,6 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 
@@ -184,7 +183,7 @@ public class HeaderMatcherTests {
 		message = MessageBuilder.fromMessage(message).setHeader("expirationDate", expirationDate.getTime()).build();
 		MatcherAssert.assertThat(message, HeaderMatcher.hasExpirationDate(expirationDate));
 		MatcherAssert.assertThat(message,
-				HeaderMatcher.hasExpirationDate(Matchers.not(Matchers.is((System.currentTimeMillis())))));
+				HeaderMatcher.hasExpirationDate(Matchers.not(Matchers.is(System.currentTimeMillis()))));
 	}
 
 }

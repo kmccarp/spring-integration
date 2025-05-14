@@ -16,12 +16,13 @@
 
 package org.springframework.integration.ip.tcp;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.Properties;
 
 import org.junit.jupiter.api.MethodOrderer.MethodName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
@@ -42,8 +43,6 @@ import org.springframework.integration.test.util.TestUtils;
 import org.springframework.messaging.Message;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Gary Russell
@@ -117,7 +116,7 @@ public class ConnectionToConnectionTests {
 			//org.springframework.integration.test.util.TestUtils
 			Properties componentHistoryRecord = TestUtils.locateComponentInHistory(history, gatewayName, 0);
 			assertThat(componentHistoryRecord).isNotNull();
-			assertThat(componentHistoryRecord.get("type").equals("ip:tcp-inbound-gateway")).isTrue();
+			assertThat("ip:tcp-inbound-gateway".equals(componentHistoryRecord.get("type"))).isTrue();
 			assertThat(message).isNotNull();
 			assertThat(new String((byte[]) message.getPayload())).isEqualTo("Test");
 		}
@@ -175,7 +174,7 @@ public class ConnectionToConnectionTests {
 		//org.springframework.integration.test.util.TestUtils
 		Properties componentHistoryRecord = TestUtils.locateComponentInHistory(history, "gwNet", 0);
 		assertThat(componentHistoryRecord).isNotNull();
-		assertThat(componentHistoryRecord.get("type").equals("ip:tcp-inbound-gateway")).isTrue();
+		assertThat("ip:tcp-inbound-gateway".equals(componentHistoryRecord.get("type"))).isTrue();
 		assertThat(message).isNotNull();
 		assertThat(new String((byte[]) message.getPayload())).isEqualTo("Test");
 	}

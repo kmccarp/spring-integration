@@ -16,12 +16,11 @@
 
 package org.springframework.integration.mail.config;
 
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionStoreException;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 /**
  * @author Oleg Zhurakousky

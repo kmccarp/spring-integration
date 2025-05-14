@@ -16,6 +16,8 @@
 
 package org.springframework.integration.amqp.inbound;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -23,7 +25,6 @@ import org.aopalliance.intercept.MethodInterceptor;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.core.QueueBuilder;
@@ -55,8 +56,6 @@ import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Gary Russell
@@ -221,11 +220,11 @@ public class AmqpMessageSourceIntegrationTests {
 
 				@Override
 				public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-					if (beanName.equals("interceptedSource")) {
+					if ("interceptedSource".equals(beanName)) {
 						ProxyFactory pf = new ProxyFactory(bean);
 						pf.addAdvice((MethodInterceptor) invocation -> {
 
-							if (invocation.getMethod().getName().equals("receive")) {
+							if ("receive".equals(invocation.getMethod().getName())) {
 								org.springframework.messaging.Message<?> message =
 										(org.springframework.messaging.Message<?>) invocation.proceed();
 								if (message == null) {

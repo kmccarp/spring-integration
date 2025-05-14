@@ -24,7 +24,6 @@ import io.micrometer.core.instrument.MeterRegistry;
 import io.micrometer.core.instrument.Timer;
 import io.micrometer.core.instrument.search.Search;
 import io.micrometer.observation.ObservationConvention;
-
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.context.ApplicationContext;
 import org.springframework.integration.support.management.IntegrationManagement;
@@ -135,7 +134,7 @@ public class MicrometerNodeEnhancer {
 		if (timerSearch != null) {
 			return timerSearch
 					.tag(IntegrationObservation.HandlerTags.COMPONENT_NAME.asString(), node.getName())
-					.tag("error", (value) -> success == "none".equals(value))
+					.tag("error", value -> success == "none".equals(value))
 					.timer();
 		}
 

@@ -16,6 +16,8 @@
 
 package org.springframework.integration.hazelcast.store;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -27,7 +29,6 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.integration.channel.DirectChannel;
 import org.springframework.integration.history.MessageHistory;
 import org.springframework.integration.store.MessageGroup;
@@ -35,8 +36,6 @@ import org.springframework.integration.support.MessageBuilder;
 import org.springframework.integration.test.util.TestUtils;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.GenericMessage;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Vinicius Carvalho

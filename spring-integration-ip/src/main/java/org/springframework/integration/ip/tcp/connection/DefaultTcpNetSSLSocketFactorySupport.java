@@ -18,7 +18,6 @@ package org.springframework.integration.ip.tcp.connection;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
-
 import javax.net.ServerSocketFactory;
 import javax.net.SocketFactory;
 import javax.net.ssl.SSLContext;

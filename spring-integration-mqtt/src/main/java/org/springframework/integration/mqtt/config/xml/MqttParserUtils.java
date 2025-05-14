@@ -17,7 +17,6 @@
 package org.springframework.integration.mqtt.config.xml;
 
 import org.w3c.dom.Element;
-
 import org.springframework.beans.factory.config.ConstructorArgumentValues.ValueHolder;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.RootBeanDefinition;

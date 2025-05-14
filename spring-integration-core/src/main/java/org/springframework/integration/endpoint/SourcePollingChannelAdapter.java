@@ -21,7 +21,6 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import io.micrometer.observation.Observation;
 import io.micrometer.observation.ObservationRegistry;
-
 import org.springframework.aop.framework.Advised;
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.beans.factory.BeanFactory;
@@ -154,7 +153,7 @@ public class SourcePollingChannelAdapter extends AbstractPollingEndpoint
 
 	@Override
 	public String getComponentType() {
-		return (this.source instanceof NamedComponent namedComponent)
+		return this.source instanceof NamedComponent namedComponent
 				? namedComponent.getComponentType()
 				: "inbound-channel-adapter";
 	}

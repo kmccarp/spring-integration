@@ -27,11 +27,11 @@ import org.springframework.integration.events.IntegrationEvent;
 @SuppressWarnings("serial")
 public abstract class MailIntegrationEvent extends IntegrationEvent {
 
-	public MailIntegrationEvent(Object source) {
+	protected MailIntegrationEvent(Object source) {
 		super(source);
 	}
 
-	public MailIntegrationEvent(Object source, Throwable cause) {
+	protected MailIntegrationEvent(Object source, Throwable cause) {
 		super(source, cause);
 	}
 

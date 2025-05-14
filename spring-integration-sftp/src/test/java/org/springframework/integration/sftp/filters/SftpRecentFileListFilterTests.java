@@ -16,14 +16,14 @@
 
 package org.springframework.integration.sftp.filters;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.nio.file.attribute.FileTime;
 import java.time.Duration;
 import java.time.Instant;
 
 import org.apache.sshd.sftp.client.SftpClient;
 import org.junit.jupiter.api.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Artem Bilan

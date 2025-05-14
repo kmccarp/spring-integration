@@ -16,6 +16,9 @@
 
 package org.springframework.integration.json;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+
 import java.util.List;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -26,7 +29,6 @@ import com.fasterxml.jackson.databind.node.TextNode;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.core.convert.support.DefaultConversionService;
 import org.springframework.expression.Expression;
 import org.springframework.expression.spel.SpelEvaluationException;
@@ -36,9 +38,6 @@ import org.springframework.expression.spel.support.StandardEvaluationContext;
 import org.springframework.expression.spel.support.StandardTypeConverter;
 import org.springframework.integration.json.JsonPropertyAccessor.ArrayNodeAsList;
 import org.springframework.integration.json.JsonPropertyAccessor.ComparableJsonNode;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 /**
  * Abstract base class for tests involving {@link JsonPropertyAccessor} and {@link JsonIndexAccessor}.

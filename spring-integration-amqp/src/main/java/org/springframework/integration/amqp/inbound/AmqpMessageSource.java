@@ -26,7 +26,6 @@ import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.GetResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.springframework.amqp.core.MessageProperties;
 import org.springframework.amqp.rabbit.batch.BatchingStrategy;
 import org.springframework.amqp.rabbit.batch.SimpleBatchingStrategy;

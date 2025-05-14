@@ -21,7 +21,6 @@ import jakarta.mail.Message;
 import jakarta.mail.MessagingException;
 import jakarta.mail.URLName;
 import jakarta.mail.internet.MimeMessage;
-
 import org.springframework.util.Assert;
 
 /**

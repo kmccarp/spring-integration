@@ -16,6 +16,9 @@
 
 package org.springframework.integration.dsl.transformers;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Collections;
@@ -23,7 +26,6 @@ import java.util.Date;
 import java.util.Map;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -50,9 +52,6 @@ import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 /**
  * @author Artem Bilan
@@ -323,7 +322,7 @@ public class TransformerTests {
 		@Bean
 		public IntegrationFlow enrichFlow() {
 			return IntegrationFlow.from("enrichChannel")
-					.<TestPojo, Map<?, ?>>transform(p -> {
+					.transform(p -> {
 						if ("junk".equals(p.getName())) {
 							throw new RuntimeException("intentional");
 						}
@@ -411,9 +410,9 @@ public class TransformerTests {
 		@Bean
 		public IntegrationFlow replyProducingSubFlowEnricher() {
 			return f -> f
-					.enrich(e -> e.<TestPojo>requestPayload(p -> p.getPayload().getName())
+					.enrich(e -> e.requestPayload(p -> p.getPayload().getName())
 							.requestSubFlow(someServiceFlow())
-							.<String>headerFunction("foo", Message::getPayload)
+							.headerFunction("foo", Message::getPayload)
 							.propertyFunction("name", Message::getPayload))
 					.channel("subFlowTestReplyChannel");
 		}
@@ -426,11 +425,11 @@ public class TransformerTests {
 		@Bean
 		public IntegrationFlow terminatingSubFlowEnricher(SomeService someService) {
 			return f -> f
-					.enrich(e -> e.<TestPojo>requestPayload(p -> p.getPayload().getName())
+					.enrich(e -> e.requestPayload(p -> p.getPayload().getName())
 							.requestSubFlow(sf -> sf
 									.handle(someService::aTerminatingServiceMethod))
 							.replyChannel("enricherReplyChannel")
-							.<String>headerFunction("foo", Message::getPayload)
+							.headerFunction("foo", Message::getPayload)
 							.propertyFunction("name", Message::getPayload))
 					.channel("subFlowTestReplyChannel");
 		}
@@ -457,7 +456,7 @@ public class TransformerTests {
 		@Bean
 		public IntegrationFlow transformFlowWithError() {
 			return f -> f
-					.transformWith((t) ->
+					.transformWith(t ->
 							t.transformer(p -> {
 										throw new RuntimeException("intentional");
 									})

@@ -24,7 +24,6 @@ import java.util.Map;
 
 import org.eclipse.paho.mqttv5.common.packet.MqttProperties;
 import org.eclipse.paho.mqttv5.common.packet.UserProperty;
-
 import org.springframework.core.log.LogAccessor;
 import org.springframework.core.log.LogMessage;
 import org.springframework.integration.mapping.HeaderMapper;
@@ -115,7 +114,7 @@ public class MqttHeaderMapper implements HeaderMapper<MqttProperties> {
 	}
 
 	private Object mapPropertyIfMatch(String headerName, @Nullable Object value) {
-		return (value != null && shouldMapHeader(headerName, this.inboundHeaderNames)) ? value : null;
+		return value != null && shouldMapHeader(headerName, this.inboundHeaderNames) ? value : null;
 	}
 
 	private static boolean shouldMapHeader(String headerName, String[] patterns) {

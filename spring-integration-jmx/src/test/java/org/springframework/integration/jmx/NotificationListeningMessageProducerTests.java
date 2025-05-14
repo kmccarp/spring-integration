@@ -16,8 +16,10 @@
 
 package org.springframework.integration.jmx;
 
-import java.util.concurrent.atomic.AtomicInteger;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 
+import java.util.concurrent.atomic.AtomicInteger;
 import javax.management.MBeanServer;
 import javax.management.Notification;
 import javax.management.ObjectName;
@@ -28,7 +30,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.Mockito;
-
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -39,9 +40,6 @@ import org.springframework.jmx.export.notification.NotificationPublisherAware;
 import org.springframework.jmx.support.MBeanServerFactoryBean;
 import org.springframework.jmx.support.ObjectNameManager;
 import org.springframework.messaging.Message;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
 
 /**
  * @author Mark Fisher
@@ -137,7 +135,7 @@ public class NotificationListeningMessageProducerTests {
 		adapter.setServer(this.server);
 		adapter.setObjectName(this.objectName);
 		adapter.setOutputChannel(outputChannel);
-		adapter.setFilter(notification -> !notification.getMessage().equals("bad"));
+		adapter.setFilter(notification -> !"bad".equals(notification.getMessage()));
 		adapter.setBeanFactory(mock(BeanFactory.class));
 		adapter.afterPropertiesSet();
 		adapter.start();

@@ -22,7 +22,6 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.dom.DOMSource;
 
 import org.w3c.dom.Document;
-
 import org.springframework.integration.support.AbstractIntegrationMessageBuilder;
 import org.springframework.messaging.Message;
 import org.springframework.util.Assert;
@@ -54,7 +53,7 @@ public class SimpleWebServiceInboundGateway extends AbstractWebServiceInboundGat
 		Assert.notNull(request, "Invalid message context: request was null.");
 
 		AbstractIntegrationMessageBuilder<?> builder = getMessageBuilderFactory().withPayload(
-				(this.extractPayload) ? request.getPayloadSource() : request);
+				this.extractPayload ? request.getPayloadSource() : request);
 
 		fromSoapHeaders(messageContext, builder);
 

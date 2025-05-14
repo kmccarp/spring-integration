@@ -16,9 +16,12 @@
 
 package org.springframework.integration.ip.tcp.connection;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.mock;
+
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.event.ApplicationEventMulticaster;
 import org.springframework.context.support.AbstractApplicationContext;
@@ -26,10 +29,6 @@ import org.springframework.core.ResolvableType;
 import org.springframework.integration.channel.QueueChannel;
 import org.springframework.integration.event.inbound.ApplicationEventListeningMessageProducer;
 import org.springframework.messaging.Message;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.mock;
 
 /**
  * @author Gary Russell

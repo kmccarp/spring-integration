@@ -16,6 +16,9 @@
 
 package org.springframework.integration.support.management.observation;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.awaitility.Awaitility.await;
+
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -24,7 +27,6 @@ import io.micrometer.observation.ObservationRegistry;
 import io.micrometer.tracing.Span;
 import io.micrometer.tracing.test.SampleTestRunner;
 import io.micrometer.tracing.test.simple.SpansAssert;
-
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -44,9 +46,6 @@ import org.springframework.integration.transaction.TransactionInterceptorBuilder
 import org.springframework.integration.transaction.TransactionSynchronizationFactory;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.transaction.interceptor.TransactionInterceptor;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.awaitility.Awaitility.await;
 
 /**
  * @author Artem Bilan

@@ -16,12 +16,11 @@
 
 package org.springframework.integration.file.transformer;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.junit.Before;
 import org.junit.Test;
-
 import org.springframework.messaging.Message;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Alex Peters

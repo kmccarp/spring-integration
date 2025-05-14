@@ -17,7 +17,6 @@
 package org.springframework.integration.ftp.dsl;
 
 import org.apache.commons.net.ftp.FTPFile;
-
 import org.springframework.integration.file.dsl.FileTransferringMessageHandlerSpec;
 import org.springframework.integration.file.remote.session.SessionFactory;
 import org.springframework.integration.file.support.FileExistsMode;

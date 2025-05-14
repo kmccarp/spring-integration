@@ -16,6 +16,10 @@
 
 package org.springframework.integration.store;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -25,16 +29,11 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.integration.support.MessageBuilder;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessagingException;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.test.util.ReflectionTestUtils;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
 
 /**
  * @author Iwein Fuld
@@ -238,7 +237,7 @@ public class SimpleMessageStoreTests {
 		SimpleMessageStore store = new SimpleMessageStore();
 		store.setExpiryCallbacks(List.of((messageGroupStore, group) -> {
 		}));
-		assertThat(((Collection<?>) ReflectionTestUtils.getField(store, "expiryCallbacks"))).hasSize(1);
+		assertThat((Collection<?>) ReflectionTestUtils.getField(store, "expiryCallbacks")).hasSize(1);
 	}
 
 	@Test

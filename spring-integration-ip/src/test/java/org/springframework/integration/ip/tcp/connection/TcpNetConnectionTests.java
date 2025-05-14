@@ -16,6 +16,13 @@
 
 package org.springframework.integration.ip.tcp.connection;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,13 +35,11 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
-
 import javax.net.SocketFactory;
 
 import org.apache.commons.logging.Log;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-
 import org.springframework.beans.DirectFieldAccessor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.integration.ip.tcp.connection.TcpNioConnection.ChannelInputStream;
@@ -46,13 +51,6 @@ import org.springframework.integration.support.converter.MapMessageConverter;
 import org.springframework.integration.test.util.TestUtils;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.ErrorMessage;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 /**
  * @author Gary Russell
@@ -72,7 +70,7 @@ public class TcpNetConnectionTests {
 		TcpNetConnection connection = new TcpNetConnection(socket, true, false, e -> {
 		}, null);
 		connection.setDeserializer(new ByteArrayStxEtxSerializer());
-		final AtomicReference<Object> log = new AtomicReference<Object>();
+		final AtomicReference<Object> log = new AtomicReference<>();
 		Log logger = mock(Log.class);
 		given(logger.isErrorEnabled()).willReturn(true);
 		doAnswer(invocation -> {
@@ -136,7 +134,7 @@ public class TcpNetConnectionTests {
 		out.write(baos.toByteArray());
 		out.close();
 
-		final AtomicReference<Message<?>> inboundMessage = new AtomicReference<Message<?>>();
+		final AtomicReference<Message<?>> inboundMessage = new AtomicReference<>();
 		TcpListener listener = message1 -> {
 			if (!(message1 instanceof ErrorMessage)) {
 				inboundMessage.set(message1);
@@ -169,7 +167,7 @@ public class TcpNetConnectionTests {
 		Socket socket = SocketFactory.getDefault().createSocket("localhost", port.get());
 		TcpNetConnection connection = new TcpNetConnection(socket, false, false, publisher, "socketClosedNextRead");
 		socket.close();
-		assertThatThrownBy(() -> connection.getPayload())
+		assertThatThrownBy(connection::getPayload)
 				.isInstanceOf(SoftEndOfStreamException.class);
 		server.stop();
 	}

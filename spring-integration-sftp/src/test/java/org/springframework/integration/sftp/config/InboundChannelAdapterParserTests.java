@@ -16,6 +16,9 @@
 
 package org.springframework.integration.sftp.config;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+
 import java.io.File;
 import java.util.Collection;
 import java.util.Comparator;
@@ -24,7 +27,6 @@ import java.util.concurrent.PriorityBlockingQueue;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.Lifecycle;
@@ -38,9 +40,6 @@ import org.springframework.integration.sftp.inbound.SftpInboundFileSynchronizing
 import org.springframework.integration.test.util.TestUtils;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.PollableChannel;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 /**
  * @author Oleg Zhurakousky

@@ -25,7 +25,6 @@ import com.hazelcast.map.IMap;
 import com.hazelcast.map.listener.EntryAddedListener;
 import com.hazelcast.map.listener.EntryRemovedListener;
 import com.hazelcast.map.listener.EntryUpdatedListener;
-
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.integration.metadata.ListenableMetadataStore;
 import org.springframework.integration.metadata.MetadataStoreListener;

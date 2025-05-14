@@ -16,6 +16,9 @@
 
 package org.springframework.integration.http.config;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.integration.test.util.TestUtils.getPropertyValue;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -24,7 +27,6 @@ import java.util.Map;
 
 import jakarta.servlet.http.HttpServletResponse;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.DirectFieldAccessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -47,9 +49,6 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.integration.test.util.TestUtils.getPropertyValue;
 
 /**
  * @author Mark Fisher
@@ -120,7 +119,7 @@ public class HttpInboundGatewayParserTests {
 		List<HttpMessageConverter<?>> messageConverters =
 				TestUtils.getPropertyValue(this.gateway, "messageConverters", List.class);
 
-		assertThat(messageConverters.size() > 0)
+		assertThat(!messageConverters.isEmpty())
 				.as("The default converters should have been registered, given there are no custom converters")
 				.isTrue();
 
@@ -187,7 +186,7 @@ public class HttpInboundGatewayParserTests {
 		assertThat(map.get("foo")).isEqualTo("foo");
 		assertThat(map.get("bar")).isEqualTo("bar");
 
-		Map<String, Object> mapOfHeaders = new HashMap<String, Object>();
+		Map<String, Object> mapOfHeaders = new HashMap<>();
 		mapOfHeaders.put("abc", "abc");
 		MessageHeaders mh = new MessageHeaders(mapOfHeaders);
 		headers = new HttpHeaders();

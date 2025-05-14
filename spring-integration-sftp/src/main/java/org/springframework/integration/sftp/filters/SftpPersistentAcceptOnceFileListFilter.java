@@ -17,7 +17,6 @@
 package org.springframework.integration.sftp.filters;
 
 import org.apache.sshd.sftp.client.SftpClient;
-
 import org.springframework.integration.file.filters.AbstractPersistentAcceptOnceFileListFilter;
 import org.springframework.integration.metadata.ConcurrentMetadataStore;
 

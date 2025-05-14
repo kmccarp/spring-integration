@@ -16,6 +16,10 @@
 
 package org.springframework.integration.core;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.verify;
+
 import java.lang.reflect.Field;
 import java.util.UUID;
 
@@ -24,7 +28,6 @@ import org.apache.commons.logging.LogFactory;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
 import org.springframework.integration.test.util.TestUtils;
@@ -34,10 +37,6 @@ import org.springframework.messaging.support.GenericMessage;
 import org.springframework.util.IdGenerator;
 import org.springframework.util.ReflectionUtils;
 import org.springframework.util.StopWatch;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.atLeastOnce;
-import static org.mockito.Mockito.verify;
 
 /**
  * @author Oleg Zhurakousky

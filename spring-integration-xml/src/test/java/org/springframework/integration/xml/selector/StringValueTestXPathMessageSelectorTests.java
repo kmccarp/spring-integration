@@ -16,11 +16,10 @@
 
 package org.springframework.integration.xml.selector;
 
-import org.junit.jupiter.api.Test;
-
-import org.springframework.messaging.support.GenericMessage;
-
 import static org.assertj.core.api.Assertions.assertThat;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.messaging.support.GenericMessage;
 
 /**
  * @author Jonas Partner

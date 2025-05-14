@@ -53,7 +53,7 @@ public abstract class AbstractMarkerFilePresentFileListFilter<F> implements File
 	 * "foo.txt" if "foo.txt.complete" is present.
 	 * @param filter the file name filter.
 	 */
-	public AbstractMarkerFilePresentFileListFilter(FileListFilter<F> filter) {
+	protected AbstractMarkerFilePresentFileListFilter(FileListFilter<F> filter) {
 		this(filter, defaultFileNameFunction(".complete"));
 	}
 
@@ -65,7 +65,7 @@ public abstract class AbstractMarkerFilePresentFileListFilter<F> implements File
 	 * @param filter the file name filter.
 	 * @param suffix the replacement suffix.
 	 */
-	public AbstractMarkerFilePresentFileListFilter(FileListFilter<F> filter, String suffix) {
+	protected AbstractMarkerFilePresentFileListFilter(FileListFilter<F> filter, String suffix) {
 		this(filter, defaultFileNameFunction(suffix));
 	}
 
@@ -79,7 +79,7 @@ public abstract class AbstractMarkerFilePresentFileListFilter<F> implements File
 	 * @param filter the file name filter.
 	 * @param function the function to create the marker file name from the file name.
 	 */
-	public AbstractMarkerFilePresentFileListFilter(FileListFilter<F> filter,
+	protected AbstractMarkerFilePresentFileListFilter(FileListFilter<F> filter,
 			Function<String, String> function) {
 		this(Collections.singletonMap(filter, function));
 	}
@@ -97,7 +97,7 @@ public abstract class AbstractMarkerFilePresentFileListFilter<F> implements File
 	 * constructor.
 	 * @param filtersAndFunctions the filters and functions.
 	 */
-	public AbstractMarkerFilePresentFileListFilter(
+	protected AbstractMarkerFilePresentFileListFilter(
 			Map<FileListFilter<F>, Function<String, String>> filtersAndFunctions) {
 		this.filtersAndFunctions.putAll(filtersAndFunctions);
 	}

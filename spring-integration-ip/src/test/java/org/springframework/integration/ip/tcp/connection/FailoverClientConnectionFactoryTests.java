@@ -16,6 +16,18 @@
 
 package org.springframework.integration.ip.tcp.connection;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.inOrder;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.when;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -32,13 +44,11 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
-
 import javax.net.ServerSocketFactory;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.InOrder;
 import org.mockito.Mockito;
-
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.core.task.SimpleAsyncTaskExecutor;
 import org.springframework.integration.channel.DirectChannel;
@@ -55,18 +65,6 @@ import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.SubscribableChannel;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.inOrder;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.when;
 
 /**
  * @author Gary Russell
@@ -287,7 +285,7 @@ public class FailoverClientConnectionFactoryTests {
 		when(factory2.isActive()).thenReturn(true);
 		FailoverClientConnectionFactory failoverFactory = new FailoverClientConnectionFactory(factories);
 		failoverFactory.start();
-		GenericMessage<String> message = new GenericMessage<String>("foo");
+		GenericMessage<String> message = new GenericMessage<>("foo");
 		failoverFactory.getConnection().send(message);
 		Mockito.verify(conn1).send(message);
 	}
@@ -426,15 +424,15 @@ public class FailoverClientConnectionFactoryTests {
 		conn1.send(new GenericMessage<>("foo1"));
 		conn1.close();
 		TcpConnection conn2 = failoverFactory.getConnection();
-		assertThat((TestUtils.getPropertyValue(conn2, "delegate", TcpConnectionInterceptorSupport.class))
+		assertThat(TestUtils.getPropertyValue(conn2, "delegate", TcpConnectionInterceptorSupport.class)
 				.getTheConnection())
-				.isSameAs((TestUtils.getPropertyValue(conn1, "delegate", TcpConnectionInterceptorSupport.class))
+				.isSameAs(TestUtils.getPropertyValue(conn1, "delegate", TcpConnectionInterceptorSupport.class)
 						.getTheConnection());
 		conn2.send(new GenericMessage<>("foo2"));
 		conn1 = failoverFactory.getConnection();
-		assertThat((TestUtils.getPropertyValue(conn2, "delegate", TcpConnectionInterceptorSupport.class))
+		assertThat(TestUtils.getPropertyValue(conn2, "delegate", TcpConnectionInterceptorSupport.class)
 				.getTheConnection())
-				.isNotSameAs((TestUtils.getPropertyValue(conn1, "delegate", TcpConnectionInterceptorSupport.class))
+				.isNotSameAs(TestUtils.getPropertyValue(conn1, "delegate", TcpConnectionInterceptorSupport.class)
 						.getTheConnection());
 		conn1.send(new GenericMessage<>("foo3"));
 		conn1.close();
@@ -557,15 +555,15 @@ public class FailoverClientConnectionFactoryTests {
 		conn1.send(message);
 		conn1.close();
 		TcpConnection conn2 = failoverFactory.getConnection();
-		assertThat((TestUtils.getPropertyValue(conn2, "delegate", TcpConnectionInterceptorSupport.class))
+		assertThat(TestUtils.getPropertyValue(conn2, "delegate", TcpConnectionInterceptorSupport.class)
 				.getTheConnection())
-				.isSameAs((TestUtils.getPropertyValue(conn1, "delegate", TcpConnectionInterceptorSupport.class))
+				.isSameAs(TestUtils.getPropertyValue(conn1, "delegate", TcpConnectionInterceptorSupport.class)
 						.getTheConnection());
 		conn2.send(message);
 		conn1 = failoverFactory.getConnection();
-		assertThat((TestUtils.getPropertyValue(conn2, "delegate", TcpConnectionInterceptorSupport.class))
+		assertThat(TestUtils.getPropertyValue(conn2, "delegate", TcpConnectionInterceptorSupport.class)
 				.getTheConnection())
-				.isNotSameAs((TestUtils.getPropertyValue(conn1, "delegate", TcpConnectionInterceptorSupport.class))
+				.isNotSameAs(TestUtils.getPropertyValue(conn1, "delegate", TcpConnectionInterceptorSupport.class)
 						.getTheConnection());
 		conn1.send(message);
 		conn1.close();

@@ -20,7 +20,6 @@ import java.io.IOException;
 import java.io.UncheckedIOException;
 
 import org.apache.sshd.sftp.client.SftpClient;
-
 import org.springframework.integration.file.remote.ClientCallbackWithoutResult;
 import org.springframework.integration.file.remote.RemoteFileTemplate;
 import org.springframework.integration.file.remote.handler.FileTransferringMessageHandler;

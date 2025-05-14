@@ -18,7 +18,6 @@ package org.springframework.integration.channel;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.integration.support.context.NamedComponent;
 import org.springframework.messaging.Message;

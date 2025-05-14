@@ -16,6 +16,8 @@
 
 package org.springframework.integration.jms.request_reply;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -25,15 +27,12 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.integration.MessageTimeoutException;
 import org.springframework.integration.gateway.RequestReplyExchanger;
 import org.springframework.integration.jms.ActiveMQMultiContextTests;
 import org.springframework.integration.test.condition.LongRunningTest;
 import org.springframework.messaging.support.GenericMessage;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Oleg Zhurakousky

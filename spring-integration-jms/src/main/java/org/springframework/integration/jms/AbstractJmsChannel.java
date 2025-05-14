@@ -37,7 +37,7 @@ public abstract class AbstractJmsChannel extends AbstractMessageChannel {
 
 	private final JmsTemplate jmsTemplate;
 
-	public AbstractJmsChannel(JmsTemplate jmsTemplate) {
+	protected AbstractJmsChannel(JmsTemplate jmsTemplate) {
 		Assert.notNull(jmsTemplate, "jmsTemplate must not be null");
 		this.jmsTemplate = jmsTemplate;
 	}

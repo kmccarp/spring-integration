@@ -16,6 +16,8 @@
 
 package org.springframework.integration.monitor;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.Arrays;
 
 import org.apache.commons.logging.Log;
@@ -23,13 +25,10 @@ import org.apache.commons.logging.LogFactory;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.junit.Test;
-
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.support.GenericMessage;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Dave Syer

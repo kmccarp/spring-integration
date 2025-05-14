@@ -27,7 +27,6 @@ import java.net.SocketTimeoutException;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Supplier;
-
 import javax.net.ssl.SSLSession;
 import javax.net.ssl.SSLSocket;
 

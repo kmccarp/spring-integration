@@ -21,7 +21,6 @@ import java.util.Map;
 
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryo.io.Input;
-
 import org.springframework.integration.support.MutableMessageHeaders;
 import org.springframework.messaging.MessageHeaders;
 

@@ -16,6 +16,13 @@
 
 package org.springframework.integration.ftp.outbound;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -35,7 +42,6 @@ import org.apache.commons.net.ftp.FTPFile;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-
 import org.springframework.beans.DirectFieldAccessor;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -52,13 +58,6 @@ import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.PollableChannel;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.util.FileCopyUtils;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
 
 /**
  * @author Oleg Zhurakousky
@@ -146,7 +145,7 @@ public class FtpOutboundTests {
 		File targetDir = new File("remote-target-dir");
 		assertThat(targetDir.exists()).as("target directory does not exist: " + targetDir.getName()).isTrue();
 
-		FileTransferringMessageHandler<FTPFile> handler = new FileTransferringMessageHandler<FTPFile>(sessionFactory);
+		FileTransferringMessageHandler<FTPFile> handler = new FileTransferringMessageHandler<>(sessionFactory);
 		handler.setRemoteDirectoryExpression(new LiteralExpression(targetDir.getName()));
 		handler.setFileNameGenerator(message -> ((File) message.getPayload()).getName() + ".test");
 		handler.setBeanFactory(mock(BeanFactory.class));

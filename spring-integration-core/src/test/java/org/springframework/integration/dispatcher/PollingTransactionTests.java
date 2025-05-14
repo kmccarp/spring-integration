@@ -16,6 +16,8 @@
 
 package org.springframework.integration.dispatcher;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.List;
 import java.util.concurrent.Callable;
 
@@ -23,7 +25,6 @@ import org.aopalliance.aop.Advice;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.aop.Advisor;
 import org.springframework.aop.ProxyMethodInvocation;
 import org.springframework.aop.framework.Advised;
@@ -43,8 +44,6 @@ import org.springframework.transaction.TransactionException;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.interceptor.TransactionInterceptor;
 import org.springframework.transaction.support.DefaultTransactionStatus;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Mark Fisher

@@ -22,7 +22,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import io.micrometer.observation.ObservationRegistry;
-
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.EnvironmentAware;
@@ -115,7 +114,7 @@ public class IntegrationManagementConfiguration implements ImportAware, Environm
 		if (hasAsterisk) {
 			observationPatterns =
 					observationPatterns.stream()
-							.filter((pattern) -> pattern.startsWith("!"))
+							.filter(pattern -> pattern.startsWith("!"))
 							.collect(Collectors.toList());
 
 			observationPatterns.add("*");

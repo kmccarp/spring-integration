@@ -33,7 +33,6 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Scheduler;
 import reactor.core.scheduler.Schedulers;
-
 import org.springframework.integration.endpoint.MessageProducerSupport;
 import org.springframework.integration.mapping.ConvertingBytesMessageMapper;
 import org.springframework.integration.mapping.InboundMessageMapper;
@@ -79,7 +78,7 @@ public class ZeroMqMessageProducer extends MessageProducerSupport {
 
 	private InboundMessageMapper<byte[]> messageMapper;
 
-	private Consumer<ZMQ.Socket> socketConfigurer = (socket) -> {
+	private Consumer<ZMQ.Socket> socketConfigurer = socket -> {
 	};
 
 	private Duration consumeDelay = DEFAULT_CONSUME_DELAY;
@@ -230,8 +229,8 @@ public class ZeroMqMessageProducer extends MessageProducerSupport {
 		Assert.state(isActive(), "This message producer is not active to accept a new subscription.");
 
 		Flux.fromArray(topics)
-				.flatMap((topic) ->
-						this.socketMono.doOnNext((socket) -> socket.subscribe(topic)))
+				.flatMap(topic ->
+						this.socketMono.doOnNext(socket -> socket.subscribe(topic)))
 				.subscribe();
 	}
 
@@ -241,8 +240,8 @@ public class ZeroMqMessageProducer extends MessageProducerSupport {
 		Assert.state(isActive(), "This message producer is not active to cancel a subscription.");
 
 		Flux.fromArray(topics)
-				.flatMap((topic) ->
-						this.socketMono.doOnNext((socket) -> socket.unsubscribe(topic)))
+				.flatMap(topic ->
+						this.socketMono.doOnNext(socket -> socket.unsubscribe(topic)))
 				.subscribe();
 	}
 
@@ -252,14 +251,14 @@ public class ZeroMqMessageProducer extends MessageProducerSupport {
 				Mono.just(this.context.createSocket(this.socketType))
 						.publishOn(this.consumerScheduler)
 						.doOnNext(this.socketConfigurer)
-						.doOnNext((socket) -> {
+						.doOnNext(socket -> {
 							if (SocketType.SUB.equals(this.socketType)) {
 								for (String topic : this.topics) {
 									socket.subscribe(topic);
 								}
 							}
 						})
-						.doOnNext((socket) -> {
+						.doOnNext(socket -> {
 							if (this.connectUrl != null) {
 								socket.connect(this.connectUrl);
 							}
@@ -272,7 +271,7 @@ public class ZeroMqMessageProducer extends MessageProducerSupport {
 
 		Flux<? extends Message<?>> dataFlux =
 				this.socketMono
-						.flatMap((socket) -> {
+						.flatMap(socket -> {
 							if (isRunning()) {
 								ZMsg msg = ZMsg.recvMsg(socket, false);
 								if (msg != null) {
@@ -282,10 +281,10 @@ public class ZeroMqMessageProducer extends MessageProducerSupport {
 							return Mono.empty();
 						})
 						.publishOn(Schedulers.boundedElastic())
-						.transform((msgMono) -> this.receiveRaw ? mapRaw(msgMono) : convertMessage(msgMono))
-						.doOnError((error) ->
+						.transform(msgMono -> this.receiveRaw ? mapRaw(msgMono) : convertMessage(msgMono))
+						.doOnError(error ->
 								logger.error(error, () -> "Error processing ZeroMQ message in the " + this))
-						.repeatWhenEmpty((repeat) ->
+						.repeatWhenEmpty(repeat ->
 								isActive() ? repeat.delayElements(this.consumeDelay) : repeat)
 						.repeat(this::isActive)
 						.doOnComplete(this.consumerScheduler::dispose);
@@ -294,11 +293,11 @@ public class ZeroMqMessageProducer extends MessageProducerSupport {
 	}
 
 	private Mono<Message<?>> mapRaw(Mono<ZMsg> msgMono) {
-		return msgMono.map((msg) -> getMessageBuilderFactory().withPayload(msg).build());
+		return msgMono.map(msg -> getMessageBuilderFactory().withPayload(msg).build());
 	}
 
 	private Mono<Message<?>> convertMessage(Mono<ZMsg> msgMono) {
-		return msgMono.map((msg) -> {
+		return msgMono.map(msg -> {
 			Map<String, Object> headers = null;
 			if (msg.size() > 1) {
 				ZFrame topicFrame = this.unwrapTopic ? msg.unwrap() : msg.pop();

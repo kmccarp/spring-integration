@@ -16,6 +16,8 @@
 
 package org.springframework.integration.codec.kryo;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -26,8 +28,6 @@ import java.util.Map;
 
 import org.assertj.core.data.Offset;
 import org.junit.jupiter.api.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author David Turanski
@@ -144,7 +144,7 @@ public class KryoCodecTests {
 				return false;
 			}
 			SomeClassWithNoDefaultConstructors that = (SomeClassWithNoDefaultConstructors) other;
-			return (this.val1.equals(that.val1) && this.val2 == that.val2);
+			return this.val1.equals(that.val1) && this.val2 == that.val2;
 		}
 
 		@Override

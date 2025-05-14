@@ -17,7 +17,6 @@
 package org.springframework.integration.smb.inbound;
 
 import jcifs.smb.SmbFile;
-
 import org.springframework.integration.file.remote.session.SessionFactory;
 import org.springframework.integration.file.remote.synchronizer.AbstractInboundFileSynchronizer;
 

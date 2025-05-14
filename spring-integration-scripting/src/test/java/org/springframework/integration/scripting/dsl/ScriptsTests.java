@@ -16,6 +16,8 @@
 
 package org.springframework.integration.scripting.dsl;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
@@ -24,7 +26,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -45,8 +46,6 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.util.FileCopyUtils;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 /**
  * @author Artem Bilan
  *
@@ -59,7 +58,7 @@ public class ScriptsTests {
 	@TempDir
 	public static File FOLDER;
 
-	private static File SCRIPT_FILE;
+	private static File scriptFile;
 
 	@Autowired
 	@Qualifier("scriptSplitter.input")
@@ -98,8 +97,8 @@ public class ScriptsTests {
 
 	@BeforeAll
 	public static void setup() throws IOException {
-		SCRIPT_FILE = new File(FOLDER, "script.py");
-		FileCopyUtils.copy("1".getBytes(), SCRIPT_FILE);
+		scriptFile = new File(FOLDER, "script.py");
+		FileCopyUtils.copy("1".getBytes(), scriptFile);
 	}
 
 	@AfterEach
@@ -142,8 +141,8 @@ public class ScriptsTests {
 		this.scriptServiceInput.send(new GenericMessage<Object>("test"));
 		assertThat(this.results.receive(10000).getPayload()).isEqualTo(1);
 
-		FileCopyUtils.copy("2".getBytes(), SCRIPT_FILE);
-		SCRIPT_FILE.setLastModified(System.currentTimeMillis() + 10000); // force refresh
+		FileCopyUtils.copy("2".getBytes(), scriptFile);
+		scriptFile.setLastModified(System.currentTimeMillis() + 10000); // force refresh
 
 		this.scriptServiceInput.send(new GenericMessage<Object>("test"));
 		assertThat(this.results.receive(10000).getPayload()).isEqualTo(2);
@@ -233,7 +232,7 @@ public class ScriptsTests {
 
 		@Bean
 		public IntegrationFlow scriptService() {
-			return f -> f.handle(Scripts.processor("file:" + SCRIPT_FILE.getAbsolutePath()).refreshCheckDelay(0))
+			return f -> f.handle(Scripts.processor("file:" + scriptFile.getAbsolutePath()).refreshCheckDelay(0))
 					.channel(results());
 		}
 

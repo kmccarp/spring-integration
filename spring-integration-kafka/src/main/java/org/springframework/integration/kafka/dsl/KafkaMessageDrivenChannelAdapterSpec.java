@@ -22,7 +22,6 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 import org.apache.kafka.common.TopicPartition;
-
 import org.springframework.integration.dsl.ComponentsRegistration;
 import org.springframework.integration.dsl.MessageProducerSpec;
 import org.springframework.integration.kafka.inbound.KafkaMessageDrivenChannelAdapter;

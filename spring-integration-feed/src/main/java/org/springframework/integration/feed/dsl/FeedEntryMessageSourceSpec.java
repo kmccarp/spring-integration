@@ -19,7 +19,6 @@ package org.springframework.integration.feed.dsl;
 import java.net.URL;
 
 import com.rometools.rome.io.SyndFeedInput;
-
 import org.springframework.core.io.Resource;
 import org.springframework.integration.dsl.MessageSourceSpec;
 import org.springframework.integration.feed.inbound.FeedEntryMessageSource;

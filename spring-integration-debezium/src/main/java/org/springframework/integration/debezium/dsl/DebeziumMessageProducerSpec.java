@@ -23,7 +23,6 @@ import io.debezium.engine.ChangeEvent;
 import io.debezium.engine.DebeziumEngine;
 import io.debezium.engine.Header;
 import io.debezium.engine.format.SerializationFormat;
-
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.integration.debezium.inbound.DebeziumMessageProducer;
 import org.springframework.integration.debezium.support.DefaultDebeziumHeaderMapper;

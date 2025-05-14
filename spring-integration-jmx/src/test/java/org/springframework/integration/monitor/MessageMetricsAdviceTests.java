@@ -19,7 +19,6 @@ package org.springframework.integration.monitor;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.aop.support.NameMatchMethodPointcutAdvisor;
 import org.springframework.beans.factory.BeanFactory;
@@ -109,7 +108,7 @@ public class MessageMetricsAdviceTests {
 	private static class DummyHandler implements MessageHandler {
 
 		@SuppressWarnings("unused")
-		boolean invoked = false;
+		boolean invoked;
 
 		DummyHandler() {
 			super();
@@ -124,7 +123,7 @@ public class MessageMetricsAdviceTests {
 
 	private static class DummyInterceptor implements MethodInterceptor {
 
-		boolean invoked = false;
+		boolean invoked;
 
 		DummyInterceptor() {
 			super();

@@ -20,7 +20,6 @@ import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.springframework.amqp.AmqpConnectException;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.amqp.core.MessageListener;
@@ -180,7 +179,7 @@ abstract class AbstractSubscribableAmqpChannel extends AbstractAmqpChannel
 		String queue = obtainQueueName(this.channelName);
 		this.container.setQueueNames(queue);
 		MessageConverter converter =
-				(getAmqpTemplate() instanceof RabbitTemplate rabbitTemplate)
+				getAmqpTemplate() instanceof RabbitTemplate rabbitTemplate
 						? rabbitTemplate.getMessageConverter()
 						: new SimpleMessageConverter();
 
@@ -204,7 +203,7 @@ abstract class AbstractSubscribableAmqpChannel extends AbstractAmqpChannel
 
 	@Override
 	public int getPhase() {
-		return (this.container != null) ? this.container.getPhase() : 0;
+		return this.container != null ? this.container.getPhase() : 0;
 	}
 
 	@Override
@@ -296,7 +295,7 @@ abstract class AbstractSubscribableAmqpChannel extends AbstractAmqpChannel
 			Message<?> messageToSend = null;
 			try {
 				Object converted = this.converter.fromMessage(message);
-				messageToSend = (converted instanceof Message<?>) ? (Message<?>) converted
+				messageToSend = converted instanceof Message<?> ? (Message<?>) converted
 						: buildMessage(message, converted);
 				this.dispatcher.dispatch(messageToSend);
 			}

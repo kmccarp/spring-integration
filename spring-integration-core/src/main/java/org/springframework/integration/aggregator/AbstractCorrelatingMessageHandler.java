@@ -32,7 +32,6 @@ import java.util.concurrent.locks.Lock;
 import java.util.function.BiFunction;
 
 import org.aopalliance.aop.Advice;
-
 import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
@@ -137,7 +136,7 @@ public abstract class AbstractCorrelatingMessageHandler extends AbstractMessageP
 
 	private LockRegistry lockRegistry = new DefaultLockRegistry();
 
-	private boolean lockRegistrySet = false;
+	private boolean lockRegistrySet;
 
 	private long minimumTimeoutForEmptyGroups;
 
@@ -167,7 +166,7 @@ public abstract class AbstractCorrelatingMessageHandler extends AbstractMessageP
 
 	private BiFunction<Message<?>, String, String> groupConditionSupplier;
 
-	public AbstractCorrelatingMessageHandler(MessageGroupProcessor processor, MessageGroupStore store,
+	protected AbstractCorrelatingMessageHandler(MessageGroupProcessor processor, MessageGroupStore store,
 			CorrelationStrategy correlationStrategy, ReleaseStrategy releaseStrategy) {
 
 		Assert.notNull(processor, "'processor' must not be null");
@@ -190,11 +189,11 @@ public abstract class AbstractCorrelatingMessageHandler extends AbstractMessageP
 		this.sequenceAware = this.releaseStrategy instanceof SequenceSizeReleaseStrategy;
 	}
 
-	public AbstractCorrelatingMessageHandler(MessageGroupProcessor processor, MessageGroupStore store) {
+	protected AbstractCorrelatingMessageHandler(MessageGroupProcessor processor, MessageGroupStore store) {
 		this(processor, store, null, null);
 	}
 
-	public AbstractCorrelatingMessageHandler(MessageGroupProcessor processor) {
+	protected AbstractCorrelatingMessageHandler(MessageGroupProcessor processor) {
 		this(processor, new SimpleMessageStore(0), null, null);
 	}
 
@@ -492,7 +491,7 @@ public abstract class AbstractCorrelatingMessageHandler extends AbstractMessageP
 				this.discardChannel = getChannelResolver().resolveDestination(channelName);
 			}
 			catch (DestinationResolutionException ex) {
-				if (channelName.equals(IntegrationContextUtils.NULL_CHANNEL_BEAN_NAME)) {
+				if (IntegrationContextUtils.NULL_CHANNEL_BEAN_NAME.equals(channelName)) {
 					this.discardChannel = new NullChannel();
 				}
 				else {
@@ -1100,8 +1099,8 @@ public abstract class AbstractCorrelatingMessageHandler extends AbstractMessageP
 					messageSequenceSize = 0;
 				}
 				return messageSequenceSize.equals(getSequenceSize())
-						&& !(this.sourceGroup != null ? this.sourceGroup.containsSequence(messageSequenceNumber)
-						: containsSequenceNumber(this.getMessages(), messageSequenceNumber));
+						&& this.sourceGroup == null ? containsSequenceNumber(this.getMessages(), messageSequenceNumber)
+						: this.sourceGroup.containsSequence(messageSequenceNumber);
 			}
 			return true;
 		}

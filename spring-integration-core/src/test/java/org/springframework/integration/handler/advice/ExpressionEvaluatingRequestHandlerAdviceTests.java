@@ -16,11 +16,12 @@
 
 package org.springframework.integration.handler.advice;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.Map;
 
 import org.aopalliance.aop.Advice;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -35,8 +36,6 @@ import org.springframework.messaging.support.ErrorMessage;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Gary Russell
@@ -78,7 +77,7 @@ public class ExpressionEvaluatingRequestHandlerAdviceTests {
 		public IntegrationFlow advised() {
 			return f -> f
 					.<String>handle((payload, headers) -> {
-								if (payload.equals("good")) {
+								if ("good".equals(payload)) {
 									return null;
 								}
 								else {

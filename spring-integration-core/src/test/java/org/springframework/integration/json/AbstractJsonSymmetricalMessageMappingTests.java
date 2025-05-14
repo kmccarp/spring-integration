@@ -16,8 +16,9 @@
 
 package org.springframework.integration.json;
 
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
+import org.junit.jupiter.api.Test;
 import org.springframework.integration.history.MessageHistory;
 import org.springframework.integration.support.MessageBuilder;
 import org.springframework.integration.support.context.NamedComponent;
@@ -26,8 +27,6 @@ import org.springframework.integration.support.json.JsonInboundMessageMapper.Jso
 import org.springframework.integration.support.json.JsonOutboundMessageMapper;
 import org.springframework.integration.test.predicate.MessagePredicate;
 import org.springframework.messaging.Message;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Jeremy Grelle

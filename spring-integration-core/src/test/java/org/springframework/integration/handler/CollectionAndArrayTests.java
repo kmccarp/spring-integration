@@ -16,20 +16,19 @@
 
 package org.springframework.integration.handler;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.integration.channel.QueueChannel;
 import org.springframework.integration.splitter.AbstractMessageSplitter;
 import org.springframework.integration.support.MessageBuilder;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageHandler;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Mark Fisher

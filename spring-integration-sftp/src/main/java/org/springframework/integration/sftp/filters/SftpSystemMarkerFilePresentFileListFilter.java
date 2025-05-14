@@ -20,7 +20,6 @@ import java.util.Map;
 import java.util.function.Function;
 
 import org.apache.sshd.sftp.client.SftpClient;
-
 import org.springframework.integration.file.filters.AbstractMarkerFilePresentFileListFilter;
 import org.springframework.integration.file.filters.FileListFilter;
 

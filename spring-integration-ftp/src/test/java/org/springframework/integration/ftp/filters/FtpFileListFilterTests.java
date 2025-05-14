@@ -16,12 +16,13 @@
 
 package org.springframework.integration.ftp.filters;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.io.File;
 import java.util.List;
 
 import org.apache.commons.net.ftp.FTPFile;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,8 +31,6 @@ import org.springframework.integration.ftp.FtpTestSupport;
 import org.springframework.integration.ftp.session.FtpRemoteFileTemplate;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Gary Russell

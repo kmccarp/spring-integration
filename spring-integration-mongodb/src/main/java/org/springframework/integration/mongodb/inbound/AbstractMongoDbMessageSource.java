@@ -21,7 +21,6 @@ import java.util.Map;
 
 import com.mongodb.DBObject;
 import org.bson.Document;
-
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -68,13 +67,13 @@ public abstract class AbstractMongoDbMessageSource<T> extends AbstractMessageSou
 
 	private Class<?> entityClass = DBObject.class;
 
-	private boolean expectSingleResult = false;
+	private boolean expectSingleResult;
 
 	private Expression updateExpression;
 
 	private ApplicationContext applicationContext;
 
-	private volatile boolean initialized = false;
+	private volatile boolean initialized;
 
 	protected AbstractMongoDbMessageSource(Expression queryExpression) {
 		Assert.notNull(queryExpression, "'queryExpression' must not be null");

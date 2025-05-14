@@ -16,21 +16,19 @@
 
 package org.springframework.integration.xml.transformer;
 
-import java.util.Properties;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.xmlunit.assertj3.XmlAssert.assertThat;
 
+import java.util.Properties;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.dom.DOMResult;
 import javax.xml.transform.sax.SAXResult;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.integration.xml.util.XmlTestUtil;
 import org.springframework.messaging.MessagingException;
 import org.springframework.xml.transform.StringResult;
-
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.xmlunit.assertj3.XmlAssert.assertThat;
 
 /**
  * @author Jonas Partner

@@ -16,6 +16,8 @@
 
 package org.springframework.integration.redis.util;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -29,7 +31,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -43,8 +44,6 @@ import org.springframework.messaging.PollableChannel;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Gary Russell
@@ -154,7 +153,7 @@ class AggregatorWithRedisLocksTests implements RedisContainerTest {
 
 	private void assertNoLocksAfterTest() throws Exception {
 		int n = 0;
-		while (n++ < 100 && this.template.keys("aggregatorWithRedisLocksTests:*").size() > 0) {
+		while (n++ < 100 && !this.template.keys("aggregatorWithRedisLocksTests:*").isEmpty()) {
 			Thread.sleep(100);
 		}
 		assertThat(this.template.keys("aggregatorWithRedisLocksTests:*")).isEmpty();

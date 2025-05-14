@@ -16,6 +16,9 @@
 
 package org.springframework.integration.sftp.session;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.security.GeneralSecurityException;
@@ -39,11 +42,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.EnabledIf;
 import org.mockito.Mockito;
-
 import org.springframework.core.io.FileSystemResource;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
 
 /**
  *

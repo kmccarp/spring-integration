@@ -22,7 +22,6 @@ import java.util.Comparator;
 import java.util.List;
 
 import org.apache.sshd.sftp.client.SftpClient;
-
 import org.springframework.integration.file.remote.AbstractFileInfo;
 import org.springframework.integration.file.remote.AbstractRemoteFileStreamingMessageSource;
 import org.springframework.integration.file.remote.RemoteFileTemplate;

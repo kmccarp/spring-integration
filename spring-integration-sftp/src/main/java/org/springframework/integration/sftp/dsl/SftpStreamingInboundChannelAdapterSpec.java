@@ -19,7 +19,6 @@ package org.springframework.integration.sftp.dsl;
 import java.util.Comparator;
 
 import org.apache.sshd.sftp.client.SftpClient;
-
 import org.springframework.integration.file.dsl.RemoteFileStreamingInboundChannelAdapterSpec;
 import org.springframework.integration.file.filters.CompositeFileListFilter;
 import org.springframework.integration.file.filters.FileListFilter;

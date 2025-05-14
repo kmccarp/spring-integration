@@ -18,7 +18,6 @@ package org.springframework.integration.ip.tcp.connection;
 
 import java.net.ServerSocket;
 import java.net.Socket;
-
 import javax.net.ssl.SSLParameters;
 import javax.net.ssl.SSLSocket;
 

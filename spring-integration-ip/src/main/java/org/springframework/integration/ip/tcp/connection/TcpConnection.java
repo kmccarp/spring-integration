@@ -17,7 +17,6 @@
 package org.springframework.integration.ip.tcp.connection;
 
 import java.io.IOException;
-
 import javax.net.ssl.SSLSession;
 
 import org.springframework.core.serializer.Deserializer;

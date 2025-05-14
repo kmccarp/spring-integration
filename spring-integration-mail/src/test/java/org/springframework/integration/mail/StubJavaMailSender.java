@@ -22,7 +22,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import jakarta.mail.internet.MimeMessage;
-
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -36,9 +35,9 @@ public class StubJavaMailSender implements JavaMailSender {
 
 	private final MimeMessage uniqueMessage;
 
-	private final List<MimeMessage> sentMimeMessages = new ArrayList<MimeMessage>();
+	private final List<MimeMessage> sentMimeMessages = new ArrayList<>();
 
-	private final List<SimpleMailMessage> sentSimpleMailMessages = new ArrayList<SimpleMailMessage>();
+	private final List<SimpleMailMessage> sentSimpleMailMessages = new ArrayList<>();
 
 	public StubJavaMailSender(MimeMessage uniqueMessage) {
 		this.uniqueMessage = uniqueMessage;

@@ -28,7 +28,6 @@ import io.rsocket.Payload;
 import io.rsocket.frame.FrameType;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.ReactiveAdapterRegistry;
@@ -72,7 +71,7 @@ class IntegrationRSocketMessageHandler extends RSocketMessageHandler {
 	IntegrationRSocketMessageHandler(boolean messageMappingCompatible) {
 		this.messageMappingCompatible = messageMappingCompatible;
 		if (!this.messageMappingCompatible) {
-			setHandlerPredicate((clazz) -> false);
+			setHandlerPredicate(clazz -> false);
 		}
 	}
 

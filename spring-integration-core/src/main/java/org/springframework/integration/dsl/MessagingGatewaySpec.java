@@ -36,7 +36,7 @@ import org.springframework.messaging.MessageChannel;
 public abstract class MessagingGatewaySpec<S extends MessagingGatewaySpec<S, G>, G extends MessagingGatewaySupport>
 		extends IntegrationComponentSpec<S, G> {
 
-	public MessagingGatewaySpec(G gateway) {
+	protected MessagingGatewaySpec(G gateway) {
 		this.target = gateway;
 	}
 

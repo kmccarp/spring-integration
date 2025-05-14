@@ -16,17 +16,16 @@
 
 package org.springframework.integration.dispatcher;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageDeliveryException;
 import org.springframework.messaging.support.GenericMessage;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Iwein Fuld
@@ -35,9 +34,9 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class AggregateMessageDeliveryExceptionTests {
 
-	private Message<?> message = new GenericMessage<>("foo");
+	private final Message<?> message = new GenericMessage<>("foo");
 
-	private AggregateMessageDeliveryException exception =
+	private final AggregateMessageDeliveryException exception =
 			new AggregateMessageDeliveryException(this.message, "something went wrong", exceptionsList());
 
 	private MessageDeliveryException firstProblem;

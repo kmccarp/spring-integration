@@ -16,6 +16,8 @@
 
 package org.springframework.integration.file.filters;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.io.Closeable;
 import java.io.File;
 import java.io.Flushable;
@@ -30,11 +32,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.integration.metadata.ConcurrentMetadataStore;
 import org.springframework.integration.metadata.SimpleMetadataStore;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Gary Russell

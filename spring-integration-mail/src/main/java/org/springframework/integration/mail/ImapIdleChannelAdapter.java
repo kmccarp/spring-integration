@@ -24,7 +24,6 @@ import java.util.function.Consumer;
 import jakarta.mail.Folder;
 import jakarta.mail.Message;
 import org.aopalliance.aop.Advice;
-
 import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.beans.factory.BeanClassLoaderAware;
 import org.springframework.context.ApplicationEventPublisher;

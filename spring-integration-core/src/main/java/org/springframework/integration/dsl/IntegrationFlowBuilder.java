@@ -17,7 +17,6 @@
 package org.springframework.integration.dsl;
 
 import org.reactivestreams.Publisher;
-
 import org.springframework.messaging.Message;
 
 /**

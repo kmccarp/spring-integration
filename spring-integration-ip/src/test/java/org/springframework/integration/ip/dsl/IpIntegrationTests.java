@@ -16,6 +16,8 @@
 
 package org.springframework.integration.ip.dsl;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -27,7 +29,6 @@ import java.util.stream.IntStream;
 
 import org.aopalliance.intercept.MethodInterceptor;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationEventPublisher;
@@ -71,8 +72,6 @@ import org.springframework.messaging.support.GenericMessage;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.util.ReflectionUtils;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Gary Russell
@@ -206,7 +205,7 @@ public class IpIntegrationTests {
 	void testCloseStream() throws InterruptedException {
 		IntegrationFlow server = IntegrationFlow.from(Tcp.inboundGateway(Tcp.netServer(0)
 						.deserializer(new ByteArrayRawSerializer())))
-				.<byte[], String>transform(p -> "reply:" + new String(p).toUpperCase())
+				.transform(p -> "reply:" + new String(p).toUpperCase())
 				.get();
 		CountDownLatch latch = new CountDownLatch(1);
 		AtomicInteger port = new AtomicInteger();
@@ -261,10 +260,10 @@ public class IpIntegrationTests {
 
 		List<String> expected =
 				IntStream.rangeClosed('a', 'z')
-						.mapToObj((characterCode) -> (char) characterCode)
-						.map((character) -> "" + character)
+						.mapToObj(characterCode -> (char) characterCode)
+						.map(character -> "" + character)
 						.parallel()
-						.peek((character) -> this.outboundFlowInput.send(new GenericMessage<>(character)))
+						.peek(character -> this.outboundFlowInput.send(new GenericMessage<>(character)))
 						.map(String::toUpperCase)
 						.toList();
 
@@ -307,8 +306,8 @@ public class IpIntegrationTests {
 									.errorChannel("inTcpGatewayErrorFlow.input"))
 					.handle(this, "captureId")
 					.transform(Transformers.objectToString())
-					.<String>filter((payload) -> !"junk".equals(payload))
-					.<String, String>transform(String::toUpperCase)
+					.<String>filter(payload -> !"junk".equals(payload))
+					.transform(String::toUpperCase)
 					.get();
 		}
 
@@ -324,7 +323,7 @@ public class IpIntegrationTests {
 
 		@Bean
 		public IntegrationFlow inTcpGatewayErrorFlow() {
-			return (flow) -> flow
+			return flow -> flow
 					.<Exception>handle((payload, headers) -> {
 						if (payload instanceof MessageTimeoutException) {
 							return "error:non-convertible";
@@ -426,7 +425,7 @@ public class IpIntegrationTests {
 		public IntegrationFlow server2Flow(TcpNetServerConnectionFactory server2) {
 			return IntegrationFlow.from(Tcp.inboundGateway(server2))
 					.transform(Transformers.objectToString())
-					.<String, String>transform(String::toUpperCase)
+					.transform(String::toUpperCase)
 					.get();
 		}
 
@@ -454,14 +453,14 @@ public class IpIntegrationTests {
 
 		@Bean
 		IntegrationFlow outboundFlow(CachingClientConnectionFactory cachingClient) {
-			return (flow) -> flow.handle(Tcp.outboundAdapter(cachingClient));
+			return flow -> flow.handle(Tcp.outboundAdapter(cachingClient));
 		}
 
 		@Bean
 		IntegrationFlow inboundFlow(CachingClientConnectionFactory cachingClient) {
 			return IntegrationFlow.from(Tcp.inboundAdapter(cachingClient))
 					.transform(Transformers.objectToString())
-					.channel((channels) -> channels.queue("cachingRepliesChannel"))
+					.channel(channels -> channels.queue("cachingRepliesChannel"))
 					.get();
 		}
 

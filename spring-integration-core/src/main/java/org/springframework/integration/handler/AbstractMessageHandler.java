@@ -19,7 +19,6 @@ package org.springframework.integration.handler;
 import io.micrometer.observation.ObservationRegistry;
 import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
-
 import org.springframework.integration.history.MessageHistory;
 import org.springframework.integration.support.management.metrics.MetricsCaptor;
 import org.springframework.integration.support.management.metrics.SampleFacade;

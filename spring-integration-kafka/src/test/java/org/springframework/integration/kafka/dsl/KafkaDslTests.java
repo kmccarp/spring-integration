@@ -16,6 +16,8 @@
 
 package org.springframework.integration.kafka.dsl;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.time.Duration;
 import java.util.Collection;
 import java.util.Collections;
@@ -31,7 +33,6 @@ import org.apache.kafka.clients.consumer.ConsumerRebalanceListener;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.TopicPartition;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -83,8 +84,6 @@ import org.springframework.retry.support.RetryTemplate;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.util.backoff.FixedBackOff;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Artem Bilan
@@ -479,7 +478,7 @@ public class KafkaDslTests {
 					.from(Kafka.inboundGateway(consumerFactory(), containerProperties(),
 									producerFactory())
 							.configureListenerContainer(container -> container.errorHandler(eh())))
-					.<String, String>transform(String::toUpperCase)
+					.transform(String::toUpperCase)
 					.get();
 		}
 
@@ -493,9 +492,8 @@ public class KafkaDslTests {
 			ContainerProperties props = containerProperties();
 			props.setGroupId("wreh");
 			return IntegrationFlow.from(Kafka.messageDrivenChannelAdapter(consumerFactory(), props)
-							.configureListenerContainer(container -> {
-								container.errorHandler(recoveringErrorHandler());
-							}))
+							.configureListenerContainer(container ->
+								container.errorHandler(recoveringErrorHandler())))
 					.handle(p -> {
 						throw new RuntimeException("test");
 					})

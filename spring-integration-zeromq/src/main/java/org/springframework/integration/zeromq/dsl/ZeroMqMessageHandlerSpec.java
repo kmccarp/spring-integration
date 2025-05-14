@@ -23,7 +23,6 @@ import java.util.function.Supplier;
 import org.zeromq.SocketType;
 import org.zeromq.ZContext;
 import org.zeromq.ZMQ;
-
 import org.springframework.expression.Expression;
 import org.springframework.integration.dsl.ReactiveMessageHandlerSpec;
 import org.springframework.integration.expression.FunctionExpression;

@@ -23,7 +23,6 @@ import io.debezium.engine.DebeziumEngine;
 import io.debezium.engine.format.JsonByteArray;
 import io.debezium.engine.format.KeyValueHeaderChangeEventFormat;
 import io.debezium.engine.format.SerializationFormat;
-
 import org.springframework.util.Assert;
 
 /**

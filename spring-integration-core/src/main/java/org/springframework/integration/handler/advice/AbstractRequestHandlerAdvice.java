@@ -20,7 +20,6 @@ import java.lang.reflect.Method;
 
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
-
 import org.springframework.aop.ProxyMethodInvocation;
 import org.springframework.integration.context.IntegrationObjectSupport;
 import org.springframework.messaging.Message;
@@ -47,7 +46,7 @@ public abstract class AbstractRequestHandlerAdvice extends IntegrationObjectSupp
 
 		Method method = invocation.getMethod();
 		Object[] arguments = invocation.getArguments();
-		boolean isMessageMethod = (method.getName().equals("handleRequestMessage") || method.getName().equals("handleMessage"))
+		boolean isMessageMethod = ("handleRequestMessage".equals(method.getName()) || "handleMessage".equals(method.getName()))
 				&& (arguments.length == 1 && arguments[0] instanceof Message);
 
 		Object invocationThis = invocation.getThis();

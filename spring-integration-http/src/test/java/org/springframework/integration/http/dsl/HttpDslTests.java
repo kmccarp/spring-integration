@@ -16,6 +16,15 @@
 
 package org.springframework.integration.http.dsl;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
+import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -24,7 +33,6 @@ import java.util.Map;
 import org.assertj.core.api.InstanceOfAssertFactories;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -80,15 +88,6 @@ import org.springframework.web.multipart.support.StandardServletMultipartResolve
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
-import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
  * @author Artem Bilan
@@ -146,7 +145,7 @@ public class HttpDslTests {
 				IntegrationFlow.from(Http.inboundGateway("/dynamic")
 								.requestMapping(r -> r.params("name"))
 								.payloadExpression("#requestParams.name[0]"))
-						.<String, String>transform(String::toLowerCase)
+						.transform(String::toLowerCase)
 						.get();
 
 		IntegrationFlowContext.IntegrationFlowRegistration flowRegistration =
@@ -190,21 +189,21 @@ public class HttpDslTests {
 		assertThat(result.getHeaders()).containsEntry("contentLength", -1L);
 		assertThat(result)
 				.extracting(Message::getPayload)
-				.satisfies((payload) ->
+				.satisfies(payload ->
 						assertThat((Map<String, ?>) payload)
 								.hasSize(1)
-								.extracting((map) -> map.get("a1"))
+								.extracting(map -> map.get("a1"))
 								.asInstanceOf(InstanceOfAssertFactories.LIST)
 								.hasSize(2)
-								.satisfies((list) -> {
+								.satisfies(list -> {
 									assertThat(list)
 											.element(0)
-											.extracting((file) ->
+											.extracting(file ->
 													((UploadedMultipartFile) file).getOriginalFilename())
 											.isEqualTo("file1");
 									assertThat(list)
 											.element(1)
-											.extracting((file) ->
+											.extracting(file ->
 													((UploadedMultipartFile) file).getOriginalFilename())
 											.isEqualTo("file2");
 								}));
@@ -219,7 +218,7 @@ public class HttpDslTests {
 		IntegrationFlow flow =
 				IntegrationFlow.from(
 								Http.inboundChannelAdapter("/validation")
-										.requestMapping((mapping) -> mapping
+										.requestMapping(mapping -> mapping
 												.methods(HttpMethod.POST)
 												.consumes(MediaType.APPLICATION_JSON_VALUE))
 										.requestPayloadType(TestModel.class)
@@ -280,7 +279,7 @@ public class HttpDslTests {
 													}
 
 												})))
-						.transform((payload) -> {
+						.transform(payload -> {
 							throw new RuntimeException("Error!");
 						})
 						.get();
@@ -327,7 +326,7 @@ public class HttpDslTests {
 		@Bean
 		public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 			return http
-					.authorizeHttpRequests((authorizeHttpRequests) ->
+					.authorizeHttpRequests(authorizeHttpRequests ->
 							authorizeHttpRequests
 									.requestMatchers("/service/internal/**").hasRole("ADMIN")
 									.anyRequest().permitAll())
@@ -364,7 +363,7 @@ public class HttpDslTests {
 							.payloadExpression("#requestParams.name"))
 					.channel(securityPropagationChannel)
 					.channel(transformSecuredChannel)
-					.<List<String>, String>transform(p -> p.get(0).toUpperCase())
+					.transform(p -> p.get(0).toUpperCase())
 					.get();
 		}
 
@@ -400,8 +399,8 @@ public class HttpDslTests {
 		public IntegrationFlow multiPartFilesFlow() {
 			return IntegrationFlow
 					.from(Http.inboundChannelAdapter("/multiPartFiles")
-							.headerFunction("contentLength", (entity) -> entity.getHeaders().getContentLength()))
-					.channel((c) -> c.queue("multiPartFilesChannel"))
+							.headerFunction("contentLength", entity -> entity.getHeaders().getContentLength()))
+					.channel(c -> c.queue("multiPartFilesChannel"))
 					.get();
 		}
 

@@ -16,10 +16,12 @@
 
 package org.springframework.integration.config.annotation;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.integration.test.util.TestUtils.getPropertyValue;
+
 import java.lang.reflect.Method;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.DirectFieldAccessor;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -30,9 +32,6 @@ import org.springframework.integration.aggregator.SimpleSequenceSizeReleaseStrat
 import org.springframework.integration.endpoint.EventDrivenConsumer;
 import org.springframework.integration.test.util.TestUtils;
 import org.springframework.messaging.MessageHandler;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.integration.test.util.TestUtils.getPropertyValue;
 
 /**
  * @author Marius Bogoevici

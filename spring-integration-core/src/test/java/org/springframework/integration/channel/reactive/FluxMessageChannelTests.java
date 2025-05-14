@@ -16,6 +16,9 @@
 
 package org.springframework.integration.channel.reactive;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.awaitility.Awaitility.await;
+
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +32,6 @@ import reactor.core.Disposable;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -51,9 +53,6 @@ import org.springframework.messaging.support.GenericMessage;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.awaitility.Awaitility.await;
 
 /**
  * @author Artem Bilan
@@ -96,7 +95,7 @@ public class FluxMessageChannelTests {
 		assertThat(((MessagingException) error.getPayload()).getFailedMessage().getPayload()).isEqualTo(5);
 
 		List<Message<?>> messages = this.queueChannel.clear();
-		assertThat(messages).extracting((message) -> (Integer) message.getPayload())
+		assertThat(messages).extracting(message -> (Integer) message.getPayload())
 				.containsAll(IntStream.range(0, 10).boxed().collect(Collectors.toList()));
 	}
 

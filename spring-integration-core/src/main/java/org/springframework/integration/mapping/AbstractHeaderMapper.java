@@ -28,7 +28,6 @@ import java.util.Map.Entry;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.springframework.beans.factory.BeanClassLoaderAware;
 import org.springframework.core.ResolvableType;
 import org.springframework.integration.mapping.support.JsonHeaders;
@@ -450,7 +449,7 @@ public abstract class AbstractHeaderMapper<T> implements RequestReplyHeaderMappe
 
 		@Override
 		public boolean matchHeader(String headerName) {
-			boolean result = (this.match == containsIgnoreCase(headerName));
+			boolean result = this.match == containsIgnoreCase(headerName);
 			if (result && LOGGER.isDebugEnabled()) {
 				StringBuilder message = new StringBuilder("headerName=[{0}] WILL be mapped, ");
 				if (!this.match) {
@@ -580,7 +579,7 @@ public abstract class AbstractHeaderMapper<T> implements RequestReplyHeaderMappe
 
 		@Override
 		public boolean matchHeader(String headerName) {
-			boolean result = (this.match == headerName.startsWith(this.prefix));
+			boolean result = this.match == headerName.startsWith(this.prefix);
 			if (result && LOGGER.isDebugEnabled()) {
 				StringBuilder message = new StringBuilder("headerName=[{0}] WILL be mapped, ");
 				if (!this.match) {

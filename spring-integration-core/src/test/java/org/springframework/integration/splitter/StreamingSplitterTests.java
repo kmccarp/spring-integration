@@ -16,6 +16,9 @@
 
 package org.springframework.integration.splitter;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
@@ -24,7 +27,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.integration.IntegrationMessageHeaderAccessor;
 import org.springframework.integration.annotation.Splitter;
@@ -35,9 +37,6 @@ import org.springframework.integration.support.MessageBuilder;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.support.GenericMessage;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
 
 /**
  * @author Alex Peters
@@ -169,7 +168,7 @@ public class StreamingSplitterTests {
 
 		@Splitter
 		public Iterator<String> annotatedMethod(String input) {
-			return new Iterator<String>() {
+			return new Iterator<>() {
 
 				@Override
 				public boolean hasNext() {
@@ -207,12 +206,12 @@ public class StreamingSplitterTests {
 
 		@Splitter
 		public Iterable<String> annotatedMethod(String input) {
-			return new Iterable<String>() {
+			return new Iterable<>() {
 
 				@Override
 				public Iterator<String> iterator() {
 
-					return new Iterator<String>() {
+					return new Iterator<>() {
 
 						@Override
 						public boolean hasNext() {

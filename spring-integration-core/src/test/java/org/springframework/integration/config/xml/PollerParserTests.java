@@ -16,12 +16,14 @@
 
 package org.springframework.integration.config.xml;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+
 import java.time.Duration;
 import java.util.HashMap;
 
 import org.aopalliance.aop.Advice;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.parsing.BeanDefinitionParsingException;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.integration.config.TestTrigger;
@@ -31,9 +33,6 @@ import org.springframework.scheduling.support.PeriodicTrigger;
 import org.springframework.transaction.interceptor.NameMatchTransactionAttributeSource;
 import org.springframework.transaction.interceptor.TransactionAttributeSource;
 import org.springframework.transaction.interceptor.TransactionInterceptor;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 /**
  * @author Mark Fisher

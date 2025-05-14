@@ -16,6 +16,9 @@
 
 package org.springframework.integration.history;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
@@ -25,7 +28,6 @@ import org.apache.commons.logging.LogFactory;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-
 import org.springframework.beans.DirectFieldAccessor;
 import org.springframework.beans.factory.BeanDefinitionStoreException;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -36,9 +38,6 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHandler;
 import org.springframework.util.StopWatch;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 /**
  * @author Oleg Zhurakousky

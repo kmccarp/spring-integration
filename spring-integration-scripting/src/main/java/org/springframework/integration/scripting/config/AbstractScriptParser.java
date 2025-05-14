@@ -19,7 +19,6 @@ package org.springframework.integration.scripting.config;
 import java.util.List;
 
 import org.w3c.dom.Element;
-
 import org.springframework.beans.BeanMetadataElement;
 import org.springframework.beans.factory.config.RuntimeBeanReference;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
@@ -123,7 +122,7 @@ public abstract class AbstractScriptParser extends AbstractSingleBeanDefinitionP
 			List<Element> variableElements) {
 
 		@SuppressWarnings("serial")
-		ManagedMap<String, Object> variableMap = new ManagedMap<String, Object>() {
+		ManagedMap<String, Object> variableMap = new ManagedMap<>() {
 
 			@Override
 			public Object put(String key, Object value) {

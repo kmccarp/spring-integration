@@ -16,6 +16,10 @@
 
 package org.springframework.integration.zeromq.outbound;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.awaitility.Awaitility.await;
+import static org.mockito.Mockito.mock;
+
 import java.time.Duration;
 
 import org.junit.jupiter.api.AfterAll;
@@ -25,7 +29,6 @@ import org.zeromq.ZContext;
 import org.zeromq.ZMQ;
 import org.zeromq.ZMsg;
 import reactor.core.publisher.Mono;
-
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.integration.expression.FunctionExpression;
 import org.springframework.integration.support.MessageBuilder;
@@ -36,10 +39,6 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.converter.ByteArrayMessageConverter;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.test.util.TestSocketUtils;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.awaitility.Awaitility.await;
-import static org.mockito.Mockito.mock;
 
 /**
  * @author Artem Bilan
@@ -97,7 +96,7 @@ public class ZeroMqMessageHandlerTests {
 				new ZeroMqMessageHandler(CONTEXT, "tcp://localhost:" + port, SocketType.PUB);
 		messageHandler.setBeanFactory(mock(BeanFactory.class));
 		messageHandler.setTopicExpression(
-				new FunctionExpression<Message<?>>((message) -> message.getHeaders().get("topic")));
+				new FunctionExpression<Message<?>>(message -> message.getHeaders().get("topic")));
 		messageHandler.setMessageMapper(new EmbeddedJsonHeadersMessageMapper());
 		messageHandler.afterPropertiesSet();
 		messageHandler.start();
@@ -163,7 +162,7 @@ public class ZeroMqMessageHandlerTests {
 				new ZeroMqMessageHandler(CONTEXT, "tcp://localhost:" + port, SocketType.PUB);
 		messageHandler.setBeanFactory(mock(BeanFactory.class));
 		messageHandler.setTopicExpression(
-				new FunctionExpression<Message<?>>((message) -> message.getHeaders().get("topic")));
+				new FunctionExpression<Message<?>>(message -> message.getHeaders().get("topic")));
 		messageHandler.setMessageMapper(new EmbeddedJsonHeadersMessageMapper());
 		messageHandler.wrapTopic(false);
 		messageHandler.afterPropertiesSet();
@@ -195,7 +194,7 @@ public class ZeroMqMessageHandlerTests {
 				new ZeroMqMessageHandler(CONTEXT, boundPort, SocketType.PUB);
 		messageHandler.setBeanFactory(mock(BeanFactory.class));
 		messageHandler.setTopicExpression(
-				new FunctionExpression<Message<?>>((message) -> message.getHeaders().get("topic")));
+				new FunctionExpression<Message<?>>(message -> message.getHeaders().get("topic")));
 		messageHandler.setMessageMapper(new EmbeddedJsonHeadersMessageMapper());
 		messageHandler.wrapTopic(false);
 		messageHandler.afterPropertiesSet();

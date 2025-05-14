@@ -18,7 +18,6 @@ package org.springframework.integration.jpa.dsl;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
-
 import org.springframework.integration.jpa.core.JpaExecutor;
 import org.springframework.integration.jpa.core.JpaOperations;
 

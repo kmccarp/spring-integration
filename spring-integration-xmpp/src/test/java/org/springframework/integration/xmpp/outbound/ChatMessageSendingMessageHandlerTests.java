@@ -16,24 +16,6 @@
 
 package org.springframework.integration.xmpp.outbound;
 
-import org.jivesoftware.smack.XMPPConnection;
-import org.jivesoftware.smack.packet.StanzaBuilder;
-import org.jivesoftware.smackx.gcm.packet.GcmPacketExtension;
-import org.jivesoftware.smackx.gcm.provider.GcmExtensionProvider;
-import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Mockito;
-
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.support.DefaultListableBeanFactory;
-import org.springframework.integration.support.MessageBuilder;
-import org.springframework.integration.test.util.TestUtils;
-import org.springframework.integration.xmpp.XmppHeaders;
-import org.springframework.integration.xmpp.core.XmppContextUtils;
-import org.springframework.messaging.Message;
-import org.springframework.messaging.MessageHandlingException;
-import org.springframework.messaging.support.GenericMessage;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -43,6 +25,23 @@ import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+
+import org.jivesoftware.smack.XMPPConnection;
+import org.jivesoftware.smack.packet.StanzaBuilder;
+import org.jivesoftware.smackx.gcm.packet.GcmPacketExtension;
+import org.jivesoftware.smackx.gcm.provider.GcmExtensionProvider;
+import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.support.DefaultListableBeanFactory;
+import org.springframework.integration.support.MessageBuilder;
+import org.springframework.integration.test.util.TestUtils;
+import org.springframework.integration.xmpp.XmppHeaders;
+import org.springframework.integration.xmpp.core.XmppContextUtils;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.MessageHandlingException;
+import org.springframework.messaging.support.GenericMessage;
 
 /**
  * @author Oleg Zhurakousky
@@ -66,7 +65,7 @@ public class ChatMessageSendingMessageHandlerTests {
 
 		verify(connection, times(1))
 				.sendStanza(Mockito.argThat((org.jivesoftware.smack.packet.Message smackMessage) -> {
-					boolean bodyMatches = smackMessage.getBody().equals("Test Message");
+					boolean bodyMatches = "Test Message".equals(smackMessage.getBody());
 					boolean toMatches = smackMessage.getTo().equals("kermit@frog.com");
 					return bodyMatches & toMatches;
 				}));
@@ -83,9 +82,9 @@ public class ChatMessageSendingMessageHandlerTests {
 		// in threaded conversation we need to look for existing chat
 		verify(connection, times(1))
 				.sendStanza(Mockito.argThat((org.jivesoftware.smack.packet.Message smackMessage) -> {
-					boolean bodyMatches = smackMessage.getBody().equals("Hello Kitty");
+					boolean bodyMatches = "Hello Kitty".equals(smackMessage.getBody());
 					boolean toMatches = smackMessage.getTo().equals("kermit@frog.com");
-					boolean threadIdMatches = smackMessage.getThread().equals("123");
+					boolean threadIdMatches = "123".equals(smackMessage.getThread());
 					return bodyMatches & toMatches & threadIdMatches;
 				}));
 
@@ -125,7 +124,7 @@ public class ChatMessageSendingMessageHandlerTests {
 		verify(connection).isConnected();
 		verify(connection).sendStanza(Mockito.argThat((org.jivesoftware.smack.packet.Message m) -> {
 			boolean bodyMatches = "Test Message".equals(m.getBody());
-			boolean toMatches = m.getTo().toString().equals("kermit@frog.com");
+			boolean toMatches = "kermit@frog.com".equals(m.getTo().toString());
 			return bodyMatches && toMatches;
 		}));
 

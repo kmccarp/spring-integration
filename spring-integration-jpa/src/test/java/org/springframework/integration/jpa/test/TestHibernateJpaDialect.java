@@ -19,7 +19,6 @@ package org.springframework.integration.jpa.test;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.FlushModeType;
 import jakarta.persistence.PersistenceException;
-
 import org.springframework.orm.jpa.vendor.HibernateJpaDialect;
 
 /**

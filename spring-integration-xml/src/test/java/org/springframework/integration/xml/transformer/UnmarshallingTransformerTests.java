@@ -16,21 +16,19 @@
 
 package org.springframework.integration.xml.transformer;
 
-import java.io.IOException;
+import static org.assertj.core.api.Assertions.assertThat;
 
+import java.io.IOException;
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.integration.support.MessageBuilder;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.oxm.Unmarshaller;
 import org.springframework.oxm.XmlMappingException;
 import org.springframework.xml.transform.StringSource;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Jonas Partner

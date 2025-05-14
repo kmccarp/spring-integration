@@ -17,7 +17,6 @@
 package org.springframework.integration.jmx;
 
 import java.util.Arrays;
-
 import javax.management.ObjectName;
 
 import org.springframework.util.Assert;

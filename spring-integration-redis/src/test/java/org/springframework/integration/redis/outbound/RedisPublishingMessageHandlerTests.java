@@ -16,13 +16,14 @@
 
 package org.springframework.integration.redis.outbound;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.Collections;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.listener.ChannelTopic;
 import org.springframework.data.redis.listener.RedisMessageListenerContainer;
@@ -32,8 +33,6 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.expression.common.LiteralExpression;
 import org.springframework.integration.redis.RedisContainerTest;
 import org.springframework.integration.support.MessageBuilder;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Mark Fisher

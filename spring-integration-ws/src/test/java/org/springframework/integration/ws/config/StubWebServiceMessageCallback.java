@@ -17,7 +17,6 @@
 package org.springframework.integration.ws.config;
 
 import java.io.IOException;
-
 import javax.xml.transform.TransformerException;
 
 import org.springframework.ws.WebServiceMessage;

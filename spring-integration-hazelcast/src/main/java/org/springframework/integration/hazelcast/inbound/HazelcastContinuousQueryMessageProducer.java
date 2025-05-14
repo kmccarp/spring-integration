@@ -18,7 +18,6 @@ package org.springframework.integration.hazelcast.inbound;
 
 import com.hazelcast.map.IMap;
 import com.hazelcast.query.impl.predicates.SqlPredicate;
-
 import org.springframework.util.Assert;
 
 /**

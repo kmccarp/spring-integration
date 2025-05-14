@@ -16,15 +16,15 @@
 
 package org.springframework.integration.smb.filters;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 import java.time.Duration;
 import java.time.Instant;
 
 import jcifs.smb.SmbFile;
 import org.junit.jupiter.api.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 /**
  * @author Adama Sorho

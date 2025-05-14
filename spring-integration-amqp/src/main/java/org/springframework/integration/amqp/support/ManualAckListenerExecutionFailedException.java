@@ -19,7 +19,6 @@ package org.springframework.integration.amqp.support;
 import java.io.Serial;
 
 import com.rabbitmq.client.Channel;
-
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.support.ListenerExecutionFailedException;
 

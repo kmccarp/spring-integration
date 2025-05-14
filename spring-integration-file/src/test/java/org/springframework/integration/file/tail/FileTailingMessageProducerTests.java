@@ -16,6 +16,10 @@
 
 package org.springframework.integration.file.tail;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
+import static org.mockito.Mockito.mock;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -29,7 +33,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-
 import org.springframework.beans.DirectFieldAccessor;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.integration.channel.NullChannel;
@@ -39,10 +42,6 @@ import org.springframework.integration.file.tail.FileTailingMessageProducerSuppo
 import org.springframework.integration.file.tail.FileTailingMessageProducerSupport.FileTailingIdleEvent;
 import org.springframework.messaging.Message;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.fail;
-import static org.mockito.Mockito.mock;
 
 /**
  * @author Gary Russell
@@ -279,7 +278,7 @@ public class FileTailingMessageProducerTests {
 		waitForField(adapter, "stdOutReader");
 
 		FileOutputStream fos = new FileOutputStream(file);
-		fos.write(("hello foobar\n").getBytes());
+		fos.write("hello foobar\n".getBytes());
 		fos.close();
 
 		Message<?> message = outputChannel.receive(10000);

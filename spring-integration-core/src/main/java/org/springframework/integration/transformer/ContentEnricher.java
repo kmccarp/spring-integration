@@ -21,7 +21,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.jetbrains.annotations.Nullable;
-
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.BeanInitializationException;
@@ -81,7 +80,7 @@ public class ContentEnricher extends AbstractReplyProducingMessageHandler implem
 
 	private EvaluationContext targetEvaluationContext;
 
-	private boolean shouldClonePayload = false;
+	private boolean shouldClonePayload;
 
 	private Expression requestPayloadExpression;
 

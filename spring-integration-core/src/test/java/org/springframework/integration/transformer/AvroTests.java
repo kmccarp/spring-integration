@@ -16,9 +16,13 @@
 
 package org.springframework.integration.transformer;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
-
 import org.springframework.beans.DirectFieldAccessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -36,11 +40,6 @@ import org.springframework.messaging.PollableChannel;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.atLeastOnce;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
 
 /**
  * @author Gary Russell
@@ -61,12 +60,12 @@ public class AvroTests {
 		config.in1().send(new GenericMessage<>(test));
 		assertThat(config.tapped().receive(0))
 				.isNotNull()
-				.extracting(msg -> msg.getPayload())
+				.extracting(Message::getPayload)
 				.isInstanceOf(byte[].class);
 		Message<?> received = config.out().receive(0);
 		assertThat(received)
 				.isNotNull()
-				.extracting(msg -> msg.getPayload())
+				.extracting(Message::getPayload)
 				.isEqualTo(test)
 				.isNotSameAs(test);
 		assertThat(received.getHeaders().get("flow")).isEqualTo("flow1");
@@ -82,12 +81,12 @@ public class AvroTests {
 		config.in2().send(new GenericMessage<>(test));
 		assertThat(config.tapped().receive(0))
 				.isNotNull()
-				.extracting(msg -> msg.getPayload())
+				.extracting(Message::getPayload)
 				.isInstanceOf(byte[].class);
 		Message<?> received = config.out().receive(0);
 		assertThat(received)
 				.isNotNull()
-				.extracting(msg -> msg.getPayload())
+				.extracting(Message::getPayload)
 				.isNotEqualTo(test)
 				.isInstanceOf(AvroTestClass2.class);
 		assertThat(received.getHeaders().get("flow")).isEqualTo("flow2");
@@ -99,12 +98,12 @@ public class AvroTests {
 		config.in3().send(new GenericMessage<>(test));
 		assertThat(config.tapped().receive(0))
 				.isNotNull()
-				.extracting(msg -> msg.getPayload())
+				.extracting(Message::getPayload)
 				.isInstanceOf(byte[].class);
 		Message<?> received = config.out().receive(0);
 		assertThat(received)
 				.isNotNull()
-				.extracting(msg -> msg.getPayload())
+				.extracting(Message::getPayload)
 				.isNotEqualTo(test)
 				.isInstanceOf(AvroTestClass2.class);
 		assertThat(received.getHeaders().get("flow")).isEqualTo("flow3");
@@ -116,12 +115,12 @@ public class AvroTests {
 		config.in4().send(new GenericMessage<>(test));
 		assertThat(config.tapped().receive(0))
 				.isNotNull()
-				.extracting(msg -> msg.getPayload())
+				.extracting(Message::getPayload)
 				.isInstanceOf(byte[].class);
 		Message<?> received = config.out().receive(0);
 		assertThat(received)
 				.isNotNull()
-				.extracting(msg -> msg.getPayload())
+				.extracting(Message::getPayload)
 				.isEqualTo(test)
 				.isNotSameAs(test);
 		assertThat(received.getHeaders().get("flow")).isEqualTo("flow4");
@@ -133,12 +132,12 @@ public class AvroTests {
 		config.in5().send(new GenericMessage<>(test));
 		assertThat(config.tapped().receive(0))
 				.isNotNull()
-				.extracting(msg -> msg.getPayload())
+				.extracting(Message::getPayload)
 				.isInstanceOf(byte[].class);
 		Message<?> received = config.out().receive(0);
 		assertThat(received)
 				.isNotNull()
-				.extracting(msg -> msg.getPayload())
+				.extracting(Message::getPayload)
 				.isNotEqualTo(test)
 				.isInstanceOf(AvroTestClass2.class);
 		assertThat(received.getHeaders().get("flow")).isEqualTo("flow5");
@@ -150,12 +149,12 @@ public class AvroTests {
 		config.in6().send(new GenericMessage<>(test));
 		assertThat(config.tapped().receive(0))
 				.isNotNull()
-				.extracting(msg -> msg.getPayload())
+				.extracting(Message::getPayload)
 				.isInstanceOf(byte[].class);
 		Message<?> received = config.out().receive(0);
 		assertThat(received)
 				.isNotNull()
-				.extracting(msg -> msg.getPayload())
+				.extracting(Message::getPayload)
 				.isEqualTo(test)
 				.isNotSameAs(test);
 		assertThat(received.getHeaders().get("flow")).isEqualTo("flow6");

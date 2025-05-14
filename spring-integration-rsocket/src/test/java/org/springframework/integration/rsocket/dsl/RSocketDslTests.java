@@ -16,6 +16,8 @@
 
 package org.springframework.integration.rsocket.dsl;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.time.Duration;
 import java.util.function.Function;
 
@@ -23,7 +25,6 @@ import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Flux;
 import reactor.core.scheduler.Schedulers;
 import reactor.test.StepVerifier;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -38,8 +39,6 @@ import org.springframework.integration.support.MessageBuilder;
 import org.springframework.messaging.Message;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Artem Bilan
@@ -132,7 +131,7 @@ public class RSocketDslTests {
 					.from(Function.class)
 					.handle(RSockets.outboundGateway(message ->
 											message.getHeaders().getOrDefault("route", "/uppercase"))
-									.interactionModel((message) -> RSocketInteractionModel.requestChannel)
+									.interactionModel(message -> RSocketInteractionModel.requestChannel)
 									.expectedResponseType("T(java.lang.String)")
 									.clientRSocketConnector(clientRSocketConnector),
 							e -> e.customizeMonoReply(
@@ -147,7 +146,7 @@ public class RSocketDslTests {
 			return IntegrationFlow
 					.from(RSockets.inboundGateway("/uppercase")
 							.interactionModels(RSocketInteractionModel.requestChannel))
-					.<Flux<String>, Flux<String>>transform((flux) -> flux.map(String::toUpperCase))
+					.transform(flux -> flux.map(String::toUpperCase))
 					.get();
 		}
 
@@ -157,7 +156,7 @@ public class RSocketDslTests {
 					.from(RSockets.inboundGateway("/uppercaseWhole")
 							.interactionModels(RSocketInteractionModel.requestChannel)
 							.decodeFluxAsUnit(true))
-					.<Flux<String>, Flux<String>>transform((flux) -> flux.map(String::toUpperCase))
+					.transform(flux -> flux.map(String::toUpperCase))
 					.get();
 		}
 
@@ -165,7 +164,7 @@ public class RSocketDslTests {
 		public IntegrationFlow rsocketLowerCaseFlow() {
 			return IntegrationFlow
 					.from(RSockets.inboundGateway("/lowercase"))
-					.<Flux<String>, Flux<String>>transform((flux) -> flux.map(String::toLowerCase))
+					.transform(flux -> flux.map(String::toLowerCase))
 					.get();
 		}
 

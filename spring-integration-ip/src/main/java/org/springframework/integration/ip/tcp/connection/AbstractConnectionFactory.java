@@ -141,11 +141,11 @@ public abstract class AbstractConnectionFactory extends IntegrationObjectSupport
 
 	private volatile boolean active;
 
-	public AbstractConnectionFactory(int port) {
+	protected AbstractConnectionFactory(int port) {
 		this.port = port;
 	}
 
-	public AbstractConnectionFactory(String host, int port) {
+	protected AbstractConnectionFactory(String host, int port) {
 		Assert.notNull(host, "host must not be null");
 		this.host = host;
 		this.port = port;
@@ -335,7 +335,7 @@ public abstract class AbstractConnectionFactory extends IntegrationObjectSupport
 	 */
 	@Nullable
 	public TcpSender getSender() {
-		return !this.senders.isEmpty() ? this.senders.get(0) : null;
+		return this.senders.isEmpty() ? null : this.senders.get(0);
 	}
 
 	/**
@@ -637,7 +637,7 @@ public abstract class AbstractConnectionFactory extends IntegrationObjectSupport
 				if (this.listener == null) {
 					connection.registerListener(wrapper);
 				}
-				if (this.senders.size() == 0) {
+				if (this.senders.isEmpty()) {
 					connection.registerSender(wrapper);
 				}
 				connection.setWrapped(true);

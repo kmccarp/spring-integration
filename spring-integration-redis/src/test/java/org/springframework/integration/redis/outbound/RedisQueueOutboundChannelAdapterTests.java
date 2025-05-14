@@ -16,12 +16,13 @@
 
 package org.springframework.integration.redis.outbound;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.Arrays;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -40,8 +41,6 @@ import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Gunnar Hillert
@@ -110,7 +109,7 @@ class RedisQueueOutboundChannelAdapterTests implements RedisContainerTest {
 		Message<String> message = MessageBuilder.withPayload("testing").build();
 		handler.handleMessage(message);
 
-		RedisTemplate<String, Object> redisTemplate = new RedisTemplate<String, Object>();
+		RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
 		redisTemplate.setConnectionFactory(this.connectionFactory);
 		redisTemplate.setEnableDefaultSerializer(false);
 		redisTemplate.setKeySerializer(new StringRedisSerializer());
@@ -157,7 +156,7 @@ class RedisQueueOutboundChannelAdapterTests implements RedisContainerTest {
 
 		final String queueName = "si.test.Int3017IntegrationOutbound";
 
-		GenericMessage<Object> message = new GenericMessage<Object>(queueName);
+		GenericMessage<Object> message = new GenericMessage<>(queueName);
 		this.sendChannel.send(message);
 
 		RedisTemplate<String, String> redisTemplate = new StringRedisTemplate();

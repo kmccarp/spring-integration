@@ -16,11 +16,12 @@
 
 package org.springframework.integration.jmx.config;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import javax.management.Notification;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.integration.jmx.NotificationListeningMessageProducer;
@@ -31,8 +32,6 @@ import org.springframework.messaging.PollableChannel;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Mark Fisher

@@ -16,6 +16,10 @@
 
 package org.springframework.integration.jdbc.store;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.fail;
+
 import java.io.NotSerializableException;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -25,7 +29,6 @@ import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.serializer.support.SerializationFailedException;
@@ -42,10 +45,6 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.transaction.support.TransactionTemplate;
 import org.springframework.util.StopWatch;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.assertj.core.api.Assertions.fail;
 
 /**
  * @author Dave Syer
@@ -168,7 +167,7 @@ public class JdbcMessageStoreChannelIntegrationTests {
 
 	protected void waitForMessage() throws InterruptedException {
 		int n = 0;
-		while (Service.messages.size() == 0) {
+		while (Service.messages.isEmpty()) {
 			if (n++ > 200) {
 				fail("Message not received by Service");
 			}
@@ -239,7 +238,7 @@ public class JdbcMessageStoreChannelIntegrationTests {
 
 	public static class Service {
 
-		private static boolean fail = false;
+		private static boolean fail;
 
 		private static final List<String> messages = new CopyOnWriteArrayList<>();
 

@@ -36,7 +36,6 @@ import com.rometools.rome.feed.synd.SyndFeed;
 import com.rometools.rome.io.FeedException;
 import com.rometools.rome.io.SyndFeedInput;
 import com.rometools.rome.io.XmlReader;
-
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.core.io.Resource;
 import org.springframework.integration.context.IntegrationContextUtils;
@@ -283,7 +282,7 @@ public class FeedEntryMessageSource extends AbstractMessageSource<SyndEntry> {
 	}
 
 	private static Date getLastModifiedDate(SyndEntry entry) {
-		return (entry.getUpdatedDate() != null) ? entry.getUpdatedDate() : entry.getPublishedDate();
+		return entry.getUpdatedDate() != null ? entry.getUpdatedDate() : entry.getPublishedDate();
 	}
 
 }

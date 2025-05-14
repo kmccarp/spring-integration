@@ -17,7 +17,6 @@
 package org.springframework.integration.dsl;
 
 import reactor.util.function.Tuple2;
-
 import org.springframework.integration.IntegrationMessageHeaderAccessor;
 import org.springframework.integration.aggregator.BarrierMessageHandler;
 import org.springframework.integration.aggregator.CorrelationStrategy;

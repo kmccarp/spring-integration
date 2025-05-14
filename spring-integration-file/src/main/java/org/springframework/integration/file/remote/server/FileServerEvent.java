@@ -30,11 +30,11 @@ import org.springframework.integration.events.IntegrationEvent;
 @SuppressWarnings("serial")
 public abstract class FileServerEvent extends IntegrationEvent {
 
-	public FileServerEvent(Object source) {
+	protected FileServerEvent(Object source) {
 		super(source);
 	}
 
-	public FileServerEvent(Object source, Throwable cause) {
+	protected FileServerEvent(Object source, Throwable cause) {
 		super(source, cause);
 	}
 

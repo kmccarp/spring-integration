@@ -16,6 +16,8 @@
 
 package org.springframework.integration.ftp.dsl;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -30,7 +32,6 @@ import java.util.regex.Matcher;
 
 import org.apache.commons.net.ftp.FTPFile;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Configuration;
@@ -62,8 +63,6 @@ import org.springframework.messaging.support.GenericMessage;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.util.FileCopyUtils;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Artem Bilan
@@ -258,7 +257,7 @@ public class FtpTests extends FtpTestSupport {
 				.handle(Ftp.outboundAdapter(sessionFactory(), FileExistsMode.FAIL)
 						.useTemporaryFileName(false)
 						.fileNameExpression("headers['" + FileHeaders.FILENAME + "']")
-						.chmod(0644)
+						.chmod(420)
 						.remoteDirectory("ftpTarget"));
 		IntegrationFlowRegistration registration = this.flowContext.registration(flow).register();
 		String fileName = "foo.file";

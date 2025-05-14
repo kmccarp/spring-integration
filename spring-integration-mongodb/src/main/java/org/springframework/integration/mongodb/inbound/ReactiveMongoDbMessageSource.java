@@ -19,7 +19,6 @@ package org.springframework.integration.mongodb.inbound;
 import org.reactivestreams.Publisher;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
 import org.springframework.context.ApplicationContext;
 import org.springframework.data.mongodb.ReactiveMongoDatabaseFactory;
 import org.springframework.data.mongodb.core.ReactiveMongoOperations;
@@ -159,7 +158,7 @@ public class ReactiveMongoDbMessageSource extends AbstractMongoDbMessageSource<P
 	}
 
 	private Publisher<?> updateSingle(Mono<?> result, Update update, String collectionName) {
-		return result.flatMap((entity) -> {
+		return result.flatMap(entity -> {
 			Pair<String, Object> idPair = idForEntity(entity);
 			Query query = new Query(Criteria.where(idPair.getFirst()).is(idPair.getSecond()));
 			return this.reactiveMongoTemplate.updateFirst(query, update, collectionName)
@@ -169,7 +168,7 @@ public class ReactiveMongoDbMessageSource extends AbstractMongoDbMessageSource<P
 
 	private Publisher<?> updateMulti(Flux<?> result, Update update, String collectionName) {
 		return result.collectList()
-				.flatMapMany((entities) ->
+				.flatMapMany(entities ->
 						this.reactiveMongoTemplate.updateMulti(getByIdInQuery(entities), update, collectionName)
 								.thenMany(Flux.fromIterable(entities))
 				);

@@ -16,6 +16,10 @@
 
 package org.springframework.integration.ip.udp;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
+import static org.awaitility.Awaitility.await;
+
 import java.time.Duration;
 import java.util.Date;
 import java.util.Properties;
@@ -24,7 +28,6 @@ import java.util.concurrent.TimeUnit;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -38,10 +41,6 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.core.DestinationResolver;
 import org.springframework.messaging.support.GenericMessage;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.fail;
-import static org.awaitility.Awaitility.await;
 
 /**
  * Sends and receives a simple message through to the Udp channel adapters.
@@ -177,9 +176,6 @@ public class UdpUnicastEndToEndTests implements Runnable {
 					throw new RuntimeException("Failed to start listening");
 				}
 			}
-		}
-		catch (RuntimeException e) {
-			throw e;
 		}
 		catch (InterruptedException e) {
 			Thread.currentThread().interrupt();

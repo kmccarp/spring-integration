@@ -16,6 +16,10 @@
 
 package org.springframework.integration.mongodb.dsl;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.awaitility.Awaitility.await;
+
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
@@ -24,7 +28,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -54,10 +57,6 @@ import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.PollableChannel;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.awaitility.Awaitility.await;
 
 /**
  * @author Xavier Padro
@@ -407,7 +406,7 @@ class MongoDbTests implements MongoDbContainerTest {
 		private MongoDbOutboundGatewaySpec collectionNameFunctionOutboundGateway(boolean expectSingleResult) {
 			return MongoDb.outboundGateway(mongoDbFactory(), mongoConverter())
 					.queryExpression("headers.query")
-					.<String>collectionNameFunction(Message::getPayload)
+					.collectionNameFunction(Message::getPayload)
 					.expectSingleResult(expectSingleResult)
 					.entityClass(Person.class);
 		}

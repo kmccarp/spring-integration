@@ -21,7 +21,6 @@ import java.math.BigDecimal;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 
@@ -57,7 +56,7 @@ public class PayloadMatcherTests {
 	@Test
 	public void hasPayload_withNotMatchingMatcher_notMatching() {
 		MatcherAssert.assertThat(this.message,
-				Matchers.not((PayloadMatcher.hasPayload(Matchers.is(Matchers.instanceOf(String.class))))));
+				Matchers.not(PayloadMatcher.hasPayload(Matchers.is(Matchers.instanceOf(String.class)))));
 	}
 
 	@Test

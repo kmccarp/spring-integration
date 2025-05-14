@@ -16,6 +16,8 @@
 
 package org.springframework.integration.http.support;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.text.ParseException;
@@ -30,7 +32,6 @@ import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
-
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.core.convert.converter.Converter;
@@ -41,8 +42,6 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.integration.mapping.HeaderMapper;
 import org.springframework.messaging.MessageHeaders;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Oleg Zhurakousky

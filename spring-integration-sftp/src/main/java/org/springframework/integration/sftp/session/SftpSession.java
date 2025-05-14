@@ -31,7 +31,6 @@ import org.apache.sshd.sftp.SftpModuleProperties;
 import org.apache.sshd.sftp.client.SftpClient;
 import org.apache.sshd.sftp.common.SftpConstants;
 import org.apache.sshd.sftp.common.SftpException;
-
 import org.springframework.integration.file.remote.session.Session;
 import org.springframework.util.Assert;
 import org.springframework.util.FileCopyUtils;
@@ -125,7 +124,7 @@ public class SftpSession implements Session<SftpClient.DirEntry> {
 		}
 		remoteDir = normalizePath(remoteDir);
 		return StreamSupport.stream(this.sftpClient.readDir(remoteDir).spliterator(), false)
-				.filter((entry) -> !isPattern || PatternMatchUtils.simpleMatch(remoteFile, entry.getFilename()));
+				.filter(entry -> !isPattern || PatternMatchUtils.simpleMatch(remoteFile, entry.getFilename()));
 	}
 
 	@Override

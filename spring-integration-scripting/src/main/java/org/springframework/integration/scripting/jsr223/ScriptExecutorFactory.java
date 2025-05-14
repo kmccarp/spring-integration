@@ -21,7 +21,6 @@ import javax.script.ScriptEngineManager;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.springframework.integration.scripting.PolyglotScriptExecutor;
 import org.springframework.integration.scripting.ScriptExecutor;
 import org.springframework.util.Assert;
@@ -39,20 +38,20 @@ public final class ScriptExecutorFactory {
 	private static final Log LOGGER = LogFactory.getLog(ScriptExecutorFactory.class);
 
 	public static ScriptExecutor getScriptExecutor(String language) {
-		if (language.equalsIgnoreCase("jython")) {
+		if ("jython".equalsIgnoreCase(language)) {
 			LOGGER.warn("""
 					The 'jython' language indicator is deprecated and will be removed in the next version.
 					The Python support is fully based on GraalVM Polyglot and there is no 'jython' dependency requirement any more.
 					""");
 			return new PolyglotScriptExecutor("python");
 		}
-		else if (language.equalsIgnoreCase("python")) {
+		else if ("python".equalsIgnoreCase(language)) {
 			return new PolyglotScriptExecutor("python");
 		}
-		else if (language.equalsIgnoreCase("ruby") || language.equalsIgnoreCase("jruby")) {
+		else if ("ruby".equalsIgnoreCase(language) || "jruby".equalsIgnoreCase(language)) {
 			return new RubyScriptExecutor();
 		}
-		else if (language.equalsIgnoreCase("js") || language.equalsIgnoreCase("javascript")) {
+		else if ("js".equalsIgnoreCase(language) || "javascript".equalsIgnoreCase(language)) {
 			return new PolyglotScriptExecutor("js");
 		}
 		return new DefaultScriptExecutor(language);

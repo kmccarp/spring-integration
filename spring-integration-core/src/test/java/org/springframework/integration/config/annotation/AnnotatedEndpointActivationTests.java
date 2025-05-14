@@ -16,11 +16,13 @@
 
 package org.springframework.integration.config.annotation;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+
 import java.util.concurrent.CompletableFuture;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.support.AbstractApplicationContext;
@@ -33,9 +35,6 @@ import org.springframework.messaging.PollableChannel;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 /**
  * @author Dave Syer
@@ -70,7 +69,7 @@ public class AnnotatedEndpointActivationTests {
 	// This has to be static because the MessageBus registers the handler
 	// more than once (every time a test instance is created), but only one of
 	// them will get the message.
-	private static volatile int count = 0;
+	private static volatile int count;
 
 	@BeforeEach
 	public void resetCount() {

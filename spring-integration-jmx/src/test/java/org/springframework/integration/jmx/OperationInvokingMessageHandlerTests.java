@@ -16,11 +16,13 @@
 
 package org.springframework.integration.jmx;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.management.MBeanServer;
 
 import org.junit.After;
@@ -28,7 +30,6 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.integration.channel.QueueChannel;
 import org.springframework.integration.jmx.config.DynamicRouterTests;
@@ -37,9 +38,6 @@ import org.springframework.jmx.support.MBeanServerFactoryBean;
 import org.springframework.jmx.support.ObjectNameManager;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessagingException;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
 
 /**
  * See DynamicRouterTests for additional tests where the MBean is registered by the Spring exporter.

@@ -27,7 +27,6 @@ import java.util.stream.Stream;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.springframework.integration.IntegrationMessageHeaderAccessor;
 import org.springframework.lang.Nullable;
 import org.springframework.messaging.Message;
@@ -107,7 +106,7 @@ class PersistentMessageGroup implements MessageGroup {
 			if (message != null) {
 				Integer sequenceSize = message.getHeaders()
 						.get(IntegrationMessageHeaderAccessor.SEQUENCE_SIZE, Integer.class);
-				return (sequenceSize != null ? sequenceSize : 0);
+				return sequenceSize != null ? sequenceSize : 0;
 			}
 			else {
 				return 0;

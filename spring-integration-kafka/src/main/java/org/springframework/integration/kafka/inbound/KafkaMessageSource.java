@@ -47,7 +47,6 @@ import org.apache.kafka.clients.consumer.OffsetAndMetadata;
 import org.apache.kafka.clients.consumer.OffsetCommitCallback;
 import org.apache.kafka.common.TopicPartition;
 import org.apache.kafka.common.errors.WakeupException;
-
 import org.springframework.beans.factory.BeanClassLoaderAware;
 import org.springframework.core.log.LogAccessor;
 import org.springframework.integration.IntegrationMessageHeaderAccessor;

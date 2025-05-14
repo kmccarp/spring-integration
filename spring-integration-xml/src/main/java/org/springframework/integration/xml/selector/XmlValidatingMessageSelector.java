@@ -21,7 +21,6 @@ import java.io.UncheckedIOException;
 import java.util.Arrays;
 
 import org.xml.sax.SAXParseException;
-
 import org.springframework.core.io.Resource;
 import org.springframework.core.log.LogAccessor;
 import org.springframework.integration.MessageRejectedException;

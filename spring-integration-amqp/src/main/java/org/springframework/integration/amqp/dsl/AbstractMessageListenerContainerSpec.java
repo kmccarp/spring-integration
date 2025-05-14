@@ -20,7 +20,6 @@ import java.util.Map;
 import java.util.concurrent.Executor;
 
 import org.aopalliance.aop.Advice;
-
 import org.springframework.amqp.core.AcknowledgeMode;
 import org.springframework.amqp.core.MessagePostProcessor;
 import org.springframework.amqp.core.Queue;
@@ -50,7 +49,7 @@ public abstract class AbstractMessageListenerContainerSpec<S extends AbstractMes
 		C extends AbstractMessageListenerContainer>
 		extends MessageListenerContainerSpec<S, C> {
 
-	public AbstractMessageListenerContainerSpec(C listenerContainer) {
+	protected AbstractMessageListenerContainerSpec(C listenerContainer) {
 		this.target = listenerContainer;
 	}
 

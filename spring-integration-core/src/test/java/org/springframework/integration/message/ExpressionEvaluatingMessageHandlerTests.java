@@ -16,11 +16,13 @@
 
 package org.springframework.integration.message;
 
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.mockito.Mockito.mock;
+
 import java.util.HashMap;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.expression.Expression;
 import org.springframework.expression.ExpressionParser;
@@ -29,9 +31,6 @@ import org.springframework.integration.handler.ExpressionEvaluatingMessageHandle
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessagingException;
 import org.springframework.messaging.support.GenericMessage;
-
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.mockito.Mockito.mock;
 
 /**
  * @author Artem Bilan
@@ -71,7 +70,7 @@ public class ExpressionEvaluatingMessageHandlerTests {
 		ExpressionEvaluatingMessageHandler handler = new ExpressionEvaluatingMessageHandler(expression);
 		handler.setBeanFactory(mock(BeanFactory.class));
 		handler.afterPropertiesSet();
-		HashMap<String, Object> headers = new HashMap<String, Object>();
+		HashMap<String, Object> headers = new HashMap<>();
 		headers.put("offset", 4);
 		handler.handleMessage(new GenericMessage<String>("testtest", headers));
 	}

@@ -19,7 +19,6 @@ package org.springframework.integration.groovy;
 import groovy.lang.Binding;
 import groovy.lang.GroovyObject;
 import groovy.lang.Script;
-
 import org.springframework.util.Assert;
 
 /**

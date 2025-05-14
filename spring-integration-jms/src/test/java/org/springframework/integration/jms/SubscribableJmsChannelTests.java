@@ -16,6 +16,14 @@
 
 package org.springframework.integration.jms;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -29,7 +37,6 @@ import org.apache.activemq.artemis.jms.client.ActiveMQTopic;
 import org.apache.commons.logging.Log;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.DirectFieldAccessor;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
@@ -42,14 +49,6 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageDeliveryException;
 import org.springframework.messaging.MessageHandler;
 import org.springframework.messaging.support.GenericMessage;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.fail;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 /**
  * @author Mark Fisher
@@ -311,9 +310,9 @@ public class SubscribableJmsChannelTests extends ActiveMQMultiContextTests {
 	}
 
 	private void verifyLogReceived(final List<String> logList) {
-		assertThat(logList.size() > 0).as("Failed to get expected exception").isTrue();
+		assertThat(!logList.isEmpty()).as("Failed to get expected exception").isTrue();
 		boolean expectedExceptionFound = false;
-		while (logList.size() > 0) {
+		while (!logList.isEmpty()) {
 			String message = logList.remove(0);
 			assertThat(message).as("Failed to get expected exception").isNotNull();
 			if (message.startsWith("Dispatcher has no subscribers")) {

@@ -16,6 +16,9 @@
 
 package org.springframework.integration.config.xml;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+
 import java.io.ByteArrayInputStream;
 import java.util.Arrays;
 import java.util.Collection;
@@ -26,7 +29,6 @@ import java.util.Properties;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.BeanDefinitionStoreException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
@@ -44,9 +46,6 @@ import org.springframework.messaging.PollableChannel;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.util.StringUtils;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 /**
  * @author Oleg Zhurakousky
@@ -232,7 +231,7 @@ public class InnerDefinitionHandlerAwareEndpointParserTests {
 		inChannel.send(inMessage);
 		PollableChannel outChannel = this.applicationContext.getBean("outChannel", PollableChannel.class);
 		String payload = (String) outChannel.receive().getPayload();
-		assertThat(payload.equals("One,Two")).isTrue();
+		assertThat("One,Two".equals(payload)).isTrue();
 	}
 
 	private void testRouterDefinitionSuccess(String configProperty) {
@@ -244,12 +243,12 @@ public class InnerDefinitionHandlerAwareEndpointParserTests {
 		DirectChannel inChannel = this.applicationContext.getBean("inChannel", DirectChannel.class);
 		inChannel.send(inMessage);
 		PollableChannel channel1 = this.applicationContext.getBean("channel1", PollableChannel.class);
-		assertThat(channel1.receive().getPayload().equals("1")).isTrue();
+		assertThat("1".equals(channel1.receive().getPayload())).isTrue();
 		inChannelMessageBuilder = MessageBuilder.withPayload("2");
 		inMessage = inChannelMessageBuilder.build();
 		inChannel.send(inMessage);
 		PollableChannel channel2 = this.applicationContext.getBean("channel2", PollableChannel.class);
-		assertThat(channel2.receive().getPayload().equals("2")).isTrue();
+		assertThat("2".equals(channel2.receive().getPayload())).isTrue();
 	}
 
 	private void testSADefinitionSuccess(String configProperty) {
@@ -262,7 +261,7 @@ public class InnerDefinitionHandlerAwareEndpointParserTests {
 		DirectChannel inChannel = this.applicationContext.getBean("inChannel", DirectChannel.class);
 		inChannel.send(inMessage);
 		PollableChannel channel1 = this.applicationContext.getBean("outChannel", PollableChannel.class);
-		assertThat(channel1.receive().getPayload().equals("1")).isTrue();
+		assertThat("1".equals(channel1.receive().getPayload())).isTrue();
 	}
 
 	private void testAggregatorDefinitionSuccess(String configProperty) {
@@ -324,7 +323,7 @@ public class InnerDefinitionHandlerAwareEndpointParserTests {
 	public static class TestRouter {
 
 		public String route(String value) {
-			return (value.equals("1")) ? "channel1" : "channel2";
+			return "1".equals(value) ? "channel1" : "channel2";
 		}
 
 	}
@@ -352,7 +351,7 @@ public class InnerDefinitionHandlerAwareEndpointParserTests {
 	public static class TestMessageFilter {
 
 		public boolean filter(String value) {
-			return value.equals("foo");
+			return "foo".equals(value);
 		}
 
 	}

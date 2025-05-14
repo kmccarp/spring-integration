@@ -28,7 +28,6 @@ import org.apache.commons.io.FilenameUtils;
 import org.zeroturnaround.zip.ByteSource;
 import org.zeroturnaround.zip.FileSource;
 import org.zeroturnaround.zip.ZipEntrySource;
-
 import org.springframework.integration.file.DefaultFileNameGenerator;
 import org.springframework.integration.file.FileHeaders;
 import org.springframework.integration.file.FileNameGenerator;

@@ -16,10 +16,12 @@
 
 package org.springframework.integration.config;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.integration.test.util.TestUtils.getPropertyValue;
+
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.integration.aggregator.CorrelationStrategy;
@@ -35,9 +37,6 @@ import org.springframework.integration.test.util.TestUtils;
 import org.springframework.messaging.Message;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.integration.test.util.TestUtils.getPropertyValue;
 
 /**
  * @author Marius Bogoevici
@@ -195,7 +194,7 @@ public class ResequencerParserTests {
 
 	static class TestReleaseStrategyPojo {
 
-		private int invocationCount = 0;
+		private int invocationCount;
 
 		public boolean bar(List<Message<?>> __) {
 			invocationCount++;

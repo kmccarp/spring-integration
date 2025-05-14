@@ -16,6 +16,9 @@
 
 package org.springframework.integration.json;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
+
 import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -24,7 +27,6 @@ import java.util.Map;
 import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.integration.support.MessageBuilder;
 import org.springframework.integration.support.json.JsonInboundMessageMapper;
@@ -33,9 +35,6 @@ import org.springframework.integration.support.json.JsonObjectMapper;
 import org.springframework.integration.support.json.JsonObjectMapperProvider;
 import org.springframework.integration.test.predicate.MessagePredicate;
 import org.springframework.messaging.Message;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.fail;
 
 /**
  * @author Jeremy Grelle

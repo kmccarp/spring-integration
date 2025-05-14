@@ -20,7 +20,6 @@ import java.io.File;
 import java.util.Comparator;
 
 import jcifs.smb.SmbFile;
-
 import org.springframework.integration.file.dsl.RemoteFileInboundChannelAdapterSpec;
 import org.springframework.integration.file.filters.CompositeFileListFilter;
 import org.springframework.integration.file.filters.FileListFilter;

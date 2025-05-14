@@ -29,11 +29,11 @@ import org.springframework.integration.events.IntegrationEvent;
 @SuppressWarnings("serial")
 public abstract class StompIntegrationEvent extends IntegrationEvent {
 
-	public StompIntegrationEvent(Object source) {
+	protected StompIntegrationEvent(Object source) {
 		super(source);
 	}
 
-	public StompIntegrationEvent(Object source, Throwable cause) {
+	protected StompIntegrationEvent(Object source, Throwable cause) {
 		super(source, cause);
 	}
 

@@ -22,7 +22,6 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import org.aopalliance.aop.Advice;
-
 import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.beans.factory.BeanClassLoaderAware;
 import org.springframework.core.log.LogMessage;
@@ -55,7 +54,7 @@ public abstract class AbstractReplyProducingMessageHandler extends AbstractMessa
 
 	private ClassLoader beanClassLoader = ClassUtils.getDefaultClassLoader();
 
-	private boolean requiresReply = false;
+	private boolean requiresReply;
 
 	private volatile RequestHandler advisedRequestHandler;
 

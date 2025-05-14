@@ -16,14 +16,13 @@
 
 package org.springframework.integration.support.converter;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.nio.charset.StandardCharsets;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.integration.support.MessageBuilder;
 import org.springframework.messaging.Message;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Falk Hanisch

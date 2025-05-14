@@ -17,7 +17,6 @@
 package org.springframework.integration.xmpp.support;
 
 import org.jivesoftware.smack.packet.MessageBuilder;
-
 import org.springframework.integration.mapping.RequestReplyHeaderMapper;
 
 /**

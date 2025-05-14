@@ -16,6 +16,9 @@
 
 package org.springframework.integration.jdbc.store;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
+
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.CountDownLatch;
@@ -25,7 +28,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.integration.channel.QueueChannel;
@@ -38,9 +40,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.support.TransactionTemplate;
 import org.springframework.util.StopWatch;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.fail;
 
 /**
  * @author Dave Syer
@@ -161,9 +160,9 @@ public class JdbcMessageStoreChannelOnePollerIntegrationTests {
 
 	public static class Service {
 
-		private static boolean fail = false;
+		private static boolean fail;
 
-		private static List<String> messages = new CopyOnWriteArrayList<String>();
+		private static List<String> messages = new CopyOnWriteArrayList<>();
 
 		private static CountDownLatch latch = new CountDownLatch(0);
 

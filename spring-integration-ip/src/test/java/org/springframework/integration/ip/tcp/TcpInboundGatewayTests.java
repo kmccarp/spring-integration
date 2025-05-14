@@ -16,6 +16,9 @@
 
 package org.springframework.integration.ip.tcp;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.ServerSocket;
@@ -29,12 +32,10 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
-
 import javax.net.ServerSocketFactory;
 import javax.net.SocketFactory;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.integration.channel.DirectChannel;
@@ -57,9 +58,6 @@ import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.SubscribableChannel;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
 
 /**
  * @author Gary Russell
@@ -247,7 +245,7 @@ public class TcpInboundGatewayTests {
 		socket.getOutputStream().write("Test2\r\n".getBytes());
 		handler.handleMessage(channel.receive(10000));
 		handler.handleMessage(channel.receive(10000));
-		Set<String> results = new HashSet<String>();
+		Set<String> results = new HashSet<>();
 		byte[] bytes = new byte[12];
 		readFully(socket.getInputStream(), bytes);
 		results.add(new String(bytes));

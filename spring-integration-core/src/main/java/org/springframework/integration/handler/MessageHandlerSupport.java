@@ -20,7 +20,6 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import io.micrometer.observation.ObservationRegistry;
-
 import org.springframework.core.Ordered;
 import org.springframework.integration.IntegrationPattern;
 import org.springframework.integration.IntegrationPatternType;
@@ -58,7 +57,7 @@ public abstract class MessageHandlerSupport extends IntegrationObjectSupport
 
 	private final Set<TimerFacade> timers = ConcurrentHashMap.newKeySet();
 
-	private boolean shouldTrack = false;
+	private boolean shouldTrack;
 
 	private boolean loggingEnabled = true;
 

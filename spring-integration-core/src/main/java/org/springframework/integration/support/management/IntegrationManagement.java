@@ -17,7 +17,6 @@
 package org.springframework.integration.support.management;
 
 import io.micrometer.observation.ObservationRegistry;
-
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.integration.support.context.NamedComponent;
 import org.springframework.integration.support.management.metrics.MetricsCaptor;

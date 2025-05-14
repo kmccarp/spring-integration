@@ -17,7 +17,6 @@
 package org.springframework.integration.ip.config;
 
 import org.w3c.dom.Element;
-
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.integration.config.xml.AbstractInboundGatewayParser;
 import org.springframework.integration.config.xml.IntegrationNamespaceUtils;
@@ -37,8 +36,8 @@ public class TcpInboundGatewayParser extends AbstractInboundGatewayParser {
 
 	@Override
 	protected boolean isEligibleAttribute(String attributeName) {
-		return !attributeName.equals(IpAdapterParserUtils.TCP_CONNECTION_FACTORY)
-				&& !attributeName.equals(IpAdapterParserUtils.SCHEDULER)
+		return !IpAdapterParserUtils.TCP_CONNECTION_FACTORY.equals(attributeName)
+				&& !IpAdapterParserUtils.SCHEDULER.equals(attributeName)
 				&& super.isEligibleAttribute(attributeName);
 	}
 

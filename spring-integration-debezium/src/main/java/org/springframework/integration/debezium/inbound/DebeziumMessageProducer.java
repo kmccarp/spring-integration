@@ -31,7 +31,6 @@ import io.debezium.engine.DebeziumEngine.ChangeConsumer;
 import io.debezium.engine.DebeziumEngine.RecordCommitter;
 import io.debezium.engine.Header;
 import io.debezium.engine.format.SerializationFormat;
-
 import org.springframework.core.task.SimpleAsyncTaskExecutor;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.integration.debezium.support.DebeziumHeaders;
@@ -66,9 +65,9 @@ public class DebeziumMessageProducer extends MessageProducerSupport {
 
 	private HeaderMapper<List<Header<Object>>> headerMapper = new DefaultDebeziumHeaderMapper();
 
-	private boolean enableEmptyPayload = false;
+	private boolean enableEmptyPayload;
 
-	private boolean enableBatch = false;
+	private boolean enableBatch;
 
 	private volatile CountDownLatch lifecycleLatch = new CountDownLatch(0);
 

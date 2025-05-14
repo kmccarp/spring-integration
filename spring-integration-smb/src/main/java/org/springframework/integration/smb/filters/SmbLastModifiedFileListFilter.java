@@ -21,7 +21,6 @@ import java.time.Instant;
 import java.util.function.Consumer;
 
 import jcifs.smb.SmbFile;
-
 import org.springframework.integration.file.filters.AbstractLastModifiedFileListFilter;
 
 /**

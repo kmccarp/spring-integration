@@ -16,6 +16,8 @@
 
 package org.springframework.integration.mongodb.inbound;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.time.Duration;
 
 import com.mongodb.client.model.changestream.OperationType;
@@ -30,7 +32,6 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Flux;
 import reactor.test.StepVerifier;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -47,8 +48,6 @@ import org.springframework.integration.mongodb.dsl.MongoDb;
 import org.springframework.integration.mongodb.support.MongoHeaders;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Artem Bilan
@@ -109,7 +108,7 @@ public class MongoDbChangeStreamMessageProducerTests {
 		StepVerifier stepVerifier =
 				Flux.from(this.fluxMessageChannel)
 						.as(StepVerifier::create)
-						.assertNext((message) -> {
+						.assertNext(message -> {
 							assertThat(message.getPayload())
 									.isInstanceOf(ChangeStreamEvent.class)
 									.extracting("body")
@@ -121,11 +120,11 @@ public class MongoDbChangeStreamMessageProducerTests {
 									.containsKeys(MongoHeaders.CHANGE_STREAM_TIMESTAMP,
 											MongoHeaders.CHANGE_STREAM_RESUME_TOKEN);
 						})
-						.assertNext((message) ->
+						.assertNext(message ->
 								assertThat(message.getPayload())
 										.extracting("body")
 										.isEqualTo(person2))
-						.assertNext((message) ->
+						.assertNext(message ->
 								assertThat(message.getPayload())
 										.extracting("body")
 										.isEqualTo(person3))

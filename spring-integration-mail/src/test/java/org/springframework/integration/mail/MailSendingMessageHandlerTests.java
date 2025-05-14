@@ -16,6 +16,8 @@
 
 package org.springframework.integration.mail;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.io.DataInputStream;
 
 import jakarta.mail.Message;
@@ -25,11 +27,8 @@ import jakarta.mail.internet.MimeMessage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.integration.support.MessageBuilder;
 import org.springframework.mail.SimpleMailMessage;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Marius Bogoevici

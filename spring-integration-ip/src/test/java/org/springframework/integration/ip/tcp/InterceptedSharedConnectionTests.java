@@ -16,11 +16,12 @@
 
 package org.springframework.integration.ip.tcp;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.support.AbstractApplicationContext;
@@ -38,8 +39,6 @@ import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Gary Russell
@@ -81,7 +80,7 @@ public class InterceptedSharedConnectionTests {
 	void test1() throws Exception {
 		TestingUtilities.waitListening(this.server, null);
 		this.client.setPort(this.server.getPort());
-		this.ctx.getBeansOfType(ConsumerEndpointFactoryBean.class).values().forEach(c -> c.start());
+		this.ctx.getBeansOfType(ConsumerEndpointFactoryBean.class).values().forEach(ConsumerEndpointFactoryBean::start);
 		for (int i = 0; i < 5; i++) {
 			MessageChannel input = ctx.getBean("input", MessageChannel.class);
 			input.send(MessageBuilder.withPayload("Test").build());

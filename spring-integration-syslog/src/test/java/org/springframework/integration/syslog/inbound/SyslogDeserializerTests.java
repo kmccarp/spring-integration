@@ -16,15 +16,14 @@
 
 package org.springframework.integration.syslog.inbound;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.io.ByteArrayInputStream;
 import java.util.List;
 import java.util.Map;
 
 import org.junit.Test;
-
 import org.springframework.integration.syslog.SyslogHeaders;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Duncan McIntyre

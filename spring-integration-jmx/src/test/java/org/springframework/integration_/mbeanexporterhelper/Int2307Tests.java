@@ -16,19 +16,17 @@
 
 package org.springframework.integration_.mbeanexporterhelper;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.List;
 import java.util.Set;
-
 import javax.management.MBeanServer;
 import javax.management.ObjectInstance;
 
 import org.junit.Test;
-
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.integration.test.util.TestUtils;
 import org.springframework.jmx.export.MBeanExporter;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Oleg Zhurakousky

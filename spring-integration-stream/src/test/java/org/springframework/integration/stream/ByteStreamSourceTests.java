@@ -16,15 +16,14 @@
 
 package org.springframework.integration.stream;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+
 import java.io.ByteArrayInputStream;
 
 import org.junit.Test;
-
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.messaging.Message;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
 
 /**
  * @author Mark Fisher

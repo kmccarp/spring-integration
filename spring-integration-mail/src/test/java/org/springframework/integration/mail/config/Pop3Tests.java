@@ -16,6 +16,8 @@
 
 package org.springframework.integration.mail.config;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.Arrays;
 
 import com.icegreen.greenmail.user.GreenMailUser;
@@ -29,15 +31,12 @@ import jakarta.mail.internet.MimeMessage;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.integration.mail.MailHeaders;
 import org.springframework.integration.mail.MailReceivingMessageSource;
 import org.springframework.integration.mail.Pop3MailReceiver;
 import org.springframework.integration.mail.support.DefaultMailHeaderMapper;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageHeaders;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Gary Russell

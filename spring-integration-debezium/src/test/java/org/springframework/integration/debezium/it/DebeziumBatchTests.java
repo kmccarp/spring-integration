@@ -16,6 +16,9 @@
 
 package org.springframework.integration.debezium.it;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.awaitility.Awaitility.await;
+
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +27,6 @@ import io.debezium.engine.ChangeEvent;
 import io.debezium.engine.DebeziumEngine;
 import io.debezium.engine.Header;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -39,9 +41,6 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.awaitility.Awaitility.await;
 
 /**
  * @author Christian Tzolov
@@ -59,11 +58,11 @@ public class DebeziumBatchTests implements DebeziumMySqlTestContainer {
 	@Qualifier("queueChannel")
 	private QueueChannel queueChannel;
 
-	private int batchCount = 0;
+	private int batchCount;
 
 	@Test
 	void batchMode() {
-		await().atMost(Duration.ofMinutes(1)).until(this::receivePayloads, (count) -> count == EXPECTED_DB_TX_COUNT);
+		await().atMost(Duration.ofMinutes(1)).until(this::receivePayloads, count -> count == EXPECTED_DB_TX_COUNT);
 
 		assertThat(allPayload).hasSize(EXPECTED_DB_TX_COUNT);
 		assertThat(batchCount).isLessThan(EXPECTED_DB_TX_COUNT);

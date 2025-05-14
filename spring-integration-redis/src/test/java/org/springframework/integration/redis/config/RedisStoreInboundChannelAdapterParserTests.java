@@ -16,8 +16,10 @@
 
 package org.springframework.integration.redis.config;
 
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.parsing.BeanDefinitionParsingException;
 import org.springframework.context.ApplicationContext;
@@ -29,9 +31,6 @@ import org.springframework.integration.redis.inbound.RedisStoreMessageSource;
 import org.springframework.integration.test.util.TestUtils;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
  * @author Oleg Zhurakousky
@@ -67,7 +66,7 @@ class RedisStoreInboundChannelAdapterParserTests {
 				TestUtils.getPropertyValue(context.getBean("withExternalTemplate"), "source", RedisStoreMessageSource.class);
 		assertThat(((SpelExpression) TestUtils.getPropertyValue(withExternalTemplate, "keyExpression"))
 				.getExpressionString()).isEqualTo("'presidents'");
-		assertThat((TestUtils.getPropertyValue(withExternalTemplate, "collectionType")))
+		assertThat(TestUtils.getPropertyValue(withExternalTemplate, "collectionType"))
 				.hasToString("LIST");
 		assertThat(TestUtils.getPropertyValue(withExternalTemplate, "redisTemplate")).isSameAs(redisTemplate);
 	}

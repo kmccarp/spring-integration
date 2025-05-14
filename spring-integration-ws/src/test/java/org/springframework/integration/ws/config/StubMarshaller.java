@@ -17,7 +17,6 @@
 package org.springframework.integration.ws.config;
 
 import java.io.IOException;
-
 import javax.xml.transform.Result;
 
 import org.springframework.oxm.Marshaller;

@@ -16,17 +16,18 @@
 
 package org.springframework.integration.xml.transformer.jaxbmarshaling;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-
 import javax.xml.transform.Source;
 import javax.xml.transform.dom.DOMResult;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 import org.w3c.dom.Document;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.integration.transformer.MessageTransformationException;
@@ -38,9 +39,6 @@ import org.springframework.oxm.UnmarshallingFailureException;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.xml.transform.StringSource;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 /**
  * @author Jonas Partner

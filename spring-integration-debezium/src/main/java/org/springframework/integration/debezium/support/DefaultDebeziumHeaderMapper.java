@@ -22,7 +22,6 @@ import java.util.List;
 import java.util.Map;
 
 import io.debezium.engine.Header;
-
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.support.HeaderMapper;
 import org.springframework.util.Assert;

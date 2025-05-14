@@ -16,13 +16,13 @@
 
 package org.springframework.integration.support;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.springframework.integration.test.support.PayloadValidator;
 import org.springframework.integration.test.support.RequestResponseScenario;
 import org.springframework.integration.test.support.SingleRequestResponseScenarioTests;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author David Turanski

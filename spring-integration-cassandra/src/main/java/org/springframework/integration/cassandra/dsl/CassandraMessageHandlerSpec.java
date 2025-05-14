@@ -21,7 +21,6 @@ import java.util.Map;
 import java.util.function.Function;
 
 import com.datastax.oss.driver.api.core.cql.Statement;
-
 import org.springframework.data.cassandra.core.ReactiveCassandraOperations;
 import org.springframework.data.cassandra.core.cql.WriteOptions;
 import org.springframework.expression.Expression;

@@ -19,7 +19,6 @@ package org.springframework.integration.xml.transformer;
 import java.io.StringReader;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -28,7 +27,6 @@ import javax.xml.transform.dom.DOMResult;
 
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
-
 import org.springframework.messaging.MessagingException;
 import org.springframework.util.Assert;
 import org.springframework.xml.DocumentBuilderFactoryUtils;

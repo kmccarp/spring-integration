@@ -40,7 +40,6 @@ import jakarta.mail.Session;
 import jakarta.mail.Store;
 import jakarta.mail.URLName;
 import jakarta.mail.internet.MimeMessage;
-
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.expression.Expression;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
@@ -120,16 +119,16 @@ public abstract class AbstractMailReceiver extends IntegrationObjectSupport impl
 
 	private volatile Folder folder;
 
-	public AbstractMailReceiver() {
+	protected AbstractMailReceiver() {
 		this.url = null;
 	}
 
-	public AbstractMailReceiver(URLName urlName) {
+	protected AbstractMailReceiver(URLName urlName) {
 		Assert.notNull(urlName, "urlName must not be null");
 		this.url = urlName;
 	}
 
-	public AbstractMailReceiver(String url) {
+	protected AbstractMailReceiver(String url) {
 		if (url != null) {
 			this.url = new URLName(url);
 		}

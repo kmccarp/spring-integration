@@ -16,11 +16,10 @@
 
 package org.springframework.integration.ip.tcp.serializer;
 
-import org.junit.jupiter.api.Test;
-
-import org.springframework.integration.test.util.TestUtils;
-
 import static org.assertj.core.api.Assertions.assertThat;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.integration.test.util.TestUtils;
 
 /**
  * @author Gary Russell

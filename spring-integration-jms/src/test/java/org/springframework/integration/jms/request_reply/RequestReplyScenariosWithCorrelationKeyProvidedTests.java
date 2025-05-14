@@ -16,10 +16,11 @@
 
 package org.springframework.integration.jms.request_reply;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.integration.gateway.RequestReplyExchanger;
 import org.springframework.integration.jms.ActiveMQMultiContextTests;
@@ -29,8 +30,6 @@ import org.springframework.integration.test.condition.LongRunningTest;
 import org.springframework.integration.test.util.TestUtils;
 import org.springframework.jms.support.JmsHeaders;
 import org.springframework.messaging.Message;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Oleg Zhurakousky

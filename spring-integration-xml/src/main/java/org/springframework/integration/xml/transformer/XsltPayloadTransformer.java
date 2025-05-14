@@ -20,7 +20,6 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Map.Entry;
-
 import javax.xml.XMLConstants;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
@@ -34,7 +33,6 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamSource;
 
 import org.w3c.dom.Document;
-
 import org.springframework.beans.factory.BeanClassLoaderAware;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
@@ -105,9 +103,9 @@ public class XsltPayloadTransformer extends AbstractXmlTransformer implements Be
 
 	private boolean resultFactoryExplicitlySet;
 
-	private boolean alwaysUseSourceFactory = false;
+	private boolean alwaysUseSourceFactory;
 
-	private boolean alwaysUseResultFactory = false;
+	private boolean alwaysUseResultFactory;
 
 	private String[] xsltParamHeaders;
 
@@ -143,8 +141,8 @@ public class XsltPayloadTransformer extends AbstractXmlTransformer implements Be
 		Assert.isTrue(xslResource instanceof ClassPathResource ||
 						xslResource instanceof FileSystemResource ||
 						xslResource instanceof VfsResource || // NOSONAR boolean complexity
-						xslResource.getClass().getName()
-								.equals("org.springframework.web.context.support.ServletContextResource"),
+						"org.springframework.web.context.support.ServletContextResource"
+								.equals(xslResource.getClass().getName()),
 				"Only 'ClassPathResource', 'FileSystemResource', 'ServletContextResource' or 'VfsResource'" +
 						" are supported directly in this transformer. For any other 'Resource' implementations" +
 						" consider to use a 'Templates'-based constructor instantiation.");

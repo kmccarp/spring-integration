@@ -18,7 +18,6 @@ package org.springframework.integration.jpa.core;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
-
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.orm.jpa.SharedEntityManagerCreator;
 import org.springframework.util.Assert;

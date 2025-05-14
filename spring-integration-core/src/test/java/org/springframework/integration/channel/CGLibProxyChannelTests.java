@@ -16,13 +16,14 @@
 
 package org.springframework.integration.channel;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.aop.framework.ProxyFactoryBean;
 import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +35,6 @@ import org.springframework.messaging.support.GenericMessage;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Gary Russell
@@ -62,7 +61,7 @@ public class CGLibProxyChannelTests {
 	public void testProxyDirect() {
 		assertThat(AopUtils.isCglibProxy(this.directChannel)).isTrue();
 		final AtomicReference<Message<?>> message = new AtomicReference<>();
-		this.directChannel.subscribe(m -> message.set(m));
+		this.directChannel.subscribe(message::set);
 		this.directChannel.send(new GenericMessage<>("foo"));
 		assertThat(message.get()).isNotNull();
 	}

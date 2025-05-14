@@ -16,6 +16,9 @@
 
 package org.springframework.integration.zip.transformer;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.RandomAccessFile;
@@ -30,14 +33,10 @@ import java.util.UUID;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 import org.zeroturnaround.zip.ZipUtil;
-
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.integration.support.MessageBuilder;
 import org.springframework.integration.zip.ZipHeaders;
 import org.springframework.messaging.Message;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
 
 /**
  *
@@ -162,7 +161,7 @@ public class ZipTransformerTests {
 		final File payload = (File) result.getPayload();
 
 		assertThat(payload).hasName(message.getHeaders().getId().toString() + ".msg.zip");
-		assertThat((SpringZipUtils.isValid(payload))).isTrue();
+		assertThat(SpringZipUtils.isValid(payload)).isTrue();
 
 		final byte[] zipEntryData = ZipUtil.unpackEntry(payload, "test.txt");
 

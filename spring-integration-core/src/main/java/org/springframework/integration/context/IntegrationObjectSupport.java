@@ -330,7 +330,7 @@ public abstract class IntegrationObjectSupport implements ComponentSourceAware, 
 
 	@Override
 	public String toString() {
-		return (this.beanName != null) ? getBeanDescription() : super.toString();
+		return this.beanName != null ? getBeanDescription() : super.toString();
 	}
 
 	@SuppressWarnings("unchecked")

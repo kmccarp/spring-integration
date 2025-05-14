@@ -25,7 +25,6 @@ import com.hazelcast.replicatedmap.ReplicatedMap;
 import com.hazelcast.topic.ITopic;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.integration.hazelcast.HazelcastIntegrationTestUser;
 import org.springframework.integration.hazelcast.inbound.util.HazelcastInboundChannelAdapterTestUtils;

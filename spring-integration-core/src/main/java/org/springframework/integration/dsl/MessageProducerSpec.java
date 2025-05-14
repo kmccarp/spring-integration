@@ -36,7 +36,7 @@ import org.springframework.messaging.MessageChannel;
 public abstract class MessageProducerSpec<S extends MessageProducerSpec<S, P>, P extends MessageProducerSupport>
 		extends IntegrationComponentSpec<S, P> {
 
-	public MessageProducerSpec(@Nullable P producer) {
+	protected MessageProducerSpec(@Nullable P producer) {
 		this.target = producer;
 	}
 

@@ -28,7 +28,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.deser.std.StdNodeBasedDeserializer;
 import com.fasterxml.jackson.databind.jsontype.TypeDeserializer;
 import com.fasterxml.jackson.databind.type.TypeFactory;
-
 import org.springframework.integration.support.MutableMessageHeaders;
 import org.springframework.messaging.Message;
 import org.springframework.util.Assert;

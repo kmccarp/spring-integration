@@ -16,6 +16,9 @@
 
 package org.springframework.integration.file;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -28,7 +31,6 @@ import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
-
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.integration.file.filters.ChainFileListFilter;
 import org.springframework.integration.file.filters.FileSystemPersistentAcceptOnceFileListFilter;
@@ -36,9 +38,6 @@ import org.springframework.integration.file.filters.LastModifiedFileListFilter;
 import org.springframework.integration.metadata.SimpleMetadataStore;
 import org.springframework.integration.test.util.TestUtils;
 import org.springframework.messaging.Message;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
 
 /**
  * @author Gary Russell
@@ -88,7 +87,7 @@ public class WatchServiceDirectoryScannerTests {
 		fileReadingMessageSource.setWatchEvents(FileReadingMessageSource.WatchEventType.CREATE,
 				FileReadingMessageSource.WatchEventType.MODIFY,
 				FileReadingMessageSource.WatchEventType.DELETE);
-		fileReadingMessageSource.setWatchDirPredicate(path -> !path.getFileName().toString().equals("skipped"));
+		fileReadingMessageSource.setWatchDirPredicate(path -> !"skipped".equals(path.getFileName().toString()));
 		fileReadingMessageSource.setBeanFactory(mock(BeanFactory.class));
 
 		final CountDownLatch removeFileLatch = new CountDownLatch(1);
@@ -187,7 +186,7 @@ public class WatchServiceDirectoryScannerTests {
 
 		n = 0;
 		files.clear();
-		while (n++ < 300 && files.size() < 1) {
+		while (n++ < 300 && files.isEmpty()) {
 			Thread.sleep(100);
 			files = scanner.listFiles(this.rootDir);
 			accum.addAll(files);

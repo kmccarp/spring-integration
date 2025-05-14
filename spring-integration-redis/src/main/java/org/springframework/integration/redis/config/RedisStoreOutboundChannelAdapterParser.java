@@ -17,7 +17,6 @@
 package org.springframework.integration.redis.config;
 
 import org.w3c.dom.Element;
-
 import org.springframework.beans.factory.config.TypedStringValue;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;

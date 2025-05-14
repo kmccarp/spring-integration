@@ -16,6 +16,9 @@
 
 package org.springframework.integration.http;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.isNull;
+
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -25,7 +28,6 @@ import java.util.Locale;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-
 import org.springframework.beans.DirectFieldAccessor;
 import org.springframework.beans.PropertyAccessor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,9 +55,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.HandlerAdapter;
 import org.springframework.web.servlet.HandlerMapping;
 import org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.isNull;
 
 /**
  * @author Artem Bilan
@@ -85,22 +84,22 @@ public class HttpProxyScenarioTests {
 
 	@Test
 	public void testHttpProxyScenario() throws Exception {
-		ZoneId GMT = ZoneId.of("GMT");
+		ZoneId gmt = ZoneId.of("GMT");
 		DateTimeFormatter dateTimeFormatter =
-				DateTimeFormatter.ofPattern("EEE, dd MMM yyyy HH:mm:ss zzz", Locale.US).withZone(GMT);
+				DateTimeFormatter.ofPattern("EEE, dd MMM yyyy HH:mm:ss zzz", Locale.US).withZone(gmt);
 
 		Calendar c = Calendar.getInstance();
 		c.set(Calendar.MILLISECOND, 0);
 
 		final long ifModifiedSince = c.getTimeInMillis();
 		Instant instant = Instant.ofEpochMilli(ifModifiedSince);
-		ZonedDateTime zonedDateTime = ZonedDateTime.ofInstant(instant, GMT);
+		ZonedDateTime zonedDateTime = ZonedDateTime.ofInstant(instant, gmt);
 		String ifModifiedSinceValue = dateTimeFormatter.format(zonedDateTime);
 
 		c.add(Calendar.DATE, -1);
 		long ifUnmodifiedSince = c.getTimeInMillis();
 		instant = Instant.ofEpochMilli(ifUnmodifiedSince);
-		zonedDateTime = ZonedDateTime.ofInstant(instant, GMT);
+		zonedDateTime = ZonedDateTime.ofInstant(instant, gmt);
 		final String ifUnmodifiedSinceValue = dateTimeFormatter.format(zonedDateTime);
 
 		MockHttpServletRequest request = new MockHttpServletRequest("GET", "/test");

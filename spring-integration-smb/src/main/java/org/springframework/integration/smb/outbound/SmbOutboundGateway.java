@@ -22,7 +22,6 @@ import java.util.List;
 
 import jcifs.smb.SmbException;
 import jcifs.smb.SmbFile;
-
 import org.springframework.integration.file.remote.AbstractFileInfo;
 import org.springframework.integration.file.remote.MessageSessionCallback;
 import org.springframework.integration.file.remote.RemoteFileTemplate;

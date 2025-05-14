@@ -22,7 +22,6 @@ import java.util.function.Function;
 
 import reactor.util.function.Tuple2;
 import reactor.util.function.Tuples;
-
 import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.integration.channel.DirectChannel;

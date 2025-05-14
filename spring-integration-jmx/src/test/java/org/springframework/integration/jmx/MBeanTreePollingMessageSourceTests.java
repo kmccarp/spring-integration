@@ -16,18 +16,16 @@
 
 package org.springframework.integration.jmx;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.HashMap;
 import java.util.Map;
-
 import javax.management.MBeanServer;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
 import org.springframework.jmx.support.MBeanServerFactoryBean;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Stuart Williams

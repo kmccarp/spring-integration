@@ -16,6 +16,11 @@
 
 package org.springframework.integration.util;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -24,13 +29,7 @@ import java.util.concurrent.Semaphore;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.integration.test.util.TestUtils;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
-import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
 
 /**
  * @author Gary Russell
@@ -332,7 +331,7 @@ public class SimplePoolTests {
 	}
 
 	private SimplePool<String> stringPool(int size, Set<String> strings, AtomicBoolean stale) {
-		return new SimplePool<String>(size, new SimplePool.PoolItemCallback<String>() {
+		return new SimplePool<>(size, new SimplePool.PoolItemCallback<String>() {
 
 			private int i;
 

@@ -16,6 +16,19 @@
 
 package org.springframework.integration.amqp.inbound;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyBoolean;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.isNull;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.willReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +40,6 @@ import com.rabbitmq.client.Channel;
 import org.assertj.core.api.InstanceOfAssertFactories;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-
 import org.springframework.amqp.core.AcknowledgeMode;
 import org.springframework.amqp.core.MessageProperties;
 import org.springframework.amqp.rabbit.batch.MessageBatch;
@@ -66,19 +78,6 @@ import org.springframework.messaging.MessagingException;
 import org.springframework.messaging.PollableChannel;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.retry.support.RetryTemplate;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
-import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyBoolean;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.ArgumentMatchers.isNull;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.BDDMockito.willReturn;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
 
 /**
  * @author Artem Bilan
@@ -480,7 +479,7 @@ public class InboundEndpointTests {
 		listener.onMessage(batched.getMessage(), null);
 		Message<?> received = out.receive(0);
 		assertThat(received).isNotNull();
-		assertThat(((List<String>) received.getPayload())).contains("test1", "test2");
+		assertThat((List<String>) received.getPayload()).contains("test1", "test2");
 	}
 
 	@SuppressWarnings({"unchecked"})
@@ -506,7 +505,7 @@ public class InboundEndpointTests {
 		listener.onMessage(batched.getMessage(), null);
 		Message<?> received = out.receive(0);
 		assertThat(received).isNotNull();
-		assertThat(((List<String>) received.getPayload())).contains("test1", "test2");
+		assertThat((List<String>) received.getPayload()).contains("test1", "test2");
 		org.springframework.amqp.core.Message sourceData = StaticMessageHeaderAccessor.getSourceData(received);
 		assertThat(sourceData).isSameAs(batched.getMessage());
 	}
@@ -531,7 +530,7 @@ public class InboundEndpointTests {
 		listener.onMessageBatch(messages, null);
 		Message<?> received = out.receive(0);
 		assertThat(received).isNotNull();
-		assertThat(((List<String>) received.getPayload())).contains("test1", "test2");
+		assertThat((List<String>) received.getPayload()).contains("test1", "test2");
 		assertThat(received.getHeaders().get("some_batch_headers", List.class))
 				.hasSize(2);
 	}
@@ -554,8 +553,8 @@ public class InboundEndpointTests {
 		listener.onMessageBatch(messages, null);
 		Message<?> received = out.receive(0);
 		assertThat(received).isNotNull();
-		assertThat(((List<Message<String>>) received.getPayload()))
-				.extracting(message -> message.getPayload())
+		assertThat((List<Message<String>>) received.getPayload())
+				.extracting(Message::getPayload)
 				.contains("test1", "test2");
 	}
 

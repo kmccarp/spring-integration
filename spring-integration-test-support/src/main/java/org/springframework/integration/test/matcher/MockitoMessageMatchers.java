@@ -21,7 +21,6 @@ import java.util.Map;
 import org.hamcrest.Matcher;
 import org.mockito.ArgumentMatchers;
 import org.mockito.internal.hamcrest.HamcrestArgumentMatcher;
-
 import org.springframework.messaging.Message;
 
 /**

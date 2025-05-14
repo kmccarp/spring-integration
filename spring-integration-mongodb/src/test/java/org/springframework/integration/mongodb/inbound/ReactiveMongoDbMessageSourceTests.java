@@ -16,6 +16,13 @@
 
 package org.springframework.integration.mongodb.inbound;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,7 +38,6 @@ import org.mockito.Mockito;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
-
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -51,13 +57,6 @@ import org.springframework.integration.dsl.PollerSpec;
 import org.springframework.integration.dsl.Pollers;
 import org.springframework.integration.mongodb.MongoDbContainerTest;
 import org.springframework.integration.mongodb.dsl.MongoDb;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 
 /**
  * @author David Turanski
@@ -150,7 +149,7 @@ class ReactiveMongoDbMessageSourceTests implements MongoDbContainerTest {
 				})
 				.expectNextMatches(person -> {
 					names.remove(person.getName());
-					return names.size() == 0;
+					return names.isEmpty();
 				})
 				.verifyComplete();
 	}

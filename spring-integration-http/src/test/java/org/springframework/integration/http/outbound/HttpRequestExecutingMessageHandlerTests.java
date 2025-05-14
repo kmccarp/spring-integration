@@ -16,6 +16,12 @@
 
 package org.springframework.integration.http.outbound;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.Serializable;
@@ -27,13 +33,11 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
-
 import javax.xml.transform.Source;
 
 import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Sinks;
 import reactor.test.StepVerifier;
-
 import org.springframework.beans.DirectFieldAccessor;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -68,12 +72,6 @@ import org.springframework.web.client.ResponseExtractor;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.DefaultUriBuilderFactory;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 /**
  * @author Mark Fisher
@@ -425,7 +423,7 @@ public class HttpRequestExecutingMessageHandlerTests {
 		listA.add("1");
 		listA.add("2");
 		form.put("a", listA);
-		form.put("b", Collections.EMPTY_LIST);
+		form.put("b", Collections.emptyList());
 		form.put("c", Collections.singletonList("3"));
 		Message<?> message = MessageBuilder.withPayload(form).build();
 
@@ -467,7 +465,7 @@ public class HttpRequestExecutingMessageHandlerTests {
 		listA.add(new City("Philadelphia"));
 		listA.add(new City("Ambler"));
 		form.put("a", listA);
-		form.put("b", Collections.EMPTY_LIST);
+		form.put("b", Collections.emptyList());
 		form.put("c", Collections.singletonList(new City("Mohnton")));
 		Message<?> message = MessageBuilder.withPayload(form).build();
 
@@ -789,7 +787,7 @@ public class HttpRequestExecutingMessageHandlerTests {
 				.withStackTraceContaining("404 Not Found");
 
 		assertThat(requestHeaders.getAccept()).isNotNull();
-		assertThat(requestHeaders.getAccept().size() > 0).isTrue();
+		assertThat(!requestHeaders.getAccept().isEmpty()).isTrue();
 		List<MediaType> accept = requestHeaders.getAccept();
 		assertThat(accept).hasSizeGreaterThan(0);
 		assertThat(accept.get(0).getType()).isEqualTo("application");
@@ -820,7 +818,7 @@ public class HttpRequestExecutingMessageHandlerTests {
 				.withStackTraceContaining("404 Not Found");
 
 		assertThat(requestHeaders.getAccept()).isNotNull();
-		assertThat(requestHeaders.getAccept().size() > 0).isTrue();
+		assertThat(!requestHeaders.getAccept().isEmpty()).isTrue();
 		List<MediaType> accept = requestHeaders.getAccept();
 		assertThat(accept).hasSizeGreaterThan(0);
 		assertThat(accept.get(0).getType()).isEqualTo("application");

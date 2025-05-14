@@ -36,11 +36,11 @@ public abstract class AbstractRegexPatternFileListFilter<F> extends AbstractDire
 
 	private Pattern pattern;
 
-	public AbstractRegexPatternFileListFilter(String pattern) {
+	protected AbstractRegexPatternFileListFilter(String pattern) {
 		this(Pattern.compile(pattern));
 	}
 
-	public AbstractRegexPatternFileListFilter(Pattern pattern) {
+	protected AbstractRegexPatternFileListFilter(Pattern pattern) {
 		Assert.notNull(pattern, "'pattern' must not be null!");
 		this.pattern = pattern;
 	}

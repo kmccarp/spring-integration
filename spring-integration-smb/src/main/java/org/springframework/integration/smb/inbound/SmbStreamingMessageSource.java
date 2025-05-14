@@ -25,7 +25,6 @@ import jcifs.smb.SmbException;
 import jcifs.smb.SmbFile;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.springframework.integration.file.remote.AbstractFileInfo;
 import org.springframework.integration.file.remote.AbstractRemoteFileStreamingMessageSource;
 import org.springframework.integration.file.remote.RemoteFileTemplate;

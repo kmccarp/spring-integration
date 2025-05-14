@@ -16,6 +16,21 @@
 
 package org.springframework.integration.ip.tcp.connection;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.fail;
+import static org.awaitility.Awaitility.await;
+import static org.awaitility.Awaitility.with;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.contains;
+import static org.mockito.BDDMockito.willReturn;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -46,7 +61,6 @@ import java.util.concurrent.Future;
 import java.util.concurrent.ThreadPoolExecutor.AbortPolicy;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
-
 import javax.net.ServerSocketFactory;
 import javax.net.SocketFactory;
 
@@ -57,7 +71,6 @@ import org.junit.jupiter.api.TestInfo;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
-
 import org.springframework.beans.DirectFieldAccessor;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.context.ApplicationEvent;
@@ -79,21 +92,6 @@ import org.springframework.messaging.support.ErrorMessage;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.util.ReflectionUtils;
 import org.springframework.util.StopWatch;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
-import static org.assertj.core.api.Assertions.fail;
-import static org.awaitility.Awaitility.await;
-import static org.awaitility.Awaitility.with;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.contains;
-import static org.mockito.BDDMockito.willReturn;
-import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
 
 /**
  * @author Gary Russell
@@ -526,7 +524,7 @@ public class TcpNioConnectionTests {
 				.build();
 		outboundConnection.send(message);
 
-		final AtomicReference<Message<?>> inboundMessage = new AtomicReference<Message<?>>();
+		final AtomicReference<Message<?>> inboundMessage = new AtomicReference<>();
 		final CountDownLatch latch = new CountDownLatch(1);
 		TcpListener listener = message1 -> {
 			inboundMessage.set(message1);
@@ -633,11 +631,11 @@ public class TcpNioConnectionTests {
 		}
 		Thread.sleep(1);
 		for (int i = 0; i < numberOfSockets; i++) {
-			sockets[i].getOutputStream().write(("...foo2\r\nbar1 and...").getBytes());
+			sockets[i].getOutputStream().write("...foo2\r\nbar1 and...".getBytes());
 			sockets[i].getOutputStream().flush();
 		}
 		for (int i = 0; i < numberOfSockets; i++) {
-			sockets[i].getOutputStream().write(("...bar2\r\n").getBytes());
+			sockets[i].getOutputStream().write("...bar2\r\n".getBytes());
 			sockets[i].getOutputStream().flush();
 		}
 		for (int i = 0; i < numberOfSockets; i++) {
@@ -646,11 +644,11 @@ public class TcpNioConnectionTests {
 		}
 		Thread.sleep(1);
 		for (int i = 0; i < numberOfSockets; i++) {
-			sockets[i].getOutputStream().write(("...foo4\r\nbar3 and...").getBytes());
+			sockets[i].getOutputStream().write("...foo4\r\nbar3 and...".getBytes());
 			sockets[i].getOutputStream().flush();
 		}
 		for (int i = 0; i < numberOfSockets; i++) {
-			sockets[i].getOutputStream().write(("...bar4\r\n").getBytes());
+			sockets[i].getOutputStream().write("...bar4\r\n".getBytes());
 			sockets[i].close();
 		}
 
@@ -699,7 +697,7 @@ public class TcpNioConnectionTests {
 
 		});
 		final CountDownLatch assemblerLatch = new CountDownLatch(1);
-		final AtomicReference<Thread> assembler = new AtomicReference<Thread>();
+		final AtomicReference<Thread> assembler = new AtomicReference<>();
 		factory.registerListener(message -> {
 			if (!(message instanceof ErrorMessage)) {
 				assembler.set(Thread.currentThread());

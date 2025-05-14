@@ -16,6 +16,12 @@
 
 package org.springframework.integration.endpoint;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.atMost;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+
 import java.time.Duration;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -25,7 +31,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.Lifecycle;
@@ -44,12 +49,6 @@ import org.springframework.messaging.support.GenericMessage;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.scheduling.support.PeriodicTrigger;
 import org.springframework.util.StopWatch;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.atMost;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.times;
 
 /**
  * @author Oleg Zhurakousky
@@ -228,7 +227,7 @@ public class PollingLifecycleTests {
 		var context = new AnnotationConfigApplicationContext();
 		context.register(TestDefaultAnnotationConfiguration.class);
 
-		PollingConsumer consumer = new PollingConsumer(new QueueChannel(), (m) -> {
+		PollingConsumer consumer = new PollingConsumer(new QueueChannel(), m -> {
 		});
 		consumer.setTrigger(new PeriodicTrigger(Duration.ofSeconds(10)));
 		consumer.setReceiveTimeout(30_000);

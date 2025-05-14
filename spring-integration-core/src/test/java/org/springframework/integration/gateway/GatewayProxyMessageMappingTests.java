@@ -16,12 +16,14 @@
 
 package org.springframework.integration.gateway;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+
 import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.support.RootBeanDefinition;
 import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.integration.channel.QueueChannel;
@@ -32,9 +34,6 @@ import org.springframework.messaging.MessagingException;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.Headers;
 import org.springframework.messaging.handler.annotation.Payload;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 /**
  * @author Mark Fisher
@@ -47,7 +46,7 @@ public class GatewayProxyMessageMappingTests {
 
 	private final QueueChannel channel = new QueueChannel();
 
-	private volatile TestGateway gateway = null;
+	private volatile TestGateway gateway;
 
 	@BeforeEach
 	public void initializeGateway() {

@@ -28,7 +28,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-
 import javax.xml.transform.Source;
 
 import org.springframework.beans.factory.BeanFactory;
@@ -105,20 +104,20 @@ public abstract class AbstractHttpRequestExecutingMessageHandler extends Abstrac
 
 	private boolean extractPayload = true;
 
-	private boolean extractPayloadExplicitlySet = false;
+	private boolean extractPayloadExplicitlySet;
 
 	private boolean extractResponseBody = true;
 
 	private Charset charset = StandardCharsets.UTF_8;
 
-	private boolean transferCookies = false;
+	private boolean transferCookies;
 
 	private HeaderMapper<HttpHeaders> headerMapper = DefaultHttpHeaderMapper.outboundMapper();
 
 	@Nullable
 	private Expression uriVariablesExpression;
 
-	public AbstractHttpRequestExecutingMessageHandler(Expression uriExpression) {
+	protected AbstractHttpRequestExecutingMessageHandler(Expression uriExpression) {
 		Assert.notNull(uriExpression, "URI Expression is required");
 		this.uriExpression = uriExpression;
 	}
@@ -337,7 +336,7 @@ public abstract class AbstractHttpRequestExecutingMessageHandler extends Abstrac
 		MessageBuilderFactory messageBuilderFactory = getMessageBuilderFactory();
 		if (httpResponse.hasBody() && this.extractResponseBody) {
 			Object responseBody = httpResponse.getBody();
-			replyBuilder = (responseBody instanceof Message<?>)
+			replyBuilder = responseBody instanceof Message<?>
 					? messageBuilderFactory.fromMessage((Message<?>) responseBody)
 					: messageBuilderFactory.withPayload(responseBody); // NOSONAR - hasBody()
 		}
@@ -352,7 +351,7 @@ public abstract class AbstractHttpRequestExecutingMessageHandler extends Abstrac
 	private void doConvertSetCookie(Map<String, Object> headers) {
 		String keyName = null;
 		for (String key : headers.keySet()) {
-			if (key.equalsIgnoreCase(HttpHeaders.SET_COOKIE)) {
+			if (HttpHeaders.SET_COOKIE.equalsIgnoreCase(key)) {
 				keyName = key;
 				break;
 			}
@@ -440,7 +439,7 @@ public abstract class AbstractHttpRequestExecutingMessageHandler extends Abstrac
 	}
 
 	private boolean shouldIncludeRequestBody(HttpMethod httpMethod) {
-		return !(CollectionUtils.containsInstance(NO_BODY_HTTP_METHODS, httpMethod));
+		return !CollectionUtils.containsInstance(NO_BODY_HTTP_METHODS, httpMethod);
 	}
 
 	private MultiValueMap<Object, Object> convertToMultiValueMap(Map<?, ?> simpleMap) {
@@ -500,7 +499,7 @@ public abstract class AbstractHttpRequestExecutingMessageHandler extends Abstrac
 
 	private HttpMethod determineHttpMethod(Message<?> requestMessage) {
 		Object httpMethod = this.httpMethodExpression.getValue(this.evaluationContext, requestMessage);
-		Assert.state((httpMethod instanceof String || httpMethod instanceof HttpMethod), () ->
+		Assert.state(httpMethod instanceof String || httpMethod instanceof HttpMethod, () ->
 				"'httpMethodExpression' evaluation must result in an 'HttpMethod' enum or its String representation, " +
 						"not: " + (httpMethod == null ? "null" : httpMethod.getClass()));
 		if (httpMethod instanceof HttpMethod castHttpMethod) {

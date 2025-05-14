@@ -17,7 +17,6 @@
 package org.springframework.integration.sftp.dsl;
 
 import org.apache.sshd.sftp.client.SftpClient;
-
 import org.springframework.integration.file.dsl.RemoteFileOutboundGatewaySpec;
 import org.springframework.integration.file.remote.gateway.AbstractRemoteFileOutboundGateway;
 import org.springframework.integration.sftp.filters.SftpRegexPatternFileListFilter;

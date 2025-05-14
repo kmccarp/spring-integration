@@ -26,7 +26,6 @@ import java.util.function.Function;
 
 import org.mockito.ArgumentCaptor;
 import org.mockito.internal.matchers.CapturingMatcher;
-
 import org.springframework.integration.handler.AbstractMessageProducingHandler;
 import org.springframework.integration.test.util.TestUtils;
 import org.springframework.messaging.Message;

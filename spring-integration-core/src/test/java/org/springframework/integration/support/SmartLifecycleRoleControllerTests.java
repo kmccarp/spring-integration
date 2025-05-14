@@ -16,18 +16,17 @@
 
 package org.springframework.integration.support;
 
-import org.junit.jupiter.api.Test;
-import org.mockito.InOrder;
-
-import org.springframework.context.SmartLifecycle;
-import org.springframework.integration.support.context.NamedComponent;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+
+import org.junit.jupiter.api.Test;
+import org.mockito.InOrder;
+import org.springframework.context.SmartLifecycle;
+import org.springframework.integration.support.context.NamedComponent;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 
 /**
  * @author Gary Russell

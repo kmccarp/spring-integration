@@ -28,7 +28,6 @@ import jakarta.jms.JMSException;
 import jakarta.jms.Message;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.springframework.integration.IntegrationMessageHeaderAccessor;
 import org.springframework.jms.support.JmsHeaders;
 import org.springframework.messaging.MessageHeaders;
@@ -68,9 +67,9 @@ public class DefaultJmsHeaderMapper extends JmsHeaderMapper {
 
 	private volatile boolean mapInboundPriority = true;
 
-	private volatile boolean mapInboundDeliveryMode = false;
+	private volatile boolean mapInboundDeliveryMode;
 
-	private volatile boolean mapInboundExpiration = false;
+	private volatile boolean mapInboundExpiration;
 
 	/**
 	 * Suppress the mapping of inbound priority by using this setter with 'false'.
@@ -110,7 +109,7 @@ public class DefaultJmsHeaderMapper extends JmsHeaderMapper {
 	 * @param inboundPrefix The inbound prefix.
 	 */
 	public void setInboundPrefix(String inboundPrefix) {
-		this.inboundPrefix = (inboundPrefix != null) ? inboundPrefix : "";
+		this.inboundPrefix = inboundPrefix != null ? inboundPrefix : "";
 	}
 
 	/**
@@ -125,7 +124,7 @@ public class DefaultJmsHeaderMapper extends JmsHeaderMapper {
 	 * @param outboundPrefix The outbound prefix.
 	 */
 	public void setOutboundPrefix(String outboundPrefix) {
-		this.outboundPrefix = (outboundPrefix != null) ? outboundPrefix : "";
+		this.outboundPrefix = outboundPrefix != null ? outboundPrefix : "";
 	}
 
 	@Override
@@ -203,7 +202,7 @@ public class DefaultJmsHeaderMapper extends JmsHeaderMapper {
 			}
 			catch (Exception e) {
 				if (headerName.startsWith("JMSX")
-						|| headerName.equals(IntegrationMessageHeaderAccessor.PRIORITY)) {
+						|| IntegrationMessageHeaderAccessor.PRIORITY.equals(headerName)) {
 					if (LOGGER.isTraceEnabled()) {
 						LOGGER.trace("skipping reserved header, it cannot be set by client: "
 								+ headerName);

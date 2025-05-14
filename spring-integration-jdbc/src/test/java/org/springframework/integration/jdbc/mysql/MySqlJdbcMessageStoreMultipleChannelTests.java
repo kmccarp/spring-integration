@@ -16,12 +16,13 @@
 
 package org.springframework.integration.jdbc.mysql;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
-
 import javax.sql.DataSource;
 
 import org.apache.commons.logging.Log;
@@ -31,7 +32,6 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.integration.IntegrationMessageHeaderAccessor;
@@ -46,8 +46,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.support.TransactionTemplate;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * This test was created to reproduce INT-2980.
@@ -124,7 +122,7 @@ public class MySqlJdbcMessageStoreMultipleChannelTests {
 		}
 
 		public List<Object> duplicate(Message<?> message) {
-			ArrayList<Object> res = new ArrayList<Object>();
+			ArrayList<Object> res = new ArrayList<>();
 			res.add(message);
 			res.add(message);
 			return res;

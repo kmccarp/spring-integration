@@ -16,6 +16,8 @@
 
 package org.springframework.integration.mail;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -23,8 +25,6 @@ import jakarta.mail.Message;
 import jakarta.mail.internet.MimeMessage;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Jonas Partner

@@ -16,6 +16,8 @@
 
 package org.springframework.integration.file.config;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -23,14 +25,11 @@ import java.util.Properties;
 
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
-
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.integration.history.MessageHistory;
 import org.springframework.integration.test.util.TestUtils;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.PollableChannel;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Oleg Zhurakousky

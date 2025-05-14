@@ -34,11 +34,11 @@ public abstract class IntegrationEvent extends ApplicationEvent {
 
 	protected final Throwable cause; // NOSONAR protected final
 
-	public IntegrationEvent(Object source) {
+	protected IntegrationEvent(Object source) {
 		this(source, null);
 	}
 
-	public IntegrationEvent(Object source, @Nullable Throwable cause) {
+	protected IntegrationEvent(Object source, @Nullable Throwable cause) {
 		super(source);
 		this.cause = cause;
 	}

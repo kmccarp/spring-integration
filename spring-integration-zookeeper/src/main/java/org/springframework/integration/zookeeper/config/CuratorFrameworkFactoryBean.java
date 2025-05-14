@@ -24,7 +24,6 @@ import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.retry.ExponentialBackoffRetry;
 import org.apache.curator.utils.CloseableUtils;
-
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.context.SmartLifecycle;
 import org.springframework.util.Assert;

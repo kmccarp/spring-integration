@@ -16,6 +16,8 @@
 
 package org.springframework.integration.websocket.config;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Arrays;
@@ -24,7 +26,6 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.integration.support.converter.MapMessageConverter;
@@ -56,8 +57,6 @@ import org.springframework.web.socket.sockjs.frame.SockJsMessageCodec;
 import org.springframework.web.socket.sockjs.transport.TransportHandler;
 import org.springframework.web.socket.sockjs.transport.TransportHandlingSockJsService;
 import org.springframework.web.socket.sockjs.transport.TransportType;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Artem Bilan

@@ -16,6 +16,8 @@
 
 package org.springframework.integration.hazelcast;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -25,13 +27,10 @@ import com.hazelcast.instance.impl.HazelcastInstanceFactory;
 import org.junit.AfterClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Hazelcast Integration Definition Validator Test Class

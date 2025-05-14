@@ -16,8 +16,9 @@
 
 package org.springframework.integration.config;
 
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.DirectFieldAccessor;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.event.SimpleApplicationEventMulticaster;
@@ -29,8 +30,6 @@ import org.springframework.integration.context.IntegrationContextUtils;
 import org.springframework.integration.support.channel.BeanFactoryChannelResolver;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Mark Fisher

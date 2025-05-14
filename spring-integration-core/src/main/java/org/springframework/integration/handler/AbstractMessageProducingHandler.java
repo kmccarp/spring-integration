@@ -33,7 +33,6 @@ import org.reactivestreams.Publisher;
 import reactor.core.Exceptions;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
@@ -343,7 +342,7 @@ public abstract class AbstractMessageProducingHandler extends AbstractMessageHan
 					reactiveStreamsSubscribableChannel
 							.subscribeTo(
 									Flux.from(reactiveReply)
-											.doOnError((ex) -> sendErrorMessage(requestMessage, ex))
+											.doOnError(ex -> sendErrorMessage(requestMessage, ex))
 											.map(result -> createOutputMessage(result, requestHeaders)));
 				}
 				else {
@@ -390,7 +389,7 @@ public abstract class AbstractMessageProducingHandler extends AbstractMessageHan
 					 via whenComplete() callback. So, when value is set into the Future, it is available
 					 in the callback in the same thread immediately.
 					 */
-					.doOnEach((signal) -> {
+					.doOnEach(signal -> {
 						try (AutoCloseable scope = IntegrationReactiveUtils
 								.setThreadLocalsFromReactorContext(signal.getContextView())) {
 

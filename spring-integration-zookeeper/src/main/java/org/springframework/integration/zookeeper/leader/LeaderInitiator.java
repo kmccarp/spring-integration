@@ -28,7 +28,6 @@ import org.apache.curator.framework.imps.CuratorFrameworkState;
 import org.apache.curator.framework.recipes.leader.LeaderSelector;
 import org.apache.curator.framework.recipes.leader.LeaderSelectorListenerAdapter;
 import org.apache.curator.framework.recipes.leader.Participant;
-
 import org.springframework.context.SmartLifecycle;
 import org.springframework.integration.leader.Candidate;
 import org.springframework.integration.leader.Context;

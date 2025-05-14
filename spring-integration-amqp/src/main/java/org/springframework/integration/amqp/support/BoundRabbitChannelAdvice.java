@@ -23,7 +23,6 @@ import com.rabbitmq.client.ConfirmCallback;
 import org.aopalliance.intercept.MethodInvocation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.springframework.amqp.rabbit.core.RabbitOperations;
 import org.springframework.integration.handler.advice.HandleMessageAdvice;
 import org.springframework.lang.Nullable;
@@ -112,7 +111,7 @@ public class BoundRabbitChannelAdvice implements HandleMessageAdvice {
 
 	private void doHandleAcks(long deliveryTag, boolean multiple, boolean ack) {
 		if (this.logger.isDebugEnabled()) {
-			this.logger.debug("Publisher confirm " + (!ack ? "n" : "") + "ack: " + deliveryTag + ", " +
+			this.logger.debug("Publisher confirm " + (ack ? "" : "n") + "ack: " + deliveryTag + ", " +
 					"multiple: " + multiple);
 		}
 	}

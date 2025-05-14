@@ -16,12 +16,13 @@
 
 package org.springframework.integration.dsl.publishsubscribe;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Consumer;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -35,8 +36,6 @@ import org.springframework.messaging.MessageHandler;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Artem Bilan

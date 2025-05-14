@@ -19,7 +19,6 @@ package org.springframework.integration.handler.advice;
 import java.lang.reflect.Method;
 
 import org.aopalliance.intercept.MethodInvocation;
-
 import org.springframework.integration.context.IntegrationObjectSupport;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageHandler;
@@ -41,7 +40,7 @@ public abstract class AbstractHandleMessageAdvice extends IntegrationObjectSuppo
 		Object invocationThis = invocation.getThis();
 		Object[] arguments = invocation.getArguments();
 		boolean isMessageHandler = invocationThis instanceof MessageHandler;
-		boolean isMessageMethod = method.getName().equals("handleMessage")
+		boolean isMessageMethod = "handleMessage".equals(method.getName())
 				&& (arguments.length == 1 && arguments[0] instanceof Message);
 		if (!isMessageHandler || !isMessageMethod) {
 			if (this.logger.isWarnEnabled()) {

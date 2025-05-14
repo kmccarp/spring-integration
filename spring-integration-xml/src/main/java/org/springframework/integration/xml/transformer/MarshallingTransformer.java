@@ -17,7 +17,6 @@
 package org.springframework.integration.xml.transformer;
 
 import java.io.IOException;
-
 import javax.xml.transform.Result;
 
 import org.springframework.messaging.Message;
@@ -70,7 +69,7 @@ public class MarshallingTransformer extends AbstractXmlTransformer {
 
 	@Override
 	public Object doTransform(Message<?> message) {
-		Object source = (this.extractPayload) ? message.getPayload() : message;
+		Object source = this.extractPayload ? message.getPayload() : message;
 		Object transformedPayload;
 		Result result = getResultFactory().createResult(source);
 		if (result == null) {

@@ -16,13 +16,12 @@
 
 package org.springframework.integration.ip.config;
 
-import org.junit.jupiter.api.Test;
-
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.integration.test.util.TestUtils;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.integration.test.util.TestUtils;
 
 /**
  * @author Gary Russell

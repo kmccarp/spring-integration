@@ -52,7 +52,7 @@ public abstract class AbstractPersistentAcceptOnceFileListFilter<F> extends Abst
 
 	protected boolean flushOnUpdate; // NOSONAR
 
-	public AbstractPersistentAcceptOnceFileListFilter(ConcurrentMetadataStore store, String prefix) {
+	protected AbstractPersistentAcceptOnceFileListFilter(ConcurrentMetadataStore store, String prefix) {
 		Assert.notNull(store, "'store' cannot be null");
 		Assert.notNull(prefix, "'prefix' cannot be null");
 		this.store = store;

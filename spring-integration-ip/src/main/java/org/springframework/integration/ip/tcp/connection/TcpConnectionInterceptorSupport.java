@@ -20,7 +20,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-
 import javax.net.ssl.SSLSession;
 
 import org.springframework.context.ApplicationEventPublisher;
@@ -55,10 +54,10 @@ public abstract class TcpConnectionInterceptorSupport extends TcpConnectionSuppo
 
 	private boolean removed;
 
-	public TcpConnectionInterceptorSupport() {
+	protected TcpConnectionInterceptorSupport() {
 	}
 
-	public TcpConnectionInterceptorSupport(ApplicationEventPublisher applicationEventPublisher) {
+	protected TcpConnectionInterceptorSupport(ApplicationEventPublisher applicationEventPublisher) {
 		super(applicationEventPublisher);
 	}
 

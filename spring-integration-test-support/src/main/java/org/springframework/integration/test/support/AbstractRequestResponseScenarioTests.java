@@ -16,12 +16,13 @@
 
 package org.springframework.integration.test.support;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.messaging.Message;
@@ -30,8 +31,6 @@ import org.springframework.messaging.PollableChannel;
 import org.springframework.messaging.SubscribableChannel;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Convenience class for testing Spring Integration request-response message scenarios.
@@ -52,7 +51,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DirtiesContext
 public abstract class AbstractRequestResponseScenarioTests {
 
-	private List<RequestResponseScenario> scenarios = null;
+	private List<RequestResponseScenario> scenarios;
 
 	@Autowired
 	private ApplicationContext applicationContext;

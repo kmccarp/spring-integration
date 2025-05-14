@@ -23,7 +23,6 @@ import jakarta.mail.Authenticator;
 import jakarta.mail.Session;
 import jakarta.mail.URLName;
 import jakarta.mail.internet.MimeMessage;
-
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.config.AbstractFactoryBean;
@@ -64,9 +63,9 @@ public class MailReceiverFactoryBean extends AbstractFactoryBean<MailReceiver> {
 	 * Indicates whether retrieved messages should be deleted from the server.
 	 * This value will be <code>null</code> <i>unless</i> explicitly configured.
 	 */
-	private Boolean shouldDeleteMessages = null;
+	private Boolean shouldDeleteMessages;
 
-	private Boolean shouldMarkMessagesAsRead = null;
+	private Boolean shouldMarkMessagesAsRead;
 
 	private int maxFetchSize = 1;
 
@@ -158,7 +157,7 @@ public class MailReceiverFactoryBean extends AbstractFactoryBean<MailReceiver> {
 
 	@Override
 	public Class<?> getObjectType() {
-		return (this.receiver != null) ? this.receiver.getClass() : MailReceiver.class;
+		return this.receiver != null ? this.receiver.getClass() : MailReceiver.class;
 	}
 
 	private MailReceiver createReceiver() { // NOSONAR

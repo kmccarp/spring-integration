@@ -18,7 +18,6 @@ package org.springframework.integration.mail;
 
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
-
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.integration.handler.AbstractMessageHandler;
 import org.springframework.integration.mapping.MessageMappingException;

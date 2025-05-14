@@ -16,13 +16,15 @@
 
 package org.springframework.integration.jpa.inbound;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.awaitility.Awaitility.await;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.support.GenericApplicationContext;
@@ -41,9 +43,6 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.transaction.annotation.Transactional;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.awaitility.Awaitility.await;
 
 /**
  * Integration tests for the Jpa Polling Channel Adapter {@link JpaPollingChannelAdapter}.
@@ -292,7 +291,7 @@ public class JpaPollingChannelAdapterTests {
 		assertThat(students.size()).isEqualTo(3);
 
 		await().until(() -> entityManager.createQuery("select count(*) from Student", Long.class).getSingleResult(),
-				(count) -> count == 0);
+				count -> count == 0);
 	}
 
 	@Test
@@ -364,7 +363,7 @@ public class JpaPollingChannelAdapterTests {
 		assertThat(students.size()).isEqualTo(3);
 
 		await().until(() -> entityManager.createQuery("select count(*) from Student", Long.class).getSingleResult(),
-				(count) -> count == 0);
+				count -> count == 0);
 	}
 
 	/**

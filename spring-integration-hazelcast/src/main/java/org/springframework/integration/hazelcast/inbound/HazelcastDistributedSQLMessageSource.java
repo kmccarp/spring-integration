@@ -21,7 +21,6 @@ import java.util.Collections;
 
 import com.hazelcast.map.IMap;
 import com.hazelcast.query.impl.predicates.SqlPredicate;
-
 import org.springframework.integration.endpoint.AbstractMessageSource;
 import org.springframework.integration.hazelcast.DistributedSQLIterationType;
 import org.springframework.util.Assert;

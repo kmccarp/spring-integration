@@ -194,7 +194,7 @@ public final class MessagingAnnotationUtils {
 		}
 		for (Annotation metaAnn : ann.annotationType().getAnnotations()) {
 			if (!ann.equals(metaAnn) && !visited.contains(metaAnn)
-					&& !(metaAnn.annotationType().getPackage().getName().startsWith("java.lang"))) {
+					&& !metaAnn.annotationType().getPackage().getName().startsWith("java.lang")) {
 				visited.add(metaAnn); // prevent infinite recursion if the same annotation is found again
 				if (recursiveFindAnnotation(annotationType, metaAnn, annotationChain, visited)) {
 					annotationChain.add(ann);

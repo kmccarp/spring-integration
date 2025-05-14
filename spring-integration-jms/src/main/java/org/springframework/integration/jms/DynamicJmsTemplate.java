@@ -17,7 +17,6 @@
 package org.springframework.integration.jms;
 
 import jakarta.jms.ConnectionFactory;
-
 import org.springframework.jms.connection.CachingConnectionFactory;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.support.destination.JmsDestinationAccessor;
@@ -77,19 +76,19 @@ public class DynamicJmsTemplate extends JmsTemplate {
 	@Override
 	public long getReceiveTimeout() {
 		Long receiveTimeout = DynamicJmsTemplateProperties.getReceiveTimeout();
-		return (receiveTimeout != null) ? receiveTimeout : super.getReceiveTimeout();
+		return receiveTimeout != null ? receiveTimeout : super.getReceiveTimeout();
 	}
 
 	@Override
 	public int getDeliveryMode() {
 		Integer deliveryMode = DynamicJmsTemplateProperties.getDeliveryMode();
-		return (deliveryMode != null) ? deliveryMode : super.getDeliveryMode();
+		return deliveryMode != null ? deliveryMode : super.getDeliveryMode();
 	}
 
 	@Override
 	public long getTimeToLive() {
 		Long timeToLive = DynamicJmsTemplateProperties.getTimeToLive();
-		return (timeToLive != null) ? timeToLive : super.getTimeToLive();
+		return timeToLive != null ? timeToLive : super.getTimeToLive();
 	}
 
 }

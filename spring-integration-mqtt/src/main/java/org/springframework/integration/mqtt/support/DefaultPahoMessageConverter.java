@@ -20,7 +20,6 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
 import org.eclipse.paho.client.mqttv3.MqttMessage;
-
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.integration.handler.MessageProcessor;
@@ -57,7 +56,7 @@ public class DefaultPahoMessageConverter implements MqttMessageConverter, BeanFa
 
 	private BytesMessageMapper bytesMessageMapper;
 
-	private boolean payloadAsBytes = false;
+	private boolean payloadAsBytes;
 
 	private BeanFactory beanFactory;
 

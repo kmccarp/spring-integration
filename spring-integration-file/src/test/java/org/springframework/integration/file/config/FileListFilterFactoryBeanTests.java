@@ -16,12 +16,13 @@
 
 package org.springframework.integration.file.config;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.io.File;
 import java.util.Collection;
 import java.util.Iterator;
 
 import org.junit.Test;
-
 import org.springframework.beans.DirectFieldAccessor;
 import org.springframework.integration.file.filters.AbstractFileListFilter;
 import org.springframework.integration.file.filters.AcceptOnceFileListFilter;
@@ -29,8 +30,6 @@ import org.springframework.integration.file.filters.CompositeFileListFilter;
 import org.springframework.integration.file.filters.FileListFilter;
 import org.springframework.integration.file.filters.SimplePatternFileListFilter;
 import org.springframework.integration.test.util.TestUtils;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Mark Fisher
@@ -105,7 +104,7 @@ public class FileListFilterFactoryBeanTests {
 	public void filenamePatternAndPreventDuplicatesTrue() throws Exception {
 		FileListFilterFactoryBean factory = new FileListFilterFactoryBean();
 		factory.setIgnoreHidden(false);
-		factory.setFilenamePattern(("foo"));
+		factory.setFilenamePattern("foo");
 		factory.setPreventDuplicates(Boolean.TRUE);
 		FileListFilter<File> result = factory.getObject();
 		assertThat(result instanceof CompositeFileListFilter).isTrue();
@@ -122,7 +121,7 @@ public class FileListFilterFactoryBeanTests {
 	public void filenamePatternAndPreventDuplicatesFalse() throws Exception {
 		FileListFilterFactoryBean factory = new FileListFilterFactoryBean();
 		factory.setIgnoreHidden(false);
-		factory.setFilenamePattern(("foo"));
+		factory.setFilenamePattern("foo");
 		factory.setAlwaysAcceptDirectories(true);
 		factory.setPreventDuplicates(Boolean.FALSE);
 		FileListFilter<File> result = factory.getObject();

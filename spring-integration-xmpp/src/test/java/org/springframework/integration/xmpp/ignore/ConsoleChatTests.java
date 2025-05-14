@@ -18,7 +18,6 @@ package org.springframework.integration.xmpp.ignore;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 

@@ -22,7 +22,6 @@ import java.util.Map;
 import jakarta.mail.Address;
 import jakarta.mail.Message;
 import jakarta.mail.Message.RecipientType;
-
 import org.springframework.integration.mail.MailHeaders;
 import org.springframework.messaging.MessagingException;
 import org.springframework.util.StringUtils;

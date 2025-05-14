@@ -16,6 +16,9 @@
 
 package org.springframework.integration.channel;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -27,7 +30,6 @@ import java.util.stream.IntStream;
 
 import org.assertj.core.api.InstanceOfAssertFactories;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -47,9 +49,6 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-
 /**
  * @author Artem Bilan
  *
@@ -62,7 +61,7 @@ public class PartitionedChannelTests {
 	@Test
 	void messagesAreProperlyPartitioned() throws InterruptedException {
 		PartitionedChannel partitionedChannel =
-				new PartitionedChannel(2, (message) -> message.getHeaders().get("partitionKey"));
+				new PartitionedChannel(2, message -> message.getHeaders().get("partitionKey"));
 		partitionedChannel.setBeanFactory(mock(BeanFactory.class));
 		partitionedChannel.setBeanName("testPartitionedChannel");
 
@@ -81,7 +80,7 @@ public class PartitionedChannelTests {
 		MultiValueMap<String, Message<?>> partitionedMessages = new LinkedMultiValueMap<>();
 
 		Lock partitionsLock = new ReentrantLock();
-		partitionedChannel.subscribe((message) -> {
+		partitionedChannel.subscribe(message -> {
 			partitionsLock.lock();
 			try {
 				partitionedMessages.add(Thread.currentThread().getName(), message);

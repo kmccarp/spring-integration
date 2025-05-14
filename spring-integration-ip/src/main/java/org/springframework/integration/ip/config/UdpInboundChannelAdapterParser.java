@@ -17,7 +17,6 @@
 package org.springframework.integration.ip.config;
 
 import org.w3c.dom.Element;
-
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.ParserContext;
@@ -65,7 +64,7 @@ public class UdpInboundChannelAdapterParser extends AbstractChannelAdapterParser
 	private BeanDefinitionBuilder parseUdp(Element element, ParserContext parserContext) {
 		BeanDefinitionBuilder builder;
 		String multicast = IpAdapterParserUtils.getMulticast(element);
-		if (multicast.equals("false")) {
+		if ("false".equals(multicast)) {
 			builder = BeanDefinitionBuilder.genericBeanDefinition(UnicastReceivingChannelAdapter.class);
 		}
 		else {

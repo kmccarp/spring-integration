@@ -25,7 +25,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Parameter;
 import jakarta.persistence.Query;
-
 import org.springframework.core.log.LogAccessor;
 import org.springframework.integration.jpa.support.JpaUtils;
 import org.springframework.integration.jpa.support.parametersource.ParameterSource;

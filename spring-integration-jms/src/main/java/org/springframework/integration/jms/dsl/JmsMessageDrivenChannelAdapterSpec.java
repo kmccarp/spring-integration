@@ -21,7 +21,6 @@ import java.util.Map;
 import java.util.function.Consumer;
 
 import jakarta.jms.Destination;
-
 import org.springframework.integration.dsl.ComponentsRegistration;
 import org.springframework.integration.dsl.MessageProducerSpec;
 import org.springframework.integration.jms.ChannelPublishingJmsMessageListener;

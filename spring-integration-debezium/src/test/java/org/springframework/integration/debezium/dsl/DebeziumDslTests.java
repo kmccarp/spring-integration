@@ -16,6 +16,8 @@
 
 package org.springframework.integration.debezium.dsl;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -28,7 +30,6 @@ import io.debezium.engine.DebeziumEngine;
 import io.debezium.engine.Header;
 import io.debezium.engine.format.KeyValueHeaderChangeEventFormat;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -40,8 +41,6 @@ import org.springframework.integration.dsl.IntegrationFlow;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.util.CollectionUtils;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Christian Tzolov
@@ -85,9 +84,8 @@ public class DebeziumDslTests implements DebeziumMySqlTestContainer {
 
 		config.batchHeaderKeys.stream()
 				.filter(headerNames -> !CollectionUtils.isEmpty(headerNames))
-				.forEach(headerNames -> {
-					assertThat(headerNames).contains("__name", "__db", "__table");
-				});
+				.forEach(headerNames ->
+					assertThat(headerNames).contains("__name", "__db", "__table"));
 	}
 
 	@Configuration
@@ -106,7 +104,7 @@ public class DebeziumDslTests implements DebeziumMySqlTestContainer {
 
 		private final List<List<String>> batchHeaderKeys = new ArrayList<>();
 
-		private int batchMessageCount = 0;
+		private int batchMessageCount;
 
 		@Bean
 		public IntegrationFlow streamFlowFromBuilder(DebeziumEngine.Builder<ChangeEvent<byte[], byte[]>> builder) {

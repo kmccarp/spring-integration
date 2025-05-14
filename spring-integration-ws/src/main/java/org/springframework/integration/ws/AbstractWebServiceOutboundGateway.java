@@ -22,7 +22,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-
 import javax.xml.transform.TransformerException;
 
 import org.springframework.expression.Expression;
@@ -84,14 +83,14 @@ public abstract class AbstractWebServiceOutboundGateway extends AbstractReplyPro
 
 	private boolean webServiceTemplateExplicitlySet;
 
-	public AbstractWebServiceOutboundGateway(final String uri, WebServiceMessageFactory messageFactory) {
+	protected AbstractWebServiceOutboundGateway(final String uri, WebServiceMessageFactory messageFactory) {
 		Assert.hasText(uri, "URI must not be empty");
 		this.webServiceTemplate = new WebServiceTemplate(messageFactory);
 		this.destinationProvider = null;
 		this.uri = uri;
 	}
 
-	public AbstractWebServiceOutboundGateway(DestinationProvider destinationProvider,
+	protected AbstractWebServiceOutboundGateway(DestinationProvider destinationProvider,
 			WebServiceMessageFactory messageFactory) {
 
 		Assert.notNull(destinationProvider, "DestinationProvider must not be null");
@@ -239,7 +238,7 @@ public abstract class AbstractWebServiceOutboundGateway extends AbstractReplyPro
 
 		private final Message<?> requestMessage;
 
-		public RequestMessageCallback(WebServiceMessageCallback requestCallback, Message<?> requestMessage) {
+		protected RequestMessageCallback(WebServiceMessageCallback requestCallback, Message<?> requestMessage) {
 			this.reqCallback = requestCallback;
 			this.requestMessage = requestMessage;
 		}

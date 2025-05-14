@@ -16,11 +16,12 @@
 
 package org.springframework.integration.jms.config;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import jakarta.jms.Destination;
 import jakarta.jms.Message;
 import jakarta.jms.TextMessage;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.integration.jms.ActiveMQMultiContextTests;
@@ -28,8 +29,6 @@ import org.springframework.integration.support.MessageBuilder;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Oleg Zhurakousky

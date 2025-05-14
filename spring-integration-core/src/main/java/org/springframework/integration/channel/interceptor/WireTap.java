@@ -18,7 +18,6 @@ package org.springframework.integration.channel.interceptor;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
@@ -56,7 +55,7 @@ public class WireTap implements ChannelInterceptor, ManageableLifecycle, VetoCap
 
 	private String channelName;
 
-	private long timeout = 0;
+	private long timeout;
 
 	private BeanFactory beanFactory;
 
@@ -175,7 +174,7 @@ public class WireTap implements ChannelInterceptor, ManageableLifecycle, VetoCap
 								.build();
 			}
 			boolean sent =
-					(this.timeout >= 0)
+					this.timeout >= 0
 							? wireTapChannel.send(messageToSend, this.timeout)
 							: wireTapChannel.send(messageToSend);
 

@@ -20,7 +20,6 @@ import java.util.Map;
 
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
-
 import org.springframework.context.SmartLifecycle;
 import org.springframework.integration.dsl.StandardIntegrationFlow;
 import org.springframework.lang.Nullable;

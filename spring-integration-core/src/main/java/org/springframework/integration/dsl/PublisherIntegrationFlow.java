@@ -21,7 +21,6 @@ import java.util.Map;
 import org.reactivestreams.Publisher;
 import org.reactivestreams.Subscriber;
 import reactor.core.publisher.Flux;
-
 import org.springframework.integration.endpoint.AbstractEndpoint;
 import org.springframework.messaging.Message;
 
@@ -47,7 +46,7 @@ class PublisherIntegrationFlow<T> extends StandardIntegrationFlow implements Pub
 						.doOnTerminate(this::stop);
 
 		if (autoStartOnSubscribe) {
-			flux = flux.doOnSubscribe((sub) -> start());
+			flux = flux.doOnSubscribe(sub -> start());
 			for (Object component : integrationComponents.keySet()) {
 				if (component instanceof EndpointSpec<?, ?, ?> endpointSpec) {
 					endpointSpec.autoStartup(false);

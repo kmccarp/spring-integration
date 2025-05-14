@@ -16,19 +16,18 @@
 
 package org.springframework.integration.jms.request_reply;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.integration.gateway.RequestReplyExchanger;
 import org.springframework.integration.jms.ActiveMQMultiContextTests;
 import org.springframework.integration.test.condition.LongRunningTest;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.util.StopWatch;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Oleg Zhurakousky

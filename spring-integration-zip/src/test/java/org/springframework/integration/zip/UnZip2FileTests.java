@@ -16,6 +16,9 @@
 
 package org.springframework.integration.zip;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+
 import java.io.File;
 import java.io.InputStream;
 
@@ -25,7 +28,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 import org.zeroturnaround.zip.ZipException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.Resource;
@@ -35,9 +37,6 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 /**
  *
@@ -111,20 +110,20 @@ public class UnZip2FileTests {
 		boolean pl = false;
 
 		for (File file : files) {
-			if (file.getName().equals("continents")) {
+			if ("continents".equals(file.getName())) {
 				continents = true;
 				assertThat(file).isDirectory();
 				assertThat(file.list()).hasSize(2);
 			}
-			if (file.getName().equals("de.txt")) {
+			if ("de.txt".equals(file.getName())) {
 				de = true;
 				assertThat(file).isFile();
 			}
-			if (file.getName().equals("fr.txt")) {
+			if ("fr.txt".equals(file.getName())) {
 				fr = true;
 				assertThat(file).isFile();
 			}
-			if (file.getName().equals("pl.txt")) {
+			if ("pl.txt".equals(file.getName())) {
 				pl = true;
 				assertThat(file).isFile();
 			}

@@ -16,12 +16,13 @@
 
 package org.springframework.integration.jms;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -45,8 +46,6 @@ import org.springframework.messaging.support.GenericMessage;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 /**
  * @author Artem Bilan
  *
@@ -69,7 +68,7 @@ public class SplitterAggregatorTests extends ActiveMQMultiContextTests {
 		this.splitChannel.send(new GenericMessage<>(payload));
 		Message<?> message = this.resultChannel.receive(10000);
 		assertThat(message).isNotNull();
-		Collections.sort(((List<Integer>) message.getPayload()));
+		Collections.sort((List<Integer>) message.getPayload());
 		assertThat(message.getPayload()).isEqualTo(payload);
 	}
 

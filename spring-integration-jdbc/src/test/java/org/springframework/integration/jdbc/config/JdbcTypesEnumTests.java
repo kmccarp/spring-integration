@@ -16,12 +16,12 @@
 
 package org.springframework.integration.jdbc.config;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
+
 import java.sql.Types;
 
 import org.junit.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.fail;
 
 public class JdbcTypesEnumTests {
 

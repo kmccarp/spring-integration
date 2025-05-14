@@ -16,11 +16,13 @@
 
 package org.springframework.integration.channel.interceptor;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.core.task.SyncTaskExecutor;
 import org.springframework.integration.channel.ExecutorChannel;
 import org.springframework.integration.util.ErrorHandlingTaskExecutor;
@@ -28,9 +30,6 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.util.ReflectionUtils;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
 
 /**
  * @author Artem Bilan

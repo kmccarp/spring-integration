@@ -19,7 +19,6 @@ package org.springframework.integration.hazelcast.lock;
 import java.util.concurrent.locks.Lock;
 
 import com.hazelcast.core.HazelcastInstance;
-
 import org.springframework.integration.support.locks.LockRegistry;
 import org.springframework.util.Assert;
 

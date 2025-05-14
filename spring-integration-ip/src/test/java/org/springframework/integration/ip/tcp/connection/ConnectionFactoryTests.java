@@ -16,6 +16,19 @@
 
 package org.springframework.integration.ip.tcp.connection;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.fail;
+import static org.awaitility.Awaitility.await;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.argThat;
+import static org.mockito.Mockito.atLeast;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
@@ -31,14 +44,12 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
-
 import javax.net.SocketFactory;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
-
 import org.springframework.beans.DirectFieldAccessor;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.ApplicationEventPublisher;
@@ -59,19 +70,6 @@ import org.springframework.messaging.support.ErrorMessage;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.assertj.core.api.Assertions.fail;
-import static org.awaitility.Awaitility.await;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.argThat;
-import static org.mockito.Mockito.atLeast;
-import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 /**
  * @author Gary Russell
@@ -190,7 +188,7 @@ public class ConnectionFactoryTests {
 		assertThat(serverFactory.closeConnection(servers.get(0))).isTrue();
 		servers = serverFactory.getOpenConnectionIds();
 		assertThat(servers.size()).isEqualTo(0);
-		await().atMost(Duration.ofSeconds(10)).until(() -> clientFactory.getOpenConnectionIds().size() == 0);
+		await().atMost(Duration.ofSeconds(10)).until(() -> clientFactory.getOpenConnectionIds().isEmpty());
 		clients = clientFactory.getOpenConnectionIds();
 		assertThat(clients.size()).isEqualTo(0);
 		assertThat(eventLatch.await(10, TimeUnit.SECONDS)).isTrue();
@@ -300,14 +298,12 @@ public class ConnectionFactoryTests {
 		});
 		server.setBeanFactory(mock(BeanFactory.class));
 		AtomicReference<TcpConnection> connection = new AtomicReference<>();
-		server.registerSender(conn -> {
-			connection.set(conn);
-		});
+		server.registerSender(connection::set);
 		AtomicInteger tested = new AtomicInteger();
 		server.registerListener(msg -> {
 			if (!(msg instanceof ErrorMessage)) {
 				String payload = new String((byte[]) msg.getPayload());
-				if (payload.equals("PING")) {
+				if ("PING".equals(payload)) {
 					tested.incrementAndGet();
 					connection.get().send(new GenericMessage<>(fail ? "PANG" : "PONG"));
 				}

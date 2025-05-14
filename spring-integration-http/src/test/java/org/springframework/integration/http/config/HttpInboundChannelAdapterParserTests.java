@@ -16,6 +16,11 @@
 
 package org.springframework.integration.http.config;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.willReturn;
+
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
@@ -25,7 +30,6 @@ import java.util.Properties;
 
 import jakarta.servlet.http.HttpServletResponse;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.expression.Expression;
@@ -51,11 +55,6 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.validation.Validator;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.servlet.HandlerMapping;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.BDDMockito.willReturn;
 
 /**
  * @author Mark Fisher
@@ -200,7 +199,7 @@ public class HttpInboundChannelAdapterParserTests extends AbstractHttpInboundTes
 
 		assertThatExceptionOfType(HttpRequestMethodNotSupportedException.class)
 				.isThrownBy(() -> this.integrationRequestMappingHandlerMapping.getHandler(request))
-				.satisfies((ex) -> {
+				.satisfies(ex -> {
 					assertThat(ex.getMethod()).isEqualTo("GET");
 					assertThat(ex.getSupportedMethods()).containsExactly("POST");
 				});

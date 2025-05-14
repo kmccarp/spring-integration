@@ -23,7 +23,6 @@ import jakarta.jms.ConnectionFactory;
 import jakarta.jms.Destination;
 import jakarta.jms.ExceptionListener;
 import jakarta.jms.Session;
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanNameAware;
@@ -368,7 +367,7 @@ public class JmsChannelFactoryBean extends AbstractFactoryBean<AbstractJmsChanne
 
 	@Override
 	public Class<?> getObjectType() {
-		return (this.channel != null) ? this.channel.getClass() : AbstractJmsChannel.class;
+		return this.channel != null ? this.channel.getClass() : AbstractJmsChannel.class;
 	}
 
 	@Override
@@ -476,7 +475,7 @@ public class JmsChannelFactoryBean extends AbstractFactoryBean<AbstractJmsChanne
 
 	@Override
 	public int getPhase() {
-		return (this.channel instanceof SubscribableJmsChannel jmsChannel) ?
+		return this.channel instanceof SubscribableJmsChannel jmsChannel ?
 				jmsChannel.getPhase() : 0;
 	}
 

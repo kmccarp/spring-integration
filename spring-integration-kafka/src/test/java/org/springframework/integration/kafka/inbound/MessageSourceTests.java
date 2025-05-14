@@ -16,6 +16,22 @@
 
 package org.springframework.integration.kafka.inbound;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyCollection;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.isNull;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.willAnswer;
+import static org.mockito.BDDMockito.willDoNothing;
+import static org.mockito.BDDMockito.willReturn;
+import static org.mockito.Mockito.inOrder;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -53,7 +69,6 @@ import org.apache.kafka.common.record.TimestampType;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InOrder;
-
 import org.springframework.beans.DirectFieldAccessor;
 import org.springframework.core.log.LogMessage;
 import org.springframework.integration.IntegrationMessageHeaderAccessor;
@@ -70,22 +85,6 @@ import org.springframework.kafka.support.TopicPartitionOffset;
 import org.springframework.kafka.test.utils.KafkaTestUtils;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageHeaders;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyCollection;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.ArgumentMatchers.isNull;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.BDDMockito.willAnswer;
-import static org.mockito.BDDMockito.willDoNothing;
-import static org.mockito.BDDMockito.willReturn;
-import static org.mockito.Mockito.inOrder;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.times;
 
 /**
  * @author Gary Russell
@@ -279,9 +278,8 @@ class MessageSourceTests {
 		given(consumerFactory.createConsumer(isNull(), anyString(), isNull(), any())).willReturn(consumer);
 		ConsumerProperties consumerProperties = new ConsumerProperties("foo");
 		AtomicInteger callbackCount = new AtomicInteger();
-		OffsetCommitCallback commitCallback = (offsets, ex) -> {
+		OffsetCommitCallback commitCallback = (offsets, ex) ->
 			callbackCount.incrementAndGet();
-		};
 		if (!sync) {
 			consumerProperties.setSyncCommits(false);
 			consumerProperties.setCommitCallback(commitCallback);
@@ -624,12 +622,12 @@ class MessageSourceTests {
 	void testMaxPollRecords() {
 		KafkaMessageSource source = new KafkaMessageSource(new DefaultKafkaConsumerFactory<>(Collections.emptyMap()),
 				new ConsumerProperties("topic"));
-		assertThat((TestUtils.getPropertyValue(source, "consumerFactory.configs", Map.class)
-				.get(ConsumerConfig.MAX_POLL_RECORDS_CONFIG))).isEqualTo(1);
+		assertThat(TestUtils.getPropertyValue(source, "consumerFactory.configs", Map.class)
+				.get(ConsumerConfig.MAX_POLL_RECORDS_CONFIG)).isEqualTo(1);
 		source = new KafkaMessageSource(new DefaultKafkaConsumerFactory<>(
 				Collections.singletonMap(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, 2)), new ConsumerProperties("topic"));
-		assertThat((TestUtils.getPropertyValue(source, "consumerFactory.configs", Map.class)
-				.get(ConsumerConfig.MAX_POLL_RECORDS_CONFIG))).isEqualTo(1);
+		assertThat(TestUtils.getPropertyValue(source, "consumerFactory.configs", Map.class)
+				.get(ConsumerConfig.MAX_POLL_RECORDS_CONFIG)).isEqualTo(1);
 
 		assertThatIllegalArgumentException()
 				.isThrownBy(() ->

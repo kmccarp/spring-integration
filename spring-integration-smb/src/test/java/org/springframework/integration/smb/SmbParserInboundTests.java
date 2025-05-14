@@ -16,16 +16,15 @@
 
 package org.springframework.integration.smb;
 
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+
 import java.io.File;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 /**
  * @author Markus Spann

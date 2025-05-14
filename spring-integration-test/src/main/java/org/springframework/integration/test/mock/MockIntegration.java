@@ -22,7 +22,6 @@ import java.util.List;
 import org.mockito.ArgumentCaptor;
 import org.mockito.BDDMockito;
 import org.mockito.Mockito;
-
 import org.springframework.integration.core.MessageSource;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.GenericMessage;
@@ -72,9 +71,9 @@ public final class MockIntegration {
 		}
 
 		return (MessageSource<T>) mockMessageSource(new GenericMessage<>(payload),
-				(messages != null
+				messages != null
 						? messages.toArray(new Message<?>[messages.size()])
-						: null));
+						: null);
 	}
 
 	/**

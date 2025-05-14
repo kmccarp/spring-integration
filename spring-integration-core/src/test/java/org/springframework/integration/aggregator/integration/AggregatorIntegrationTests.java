@@ -16,6 +16,8 @@
 
 package org.springframework.integration.aggregator.integration;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -25,7 +27,6 @@ import java.util.Queue;
 import java.util.function.Function;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.integration.IntegrationMessageHeaderAccessor;
@@ -40,8 +41,6 @@ import org.springframework.messaging.support.ErrorMessage;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Iwein Fuld
@@ -258,7 +257,7 @@ public class AggregatorIntegrationTests {
 	}
 
 	public static Function<MessageGroup, Map<String, Object>> firstMessageHeaders() {
-		return (messageGroup) -> messageGroup.getOne().getHeaders();
+		return messageGroup -> messageGroup.getOne().getHeaders();
 	}
 
 	public static class SummingAggregator {

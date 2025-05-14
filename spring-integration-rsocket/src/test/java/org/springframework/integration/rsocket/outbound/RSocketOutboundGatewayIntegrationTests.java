@@ -16,6 +16,8 @@
 
 package org.springframework.integration.rsocket.outbound;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.time.Duration;
 
 import io.rsocket.RSocket;
@@ -33,7 +35,6 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Sinks;
 import reactor.test.StepVerifier;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -64,8 +65,6 @@ import org.springframework.messaging.support.ErrorMessage;
 import org.springframework.stereotype.Controller;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Artem Bilan
@@ -249,7 +248,7 @@ public class RSocketOutboundGatewayIntegrationTests {
 								Flux.from(resultChannel)
 										.next()
 										.map(Message::getPayload)
-										.flatMapMany((payload) -> (Flux<String>) payload))
+										.flatMapMany(payload -> (Flux<String>) payload))
 						.expectNext("Hello 0").expectNextCount(6).expectNext("Hello 7")
 						.thenCancel()
 						.verifyLater();
@@ -283,7 +282,7 @@ public class RSocketOutboundGatewayIntegrationTests {
 								Flux.from(resultChannel)
 										.next()
 										.map(Message::getPayload)
-										.flatMapMany((payload) -> (Flux<String>) payload))
+										.flatMapMany(payload -> (Flux<String>) payload))
 						.expectNext("Hello 1 async").expectNextCount(8).expectNext("Hello 10 async")
 						.thenCancel()
 						.verifyLater();
@@ -469,7 +468,7 @@ public class RSocketOutboundGatewayIntegrationTests {
 				.isInstanceOf(ErrorMessage.class)
 				.extracting(Message::getPayload)
 				.isInstanceOf(MessageHandlingException.class)
-				.satisfies((ex) -> assertThat((Exception) ex)
+				.satisfies(ex -> assertThat((Exception) ex)
 						.hasStackTraceContaining(
 								"ApplicationErrorException (0x201): No handler for destination 'invalid'"));
 
@@ -487,10 +486,10 @@ public class RSocketOutboundGatewayIntegrationTests {
 		public RSocketOutboundGateway rsocketOutboundGateway() {
 			RSocketOutboundGateway rsocketOutboundGateway =
 					new RSocketOutboundGateway(
-							new FunctionExpression<Message<?>>((m) ->
+							new FunctionExpression<Message<?>>(m ->
 									m.getHeaders().get(ROUTE_HEADER)));
 			rsocketOutboundGateway.setInteractionModelExpression(
-					new FunctionExpression<Message<?>>((m) -> m.getHeaders().get(INTERACTION_MODEL_HEADER)));
+					new FunctionExpression<Message<?>>(m -> m.getHeaders().get(INTERACTION_MODEL_HEADER)));
 			return rsocketOutboundGateway;
 		}
 
@@ -605,9 +604,9 @@ public class RSocketOutboundGatewayIntegrationTests {
 
 		@MessageMapping("void-return-value")
 		Mono<Void> voidReturnValue(String payload) {
-			return !payload.equals("bad") ?
-					Mono.delay(Duration.ofMillis(10)).then(Mono.empty()) :
-					Mono.error(new IllegalStateException("bad"));
+			return "bad".equals(payload) ?
+					Mono.error(new IllegalStateException("bad")) :
+					Mono.delay(Duration.ofMillis(10)).then(Mono.empty());
 		}
 
 		@MessageExceptionHandler

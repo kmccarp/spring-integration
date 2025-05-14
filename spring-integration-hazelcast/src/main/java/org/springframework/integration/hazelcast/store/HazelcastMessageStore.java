@@ -22,7 +22,6 @@ import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.map.IMap;
 import com.hazelcast.query.Predicates;
 import com.hazelcast.query.QueryConstants;
-
 import org.springframework.integration.store.AbstractKeyValueMessageStore;
 import org.springframework.util.Assert;
 
@@ -65,7 +64,7 @@ public class HazelcastMessageStore extends AbstractKeyValueMessageStore {
 
 	@Override
 	protected void doRemoveAll(Collection<Object> ids) {
-		this.map.removeAll((mapEntry) -> ids.contains(mapEntry.getKey()));
+		this.map.removeAll(mapEntry -> ids.contains(mapEntry.getKey()));
 	}
 
 	@Override

@@ -29,7 +29,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
@@ -85,7 +84,7 @@ public class RemoteFileTemplate<F> implements RemoteFileOperations<F>, Initializ
 
 	private String temporaryFileSuffix = ".writing";
 
-	private boolean autoCreateDirectory = false;
+	private boolean autoCreateDirectory;
 
 	private boolean useTemporaryFileName = true;
 
@@ -222,7 +221,7 @@ public class RemoteFileTemplate<F> implements RemoteFileOperations<F>, Initializ
 	 * @param fileNameGenerator the file name generator.
 	 */
 	public void setFileNameGenerator(FileNameGenerator fileNameGenerator) {
-		this.fileNameGenerator = (fileNameGenerator != null) ? fileNameGenerator : new DefaultFileNameGenerator();
+		this.fileNameGenerator = fileNameGenerator != null ? fileNameGenerator : new DefaultFileNameGenerator();
 		this.fileNameGeneratorSet = fileNameGenerator != null;
 	}
 

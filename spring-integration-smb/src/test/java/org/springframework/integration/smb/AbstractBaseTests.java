@@ -16,6 +16,8 @@
 
 package org.springframework.integration.smb;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -28,12 +30,9 @@ import org.apache.commons.logging.LogFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestInfo;
-
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.util.StringUtils;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Assorted test utils for the library.

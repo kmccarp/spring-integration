@@ -17,7 +17,6 @@
 package org.springframework.integration.xml.transformer;
 
 import java.io.StringWriter;
-
 import javax.xml.transform.Result;
 import javax.xml.transform.stream.StreamResult;
 

@@ -29,7 +29,6 @@ import org.junit.jupiter.api.extension.ExecutionCondition;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.ExtensionContext.Namespace;
 import org.junit.jupiter.api.extension.ExtensionContext.Store;
-
 import org.springframework.core.annotation.MergedAnnotation;
 import org.springframework.core.annotation.MergedAnnotations;
 import org.springframework.integration.test.util.TestUtils;
@@ -76,7 +75,7 @@ public class LogLevelsCondition
 			logLevels = store.get(STORE_ANNOTATION_KEY, LogLevels.class);
 		}
 		store.put(STORE_CONTAINER_KEY, TestUtils.adjustLogLevels(context.getDisplayName(),
-				Arrays.asList((logLevels.classes())),
+				Arrays.asList(logLevels.classes()),
 				Arrays.asList(logLevels.categories()),
 				Level.toLevel(logLevels.level())));
 	}

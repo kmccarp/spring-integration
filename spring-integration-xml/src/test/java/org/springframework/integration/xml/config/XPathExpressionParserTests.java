@@ -16,16 +16,15 @@
 
 package org.springframework.integration.xml.config;
 
-import org.junit.jupiter.api.Test;
-import org.xml.sax.SAXParseException;
-
-import org.springframework.beans.factory.BeanDefinitionStoreException;
-import org.springframework.integration.xml.util.XmlTestUtil;
-import org.springframework.xml.xpath.XPathExpression;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
+import org.xml.sax.SAXParseException;
+import org.springframework.beans.factory.BeanDefinitionStoreException;
+import org.springframework.integration.xml.util.XmlTestUtil;
+import org.springframework.xml.xpath.XPathExpression;
 
 /**
  * @author Jonas Partner

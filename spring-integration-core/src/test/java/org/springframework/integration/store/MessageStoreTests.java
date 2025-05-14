@@ -16,6 +16,8 @@
 
 package org.springframework.integration.store;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -23,12 +25,9 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.test.util.ReflectionTestUtils;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Dave Syer
@@ -78,7 +77,7 @@ public class MessageStoreTests {
 		MessageGroup testMessages =
 				new SimpleMessageGroup(Collections.singletonList(new GenericMessage<String>("foo")), "bar");
 
-		private boolean removed = false;
+		private boolean removed;
 
 		TestMessageStore() {
 			super();

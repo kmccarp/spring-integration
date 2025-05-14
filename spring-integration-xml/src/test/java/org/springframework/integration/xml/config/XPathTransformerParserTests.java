@@ -16,9 +16,10 @@
 
 package org.springframework.integration.xml.config;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.io.StringReader;
 import java.util.List;
-
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.Source;
 
@@ -27,7 +28,6 @@ import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.SmartLifecycle;
 import org.springframework.integration.endpoint.EventDrivenConsumer;
@@ -42,8 +42,6 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.util.MultiValueMap;
 import org.springframework.xml.xpath.NodeMapper;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Mark Fisher

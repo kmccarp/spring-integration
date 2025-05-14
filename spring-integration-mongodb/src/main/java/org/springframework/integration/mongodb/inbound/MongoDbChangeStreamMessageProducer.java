@@ -18,7 +18,6 @@ package org.springframework.integration.mongodb.inbound;
 
 import org.bson.Document;
 import reactor.core.publisher.Flux;
-
 import org.springframework.data.mongodb.core.ChangeStreamOptions;
 import org.springframework.data.mongodb.core.ReactiveMongoOperations;
 import org.springframework.integration.endpoint.MessageProducerSupport;

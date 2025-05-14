@@ -26,7 +26,6 @@ import java.util.concurrent.locks.ReentrantLock;
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.cp.CPSubsystem;
 import com.hazelcast.cp.lock.FencedLock;
-
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationEventPublisherAware;
@@ -105,7 +104,7 @@ public class LeaderInitiator implements SmartLifecycle, DisposableBean, Applicat
 	 */
 	private volatile Future<Void> future;
 
-	private boolean customPublisher = false;
+	private boolean customPublisher;
 
 	private volatile boolean running;
 
@@ -290,7 +289,7 @@ public class LeaderInitiator implements SmartLifecycle, DisposableBean, Applicat
 
 		protected final String role = LeaderInitiator.this.candidate.getRole();
 
-		private volatile boolean leader = false;
+		private volatile boolean leader;
 
 		@Override
 		public Void call() {

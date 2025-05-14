@@ -17,7 +17,6 @@
 package org.springframework.integration.support.management.micrometer;
 
 import io.micrometer.core.instrument.MeterRegistry;
-
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Bean;

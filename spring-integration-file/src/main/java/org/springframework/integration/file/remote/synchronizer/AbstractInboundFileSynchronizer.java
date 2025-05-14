@@ -32,7 +32,6 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
@@ -136,7 +135,7 @@ public abstract class AbstractInboundFileSynchronizer<F>
 	 * Create a synchronizer with the {@link SessionFactory} used to acquire {@link Session} instances.
 	 * @param sessionFactory The session factory.
 	 */
-	public AbstractInboundFileSynchronizer(SessionFactory<F> sessionFactory) {
+	protected AbstractInboundFileSynchronizer(SessionFactory<F> sessionFactory) {
 		Assert.notNull(sessionFactory, "sessionFactory must not be null");
 		this.remoteFileTemplate = new RemoteFileTemplate<>(sessionFactory);
 	}
@@ -304,7 +303,7 @@ public abstract class AbstractInboundFileSynchronizer<F>
 	}
 
 	protected final List<F> filterFiles(F[] files) {
-		return (this.filter != null) ? this.filter.filterFiles(files) : Arrays.asList(files);
+		return this.filter != null ? this.filter.filterFiles(files) : Arrays.asList(files);
 	}
 
 	protected String getTemporaryFileSuffix() {

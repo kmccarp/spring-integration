@@ -16,6 +16,8 @@
 
 package org.springframework.integration.sftp.filters;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.nio.file.attribute.FileTime;
 import java.time.Instant;
 import java.util.Arrays;
@@ -23,10 +25,7 @@ import java.util.List;
 
 import org.apache.sshd.sftp.client.SftpClient;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.integration.metadata.SimpleMetadataStore;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Gary Russell

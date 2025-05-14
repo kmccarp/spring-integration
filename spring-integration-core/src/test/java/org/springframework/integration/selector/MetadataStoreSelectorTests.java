@@ -16,12 +16,11 @@
 
 package org.springframework.integration.selector;
 
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
+import org.junit.jupiter.api.Test;
 import org.springframework.integration.metadata.SimpleMetadataStore;
 import org.springframework.messaging.support.MessageBuilder;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Gary Russell

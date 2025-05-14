@@ -59,7 +59,7 @@ public abstract class AbstractClientConnectionFactory extends AbstractConnection
 	 * @param host The host.
 	 * @param port The port.
 	 */
-	public AbstractClientConnectionFactory(String host, int port) {
+	protected AbstractClientConnectionFactory(String host, int port) {
 		super(host, port);
 	}
 

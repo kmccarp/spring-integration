@@ -16,17 +16,16 @@
 
 package org.springframework.integration.codec.kryo;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.integration.codec.Codec;
 import org.springframework.integration.codec.CompositeCodec;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author David Turanski
@@ -69,7 +68,7 @@ public class CompositeCodecTests {
 				return false;
 			}
 			SomeClassWithNoDefaultConstructors that = (SomeClassWithNoDefaultConstructors) other;
-			return (this.val1.equals(that.val1) && this.val2 == that.val2);
+			return this.val1.equals(that.val1) && this.val2 == that.val2;
 		}
 
 		@Override

@@ -22,7 +22,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.reactivestreams.Subscriber;
-
 import org.springframework.context.Lifecycle;
 import org.springframework.integration.channel.ExecutorChannelInterceptorAware;
 import org.springframework.integration.channel.NullChannel;
@@ -211,7 +210,7 @@ public class PollingConsumer extends AbstractPollingEndpoint implements Integrat
 
 	@Override
 	protected Message<?> receiveMessage() {
-		return (this.receiveTimeout >= 0)
+		return this.receiveTimeout >= 0
 				? this.inputChannel.receive(this.receiveTimeout)
 				: this.inputChannel.receive();
 	}

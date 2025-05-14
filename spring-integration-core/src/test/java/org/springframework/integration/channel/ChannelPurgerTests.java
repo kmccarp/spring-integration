@@ -16,15 +16,14 @@
 
 package org.springframework.integration.channel;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.GenericMessage;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 /**
  * @author Mark Fisher
@@ -75,7 +74,7 @@ public class ChannelPurgerTests {
 		channel.send(new GenericMessage<String>("test1"));
 		channel.send(new GenericMessage<String>("test2"));
 		channel.send(new GenericMessage<String>("test3"));
-		ChannelPurger purger = new ChannelPurger(message -> (message.getPayload().equals("test2")), channel);
+		ChannelPurger purger = new ChannelPurger(message -> ("test2".equals(message.getPayload())), channel);
 		List<Message<?>> purgedMessages = purger.purge();
 		assertThat(purgedMessages.size()).isEqualTo(2);
 		Message<?> message = channel.receive(0);
@@ -109,7 +108,7 @@ public class ChannelPurgerTests {
 		channel2.send(new GenericMessage<String>("test1"));
 		channel2.send(new GenericMessage<String>("test2"));
 		channel2.send(new GenericMessage<String>("test3"));
-		ChannelPurger purger = new ChannelPurger(message -> (message.getPayload().equals("test2")), channel1, channel2);
+		ChannelPurger purger = new ChannelPurger(message -> ("test2".equals(message.getPayload())), channel1, channel2);
 		List<Message<?>> purgedMessages = purger.purge();
 		assertThat(purgedMessages.size()).isEqualTo(4);
 		Message<?> message1 = channel1.receive(0);

@@ -58,7 +58,7 @@ public abstract class AbstractServerConnectionFactory extends AbstractConnection
 	 * The port on which the factory will listen.
 	 * @param port The port.
 	 */
-	public AbstractServerConnectionFactory(int port) {
+	protected AbstractServerConnectionFactory(int port) {
 		super(port);
 	}
 

@@ -22,13 +22,11 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UncheckedIOException;
-
 import javax.xml.transform.Source;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamSource;
 
 import org.w3c.dom.Document;
-
 import org.springframework.integration.transformer.AbstractPayloadTransformer;
 import org.springframework.integration.xml.source.DomSourceFactory;
 import org.springframework.integration.xml.source.SourceFactory;
@@ -66,7 +64,7 @@ public class UnmarshallingTransformer extends AbstractPayloadTransformer<Object,
 
 	private SourceFactory sourceFactory = new DomSourceFactory();
 
-	private boolean alwaysUseSourceFactory = false;
+	private boolean alwaysUseSourceFactory;
 
 	private MimeMessageUnmarshallerHelper mimeMessageUnmarshallerHelper;
 

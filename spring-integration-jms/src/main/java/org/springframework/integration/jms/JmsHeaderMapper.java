@@ -17,7 +17,6 @@
 package org.springframework.integration.jms;
 
 import jakarta.jms.Message;
-
 import org.springframework.integration.mapping.HeaderMapper;
 
 /**

@@ -194,8 +194,8 @@ public abstract class AbstractStandardMessageHandlerFactoryBean
 	}
 
 	protected boolean methodIsHandleMessageOrEmpty(String targetMethodName) {
-		return (!StringUtils.hasText(targetMethodName)
-				|| "handleMessage".equals(targetMethodName));
+		return !StringUtils.hasText(targetMethodName)
+				|| "handleMessage".equals(targetMethodName);
 	}
 
 	protected boolean canBeUsedDirect(AbstractMessageProducingHandler handler) {

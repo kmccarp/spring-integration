@@ -28,7 +28,6 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-
 import javax.lang.model.SourceVersion;
 import javax.management.DynamicMBean;
 import javax.management.JMException;
@@ -288,7 +287,7 @@ public class IntegrationMBeanExporter extends MBeanExporter
 				// If the channel is proxied, we have to extract the target to expose as an MBean.
 				// The MetadataMBeanInfoAssembler does not support JDK dynamic proxies.
 				.map(this::extractTarget)
-				.filter(ch -> ch instanceof IntegrationManagement)
+				.filter(IntegrationManagement.class::isInstance)
 				.map(IntegrationManagement.class::cast)
 				.forEach(ch -> this.channels.put(ch.getComponentName(), ch));
 	}
@@ -817,7 +816,7 @@ public class IntegrationMBeanExporter extends MBeanExporter
 
 		return ',' + this.objectNameStaticProperties.entrySet()
 				.stream()
-				.map((entry) -> entry.getKey() + "=" + entry.getValue())
+				.map(entry -> entry.getKey() + "=" + entry.getValue())
 				.collect(Collectors.joining(","));
 	}
 
@@ -897,7 +896,7 @@ public class IntegrationMBeanExporter extends MBeanExporter
 	}
 
 	private String buildAnonymousManagedName(Map<Object, AtomicLong> anonymousCache, MessageChannel messageChannel) {
-		AtomicLong count = anonymousCache.computeIfAbsent(messageChannel, (key) -> new AtomicLong());
+		AtomicLong count = anonymousCache.computeIfAbsent(messageChannel, key -> new AtomicLong());
 		long total = count.incrementAndGet();
 		/*
 		 * Short hack to make sure object names are unique if more than one endpoint has the same input

@@ -20,7 +20,6 @@ import io.micrometer.observation.ObservationRegistry;
 import org.reactivestreams.Publisher;
 import org.reactivestreams.Subscription;
 import reactor.core.publisher.Flux;
-
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.SmartInitializingSingleton;
 import org.springframework.core.AttributeAccessor;
@@ -76,7 +75,7 @@ public abstract class MessageProducerSupport extends AbstractEndpoint
 
 	private String errorChannelName;
 
-	private boolean shouldTrack = false;
+	private boolean shouldTrack;
 
 	private volatile Subscription subscription;
 
@@ -275,14 +274,14 @@ public abstract class MessageProducerSupport extends AbstractEndpoint
 						.map(this::trackMessageIfAny)
 						.doOnComplete(this::stop)
 						.doOnCancel(this::stop)
-						.doOnSubscribe((subs) -> this.subscription = subs);
+						.doOnSubscribe(subs -> this.subscription = subs);
 
 		if (channelForSubscription instanceof ReactiveStreamsSubscribableChannel reactiveStreamsSubscribableChannel) {
 			reactiveStreamsSubscribableChannel.subscribeTo(messageFlux);
 		}
 		else {
 			messageFlux
-					.doOnNext((message) -> {
+					.doOnNext(message -> {
 						try {
 							sendMessage(message);
 						}

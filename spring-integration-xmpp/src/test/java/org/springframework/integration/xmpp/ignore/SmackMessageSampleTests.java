@@ -20,7 +20,6 @@ import org.jivesoftware.smack.packet.StanzaBuilder;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.jxmpp.stringprep.XmppStringprepException;
-
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;

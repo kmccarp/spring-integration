@@ -22,7 +22,6 @@ import java.util.Comparator;
 import java.util.List;
 
 import org.apache.commons.net.ftp.FTPFile;
-
 import org.springframework.integration.file.remote.AbstractFileInfo;
 import org.springframework.integration.file.remote.AbstractRemoteFileStreamingMessageSource;
 import org.springframework.integration.file.remote.RemoteFileTemplate;
@@ -68,7 +67,7 @@ public class FtpStreamingMessageSource extends AbstractRemoteFileStreamingMessag
 
 	@Override
 	protected List<AbstractFileInfo<FTPFile>> asFileInfoList(Collection<FTPFile> files) {
-		List<AbstractFileInfo<FTPFile>> canonicalFiles = new ArrayList<AbstractFileInfo<FTPFile>>();
+		List<AbstractFileInfo<FTPFile>> canonicalFiles = new ArrayList<>();
 		for (FTPFile file : files) {
 			canonicalFiles.add(new FtpFileInfo(file));
 		}

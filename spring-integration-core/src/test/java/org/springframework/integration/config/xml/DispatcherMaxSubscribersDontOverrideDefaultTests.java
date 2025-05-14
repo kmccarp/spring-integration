@@ -17,7 +17,6 @@
 package org.springframework.integration.config.xml;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 /**

@@ -20,7 +20,6 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 import org.w3c.dom.Element;
-
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.parsing.BeanComponentDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
@@ -94,7 +93,7 @@ public class RetrievingJpaOutboundGatewayParser extends AbstractJpaOutboundGatew
 
 			String others =
 					Arrays.stream(otherAttributes)
-							.filter((attr) -> gatewayElement.hasAttribute(attr) &&
+							.filter(attr -> gatewayElement.hasAttribute(attr) &&
 									StringUtils.hasText(gatewayElement.getAttribute(attr)))
 							.collect(Collectors.joining(","));
 

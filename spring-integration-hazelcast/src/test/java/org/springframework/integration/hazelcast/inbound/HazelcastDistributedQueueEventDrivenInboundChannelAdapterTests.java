@@ -16,11 +16,12 @@
 
 package org.springframework.integration.hazelcast.inbound;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import com.hazelcast.collection.IQueue;
 import com.hazelcast.core.EntryEventType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.integration.hazelcast.HazelcastHeaders;
 import org.springframework.integration.hazelcast.HazelcastIntegrationTestUser;
@@ -30,8 +31,6 @@ import org.springframework.messaging.PollableChannel;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Hazelcast Distributed Queue Event Driven Inbound Channel Adapter Test
@@ -73,9 +72,9 @@ public class HazelcastDistributedQueueEventDrivenInboundChannelAdapterTests {
 		assertThat(msg.getPayload()).isNotNull();
 		assertThat(msg.getHeaders().get(HazelcastHeaders.MEMBER)).isNotNull();
 		assertThat(msg.getHeaders().get(HazelcastHeaders.EVENT_TYPE).toString()).isEqualTo(EntryEventType.ADDED.toString());
-		assertThat((((HazelcastIntegrationTestUser) msg.getPayload()).getId())).isEqualTo(1);
-		assertThat((((HazelcastIntegrationTestUser) msg.getPayload()).getName())).isEqualTo("TestName1");
-		assertThat((((HazelcastIntegrationTestUser) msg.getPayload()).getSurname())).isEqualTo("TestSurname1");
+		assertThat(((HazelcastIntegrationTestUser) msg.getPayload()).getId()).isEqualTo(1);
+		assertThat(((HazelcastIntegrationTestUser) msg.getPayload()).getName()).isEqualTo("TestName1");
+		assertThat(((HazelcastIntegrationTestUser) msg.getPayload()).getSurname()).isEqualTo("TestSurname1");
 	}
 
 	@Test
@@ -90,9 +89,9 @@ public class HazelcastDistributedQueueEventDrivenInboundChannelAdapterTests {
 		assertThat(msg.getPayload()).isNotNull();
 		assertThat(msg.getHeaders().get(HazelcastHeaders.MEMBER)).isNotNull();
 		assertThat(msg.getHeaders().get(HazelcastHeaders.EVENT_TYPE).toString()).isEqualTo(EntryEventType.REMOVED.toString());
-		assertThat((((HazelcastIntegrationTestUser) msg.getPayload()).getId())).isEqualTo(2);
-		assertThat((((HazelcastIntegrationTestUser) msg.getPayload()).getName())).isEqualTo("TestName2");
-		assertThat((((HazelcastIntegrationTestUser) msg.getPayload()).getSurname())).isEqualTo("TestSurname2");
+		assertThat(((HazelcastIntegrationTestUser) msg.getPayload()).getId()).isEqualTo(2);
+		assertThat(((HazelcastIntegrationTestUser) msg.getPayload()).getName()).isEqualTo("TestName2");
+		assertThat(((HazelcastIntegrationTestUser) msg.getPayload()).getSurname()).isEqualTo("TestSurname2");
 	}
 
 	@Test

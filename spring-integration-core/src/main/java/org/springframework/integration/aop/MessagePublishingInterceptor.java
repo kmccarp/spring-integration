@@ -22,7 +22,6 @@ import java.util.Map;
 
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
-
 import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
@@ -163,7 +162,7 @@ public class MessagePublishingInterceptor implements MethodInterceptor, BeanFact
 		}
 		Object result = payloadExpression.getValue(context);
 		if (result != null) {
-			AbstractIntegrationMessageBuilder<?> builder = (result instanceof Message<?>)
+			AbstractIntegrationMessageBuilder<?> builder = result instanceof Message<?>
 					? getMessageBuilderFactory().fromMessage((Message<?>) result)
 					: getMessageBuilderFactory().withPayload(result);
 			Map<String, Object> headers = evaluateHeaders(method, context);

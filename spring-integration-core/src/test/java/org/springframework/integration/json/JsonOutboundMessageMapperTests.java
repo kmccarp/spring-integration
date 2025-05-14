@@ -16,6 +16,8 @@
 
 package org.springframework.integration.json;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.io.IOException;
 
 import com.fasterxml.jackson.core.JsonFactory;
@@ -23,14 +25,11 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.integration.history.MessageHistory;
 import org.springframework.integration.support.MessageBuilder;
 import org.springframework.integration.support.context.NamedComponent;
 import org.springframework.integration.support.json.JsonOutboundMessageMapper;
 import org.springframework.messaging.Message;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Jeremy Grelle
@@ -116,7 +115,7 @@ public class JsonOutboundMessageMapperTests {
 		JsonParser parser = jsonFactory.createParser(json);
 		do {
 			parser.nextToken();
-		} while (parser.getCurrentToken() != JsonToken.FIELD_NAME || !parser.currentName().equals("payload"));
+		} while (parser.getCurrentToken() != JsonToken.FIELD_NAME || !"payload".equals(parser.currentName()));
 		parser.nextToken();
 		return objectMapper.readValue(parser, TestBean.class);
 	}

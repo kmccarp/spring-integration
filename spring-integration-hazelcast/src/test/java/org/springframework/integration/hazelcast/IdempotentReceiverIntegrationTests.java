@@ -16,6 +16,10 @@
 
 package org.springframework.integration.hazelcast;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.mockito.Mockito.spy;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -26,7 +30,6 @@ import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
 import org.aopalliance.aop.Advice;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -68,10 +71,6 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.interceptor.TransactionInterceptor;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.mockito.Mockito.spy;
 
 /**
  * @author Artem Bilan
@@ -359,7 +358,7 @@ public class IdempotentReceiverIntegrationTests {
 	@Component
 	private static class FooService {
 
-		private final List<Message<?>> messages = new ArrayList<Message<?>>();
+		private final List<Message<?>> messages = new ArrayList<>();
 
 		@ServiceActivator(inputChannel = "annotatedMethodChannel")
 		@IdempotentReceiver("idempotentReceiverInterceptor")

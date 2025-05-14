@@ -16,17 +16,15 @@
 
 package org.springframework.integration.jmx;
 
-import java.util.concurrent.atomic.AtomicInteger;
+import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.concurrent.atomic.AtomicInteger;
 import javax.management.MBeanServer;
 
 import org.junit.Test;
-
 import org.springframework.jmx.support.MBeanServerFactoryBean;
 import org.springframework.jmx.support.ObjectNameManager;
 import org.springframework.messaging.Message;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Mark Fisher

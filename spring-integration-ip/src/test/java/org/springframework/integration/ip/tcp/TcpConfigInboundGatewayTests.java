@@ -16,15 +16,15 @@
 
 package org.springframework.integration.ip.tcp;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-
 import javax.net.SocketFactory;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.integration.ip.tcp.connection.AbstractClientConnectionFactory;
@@ -32,8 +32,6 @@ import org.springframework.integration.ip.tcp.connection.AbstractServerConnectio
 import org.springframework.integration.ip.tcp.serializer.ByteArrayStxEtxSerializer;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Gary Russell
@@ -189,7 +187,7 @@ public class TcpConfigInboundGatewayTests {
 		socket.setSoTimeout(5000);
 		String greetings = "Hello World!";
 		socket.getOutputStream().write(ByteArrayStxEtxSerializer.STX);
-		socket.getOutputStream().write((greetings).getBytes());
+		socket.getOutputStream().write(greetings.getBytes());
 		socket.getOutputStream().write(ByteArrayStxEtxSerializer.ETX);
 		StringBuilder sb = new StringBuilder();
 		int c;
@@ -248,7 +246,7 @@ public class TcpConfigInboundGatewayTests {
 		byte[] header = new byte[4];
 		header[3] = (byte) greetings.length();
 		socket.getOutputStream().write(header);
-		socket.getOutputStream().write((greetings).getBytes());
+		socket.getOutputStream().write(greetings.getBytes());
 		StringBuilder sb = new StringBuilder();
 		int c;
 		int n = 0;

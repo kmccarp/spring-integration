@@ -23,7 +23,6 @@ import org.apache.avro.io.DatumReader;
 import org.apache.avro.io.DecoderFactory;
 import org.apache.avro.specific.SpecificDatumReader;
 import org.apache.avro.specific.SpecificRecord;
-
 import org.springframework.beans.factory.BeanClassLoaderAware;
 import org.springframework.expression.EvaluationContext;
 import org.springframework.expression.Expression;
@@ -51,7 +50,7 @@ public class SimpleFromAvroTransformer extends AbstractTransformer implements Be
 	private final DecoderFactory decoderFactory = new DecoderFactory();
 
 	private Expression typeIdExpression =
-			new FunctionExpression<Message<?>>((message) -> message.getHeaders().get(AvroHeaders.TYPE));
+			new FunctionExpression<Message<?>>(message -> message.getHeaders().get(AvroHeaders.TYPE));
 
 	private EvaluationContext evaluationContext;
 

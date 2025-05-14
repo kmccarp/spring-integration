@@ -17,7 +17,6 @@
 package org.springframework.integration.jms;
 
 import jakarta.jms.Destination;
-
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.expression.EvaluationContext;
@@ -159,7 +158,7 @@ public class JmsSendingMessageHandler extends AbstractMessageHandler {
 
 	@Override
 	protected void handleMessageInternal(final Message<?> message) {
-		Object objectToSend = (this.extractPayload) ? message.getPayload() : message;
+		Object objectToSend = this.extractPayload ? message.getPayload() : message;
 		MessagePostProcessor messagePostProcessor = new HeaderMappingMessagePostProcessor(message, this.headerMapper);
 
 		if (this.jmsTemplate instanceof DynamicJmsTemplate && this.jmsTemplate.isExplicitQosEnabled()) {

@@ -19,7 +19,6 @@ package org.springframework.integration.redis.outbound;
 import java.util.function.Function;
 
 import reactor.core.publisher.Mono;
-
 import org.springframework.data.redis.connection.ReactiveRedisConnectionFactory;
 import org.springframework.data.redis.connection.RedisStreamCommands;
 import org.springframework.data.redis.connection.stream.Record;
@@ -151,7 +150,7 @@ public class ReactiveRedisStreamMessageHandler extends AbstractReactiveMessageHa
 					Assert.notNull(streamKey, "'streamKey' must not be null");
 					return streamKey;
 				})
-				.flatMap((streamKey) -> {
+				.flatMap(streamKey -> {
 					Object value = message;
 					if (this.extractPayload) {
 						value = message.getPayload();

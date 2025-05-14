@@ -39,7 +39,6 @@ import java.util.Set;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
@@ -337,7 +336,7 @@ public class DefaultHttpHeaderMapper implements HeaderMapper<HttpHeaders>, BeanF
 	 * @param userDefinedHeaderPrefix The user defined header prefix.
 	 */
 	public void setUserDefinedHeaderPrefix(String userDefinedHeaderPrefix) {
-		this.userDefinedHeaderPrefix = (userDefinedHeaderPrefix != null) ? userDefinedHeaderPrefix : "";
+		this.userDefinedHeaderPrefix = userDefinedHeaderPrefix != null ? userDefinedHeaderPrefix : "";
 	}
 
 	@Override
@@ -816,42 +815,42 @@ public class DefaultHttpHeaderMapper implements HeaderMapper<HttpHeaders>, BeanF
 			case ALLOW_LOWER -> source.getAllow();
 			case CACHE_CONTROL_LOWER -> {
 				String cacheControl = source.getCacheControl();
-				yield (StringUtils.hasText(cacheControl)) ? cacheControl : null;
+				yield StringUtils.hasText(cacheControl) ? cacheControl : null;
 			}
 			case CONTENT_LENGTH_LOWER -> {
 				long contentLength = source.getContentLength();
-				yield (contentLength > -1) ? contentLength : null;
+				yield contentLength > -1 ? contentLength : null;
 			}
 			case CONTENT_TYPE_LOWER -> source.getContentType();
 			case DATE_LOWER -> {
 				long date = source.getDate();
-				yield (date > -1) ? date : null;
+				yield date > -1 ? date : null;
 			}
 			case ETAG_LOWER -> {
 				String eTag = source.getETag();
-				yield (StringUtils.hasText(eTag)) ? eTag : null;
+				yield StringUtils.hasText(eTag) ? eTag : null;
 			}
 			case EXPIRES_LOWER -> {
 				long expires = source.getExpires();
-				yield (expires > -1) ? expires : null;
+				yield expires > -1 ? expires : null;
 			}
 			case IF_NONE_MATCH_LOWER -> source.getIfNoneMatch();
 			case IF_MODIFIED_SINCE_LOWER -> {
 				long modifiedSince = source.getIfModifiedSince();
-				yield (modifiedSince > -1) ? modifiedSince : null;
+				yield modifiedSince > -1 ? modifiedSince : null;
 			}
 			case IF_UNMODIFIED_SINCE_LOWER -> {
 				long unmodifiedSince = source.getIfUnmodifiedSince();
-				yield (unmodifiedSince > -1) ? unmodifiedSince : null;
+				yield unmodifiedSince > -1 ? unmodifiedSince : null;
 			}
 			case LAST_MODIFIED_LOWER -> {
 				long lastModified = source.getLastModified();
-				yield (lastModified > -1) ? lastModified : null;
+				yield lastModified > -1 ? lastModified : null;
 			}
 			case LOCATION_LOWER -> source.getLocation();
 			case PRAGMA_LOWER -> {
 				String pragma = source.getPragma();
-				yield (StringUtils.hasText(pragma)) ? pragma : null;
+				yield StringUtils.hasText(pragma) ? pragma : null;
 			}
 			default -> source.get(name);
 		};

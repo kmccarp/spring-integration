@@ -27,7 +27,7 @@ import org.springframework.integration.events.IntegrationEvent;
 @SuppressWarnings("serial")
 public abstract class FileIntegrationEvent extends IntegrationEvent {
 
-	public FileIntegrationEvent(Object source) {
+	protected FileIntegrationEvent(Object source) {
 		super(source);
 	}
 

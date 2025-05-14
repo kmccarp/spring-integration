@@ -16,6 +16,13 @@
 
 package org.springframework.integration.mongodb.inbound;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+
 import java.util.List;
 
 import com.mongodb.BasicDBObject;
@@ -23,7 +30,6 @@ import org.bson.conversions.Bson;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.data.mongodb.MongoDatabaseFactory;
 import org.springframework.data.mongodb.core.MongoOperations;
@@ -35,13 +41,6 @@ import org.springframework.expression.Expression;
 import org.springframework.expression.common.LiteralExpression;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.integration.mongodb.MongoDbContainerTest;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 
 /**
  * @author Amol Nayak
@@ -93,7 +92,7 @@ class MongoDbMessageSourceTests implements MongoDbContainerTest {
 		messageSource.setBeanFactory(mock(BeanFactory.class));
 		messageSource.afterPropertiesSet();
 		@SuppressWarnings("unchecked")
-		List<BasicDBObject> results = ((List<BasicDBObject>) messageSource.receive().getPayload());
+		List<BasicDBObject> results = (List<BasicDBObject>) messageSource.receive().getPayload();
 		assertThat(results).hasSize(1);
 		BasicDBObject resultObject = results.get(0);
 
@@ -113,7 +112,7 @@ class MongoDbMessageSourceTests implements MongoDbContainerTest {
 		messageSource.setBeanFactory(mock(BeanFactory.class));
 		messageSource.afterPropertiesSet();
 		@SuppressWarnings("unchecked")
-		List<Person> results = ((List<Person>) messageSource.receive().getPayload());
+		List<Person> results = (List<Person>) messageSource.receive().getPayload();
 		assertThat(results).hasSize(1);
 		Person person = results.get(0);
 		assertThat(person.getName()).isEqualTo("Oleg");
@@ -152,7 +151,7 @@ class MongoDbMessageSourceTests implements MongoDbContainerTest {
 		messageSource.setBeanFactory(mock(BeanFactory.class));
 		messageSource.afterPropertiesSet();
 		@SuppressWarnings("unchecked")
-		List<Person> results = ((List<Person>) messageSource.receive().getPayload());
+		List<Person> results = (List<Person>) messageSource.receive().getPayload();
 		Person person = results.get(0);
 		assertThat(person.getName()).isEqualTo("Oleg");
 		assertThat(person.getAddress().getState()).isEqualTo("PA");

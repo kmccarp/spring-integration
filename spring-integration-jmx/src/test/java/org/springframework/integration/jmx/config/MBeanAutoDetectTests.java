@@ -16,17 +16,15 @@
 
 package org.springframework.integration.jmx.config;
 
-import java.util.Set;
+import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.Set;
 import javax.management.MBeanServer;
 import javax.management.ObjectName;
 
 import org.junit.After;
 import org.junit.Test;
-
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Dave Syer

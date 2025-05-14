@@ -16,6 +16,10 @@
 
 package org.springframework.integration.smb.config;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
@@ -23,7 +27,6 @@ import java.util.Set;
 import java.util.concurrent.PriorityBlockingQueue;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -39,10 +42,6 @@ import org.springframework.integration.smb.session.SmbSessionFactory;
 import org.springframework.integration.test.util.TestUtils;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 /**
  * @author Markus Spann
@@ -117,7 +116,7 @@ public class SmbInboundChannelAdapterParserTests {
 				applicationContext.getBeansOfType(SourcePollingChannelAdapter.class);
 		SourcePollingChannelAdapter adapter = null;
 		for (String key : spcas.keySet()) {
-			if (!key.equals("smbInbound") && !key.equals("simpleAdapter")) {
+			if (!"smbInbound".equals(key) && !"simpleAdapter".equals(key)) {
 				adapter = spcas.get(key);
 			}
 		}

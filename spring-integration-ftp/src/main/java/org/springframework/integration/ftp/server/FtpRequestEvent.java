@@ -32,7 +32,7 @@ public abstract class FtpRequestEvent extends ApacheMinaFtpEvent {
 
 	protected final transient FtpRequest request; //NOSONAR protected final
 
-	public FtpRequestEvent(FtpSession source, FtpRequest request) {
+	protected FtpRequestEvent(FtpSession source, FtpRequest request) {
 		super(source);
 		this.request = request;
 	}

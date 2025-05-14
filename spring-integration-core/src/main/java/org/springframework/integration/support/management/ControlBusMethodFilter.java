@@ -56,7 +56,7 @@ public class ControlBusMethodFilter implements ReflectionUtils.MethodFilter {
 			if (CustomizableThreadCreator.class.isAssignableFrom(declaringClass)
 					&& (methodName.startsWith("get")
 					|| methodName.startsWith("set")
-					|| methodName.equals("shutdown"))) {
+					|| "shutdown".equals(methodName))) {
 				return true;
 			}
 

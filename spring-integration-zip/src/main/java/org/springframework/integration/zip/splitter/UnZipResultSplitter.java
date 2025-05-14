@@ -21,7 +21,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.io.FilenameUtils;
-
 import org.springframework.integration.file.FileHeaders;
 import org.springframework.integration.splitter.AbstractMessageSplitter;
 import org.springframework.integration.support.MessageBuilder;

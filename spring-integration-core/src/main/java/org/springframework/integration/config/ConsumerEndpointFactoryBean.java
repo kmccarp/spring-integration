@@ -25,7 +25,6 @@ import org.aopalliance.aop.Advice;
 import org.apache.commons.logging.LogFactory;
 import org.reactivestreams.Publisher;
 import reactor.core.publisher.Flux;
-
 import org.springframework.aop.framework.Advised;
 import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.aop.support.AopUtils;
@@ -103,7 +102,7 @@ public class ConsumerEndpointFactoryBean
 
 	private Boolean autoStartup;
 
-	private int phase = 0;
+	private int phase;
 
 	private boolean isPhaseSet;
 
@@ -433,7 +432,7 @@ public class ConsumerEndpointFactoryBean
 
 	@Override
 	public int getPhase() {
-		return (this.endpoint != null) ? this.endpoint.getPhase() : 0;
+		return this.endpoint != null ? this.endpoint.getPhase() : 0;
 	}
 
 	@Override

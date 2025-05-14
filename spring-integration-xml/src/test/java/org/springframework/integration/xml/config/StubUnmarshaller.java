@@ -17,7 +17,6 @@
 package org.springframework.integration.xml.config;
 
 import java.util.LinkedList;
-
 import javax.xml.transform.Source;
 
 import org.springframework.oxm.Unmarshaller;

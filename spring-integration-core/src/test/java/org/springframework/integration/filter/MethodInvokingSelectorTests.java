@@ -16,17 +16,16 @@
 
 package org.springframework.integration.filter;
 
-import java.lang.reflect.Method;
-
-import org.junit.jupiter.api.Test;
-
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.messaging.Message;
-import org.springframework.messaging.support.GenericMessage;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.mockito.Mockito.mock;
+
+import java.lang.reflect.Method;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.support.GenericMessage;
 
 /**
  * @author Mark Fisher
@@ -108,7 +107,7 @@ public class MethodInvokingSelectorTests {
 		}
 
 		public boolean acceptString(Message<?> message) {
-			return (message.getPayload() instanceof String);
+			return message.getPayload() instanceof String;
 		}
 
 		public void returnVoid(Message<?> message) {

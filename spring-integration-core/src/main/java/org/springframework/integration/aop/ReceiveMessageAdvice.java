@@ -18,7 +18,6 @@ package org.springframework.integration.aop;
 
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
-
 import org.springframework.integration.core.MessageSource;
 import org.springframework.lang.Nullable;
 import org.springframework.messaging.Message;

@@ -16,20 +16,6 @@
 
 package org.springframework.integration.file.remote;
 
-import java.io.IOException;
-import java.io.UncheckedIOException;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import org.junit.jupiter.api.Test;
-
-import org.springframework.integration.file.filters.FileListFilter;
-import org.springframework.integration.file.remote.session.CachingSessionFactory;
-import org.springframework.integration.file.remote.session.Session;
-import org.springframework.integration.file.remote.session.SessionFactory;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -38,6 +24,19 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
+import java.io.IOException;
+import java.io.UncheckedIOException;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.integration.file.filters.FileListFilter;
+import org.springframework.integration.file.remote.session.CachingSessionFactory;
+import org.springframework.integration.file.remote.session.Session;
+import org.springframework.integration.file.remote.session.SessionFactory;
 
 /**
  * @author Lukas Gemela

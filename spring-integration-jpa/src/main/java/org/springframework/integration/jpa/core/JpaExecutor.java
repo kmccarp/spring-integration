@@ -20,7 +20,6 @@ import java.util.List;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
-
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
@@ -89,21 +88,21 @@ public class JpaExecutor implements InitializingBean, BeanFactoryAware {
 
 	private PersistMode persistMode = PersistMode.MERGE;
 
-	private ParameterSourceFactory parameterSourceFactory = null;
+	private ParameterSourceFactory parameterSourceFactory;
 
 	private ParameterSource parameterSource;
 
-	private boolean flush = false;
+	private boolean flush;
 
-	private int flushSize = 0;
+	private int flushSize;
 
-	private boolean clearOnFlush = false;
+	private boolean clearOnFlush;
 
-	private boolean deleteAfterPoll = false;
+	private boolean deleteAfterPoll;
 
-	private boolean deleteInBatch = false;
+	private boolean deleteInBatch;
 
-	private boolean expectSingleResult = false;
+	private boolean expectSingleResult;
 
 	/**
 	 * Indicates that whether only the payload of the passed in {@link Message}
@@ -111,7 +110,7 @@ public class JpaExecutor implements InitializingBean, BeanFactoryAware {
 	 * default a {@link BeanPropertyParameterSourceFactory} implementation is
 	 * used for the sqlParameterSourceFactory property.
 	 */
-	private Boolean usePayloadAsParameterSource = null;
+	private Boolean usePayloadAsParameterSource;
 
 	private BeanFactory beanFactory;
 

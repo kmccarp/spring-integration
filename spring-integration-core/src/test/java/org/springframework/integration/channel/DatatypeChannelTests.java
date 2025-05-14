@@ -16,13 +16,15 @@
 
 package org.springframework.integration.channel;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.context.support.ConversionServiceFactoryBean;
@@ -43,9 +45,6 @@ import org.springframework.messaging.MessageDeliveryException;
 import org.springframework.messaging.MessagingException;
 import org.springframework.messaging.support.ErrorMessage;
 import org.springframework.messaging.support.GenericMessage;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 /**
  * @author Mark Fisher
@@ -111,7 +110,7 @@ public class DatatypeChannelTests {
 	@Test
 	public void conversionServiceBeanUsedByDefault() {
 		GenericApplicationContext context = new GenericApplicationContext();
-		Converter<Boolean, Integer> converter = new Converter<Boolean, Integer>() {
+		Converter<Boolean, Integer> converter = new Converter<>() {
 
 			@Override
 			public Integer convert(Boolean source) {
@@ -145,7 +144,7 @@ public class DatatypeChannelTests {
 	@Test
 	public void conversionServiceReferenceOverridesDefault() {
 		GenericApplicationContext context = new GenericApplicationContext();
-		Converter<Boolean, Integer> defaultConverter = new Converter<Boolean, Integer>() {
+		Converter<Boolean, Integer> defaultConverter = new Converter<>() {
 
 			@Override
 			public Integer convert(Boolean source) {
@@ -265,7 +264,7 @@ public class DatatypeChannelTests {
 
 		@Override
 		public Set<ConvertiblePair> getConvertibleTypes() {
-			Set<ConvertiblePair> pairs = new HashSet<ConvertiblePair>();
+			Set<ConvertiblePair> pairs = new HashSet<>();
 			pairs.add(new ConvertiblePair(String.class, Foo.class));
 			pairs.add(new ConvertiblePair(String.class, Bar.class));
 			return pairs;
@@ -286,7 +285,7 @@ public class DatatypeChannelTests {
 
 		@Override
 		public Set<ConvertiblePair> getConvertibleTypes() {
-			Set<ConvertiblePair> pairs = new HashSet<ConvertiblePair>();
+			Set<ConvertiblePair> pairs = new HashSet<>();
 			pairs.add(new ConvertiblePair(Integer.class, Foo.class));
 			pairs.add(new ConvertiblePair(Integer.class, Baz.class));
 			return pairs;

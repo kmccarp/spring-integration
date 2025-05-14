@@ -17,7 +17,6 @@
 package org.springframework.integration.mongodb.outbound;
 
 import reactor.core.publisher.Mono;
-
 import org.springframework.data.mongodb.ReactiveMongoDatabaseFactory;
 import org.springframework.data.mongodb.core.ReactiveMongoOperations;
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
@@ -52,7 +51,7 @@ public class ReactiveMongoDbStoringMessageHandler extends AbstractReactiveMessag
 
 	private Expression collectionNameExpression = new LiteralExpression("data");
 
-	private volatile boolean initialized = false;
+	private volatile boolean initialized;
 
 	/**
 	 * Construct this instance using a provided {@link ReactiveMongoDatabaseFactory}.

@@ -17,7 +17,6 @@
 package org.springframework.integration.jmx;
 
 import java.util.Map;
-
 import javax.management.MalformedObjectNameException;
 import javax.management.Notification;
 import javax.management.ObjectName;

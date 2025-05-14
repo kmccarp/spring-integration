@@ -16,17 +16,6 @@
 
 package org.springframework.integration.mail;
 
-import java.util.Properties;
-
-import jakarta.mail.Folder;
-import jakarta.mail.Message;
-import jakarta.mail.Session;
-import jakarta.mail.Store;
-import jakarta.mail.URLName;
-import org.junit.jupiter.api.Test;
-
-import org.springframework.beans.DirectFieldAccessor;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.Mockito.doNothing;
@@ -36,6 +25,16 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
+import java.util.Properties;
+
+import jakarta.mail.Folder;
+import jakarta.mail.Message;
+import jakarta.mail.Session;
+import jakarta.mail.Store;
+import jakarta.mail.URLName;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.DirectFieldAccessor;
 
 /**
  * @author Gary Russell

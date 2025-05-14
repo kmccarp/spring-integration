@@ -34,7 +34,6 @@ import com.hazelcast.core.LifecycleListener;
 import com.hazelcast.partition.MigrationListener;
 import com.hazelcast.partition.MigrationState;
 import com.hazelcast.partition.ReplicaMigrationEvent;
-
 import org.springframework.integration.endpoint.MessageProducerSupport;
 import org.springframework.integration.hazelcast.ClusterMonitorType;
 import org.springframework.integration.hazelcast.HazelcastIntegrationDefinitionValidator;

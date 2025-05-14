@@ -16,9 +16,12 @@
 
 package org.springframework.integration.xml.transformer;
 
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
+import static org.xmlunit.assertj3.XmlAssert.assertThat;
+
 import java.io.File;
 import java.io.IOException;
-
 import javax.xml.transform.Result;
 import javax.xml.transform.Templates;
 import javax.xml.transform.TransformerException;
@@ -30,7 +33,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 import org.mockito.Mockito;
 import org.w3c.dom.Document;
-
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
@@ -44,10 +46,6 @@ import org.springframework.messaging.support.GenericMessage;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.xml.transform.StringResult;
 import org.springframework.xml.transform.StringSource;
-
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
-import static org.xmlunit.assertj3.XmlAssert.assertThat;
 
 /**
  * @author Jonas Partner

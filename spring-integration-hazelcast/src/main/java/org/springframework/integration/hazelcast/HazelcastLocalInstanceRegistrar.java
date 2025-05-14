@@ -25,7 +25,6 @@ import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.multimap.MultiMap;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.springframework.beans.factory.SmartInitializingSingleton;
 
 /**

@@ -21,7 +21,6 @@ import java.time.Instant;
 import java.util.function.Consumer;
 
 import org.apache.commons.net.ftp.FTPFile;
-
 import org.springframework.integration.file.filters.AbstractLastModifiedFileListFilter;
 
 /**

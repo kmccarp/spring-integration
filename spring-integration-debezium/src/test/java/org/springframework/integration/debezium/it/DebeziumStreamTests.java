@@ -16,10 +16,11 @@
 
 package org.springframework.integration.debezium.it;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import io.debezium.engine.ChangeEvent;
 import io.debezium.engine.DebeziumEngine;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -35,8 +36,6 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Christian Tzolov

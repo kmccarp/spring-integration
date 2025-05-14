@@ -16,11 +16,10 @@
 
 package org.springframework.integration.json;
 
-import org.junit.jupiter.api.Test;
-
-import org.springframework.integration.support.json.JsonObjectMapperProvider;
-
 import static org.assertj.core.api.Assertions.assertThat;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.integration.support.json.JsonObjectMapperProvider;
 
 /**
  * @author Gary Russell

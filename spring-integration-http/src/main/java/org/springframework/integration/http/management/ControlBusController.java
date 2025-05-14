@@ -78,7 +78,7 @@ public class ControlBusController implements BeanFactoryAware, InitializingBean 
 		return this.controlBusCommandRegistry.getCommands()
 				.entrySet()
 				.stream()
-				.map((beanEntry) -> createControlBusBean(beanEntry.getKey(), beanEntry.getValue()))
+				.map(beanEntry -> createControlBusBean(beanEntry.getKey(), beanEntry.getValue()))
 				.toList();
 	}
 
@@ -99,7 +99,7 @@ public class ControlBusController implements BeanFactoryAware, InitializingBean 
 
 		if (!CollectionUtils.isEmpty(arguments)) {
 			parameterValues = arguments.stream()
-					.map((arg) -> this.conversionService.convert(arg.value, arg.parameterType))
+					.map(arg -> this.conversionService.convert(arg.value, arg.parameterType))
 					.toArray(Object[]::new);
 		}
 

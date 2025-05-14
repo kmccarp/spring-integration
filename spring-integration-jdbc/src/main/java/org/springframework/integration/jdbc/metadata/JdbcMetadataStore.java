@@ -17,7 +17,6 @@
 package org.springframework.integration.jdbc.metadata;
 
 import java.util.concurrent.atomic.AtomicBoolean;
-
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.InitializingBean;

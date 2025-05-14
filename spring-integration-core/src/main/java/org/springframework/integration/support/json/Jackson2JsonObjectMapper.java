@@ -35,7 +35,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
-
 import org.springframework.integration.mapping.support.JsonHeaders;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;

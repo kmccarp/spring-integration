@@ -16,24 +16,23 @@
 
 package org.springframework.integration.file.remote.session;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.expression.common.LiteralExpression;
 import org.springframework.integration.file.remote.RemoteFileTemplate;
 import org.springframework.integration.test.util.TestUtils;
 import org.springframework.messaging.MessagingException;
 import org.springframework.messaging.support.GenericMessage;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 /**
  * @author Gary Russell
@@ -58,7 +57,7 @@ public class CachingSessionFactoryTests {
 		assertThat(sess1.isOpen()).isTrue();
 		sess1 = cache.getSession();
 		assertThat(TestUtils.getPropertyValue(sess1, "targetSession.id")).isEqualTo("session:1");
-		assertThat((TestUtils.getPropertyValue(sess1, "targetSession.testCalled", Boolean.class))).isTrue();
+		assertThat(TestUtils.getPropertyValue(sess1, "targetSession.testCalled", Boolean.class)).isTrue();
 		sess1.close();
 		assertThat(sess1.isOpen()).isTrue();
 		// reset the cache; should close idle (sess1); sess2 should closed later
@@ -112,7 +111,7 @@ public class CachingSessionFactoryTests {
 
 	}
 
-	private static class TestSession implements Session<String> {
+	private static final class TestSession implements Session<String> {
 
 		@SuppressWarnings("unused")
 		private final String id;

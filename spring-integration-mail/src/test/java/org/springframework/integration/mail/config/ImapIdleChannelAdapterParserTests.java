@@ -16,6 +16,8 @@
 
 package org.springframework.integration.mail.config;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.Properties;
 
 import jakarta.mail.Flags;
@@ -23,7 +25,6 @@ import jakarta.mail.Folder;
 import jakarta.mail.URLName;
 import jakarta.mail.search.SearchTerm;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.DirectFieldAccessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -35,8 +36,6 @@ import org.springframework.integration.test.util.TestUtils;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Mark Fisher

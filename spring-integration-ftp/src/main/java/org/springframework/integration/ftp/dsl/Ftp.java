@@ -20,7 +20,6 @@ import java.io.File;
 import java.util.Comparator;
 
 import org.apache.commons.net.ftp.FTPFile;
-
 import org.springframework.integration.file.remote.MessageSessionCallback;
 import org.springframework.integration.file.remote.RemoteFileTemplate;
 import org.springframework.integration.file.remote.gateway.AbstractRemoteFileOutboundGateway;

@@ -57,9 +57,9 @@ public abstract class AbstractJsonInboundMessageMapper<P> implements InboundMess
 
 	protected final Map<String, Class<?>> headerTypes = DEFAULT_HEADER_TYPES; // NOSONAR final
 
-	private boolean mapToPayload = false;
+	private boolean mapToPayload;
 
-	public AbstractJsonInboundMessageMapper(Type payloadType) {
+	protected AbstractJsonInboundMessageMapper(Type payloadType) {
 		Assert.notNull(payloadType, "payloadType must not be null");
 		this.payloadType = payloadType;
 	}

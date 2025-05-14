@@ -16,6 +16,8 @@
 
 package org.springframework.integration.channel;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.time.Duration;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -31,13 +33,10 @@ import reactor.core.scheduler.Scheduler;
 import reactor.core.scheduler.Schedulers;
 import reactor.test.StepVerifier;
 import reactor.util.concurrent.Queues;
-
 import org.springframework.integration.core.MessageSource;
 import org.springframework.integration.util.IntegrationReactiveUtils;
 import org.springframework.messaging.MessagingException;
 import org.springframework.messaging.support.GenericMessage;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Sergei Egorov
@@ -62,7 +61,7 @@ class IntegrationReactiveUtilsTests {
 			int initialRequest = 10;
 			StepVerifier.create(IntegrationReactiveUtils.messageChannelToFlux(channel), initialRequest)
 					.expectSubscription()
-					.then(() -> {
+					.then(() ->
 						compositeDisposable.add(
 								SCHEDULER.schedule(() -> {
 									while (true) {
@@ -71,8 +70,7 @@ class IntegrationReactiveUtilsTests {
 										}
 									}
 								})
-						);
-					})
+						))
 					.expectNextCount(initialRequest)
 					.expectNoEvent(Duration.ofMillis(100))
 					.thenCancel()
@@ -122,7 +120,7 @@ class IntegrationReactiveUtilsTests {
 	void testPublisherPayloadWithNullChannel() throws InterruptedException {
 		NullChannel nullChannel = new NullChannel();
 		CountDownLatch publisherSubscribed = new CountDownLatch(1);
-		Mono<Object> mono = Mono.empty().doOnSubscribe((s) -> publisherSubscribed.countDown());
+		Mono<Object> mono = Mono.empty().doOnSubscribe(s -> publisherSubscribed.countDown());
 		nullChannel.send(new GenericMessage<>(mono));
 		assertThat(publisherSubscribed.await(10, TimeUnit.SECONDS)).isTrue();
 	}

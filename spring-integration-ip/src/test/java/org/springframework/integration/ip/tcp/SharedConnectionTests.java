@@ -16,10 +16,11 @@
 
 package org.springframework.integration.ip.tcp;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.Properties;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.integration.channel.QueueChannel;
@@ -34,8 +35,6 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Gary Russell
@@ -68,7 +67,7 @@ public class SharedConnectionTests {
 	public void test1() throws Exception {
 		TestingUtilities.waitListening(this.server, null);
 		this.client.setPort(this.server.getPort());
-		this.ctx.getBeansOfType(ConsumerEndpointFactoryBean.class).values().forEach(c -> c.start());
+		this.ctx.getBeansOfType(ConsumerEndpointFactoryBean.class).values().forEach(ConsumerEndpointFactoryBean::start);
 		MessageChannel input = ctx.getBean("input", MessageChannel.class);
 		input.send(MessageBuilder.withPayload("Test").build());
 		QueueChannel replies = ctx.getBean("replies", QueueChannel.class);

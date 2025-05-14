@@ -16,6 +16,9 @@
 
 package org.springframework.integration.jms.request_reply;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
+
 import java.util.Random;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
@@ -36,7 +39,6 @@ import org.apache.activemq.artemis.jms.client.ActiveMQDestination;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.integration.gateway.RequestReplyExchanger;
 import org.springframework.integration.jms.ActiveMQMultiContextTests;
@@ -49,9 +51,6 @@ import org.springframework.jms.listener.SessionAwareMessageListener;
 import org.springframework.jms.support.converter.SimpleMessageConverter;
 import org.springframework.messaging.MessageDeliveryException;
 import org.springframework.messaging.support.GenericMessage;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.fail;
 
 /**
  * @author Oleg Zhurakousky
@@ -125,7 +124,7 @@ public class RequestReplyScenariosWithTempReplyQueuesTests extends ActiveMQMulti
 					fail("Test failed", e1);
 				}
 				String requestPayload = (String) extractPayload(message);
-				if (requestPayload.equals("foo")) {
+				if ("foo".equals(requestPayload)) {
 					try {
 						Thread.sleep(6000);
 					}

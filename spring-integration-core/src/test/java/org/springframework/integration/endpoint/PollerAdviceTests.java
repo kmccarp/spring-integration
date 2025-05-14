@@ -16,6 +16,12 @@
 
 package org.springframework.integration.endpoint;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.atLeast;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -31,7 +37,6 @@ import org.aopalliance.aop.Advice;
 import org.aopalliance.intercept.Joinpoint;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.aop.Advisor;
 import org.springframework.aop.framework.Advised;
 import org.springframework.aop.framework.ProxyFactory;
@@ -66,12 +71,6 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.scheduling.support.PeriodicTrigger;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.atLeast;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
 
 /**
  * @author Gary Russell
@@ -119,7 +118,7 @@ public class PollerAdviceTests {
 	@Test
 	public void testSkipSimple() throws Exception {
 		SourcePollingChannelAdapter adapter = new SourcePollingChannelAdapter();
-		class LocalSource implements MessageSource<Object> {
+		final class LocalSource implements MessageSource<Object> {
 
 			private final CountDownLatch latch;
 

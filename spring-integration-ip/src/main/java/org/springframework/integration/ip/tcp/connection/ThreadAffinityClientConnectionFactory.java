@@ -18,7 +18,6 @@ package org.springframework.integration.ip.tcp.connection;
 
 import java.util.List;
 import java.util.concurrent.Executor;
-
 import javax.net.ssl.SSLSession;
 
 import org.springframework.beans.BeansException;

@@ -16,6 +16,8 @@
 
 package org.springframework.integration.file.filters;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -23,11 +25,8 @@ import java.util.Queue;
 import java.util.Set;
 
 import org.junit.Test;
-
 import org.springframework.integration.test.util.TestUtils;
 import org.springframework.util.StopWatch;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Gary Russell

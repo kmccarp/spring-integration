@@ -19,7 +19,6 @@ package org.springframework.integration.mqtt.support;
 import java.lang.reflect.Method;
 
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.ReflectionUtils;

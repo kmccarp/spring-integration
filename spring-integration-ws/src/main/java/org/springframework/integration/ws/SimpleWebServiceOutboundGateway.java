@@ -18,7 +18,6 @@ package org.springframework.integration.ws;
 
 import java.io.IOException;
 import java.util.Iterator;
-
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
 import javax.xml.transform.TransformerException;
@@ -26,7 +25,6 @@ import javax.xml.transform.dom.DOMResult;
 import javax.xml.transform.dom.DOMSource;
 
 import org.w3c.dom.Document;
-
 import org.springframework.lang.Nullable;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessagingException;
@@ -71,7 +69,7 @@ public class SimpleWebServiceOutboundGateway extends AbstractWebServiceOutboundG
 			WebServiceMessageFactory messageFactory) {
 
 		super(destinationProvider, messageFactory);
-		this.sourceExtractor = (sourceExtractor != null) ? sourceExtractor : new DefaultSourceExtractor();
+		this.sourceExtractor = sourceExtractor != null ? sourceExtractor : new DefaultSourceExtractor();
 	}
 
 	public SimpleWebServiceOutboundGateway(String uri) {
@@ -86,7 +84,7 @@ public class SimpleWebServiceOutboundGateway extends AbstractWebServiceOutboundG
 			WebServiceMessageFactory messageFactory) {
 
 		super(uri, messageFactory);
-		this.sourceExtractor = (sourceExtractor != null) ? sourceExtractor : new DefaultSourceExtractor();
+		this.sourceExtractor = sourceExtractor != null ? sourceExtractor : new DefaultSourceExtractor();
 	}
 
 	/**

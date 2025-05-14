@@ -33,7 +33,6 @@ import jakarta.mail.search.FlagTerm;
 import jakarta.mail.search.NotTerm;
 import jakarta.mail.search.SearchTerm;
 import org.eclipse.angus.mail.imap.IMAPFolder;
-
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.util.Assert;

@@ -17,7 +17,6 @@
 package org.springframework.integration.util;
 
 import reactor.core.publisher.Mono;
-
 import org.springframework.core.KotlinDetector;
 import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;

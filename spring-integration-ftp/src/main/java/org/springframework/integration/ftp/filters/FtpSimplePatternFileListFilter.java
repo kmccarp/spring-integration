@@ -17,7 +17,6 @@
 package org.springframework.integration.ftp.filters;
 
 import org.apache.commons.net.ftp.FTPFile;
-
 import org.springframework.integration.file.filters.AbstractSimplePatternFileListFilter;
 
 /**
@@ -35,7 +34,7 @@ public class FtpSimplePatternFileListFilter extends AbstractSimplePatternFileLis
 
 	@Override
 	protected String getFilename(FTPFile file) {
-		return (file != null) ? file.getName() : null;
+		return file != null ? file.getName() : null;
 	}
 
 	@Override

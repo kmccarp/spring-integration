@@ -31,7 +31,6 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Sinks;
 import reactor.util.context.ContextView;
-
 import org.springframework.context.Lifecycle;
 import org.springframework.core.log.LogMessage;
 import org.springframework.integration.IntegrationMessageHeaderAccessor;
@@ -158,10 +157,10 @@ public class FluxMessageChannel extends AbstractMessageChannel
 						.doOnComplete(() -> this.sourcePublishers.remove(publisher))
 						.delaySubscription(
 								Mono.fromCallable(this.sink::currentSubscriberCount)
-										.filter((value) -> value > 0)
-										.repeatWhenEmpty((repeat) ->
+										.filter(value -> value > 0)
+										.repeatWhenEmpty(repeat ->
 												this.active ? repeat.delayElements(Duration.ofMillis(100)) : repeat))
-						.flatMap((message) ->
+						.flatMap(message ->
 								Mono.just(message)
 										.handle((messageToHandle, syncSink) -> sendReactiveMessage(messageToHandle))
 										.contextWrite(StaticMessageHeaderAccessor.getReactorContext(message)))

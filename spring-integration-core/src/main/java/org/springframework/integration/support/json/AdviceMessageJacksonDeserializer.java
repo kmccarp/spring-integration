@@ -20,7 +20,6 @@ import java.io.IOException;
 
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
-
 import org.springframework.integration.message.AdviceMessage;
 import org.springframework.integration.support.MutableMessageHeaders;
 import org.springframework.messaging.Message;

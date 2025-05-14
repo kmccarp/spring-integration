@@ -24,7 +24,6 @@ import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.expression.Expression;
 import org.springframework.expression.ExpressionException;
@@ -127,10 +126,10 @@ public class ExpressionEvaluatingParameterSourceFactory implements ParameterSour
 		@Nullable
 		public Object getValue(String paramName) {
 			return this.values.computeIfAbsent(paramName,
-					(key) -> {
+					key -> {
 						JpaParameter jpaParameter =
 								this.parametersMap.computeIfAbsent(paramName,
-										(name) -> {
+										name -> {
 											JpaParameter parameter = new JpaParameter(paramName, null, paramName);
 											ExpressionEvaluatingParameterSourceFactory.this.parameters.add(parameter);
 											return parameter;

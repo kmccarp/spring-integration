@@ -31,7 +31,6 @@ import org.apache.commons.io.IOUtils;
 import org.zeroturnaround.zip.ZipEntryCallback;
 import org.zeroturnaround.zip.ZipException;
 import org.zeroturnaround.zip.ZipUtil;
-
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessagingException;
 
@@ -48,7 +47,7 @@ import org.springframework.messaging.MessagingException;
  */
 public class UnZipTransformer extends AbstractZipTransformer {
 
-	private volatile boolean expectSingleResult = false;
+	private volatile boolean expectSingleResult;
 
 	/**
 	 *

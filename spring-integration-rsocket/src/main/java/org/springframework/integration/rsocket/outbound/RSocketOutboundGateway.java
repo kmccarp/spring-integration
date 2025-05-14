@@ -22,7 +22,6 @@ import java.util.Map;
 import org.reactivestreams.Publisher;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.ResolvableType;
 import org.springframework.expression.EvaluationContext;
@@ -225,9 +224,9 @@ public class RSocketOutboundGateway extends AbstractReplyProducingMessageHandler
 						RSocketRequesterMethodArgumentResolver.RSOCKET_REQUESTER_HEADER + "' request message headers.");
 
 		return Mono.just(requester)
-				.map((rSocketRequester) -> createRequestSpec(rSocketRequester, requestMessage))
-				.map((requestSpec) -> prepareRetrieveSpec(requestSpec, requestMessage))
-				.flatMap((retrieveSpec) -> performRetrieve(retrieveSpec, requestMessage));
+				.map(rSocketRequester -> createRequestSpec(rSocketRequester, requestMessage))
+				.map(requestSpec -> prepareRetrieveSpec(requestSpec, requestMessage))
+				.flatMap(retrieveSpec -> performRetrieve(retrieveSpec, requestMessage));
 	}
 
 	@SuppressWarnings("unchecked")
@@ -242,7 +241,7 @@ public class RSocketOutboundGateway extends AbstractReplyProducingMessageHandler
 			Map<Object, MimeType> metadata =
 					this.metadataExpression.getValue(this.evaluationContext, requestMessage, Map.class);
 			if (!CollectionUtils.isEmpty(metadata)) {
-				requestSpec.metadata((spec) -> metadata.forEach(spec::metadata));
+				requestSpec.metadata(spec -> metadata.forEach(spec::metadata));
 			}
 		}
 
@@ -352,7 +351,7 @@ public class RSocketOutboundGateway extends AbstractReplyProducingMessageHandler
 	}
 
 	private static boolean isVoid(ResolvableType type) {
-		return (Void.class.equals(type.resolve()) || void.class.equals(type.resolve()));
+		return Void.class.equals(type.resolve()) || void.class.equals(type.resolve());
 	}
 
 }

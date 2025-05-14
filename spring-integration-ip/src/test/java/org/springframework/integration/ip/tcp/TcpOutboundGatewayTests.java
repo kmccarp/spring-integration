@@ -16,6 +16,20 @@
 
 package org.springframework.integration.ip.tcp;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.catchThrowable;
+import static org.assertj.core.api.Assertions.fail;
+import static org.awaitility.Awaitility.await;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.willReturn;
+import static org.mockito.BDDMockito.willThrow;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -39,14 +53,12 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
-
 import javax.net.ServerSocketFactory;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.core.serializer.DefaultDeserializer;
 import org.springframework.core.serializer.DefaultSerializer;
@@ -79,20 +91,6 @@ import org.springframework.messaging.support.ChannelInterceptor;
 import org.springframework.messaging.support.ErrorMessage;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.assertj.core.api.Assertions.catchThrowable;
-import static org.assertj.core.api.Assertions.fail;
-import static org.awaitility.Awaitility.await;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.BDDMockito.willReturn;
-import static org.mockito.BDDMockito.willThrow;
-import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 /**
  * @author Gary Russell
@@ -272,10 +270,10 @@ public class TcpOutboundGatewayTests {
 		Future<Integer>[] results = (Future<Integer>[]) new Future<?>[2];
 		for (int i = 0; i < 2; i++) {
 			final int j = i;
-			results[j] = (this.executor.submit(() -> {
+			results[j] = this.executor.submit(() -> {
 				gateway.handleMessage(MessageBuilder.withPayload("Test" + j).build());
 				return 0;
-			}));
+			});
 		}
 		Set<String> replies = new HashSet<>();
 		int timeouts = 0;
@@ -413,10 +411,10 @@ public class TcpOutboundGatewayTests {
 
 		for (int i = 0; i < 2; i++) {
 			final int j = i;
-			results[j] = (this.executor.submit(() -> {
+			results[j] = this.executor.submit(() -> {
 				gateway.handleMessage(MessageBuilder.withPayload("Test" + j).build());
 				return j;
-			}));
+			});
 
 		}
 		// wait until the server side has processed both requests

@@ -23,7 +23,6 @@ import java.util.Collections;
 import java.util.List;
 
 import reactor.core.publisher.Mono;
-
 import org.springframework.beans.BeansException;
 import org.springframework.beans.DirectFieldAccessor;
 import org.springframework.beans.factory.BeanFactory;
@@ -133,11 +132,11 @@ public class MockIntegrationContext implements BeanPostProcessor, SmartInitializ
 
 		this.beans.entrySet()
 				.stream()
-				.filter((bean) -> names == null || names.contains(bean.getKey()))
-				.forEach((bean) -> {
+				.filter(bean -> names == null || names.contains(bean.getKey()))
+				.forEach(bean -> {
 					Object endpoint = this.beanFactory.getBean(bean.getKey());
 					bean.getValue()
-							.forEach((value) -> resetBean(endpoint, value));
+							.forEach(value -> resetBean(endpoint, value));
 				});
 
 		if (!ObjectUtils.isEmpty(beanNames)) {
@@ -248,7 +247,7 @@ public class MockIntegrationContext implements BeanPostProcessor, SmartInitializ
 
 		if (endpoint instanceof ReactiveStreamsConsumer) {
 			ReactiveMessageHandler reactiveMessageHandler =
-					(message) -> Mono.fromRunnable(() -> mockMessageHandler.handleMessage(message));
+					message -> Mono.fromRunnable(() -> mockMessageHandler.handleMessage(message));
 			directFieldAccessor.setPropertyValue(REACTIVE_MESSAGE_HANDLER, reactiveMessageHandler);
 		}
 

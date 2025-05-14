@@ -29,13 +29,13 @@ public abstract class TcpConnectionEvent extends IpIntegrationEvent {
 
 	private final String connectionFactoryName;
 
-	public TcpConnectionEvent(TcpConnection connection,
+	protected TcpConnectionEvent(TcpConnection connection,
 			String connectionFactoryName) {
 		super(connection);
 		this.connectionFactoryName = connectionFactoryName;
 	}
 
-	public TcpConnectionEvent(TcpConnection connection, String connectionFactoryName,
+	protected TcpConnectionEvent(TcpConnection connection, String connectionFactoryName,
 			Throwable cause) {
 		super(connection, cause);
 		this.connectionFactoryName = connectionFactoryName;

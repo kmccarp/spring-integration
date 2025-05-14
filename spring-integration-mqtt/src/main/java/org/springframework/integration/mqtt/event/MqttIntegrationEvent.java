@@ -32,11 +32,11 @@ import org.springframework.lang.Nullable;
 @SuppressWarnings("serial")
 public abstract class MqttIntegrationEvent extends IntegrationEvent {
 
-	public MqttIntegrationEvent(Object source) {
+	protected MqttIntegrationEvent(Object source) {
 		super(source);
 	}
 
-	public MqttIntegrationEvent(Object source, @Nullable Throwable cause) {
+	protected MqttIntegrationEvent(Object source, @Nullable Throwable cause) {
 		super(source, cause);
 	}
 

@@ -16,11 +16,14 @@
 
 package org.springframework.integration.ws;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 import java.io.ByteArrayInputStream;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-
 import javax.xml.namespace.QName;
 import javax.xml.transform.Source;
 import javax.xml.transform.dom.DOMSource;
@@ -31,7 +34,6 @@ import jakarta.xml.soap.SOAPException;
 import jakarta.xml.soap.SOAPMessage;
 import org.junit.Test;
 import org.w3c.dom.NodeList;
-
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.ws.soap.SoapHeader;
 import org.springframework.ws.soap.SoapHeaderElement;
@@ -40,10 +42,6 @@ import org.springframework.ws.soap.saaj.SaajSoapMessage;
 import org.springframework.ws.transport.TransportConstants;
 import org.springframework.xml.namespace.QNameUtils;
 import org.springframework.xml.transform.StringSource;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 /**
  * @author Gary Russell

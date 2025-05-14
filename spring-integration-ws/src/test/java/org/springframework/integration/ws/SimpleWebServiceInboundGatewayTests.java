@@ -16,26 +16,6 @@
 
 package org.springframework.integration.ws;
 
-import java.io.StringReader;
-import java.io.StringWriter;
-
-import javax.xml.transform.Result;
-import javax.xml.transform.Source;
-import javax.xml.transform.stream.StreamResult;
-import javax.xml.transform.stream.StreamSource;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.mockito.stubbing.Answer;
-
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.integration.channel.DirectChannel;
-import org.springframework.messaging.Message;
-import org.springframework.messaging.MessageChannel;
-import org.springframework.messaging.MessageDeliveryException;
-import org.springframework.ws.WebServiceMessage;
-import org.springframework.ws.context.MessageContext;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -45,6 +25,24 @@ import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
+import java.io.StringReader;
+import java.io.StringWriter;
+import javax.xml.transform.Result;
+import javax.xml.transform.Source;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.stubbing.Answer;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.integration.channel.DirectChannel;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.MessageChannel;
+import org.springframework.messaging.MessageDeliveryException;
+import org.springframework.ws.WebServiceMessage;
+import org.springframework.ws.context.MessageContext;
 
 /**
  * @author Iwein Fuld

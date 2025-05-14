@@ -21,7 +21,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.w3c.dom.Element;
-
 import org.springframework.amqp.rabbit.listener.DirectMessageListenerContainer;
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 import org.springframework.beans.factory.config.BeanDefinition;

@@ -19,7 +19,6 @@ package org.springframework.integration.ws.config;
 import java.util.List;
 
 import org.w3c.dom.Element;
-
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.ManagedMap;
 import org.springframework.beans.factory.xml.ParserContext;
@@ -46,7 +45,7 @@ public class WebServiceOutboundGatewayParser extends AbstractOutboundGatewayPars
 
 	@Override
 	protected String getGatewayClassName(Element element) {
-		return ((StringUtils.hasText(element.getAttribute("marshaller"))) ?
+		return (StringUtils.hasText(element.getAttribute("marshaller")) ?
 				MarshallingWebServiceOutboundGateway.class : SimpleWebServiceOutboundGateway.class).getName();
 	}
 

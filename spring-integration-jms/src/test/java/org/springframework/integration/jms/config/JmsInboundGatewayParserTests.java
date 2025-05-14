@@ -16,12 +16,14 @@
 
 package org.springframework.integration.jms.config;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+
 import java.util.Properties;
 
 import jakarta.jms.ConnectionFactory;
 import jakarta.jms.DeliveryMode;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.DirectFieldAccessor;
 import org.springframework.beans.NotReadablePropertyException;
 import org.springframework.beans.factory.BeanDefinitionStoreException;
@@ -40,9 +42,6 @@ import org.springframework.jms.support.destination.JmsDestinationAccessor;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.PollableChannel;
 import org.springframework.util.MultiValueMap;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 /**
  * @author Mark Fisher

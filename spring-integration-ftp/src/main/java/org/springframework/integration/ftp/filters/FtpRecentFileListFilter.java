@@ -20,7 +20,6 @@ import java.time.Duration;
 import java.time.Instant;
 
 import org.apache.commons.net.ftp.FTPFile;
-
 import org.springframework.integration.file.filters.AbstractRecentFileListFilter;
 
 /**

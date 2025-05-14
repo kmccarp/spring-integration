@@ -16,23 +16,22 @@
 
 package org.springframework.integration.channel;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.Executor;
-
-import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-
-import org.springframework.core.log.LogAccessor;
-import org.springframework.messaging.MessageHandler;
-import org.springframework.util.ReflectionUtils;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Executor;
+
+import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+import org.springframework.core.log.LogAccessor;
+import org.springframework.messaging.MessageHandler;
+import org.springframework.util.ReflectionUtils;
 
 /**
  * @author Oleg Zhurakousky

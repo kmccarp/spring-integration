@@ -32,7 +32,6 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import org.postgresql.PGNotification;
 import org.postgresql.jdbc.PgConnection;
-
 import org.springframework.context.SmartLifecycle;
 import org.springframework.core.log.LogAccessor;
 import org.springframework.core.task.AsyncTaskExecutor;

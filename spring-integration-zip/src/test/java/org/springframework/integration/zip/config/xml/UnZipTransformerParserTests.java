@@ -16,11 +16,12 @@
 
 package org.springframework.integration.zip.config.xml;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.io.File;
 import java.nio.charset.Charset;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.integration.channel.AbstractMessageChannel;
@@ -31,8 +32,6 @@ import org.springframework.integration.zip.transformer.UnZipTransformer;
 import org.springframework.integration.zip.transformer.ZipResultType;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  *

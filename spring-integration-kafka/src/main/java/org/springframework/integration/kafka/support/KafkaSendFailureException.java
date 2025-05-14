@@ -17,7 +17,6 @@
 package org.springframework.integration.kafka.support;
 
 import org.apache.kafka.clients.producer.ProducerRecord;
-
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessagingException;
 

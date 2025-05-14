@@ -27,7 +27,6 @@ import reactor.core.Disposable;
 import reactor.core.publisher.BaseSubscriber;
 import reactor.core.publisher.Flux;
 import reactor.util.context.ContextView;
-
 import org.springframework.context.Lifecycle;
 import org.springframework.integration.IntegrationMessageHeaderAccessor;
 import org.springframework.integration.StaticMessageHeaderAccessor;
@@ -184,7 +183,7 @@ public class ReactiveStreamsConsumer extends AbstractEndpoint implements Integra
 		if (this.reactiveMessageHandler != null) {
 			this.subscription =
 					fluxFromChannel
-							.flatMap((message) ->
+							.flatMap(message ->
 									this.reactiveMessageHandler.handleMessage(message)
 											.contextWrite(StaticMessageHeaderAccessor.getReactorContext(message)))
 							.onErrorContinue((ex, data) -> this.errorHandler.handleError(ex))

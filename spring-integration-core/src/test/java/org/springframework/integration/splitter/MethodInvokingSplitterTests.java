@@ -16,6 +16,10 @@
 
 package org.springframework.integration.splitter;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.mockito.Mockito.mock;
+
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,7 +30,6 @@ import java.util.stream.Stream;
 
 import org.aopalliance.intercept.MethodInterceptor;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.integration.IntegrationMessageHeaderAccessor;
@@ -37,10 +40,6 @@ import org.springframework.integration.support.MessageBuilder;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.support.GenericMessage;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
-import static org.mockito.Mockito.mock;
 
 /**
  * @author Mark Fisher
@@ -379,7 +378,7 @@ public class MethodInvokingSplitterTests {
 		ProxyFactory pf = new ProxyFactory(stream);
 		AtomicBoolean closed = new AtomicBoolean();
 		MethodInterceptor interceptor = i -> {
-			if (i.getMethod().getName().equals("close")) {
+			if ("close".equals(i.getMethod().getName())) {
 				closed.set(true);
 			}
 			return i.proceed();

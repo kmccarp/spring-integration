@@ -16,6 +16,14 @@
 
 package org.springframework.integration.sftp.inbound;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.net.URI;
@@ -31,7 +39,6 @@ import org.apache.sshd.sftp.client.SftpClient;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.integration.file.FileHeaders;
 import org.springframework.integration.file.filters.AcceptOnceFileListFilter;
@@ -46,14 +53,6 @@ import org.springframework.integration.sftp.session.SftpSession;
 import org.springframework.integration.sftp.session.SftpTestSessionFactory;
 import org.springframework.integration.test.util.TestUtils;
 import org.springframework.messaging.Message;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 /**
  * @author Oleg Zhurakousky
@@ -175,7 +174,7 @@ public class SftpInboundRemoteFileSystemSynchronizerTests {
 			calendar.add(Calendar.DATE, 1);
 			this.sftpEntries =
 					Arrays.stream(files)
-							.map((file) -> {
+							.map(file -> {
 								SftpClient.Attributes attributes = spy(new SftpClient.Attributes());
 								attributes.setModifyTime(FileTime.fromMillis(calendar.getTimeInMillis()));
 								given(attributes.isRegularFile()).willReturn(true);

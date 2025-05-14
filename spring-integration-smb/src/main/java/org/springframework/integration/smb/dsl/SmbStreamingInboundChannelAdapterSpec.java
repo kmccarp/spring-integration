@@ -19,7 +19,6 @@ package org.springframework.integration.smb.dsl;
 import java.util.Comparator;
 
 import jcifs.smb.SmbFile;
-
 import org.springframework.integration.file.dsl.RemoteFileStreamingInboundChannelAdapterSpec;
 import org.springframework.integration.file.filters.CompositeFileListFilter;
 import org.springframework.integration.file.filters.FileListFilter;

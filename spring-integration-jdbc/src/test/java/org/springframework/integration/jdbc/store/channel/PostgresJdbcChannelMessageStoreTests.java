@@ -19,7 +19,6 @@ package org.springframework.integration.jdbc.store.channel;
 import javax.sql.DataSource;
 
 import org.apache.commons.dbcp2.BasicDataSource;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.integration.jdbc.postgres.PostgresContainerTest;

@@ -17,7 +17,6 @@
 package org.springframework.integration.sftp.filters;
 
 import org.apache.sshd.sftp.client.SftpClient;
-
 import org.springframework.integration.file.filters.AbstractSimplePatternFileListFilter;
 
 /**
@@ -37,7 +36,7 @@ public class SftpSimplePatternFileListFilter extends AbstractSimplePatternFileLi
 
 	@Override
 	protected String getFilename(SftpClient.DirEntry entry) {
-		return (entry != null) ? entry.getFilename() : null;
+		return entry != null ? entry.getFilename() : null;
 	}
 
 	@Override

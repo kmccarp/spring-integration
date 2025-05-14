@@ -32,7 +32,6 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import io.micrometer.observation.Observation;
 import io.micrometer.observation.ObservationRegistry;
-
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -98,7 +97,7 @@ public abstract class AbstractMessageChannel extends IntegrationObjectSupport
 	@Nullable
 	private MessageSenderObservationConvention observationConvention;
 
-	private boolean shouldTrack = false;
+	private boolean shouldTrack;
 
 	private Class<?>[] datatypes = new Class<?>[0];
 

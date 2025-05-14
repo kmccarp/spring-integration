@@ -16,17 +16,17 @@
 
 package org.springframework.integration.sftp.session;
 
-import org.apache.sshd.sftp.client.SftpClient;
-
 import static org.mockito.BDDMockito.willReturn;
 import static org.mockito.Mockito.spy;
+
+import org.apache.sshd.sftp.client.SftpClient;
 
 /**
  * @author Oleg Zhurakousky
  * @author Gary Russell
  *
  */
-public class SftpTestSessionFactory {
+public final class SftpTestSessionFactory {
 
 	private SftpTestSessionFactory() {
 		super();

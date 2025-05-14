@@ -16,15 +16,14 @@
 
 package org.springframework.integration.jdbc.store.channel;
 
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+
 import org.h2.jdbc.JdbcSQLSyntaxErrorException;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.context.ApplicationContextException;
 import org.springframework.integration.jdbc.store.JdbcChannelMessageStore;
 import org.springframework.integration.test.util.TestUtils;
 import org.springframework.test.context.ContextConfiguration;
-
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 /**
  * @author Gunnar Hillert

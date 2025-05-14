@@ -16,6 +16,10 @@
 
 package org.springframework.integration.handler;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.mockito.Mockito.mock;
+
 import java.lang.reflect.Method;
 import java.util.Collections;
 import java.util.HashMap;
@@ -30,7 +34,6 @@ import java.util.concurrent.TimeUnit;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.integration.support.MessageBuilder;
 import org.springframework.integration.test.util.TestUtils;
@@ -42,10 +45,6 @@ import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.Headers;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.support.GenericMessage;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.mockito.Mockito.mock;
 
 /**
  * @author Mark Fisher
@@ -61,7 +60,7 @@ public class MethodInvokingMessageProcessorAnnotationTests {
 
 	private final Employee employee = new Employee("oleg", "zhurakousky");
 
-	private static volatile int concurrencyFailures = 0;
+	private static volatile int concurrencyFailures;
 
 	@Test
 	public void multiThreadsUUIDToStringConversion() throws Exception {
@@ -445,7 +444,7 @@ public class MethodInvokingMessageProcessorAnnotationTests {
 		}
 
 		public Object mapHeadersAndPayload(Map<String, Object> headers, Object payload) {
-			Map<String, Object> map = new HashMap<String, Object>(headers);
+			Map<String, Object> map = new HashMap<>(headers);
 			map.put("payload", payload);
 			return map;
 		}

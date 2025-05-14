@@ -27,7 +27,6 @@ import java.util.function.Supplier;
 
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
-
 import org.springframework.aop.ProxyMethodInvocation;
 import org.springframework.lang.Nullable;
 import org.springframework.util.ConcurrentReferenceHashMap;
@@ -68,7 +67,7 @@ class DefaultMethodInvokingMethodInterceptor implements MethodInterceptor {
 
 	private MethodHandle getMethodHandle(Method method) {
 		return this.methodHandleCache.computeIfAbsent(method,
-				(key) -> {
+				key -> {
 					try {
 						return this.methodHandleLookup.lookup(key);
 					}
@@ -135,7 +134,7 @@ class DefaultMethodInvokingMethodInterceptor implements MethodInterceptor {
 							catch (Exception ex) {
 								// this is the signal that we are on Java 9 (encapsulated) and can't use the accessible
 								// constructor approach.
-								if (!ex.getClass().getName().equals("java.lang.reflect.InaccessibleObjectException")) {
+								if (!"java.lang.reflect.InaccessibleObjectException".equals(ex.getClass().getName())) {
 									throw new IllegalStateException(ex);
 								}
 							}

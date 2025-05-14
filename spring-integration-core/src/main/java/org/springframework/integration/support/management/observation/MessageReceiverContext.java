@@ -19,7 +19,6 @@ package org.springframework.integration.support.management.observation;
 import java.nio.charset.StandardCharsets;
 
 import io.micrometer.observation.transport.ReceiverContext;
-
 import org.springframework.lang.Nullable;
 import org.springframework.messaging.Message;
 

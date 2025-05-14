@@ -16,16 +16,15 @@
 
 package org.springframework.integration.ftp.config;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.io.File;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.support.GenericMessage;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Oleg Zhurakousky

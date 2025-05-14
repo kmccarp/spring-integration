@@ -20,7 +20,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Function;
 
 import reactor.util.function.Tuple2;
-
 import org.springframework.expression.Expression;
 import org.springframework.integration.JavaUtils;
 import org.springframework.integration.config.ConsumerEndpointFactoryBean;

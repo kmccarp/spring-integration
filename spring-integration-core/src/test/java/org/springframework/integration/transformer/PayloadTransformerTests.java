@@ -16,16 +16,15 @@
 
 package org.springframework.integration.transformer;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
 import java.util.Date;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessagingException;
 import org.springframework.messaging.support.GenericMessage;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
  * @author Mark Fisher
@@ -64,7 +63,7 @@ public class PayloadTransformerTests {
 
 		@Override
 		public Integer transformPayload(String s) {
-			if (s.equals("bad")) {
+			if ("bad".equals(s)) {
 				throw new IllegalStateException("bad input!");
 			}
 			return s.length();

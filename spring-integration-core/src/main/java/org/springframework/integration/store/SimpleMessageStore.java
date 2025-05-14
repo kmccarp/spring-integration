@@ -70,7 +70,7 @@ public class SimpleMessageStore extends AbstractMessageGroupStore
 
 	private final long upperBoundTimeout;
 
-	private boolean copyOnGet = false;
+	private boolean copyOnGet;
 
 	/**
 	 * Creates a SimpleMessageStore with a maximum size limited by the given capacity, or unlimited size if the given
@@ -184,7 +184,7 @@ public class SimpleMessageStore extends AbstractMessageGroupStore
 
 	@Override
 	public Message<?> getMessage(UUID key) {
-		return (key != null) ? this.idToMessage.get(key) : null;
+		return key != null ? this.idToMessage.get(key) : null;
 	}
 
 	@Override

@@ -35,7 +35,6 @@ import com.fasterxml.jackson.databind.jsontype.NamedType;
 import com.fasterxml.jackson.databind.jsontype.PolymorphicTypeValidator;
 import com.fasterxml.jackson.databind.jsontype.TypeIdResolver;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-
 import org.springframework.integration.message.AdviceMessage;
 import org.springframework.integration.support.MutableMessage;
 import org.springframework.messaging.support.ErrorMessage;
@@ -231,7 +230,7 @@ public final class JacksonJsonUtils {
 			if (!this.trustedPackages.isEmpty()) {
 				for (String trustedPackage : this.trustedPackages) {
 					if (packageName.equals(trustedPackage) ||
-							(!packageName.equals("java.util.logging")
+							(!"java.util.logging".equals(packageName)
 									&& packageName.startsWith(trustedPackage + "."))) {
 
 						return true;

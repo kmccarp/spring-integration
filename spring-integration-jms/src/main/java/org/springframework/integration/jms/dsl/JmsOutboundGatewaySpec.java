@@ -22,7 +22,6 @@ import java.util.function.Function;
 
 import jakarta.jms.ConnectionFactory;
 import jakarta.jms.Destination;
-
 import org.springframework.integration.dsl.IntegrationComponentSpec;
 import org.springframework.integration.dsl.MessageHandlerSpec;
 import org.springframework.integration.expression.FunctionExpression;

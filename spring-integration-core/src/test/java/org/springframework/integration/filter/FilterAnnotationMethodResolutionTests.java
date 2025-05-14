@@ -16,8 +16,9 @@
 
 package org.springframework.integration.filter;
 
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
+import org.junit.jupiter.api.Test;
 import org.springframework.integration.annotation.Filter;
 import org.springframework.integration.channel.QueueChannel;
 import org.springframework.integration.config.FilterFactoryBean;
@@ -25,8 +26,6 @@ import org.springframework.integration.support.MessageBuilder;
 import org.springframework.integration.test.util.TestUtils;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageHandler;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Mark Fisher

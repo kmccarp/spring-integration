@@ -17,7 +17,6 @@
 package org.springframework.integration.channel;
 
 import org.reactivestreams.Publisher;
-
 import org.springframework.integration.IntegrationPattern;
 import org.springframework.integration.IntegrationPatternType;
 import org.springframework.messaging.Message;

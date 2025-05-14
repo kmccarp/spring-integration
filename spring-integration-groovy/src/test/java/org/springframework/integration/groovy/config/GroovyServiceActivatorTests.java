@@ -16,6 +16,9 @@
 
 package org.springframework.integration.groovy.config;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -26,7 +29,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import groovy.lang.GroovyObject;
 import groovy.lang.MissingPropertyException;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.parsing.BeanDefinitionParsingException;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -43,9 +45,6 @@ import org.springframework.messaging.support.GenericMessage;
 import org.springframework.scripting.groovy.GroovyObjectCustomizer;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 /**
  * @author Mark Fisher

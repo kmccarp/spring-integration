@@ -16,6 +16,8 @@
 
 package org.springframework.integration.jms.config;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -24,7 +26,6 @@ import java.util.Properties;
 import java.util.StringTokenizer;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.integration.history.MessageHistory;
 import org.springframework.integration.jms.ActiveMQMultiContextTests;
@@ -37,8 +38,6 @@ import org.springframework.messaging.PollableChannel;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Oleg Zhurakousky
@@ -103,7 +102,7 @@ public class JmsMessageHistoryTests extends ActiveMQMultiContextTests {
 
 		public Map<String, Object> toHeaders(jakarta.jms.Message jmsMessage) {
 			Map<String, Object> headers = super.toHeaders(jmsMessage);
-			List<Properties> history = new ArrayList<Properties>();
+			List<Properties> history = new ArrayList<>();
 			String outboundHistory = (String) headers.get("outbound_history");
 			StringTokenizer outerTok = new StringTokenizer(outboundHistory, "[]");
 			while (outerTok.hasMoreTokens()) {

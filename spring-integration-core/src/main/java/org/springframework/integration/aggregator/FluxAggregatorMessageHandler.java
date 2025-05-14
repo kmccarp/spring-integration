@@ -25,7 +25,6 @@ import reactor.core.Disposable;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.FluxSink;
 import reactor.core.publisher.Mono;
-
 import org.springframework.integration.IntegrationMessageHeaderAccessor;
 import org.springframework.integration.IntegrationPatternType;
 import org.springframework.integration.channel.ReactiveStreamsSubscribableChannel;
@@ -84,7 +83,7 @@ public class FluxAggregatorMessageHandler extends AbstractMessageProducingHandle
 		this.aggregatorFlux =
 				Flux.<Message<?>>create(emitter -> this.sink = emitter, FluxSink.OverflowStrategy.BUFFER)
 						.groupBy(this::groupBy)
-						.flatMap((group) -> group.transform(this::releaseBy))
+						.flatMap(group -> group.transform(this::releaseBy))
 						.publish()
 						.autoConnect();
 	}
@@ -96,7 +95,7 @@ public class FluxAggregatorMessageHandler extends AbstractMessageProducingHandle
 	private Flux<Message<?>> releaseBy(Flux<Message<?>> groupFlux) {
 		return groupFlux
 				.transform(this.windowConfigurer != null ? this.windowConfigurer : this::applyWindowOptions)
-				.flatMap((windowFlux) -> windowFlux.transform(this.combineFunction));
+				.flatMap(windowFlux -> windowFlux.transform(this.combineFunction));
 	}
 
 	private Flux<Flux<Message<?>>> applyWindowOptions(Flux<Message<?>> groupFlux) {
@@ -179,7 +178,7 @@ public class FluxAggregatorMessageHandler extends AbstractMessageProducingHandle
 	 * @see Flux#windowTimeout(int, Duration)
 	 */
 	public void setWindowSize(int windowSize) {
-		setWindowSizeFunction((message) -> windowSize);
+		setWindowSizeFunction(message -> windowSize);
 	}
 
 	/**
@@ -236,7 +235,7 @@ public class FluxAggregatorMessageHandler extends AbstractMessageProducingHandle
 			}
 			else {
 				this.subscription =
-						this.aggregatorFlux.subscribe((messageToSend) -> produceOutput(messageToSend, messageToSend));
+						this.aggregatorFlux.subscribe(messageToSend -> produceOutput(messageToSend, messageToSend));
 			}
 		}
 	}
@@ -270,7 +269,7 @@ public class FluxAggregatorMessageHandler extends AbstractMessageProducingHandle
 		Flux<Message<?>> window = messageFlux.publish().autoConnect();
 		return window
 				.next()
-				.map((first) ->
+				.map(first ->
 						getMessageBuilderFactory()
 								.withPayload(Flux.concat(Mono.just(first), window))
 								.copyHeaders(first.getHeaders())

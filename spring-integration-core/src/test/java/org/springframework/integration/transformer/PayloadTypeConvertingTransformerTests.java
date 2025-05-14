@@ -16,9 +16,9 @@
 
 package org.springframework.integration.transformer;
 
-import org.junit.jupiter.api.Test;
-
 import static org.assertj.core.api.Assertions.assertThat;
+
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Gary Russell
@@ -34,7 +34,7 @@ public class PayloadTypeConvertingTransformerTests {
 	 */
 	@Test
 	public void testTransformPayloadObject() throws Exception {
-		PayloadTypeConvertingTransformer<String, String> tx = new PayloadTypeConvertingTransformer<String, String>();
+		PayloadTypeConvertingTransformer<String, String> tx = new PayloadTypeConvertingTransformer<>();
 		tx.setConverter(source -> source.toUpperCase());
 		String in = "abcd";
 		String out = tx.transformPayload(in);

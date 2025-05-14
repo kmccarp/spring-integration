@@ -16,12 +16,13 @@
 
 package org.springframework.integration.dsl.extensions;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.Arrays;
 import java.util.function.Consumer;
 
 import org.assertj.core.api.InstanceOfAssertFactories;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -36,8 +37,6 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.SubscribableChannel;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Artem Bilan
@@ -106,7 +105,7 @@ public class IntegrationFlowExtensionTests {
 	public static class CustomAggregatorSpec extends AggregatorSpec {
 
 		CustomAggregatorSpec() {
-			outputProcessor((group) ->
+			outputProcessor(group ->
 					group.getMessages()
 							.stream()
 							.map(Message::getPayload)

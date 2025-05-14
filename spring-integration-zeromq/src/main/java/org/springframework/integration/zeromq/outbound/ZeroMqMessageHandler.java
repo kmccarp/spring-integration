@@ -32,7 +32,6 @@ import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Scheduler;
 import reactor.core.scheduler.Schedulers;
 import zmq.socket.pubsub.Pub;
-
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.expression.EvaluationContext;
 import org.springframework.expression.Expression;
@@ -81,7 +80,7 @@ public class ZeroMqMessageHandler extends AbstractReactiveMessageHandler
 
 	private OutboundMessageMapper<byte[]> messageMapper;
 
-	private Consumer<ZMQ.Socket> socketConfigurer = (socket) -> {
+	private Consumer<ZMQ.Socket> socketConfigurer = socket -> {
 	};
 
 	private Expression topicExpression = new SupplierExpression<>(() -> null);
@@ -292,8 +291,8 @@ public class ZeroMqMessageHandler extends AbstractReactiveMessageHandler
 			this.socketMono =
 					Mono.just(this.context.createSocket(this.socketType))
 							.publishOn(this.publisherScheduler)
-							.doOnNext((socket) -> this.socketConfigurer.accept(socket))
-							.doOnNext((socket) -> {
+							.doOnNext(socket -> this.socketConfigurer.accept(socket))
+							.doOnNext(socket -> {
 								if (this.connectUrl != null) {
 									socket.connect(this.connectUrl.get());
 								}
@@ -323,7 +322,7 @@ public class ZeroMqMessageHandler extends AbstractReactiveMessageHandler
 	protected Mono<Void> handleMessageInternal(Message<?> message) {
 		Assert.state(this.initialized, "the message handler is not initialized yet or already destroyed");
 		return this.socketMono
-				.doOnNext((socket) -> {
+				.doOnNext(socket -> {
 					ZMsg msg;
 					if (message.getPayload() instanceof ZMsg) {
 						msg = (ZMsg) message.getPayload();

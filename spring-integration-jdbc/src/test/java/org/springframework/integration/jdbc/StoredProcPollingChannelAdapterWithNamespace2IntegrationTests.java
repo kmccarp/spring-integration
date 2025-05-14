@@ -16,6 +16,8 @@
 
 package org.springframework.integration.jdbc;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
@@ -25,7 +27,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.integration.annotation.ServiceActivator;
@@ -33,8 +34,6 @@ import org.springframework.messaging.Message;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Gunnar Hillert
@@ -53,7 +52,7 @@ public class StoredProcPollingChannelAdapterWithNamespace2IntegrationTests {
 
 	@Test
 	public void pollH2DatabaseUsingStoredProcedureCall() throws Exception {
-		List<Message<List<Integer>>> received = new ArrayList<Message<List<Integer>>>();
+		List<Message<List<Integer>>> received = new ArrayList<>();
 
 		received.add(consumer.poll(60000));
 
@@ -85,7 +84,7 @@ public class StoredProcPollingChannelAdapterWithNamespace2IntegrationTests {
 
 	static class Consumer {
 
-		private final BlockingQueue<Message<List<Integer>>> messages = new LinkedBlockingQueue<Message<List<Integer>>>();
+		private final BlockingQueue<Message<List<Integer>>> messages = new LinkedBlockingQueue<>();
 
 		@ServiceActivator
 		public void receive(Message<List<Integer>> message) {

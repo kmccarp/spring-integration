@@ -16,6 +16,8 @@
 
 package org.springframework.integration.ip.util;
 
+import static org.awaitility.Awaitility.await;
+
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
@@ -31,11 +33,8 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.springframework.integration.ip.AbstractInternetProtocolReceivingChannelAdapter;
 import org.springframework.lang.Nullable;
-
-import static org.awaitility.Awaitility.await;
 
 /**
  * TCP/IP Test utilities.
@@ -45,7 +44,7 @@ import static org.awaitility.Awaitility.await;
  * @author Artem Bilan
  *
  */
-public class SocketTestUtils {
+public final class SocketTestUtils {
 
 	public static final String TEST_STRING = "TestMessage";
 

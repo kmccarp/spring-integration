@@ -19,7 +19,6 @@ package org.springframework.integration.ftp.dsl;
 import java.util.Comparator;
 
 import org.apache.commons.net.ftp.FTPFile;
-
 import org.springframework.integration.file.dsl.RemoteFileStreamingInboundChannelAdapterSpec;
 import org.springframework.integration.file.filters.CompositeFileListFilter;
 import org.springframework.integration.file.filters.FileListFilter;

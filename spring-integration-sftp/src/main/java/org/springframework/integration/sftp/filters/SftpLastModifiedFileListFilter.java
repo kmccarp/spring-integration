@@ -22,7 +22,6 @@ import java.time.Instant;
 import java.util.function.Consumer;
 
 import org.apache.sshd.sftp.client.SftpClient;
-
 import org.springframework.integration.file.filters.AbstractLastModifiedFileListFilter;
 
 /**

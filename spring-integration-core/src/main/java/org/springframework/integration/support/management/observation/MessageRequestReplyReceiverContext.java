@@ -17,7 +17,6 @@
 package org.springframework.integration.support.management.observation;
 
 import io.micrometer.observation.transport.RequestReplyReceiverContext;
-
 import org.springframework.lang.Nullable;
 import org.springframework.messaging.Message;
 

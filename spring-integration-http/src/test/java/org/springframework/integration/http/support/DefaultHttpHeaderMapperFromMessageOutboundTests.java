@@ -16,6 +16,8 @@
 
 package org.springframework.integration.http.support;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.nio.charset.Charset;
 import java.nio.charset.UnsupportedCharsetException;
 import java.text.ParseException;
@@ -31,7 +33,6 @@ import java.util.TimeZone;
 
 import org.junit.Ignore;
 import org.junit.Test;
-
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.integration.mapping.HeaderMapper;
@@ -40,8 +41,6 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.util.MimeType;
 import org.springframework.util.StopWatch;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Oleg Zhurakousky

@@ -16,9 +16,10 @@
 
 package org.springframework.integration.zookeeper.config.xml;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.apache.curator.framework.CuratorFramework;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.integration.endpoint.SourcePollingChannelAdapter;
@@ -27,8 +28,6 @@ import org.springframework.integration.zookeeper.ZookeeperTestSupport;
 import org.springframework.integration.zookeeper.leader.LeaderInitiator;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Gary Russell

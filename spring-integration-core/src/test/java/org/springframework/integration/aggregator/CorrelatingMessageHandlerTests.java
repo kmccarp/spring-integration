@@ -16,24 +16,6 @@
 
 package org.springframework.integration.aggregator;
 
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.mockito.internal.stubbing.answers.ThrowsException;
-
-import org.springframework.integration.store.MessageGroup;
-import org.springframework.integration.store.MessageGroupStore;
-import org.springframework.integration.store.SimpleMessageGroup;
-import org.springframework.integration.store.SimpleMessageStore;
-import org.springframework.integration.support.MessageBuilder;
-import org.springframework.messaging.Message;
-import org.springframework.messaging.MessageChannel;
-import org.springframework.messaging.MessageHandlingException;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.any;
@@ -43,6 +25,23 @@ import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.internal.stubbing.answers.ThrowsException;
+import org.springframework.integration.store.MessageGroup;
+import org.springframework.integration.store.MessageGroupStore;
+import org.springframework.integration.store.SimpleMessageGroup;
+import org.springframework.integration.store.SimpleMessageStore;
+import org.springframework.integration.support.MessageBuilder;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.MessageChannel;
+import org.springframework.messaging.MessageHandlingException;
 
 /**
  * @author Iwein Fuld
@@ -55,7 +54,7 @@ public class CorrelatingMessageHandlerTests {
 
 	private CorrelationStrategy correlationStrategy;
 
-	private final ReleaseStrategy ReleaseStrategy = new SequenceSizeReleaseStrategy();
+	private final ReleaseStrategy releaseStrategy = new SequenceSizeReleaseStrategy();
 
 	private MessageGroupProcessor processor;
 
@@ -68,7 +67,7 @@ public class CorrelatingMessageHandlerTests {
 		correlationStrategy = mock(CorrelationStrategy.class);
 		processor = mock(MessageGroupProcessor.class);
 		outputChannel = mock(MessageChannel.class);
-		handler = new AggregatingMessageHandler(processor, store, correlationStrategy, ReleaseStrategy);
+		handler = new AggregatingMessageHandler(processor, store, correlationStrategy, releaseStrategy);
 		handler.setOutputChannel(outputChannel);
 		handler.setBeanFactory(mock());
 		handler.afterPropertiesSet();

@@ -19,7 +19,6 @@ package org.springframework.integration.websocket.config;
 import java.util.List;
 
 import org.w3c.dom.Element;
-
 import org.springframework.beans.factory.config.BeanReference;
 import org.springframework.beans.factory.config.RuntimeBeanReference;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;

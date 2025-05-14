@@ -16,6 +16,8 @@
 
 package org.springframework.integration.mqtt;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +25,6 @@ import java.util.List;
 import org.eclipse.paho.mqttv5.common.MqttSubscription;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -50,8 +51,6 @@ import org.springframework.messaging.converter.AbstractMessageConverter;
 import org.springframework.messaging.converter.SmartMessageConverter;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Gary Russell

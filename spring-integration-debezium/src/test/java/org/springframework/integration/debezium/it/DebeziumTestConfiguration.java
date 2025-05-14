@@ -19,7 +19,6 @@ package org.springframework.integration.debezium.it;
 import io.debezium.engine.ChangeEvent;
 import io.debezium.engine.DebeziumEngine;
 import io.debezium.engine.format.KeyValueHeaderChangeEventFormat;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.integration.annotation.BridgeFrom;

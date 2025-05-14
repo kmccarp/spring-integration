@@ -19,7 +19,6 @@ package org.springframework.integration.mongodb.outbound;
 import com.mongodb.MongoException;
 import com.mongodb.client.MongoCollection;
 import org.bson.Document;
-
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.mongodb.core.CollectionCallback;
 import org.springframework.lang.Nullable;

@@ -48,10 +48,10 @@ public abstract class AbstractLastModifiedFileListFilter<F> implements DiscardAw
 	@Nullable
 	private Consumer<F> discardCallback;
 
-	public AbstractLastModifiedFileListFilter() {
+	protected AbstractLastModifiedFileListFilter() {
 	}
 
-	public AbstractLastModifiedFileListFilter(Duration age) {
+	protected AbstractLastModifiedFileListFilter(Duration age) {
 		this.age = age;
 	}
 

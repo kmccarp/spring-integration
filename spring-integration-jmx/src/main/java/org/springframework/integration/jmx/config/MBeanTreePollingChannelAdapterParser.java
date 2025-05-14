@@ -17,7 +17,6 @@
 package org.springframework.integration.jmx.config;
 
 import org.w3c.dom.Element;
-
 import org.springframework.beans.BeanMetadataElement;
 import org.springframework.beans.factory.parsing.BeanComponentDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;

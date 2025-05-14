@@ -20,7 +20,6 @@ import java.util.regex.Pattern;
 
 import org.apache.kafka.clients.consumer.ConsumerRebalanceListener;
 import org.apache.kafka.clients.consumer.OffsetCommitCallback;
-
 import org.springframework.core.task.AsyncTaskExecutor;
 import org.springframework.integration.dsl.IntegrationComponentSpec;
 import org.springframework.kafka.core.ConsumerFactory;

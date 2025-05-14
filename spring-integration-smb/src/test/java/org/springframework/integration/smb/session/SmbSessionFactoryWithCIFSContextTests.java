@@ -16,6 +16,12 @@
 
 package org.springframework.integration.smb.session;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -28,19 +34,12 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.expression.common.LiteralExpression;
 import org.springframework.integration.file.remote.handler.FileTransferringMessageHandler;
 import org.springframework.integration.smb.AbstractBaseTests;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.util.FileSystemUtils;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 /**
  * @author Gregory Bragg
@@ -106,9 +105,9 @@ public class SmbSessionFactoryWithCIFSContextTests extends AbstractBaseTests {
 				when(smbSession.remove(Mockito.anyString())).thenReturn(true);
 				when(smbSession.list(Mockito.anyString())).thenReturn(new SmbFile[0]);
 
-				doAnswer(_invocation -> {
-					String path = _invocation.getArgument(0);
-					OutputStream os = (OutputStream) _invocation.getArguments()[1];
+				doAnswer(invocation -> {
+					String path = invocation.getArgument(0);
+					OutputStream os = (OutputStream) invocation.getArguments()[1];
 					writeToFile((this.getClass().getSimpleName() + " : TEST : " + path).getBytes(), os);
 					return null;
 				}).when(smbSession).read(Mockito.anyString(), Mockito.any(OutputStream.class));

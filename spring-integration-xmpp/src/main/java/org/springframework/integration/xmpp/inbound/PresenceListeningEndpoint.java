@@ -23,7 +23,6 @@ import org.jivesoftware.smack.packet.Presence;
 import org.jivesoftware.smack.roster.Roster;
 import org.jivesoftware.smack.roster.RosterListener;
 import org.jxmpp.jid.Jid;
-
 import org.springframework.integration.xmpp.core.AbstractXmppConnectionAwareEndpoint;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;

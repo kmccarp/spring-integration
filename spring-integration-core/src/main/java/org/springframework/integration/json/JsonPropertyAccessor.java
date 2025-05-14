@@ -25,7 +25,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.NullNode;
-
 import org.springframework.expression.AccessException;
 import org.springframework.expression.EvaluationContext;
 import org.springframework.expression.PropertyAccessor;
@@ -285,7 +284,7 @@ public class JsonPropertyAccessor implements PropertyAccessor {
 		@Override
 		public Iterator<Object> iterator() {
 
-			return new Iterator<Object>() {
+			return new Iterator<>() {
 
 				private final Iterator<JsonNode> it = ArrayNodeAsList.this.delegate.iterator();
 
@@ -309,7 +308,7 @@ public class JsonPropertyAccessor implements PropertyAccessor {
 
 		@Override
 		public int compareTo(Object o) {
-			Object that = (o instanceof JsonNodeWrapper<?> wrapper ? wrapper.getRealNode() : o);
+			Object that = o instanceof JsonNodeWrapper<?> wrapper ? wrapper.getRealNode() : o;
 			return this.delegate.equals(that) ? 0 : 1;
 		}
 

@@ -26,7 +26,6 @@ import jakarta.jms.InvalidDestinationException;
 import jakarta.jms.JMSException;
 import jakarta.jms.MessageProducer;
 import jakarta.jms.Session;
-
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
@@ -484,7 +483,7 @@ public class ChannelPublishingJmsMessageListener
 			jakarta.jms.Message replyMessage) throws JMSException {
 
 		if (this.correlationKey != null) {
-			if (this.correlationKey.equals("JMSCorrelationID")) {
+			if ("JMSCorrelationID".equals(this.correlationKey)) {
 				replyMessage.setJMSCorrelationID(requestMessage.getJMSCorrelationID());
 			}
 			else {
@@ -673,7 +672,7 @@ public class ChannelPublishingJmsMessageListener
 		@Override
 		protected AttributeAccessor getErrorMessageAttributes(@Nullable Message<?> message) {
 			AttributeAccessor attributes = ATTRIBUTES_HOLDER.get();
-			return (attributes != null) ? attributes : super.getErrorMessageAttributes(message);
+			return attributes != null ? attributes : super.getErrorMessageAttributes(message);
 		}
 
 		private void setAttributesIfNecessary(Object jmsMessage, Message<?> message) {

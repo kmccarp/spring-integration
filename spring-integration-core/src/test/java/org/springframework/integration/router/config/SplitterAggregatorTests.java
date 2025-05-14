@@ -16,19 +16,18 @@
 
 package org.springframework.integration.router.config;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.PollableChannel;
 import org.springframework.messaging.support.GenericMessage;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Mark Fisher
@@ -58,7 +57,7 @@ public class SplitterAggregatorTests {
 	}
 
 	private Numbers nextTen() {
-		List<Integer> values = new ArrayList<Integer>();
+		List<Integer> values = new ArrayList<>();
 		for (int i = 0; i < 10; i++) {
 			values.add(this.count.incrementAndGet());
 		}

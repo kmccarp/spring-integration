@@ -96,15 +96,15 @@ public abstract class AbstractInboundFileSynchronizingMessageSource<F>
 	/**
 	 * Whether the {@link DirectoryScanner} was explicitly set.
 	 */
-	private boolean scannerExplicitlySet = false;
+	private boolean scannerExplicitlySet;
 
 	private volatile boolean running;
 
-	public AbstractInboundFileSynchronizingMessageSource(AbstractInboundFileSynchronizer<F> synchronizer) {
+	protected AbstractInboundFileSynchronizingMessageSource(AbstractInboundFileSynchronizer<F> synchronizer) {
 		this(synchronizer, null);
 	}
 
-	public AbstractInboundFileSynchronizingMessageSource(AbstractInboundFileSynchronizer<F> synchronizer,
+	protected AbstractInboundFileSynchronizingMessageSource(AbstractInboundFileSynchronizer<F> synchronizer,
 			Comparator<File> comparator) {
 
 		Assert.notNull(synchronizer, "synchronizer must not be null");

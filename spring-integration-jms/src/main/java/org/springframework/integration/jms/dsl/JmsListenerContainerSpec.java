@@ -19,7 +19,6 @@ package org.springframework.integration.jms.dsl;
 import io.micrometer.observation.ObservationRegistry;
 import jakarta.jms.Destination;
 import jakarta.jms.ExceptionListener;
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.jms.listener.AbstractMessageListenerContainer;
 import org.springframework.jms.listener.DefaultMessageListenerContainer;

@@ -16,6 +16,8 @@
 
 package org.springframework.integration.zookeeper.config;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -28,7 +30,6 @@ import org.apache.curator.utils.CloseableUtils;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Bean;
@@ -43,8 +44,6 @@ import org.springframework.integration.zookeeper.ZookeeperTestSupport;
 import org.springframework.integration.zookeeper.leader.LeaderInitiator;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Gary Russell

@@ -16,23 +16,21 @@
 
 package org.springframework.integration.xml.transformer;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.xml.transform.Result;
 import javax.xml.transform.dom.DOMResult;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.integration.xml.result.StringResultFactory;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.oxm.Marshaller;
 import org.springframework.oxm.XmlMappingException;
 import org.springframework.xml.transform.StringResult;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Mark Fisher

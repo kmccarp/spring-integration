@@ -19,7 +19,6 @@ package org.springframework.integration.jms;
 import jakarta.jms.MessageListener;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.springframework.integration.MessageDispatchingException;
 import org.springframework.integration.channel.BroadcastCapableChannel;
 import org.springframework.integration.dispatcher.AbstractDispatcher;
@@ -143,7 +142,7 @@ public class SubscribableJmsChannel extends AbstractJmsChannel
 
 	@Override
 	public int getPhase() {
-		return (this.container != null) ? this.container.getPhase() : 0;
+		return this.container != null ? this.container.getPhase() : 0;
 	}
 
 	@Override

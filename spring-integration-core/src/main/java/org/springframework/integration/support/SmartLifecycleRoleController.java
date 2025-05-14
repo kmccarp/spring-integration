@@ -31,7 +31,6 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.context.ApplicationContext;
@@ -283,7 +282,7 @@ public class SmartLifecycleRoleController implements ApplicationListener<Abstrac
 		return this.lifecycles.get(role)
 				.stream()
 				.collect(Collectors.toMap(e ->
-								(e instanceof NamedComponent)
+								e instanceof NamedComponent
 										? ((NamedComponent) e).getComponentName()
 										: (e.getClass().getSimpleName() + "#" + index.getAndIncrement()),
 						Lifecycle::isRunning));

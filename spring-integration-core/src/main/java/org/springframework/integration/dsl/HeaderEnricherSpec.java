@@ -23,7 +23,6 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 import reactor.util.function.Tuple2;
-
 import org.springframework.expression.Expression;
 import org.springframework.integration.IntegrationMessageHeaderAccessor;
 import org.springframework.integration.config.ConsumerEndpointFactoryBean;

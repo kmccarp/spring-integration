@@ -25,7 +25,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.reactivestreams.Publisher;
 import reactor.core.publisher.Mono;
-
 import org.springframework.messaging.Message;
 import org.springframework.util.Assert;
 
@@ -66,7 +65,7 @@ public class ReactiveRequestHandlerAdvice implements MethodInterceptor {
 		Object invocationThis = invocation.getThis();
 		Object[] arguments = invocation.getArguments();
 		boolean isReactiveMethod =
-				method.getName().equals("handleRequestMessage") &&
+				"handleRequestMessage".equals(method.getName()) &&
 						(arguments.length == 1 && arguments[0] instanceof Message) &&
 						result instanceof Mono<?>;
 		if (!isReactiveMethod) {

@@ -16,13 +16,12 @@
 
 package org.springframework.integration.file.config;
 
-import org.junit.Test;
-
-import org.springframework.beans.factory.parsing.BeanDefinitionParsingException;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
+
+import org.junit.Test;
+import org.springframework.beans.factory.parsing.BeanDefinitionParsingException;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  *

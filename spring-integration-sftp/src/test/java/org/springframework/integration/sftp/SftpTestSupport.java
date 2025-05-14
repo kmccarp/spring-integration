@@ -26,7 +26,6 @@ import org.apache.sshd.sftp.client.SftpClient;
 import org.apache.sshd.sftp.server.SftpSubsystemFactory;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
-
 import org.springframework.integration.file.remote.RemoteFileTestSupport;
 import org.springframework.integration.file.remote.session.CachingSessionFactory;
 import org.springframework.integration.file.remote.session.SessionFactory;
@@ -66,7 +65,7 @@ public class SftpTestSupport extends RemoteFileTestSupport {
 		server.setPort(0);
 		server.setKeyPairProvider(new SimpleGeneratorHostKeyProvider(new File("hostkey.ser").toPath()));
 		SftpSubsystemFactory sftpFactory = new SftpSubsystemFactory();
-		EVENT_LISTENER.setApplicationEventPublisher((ev) -> {
+		EVENT_LISTENER.setApplicationEventPublisher(ev -> {
 			// no-op
 		});
 		sftpFactory.addSftpEventListener(EVENT_LISTENER);

@@ -16,13 +16,14 @@
 
 package org.springframework.integration.smb.config;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.integration.channel.PublishSubscribeChannel;
 import org.springframework.integration.endpoint.EventDrivenConsumer;
@@ -30,8 +31,6 @@ import org.springframework.integration.smb.AbstractBaseTests;
 import org.springframework.integration.smb.session.SmbSessionFactory;
 import org.springframework.integration.test.util.TestUtils;
 import org.springframework.messaging.MessageHandler;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Markus Spann

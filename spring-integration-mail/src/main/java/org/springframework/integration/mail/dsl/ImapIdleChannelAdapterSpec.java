@@ -30,7 +30,6 @@ import jakarta.mail.Authenticator;
 import jakarta.mail.Session;
 import jakarta.mail.internet.MimeMessage;
 import org.aopalliance.aop.Advice;
-
 import org.springframework.expression.Expression;
 import org.springframework.integration.dsl.ComponentsRegistration;
 import org.springframework.integration.dsl.MessageProducerSpec;

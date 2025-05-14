@@ -17,7 +17,6 @@
 package org.springframework.integration.sftp.server;
 
 import org.apache.sshd.server.session.ServerSession;
-
 import org.springframework.integration.file.remote.server.FileServerEvent;
 
 /**
@@ -31,11 +30,11 @@ public abstract class ApacheMinaSftpEvent extends FileServerEvent {
 
 	private static final long serialVersionUID = 1L;
 
-	public ApacheMinaSftpEvent(Object source) {
+	protected ApacheMinaSftpEvent(Object source) {
 		super(source);
 	}
 
-	public ApacheMinaSftpEvent(Object source, Throwable cause) {
+	protected ApacheMinaSftpEvent(Object source, Throwable cause) {
 		super(source, cause);
 	}
 

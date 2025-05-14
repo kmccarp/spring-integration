@@ -16,18 +16,17 @@
 
 package org.springframework.integration.config;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
+
 import java.util.Collection;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.integration.aggregator.MethodInvokingReleaseStrategy;
 import org.springframework.integration.aggregator.ReleaseStrategy;
 import org.springframework.integration.aggregator.SimpleSequenceSizeReleaseStrategy;
 import org.springframework.integration.store.MessageGroup;
 import org.springframework.integration.test.util.TestUtils;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.fail;
 
 /**
  * @author Gary Russell

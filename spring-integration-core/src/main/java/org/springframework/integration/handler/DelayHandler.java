@@ -34,7 +34,6 @@ import java.util.stream.Stream;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.aopalliance.aop.Advice;
-
 import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -537,7 +536,7 @@ public class DelayHandler extends AbstractReplyProducingMessageHandler implement
 								new AtomicInteger(this.deliveries.get(identity).get() + 1)),
 						message);
 				try {
-					if (!(getErrorChannel().send(errorMessage))) {
+					if (!getErrorChannel().send(errorMessage)) {
 						this.logger.debug(() -> "Failed to send error message: " + errorMessage);
 						rescheduleForRetry(message, identity);
 					}
@@ -626,7 +625,7 @@ public class DelayHandler extends AbstractReplyProducingMessageHandler implement
 			MessageGroup messageGroup = this.messageStore.getMessageGroup(this.messageGroupId);
 			try (Stream<Message<?>> messageStream = messageGroup.streamMessages()) {
 				TaskScheduler taskScheduler = getTaskScheduler();
-				messageStream.forEach((message) -> // NOSONAR
+				messageStream.forEach(message -> // NOSONAR
 						taskScheduler.schedule(() -> {
 							// This is fine to keep the reference to the message,
 							// because the scheduled task is performed immediately.

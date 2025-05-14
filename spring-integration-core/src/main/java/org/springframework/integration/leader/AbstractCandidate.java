@@ -39,7 +39,7 @@ public abstract class AbstractCandidate implements Candidate {
 	/**
 	 * Instantiate a abstract candidate.
 	 */
-	public AbstractCandidate() {
+	protected AbstractCandidate() {
 		this(null, null);
 	}
 
@@ -49,7 +49,7 @@ public abstract class AbstractCandidate implements Candidate {
 	 * @param id the identifier
 	 * @param role the role
 	 */
-	public AbstractCandidate(@Nullable String id, @Nullable String role) {
+	protected AbstractCandidate(@Nullable String id, @Nullable String role) {
 		this.id = StringUtils.hasText(id) ? id : UUID.randomUUID().toString();
 		this.role = StringUtils.hasText(role) ? role : DEFAULT_ROLE;
 	}

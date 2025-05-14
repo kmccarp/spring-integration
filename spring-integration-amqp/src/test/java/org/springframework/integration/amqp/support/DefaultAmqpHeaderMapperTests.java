@@ -16,6 +16,10 @@
 
 package org.springframework.integration.amqp.support;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
+import static org.mockito.Mockito.mock;
+
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -23,7 +27,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessageDeliveryMode;
 import org.springframework.amqp.core.MessageProperties;
@@ -39,10 +42,6 @@ import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.util.MimeType;
 import org.springframework.util.MimeTypeUtils;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.fail;
-import static org.mockito.Mockito.mock;
 
 /**
  * @author Mark Fisher
@@ -101,7 +100,7 @@ public class DefaultAmqpHeaderMapperTests {
 		headerMapper.fromHeadersToRequest(integrationHeaders, amqpProperties);
 		Set<String> headerKeys = amqpProperties.getHeaders().keySet();
 		for (String headerKey : headerKeys) {
-			if (headerKey.startsWith(AmqpHeaders.PREFIX) || headerKey.equals("contentType")) {
+			if (headerKey.startsWith(AmqpHeaders.PREFIX) || "contentType".equals(headerKey)) {
 				fail("Unexpected header in properties.headers: " + headerKey);
 			}
 		}

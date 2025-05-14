@@ -16,12 +16,11 @@
 
 package org.springframework.integration.groovy.config;
 
-import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
+import org.junit.Test;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.integration.scripting.RefreshableResourceScriptSource;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Dave Syer

@@ -31,7 +31,6 @@ import org.apache.curator.framework.recipes.cache.CuratorCacheListener;
 import org.apache.curator.utils.CloseableUtils;
 import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.data.Stat;
-
 import org.springframework.context.SmartLifecycle;
 import org.springframework.integration.metadata.ListenableMetadataStore;
 import org.springframework.integration.metadata.MetadataStoreListener;
@@ -372,7 +371,7 @@ public class ZookeeperMetadataStore implements ListenableMetadataStore, SmartLif
 
 						ZookeeperMetadataStore.this.updateMap.remove(eventPath);
 					}
-					ZookeeperMetadataStore.this.listeners.forEach((listener) -> listener.onAdd(eventKey, value));
+					ZookeeperMetadataStore.this.listeners.forEach(listener -> listener.onAdd(eventKey, value));
 				}
 				case NODE_CHANGED -> {
 					if (ZookeeperMetadataStore.this.updateMap.containsKey(eventKey) &&
@@ -381,11 +380,11 @@ public class ZookeeperMetadataStore implements ListenableMetadataStore, SmartLif
 
 						ZookeeperMetadataStore.this.updateMap.remove(eventPath);
 					}
-					ZookeeperMetadataStore.this.listeners.forEach((listener) -> listener.onUpdate(eventKey, value));
+					ZookeeperMetadataStore.this.listeners.forEach(listener -> listener.onUpdate(eventKey, value));
 				}
 				case NODE_DELETED -> {
 					ZookeeperMetadataStore.this.updateMap.remove(eventKey);
-					ZookeeperMetadataStore.this.listeners.forEach((listener) -> listener.onRemove(eventKey, value));
+					ZookeeperMetadataStore.this.listeners.forEach(listener -> listener.onRemove(eventKey, value));
 				}
 			}
 		}

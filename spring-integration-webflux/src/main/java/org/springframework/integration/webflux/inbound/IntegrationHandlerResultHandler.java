@@ -17,7 +17,6 @@
 package org.springframework.integration.webflux.inbound;
 
 import reactor.core.publisher.Mono;
-
 import org.springframework.core.Ordered;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.reactive.HandlerResult;

@@ -39,7 +39,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-
 import javax.net.ssl.SSLSession;
 
 import org.springframework.context.ApplicationEventPublisher;
@@ -706,7 +705,7 @@ public class TcpNioConnection extends TcpConnectionSupport {
 
 		private static final int BUFFER_LIMIT = 5;
 
-		private final BlockingQueue<byte[]> buffers = new LinkedBlockingQueue<byte[]>(BUFFER_LIMIT);
+		private final BlockingQueue<byte[]> buffers = new LinkedBlockingQueue<>(BUFFER_LIMIT);
 
 		private volatile byte[] currentBuffer;
 

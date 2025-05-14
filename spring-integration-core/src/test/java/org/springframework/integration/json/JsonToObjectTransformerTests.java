@@ -16,21 +16,20 @@
 
 package org.springframework.integration.json;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.List;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.assertj.core.api.InstanceOfAssertFactories;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.ResolvableType;
 import org.springframework.integration.expression.ValueExpression;
 import org.springframework.integration.support.json.Jackson2JsonObjectMapper;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.GenericMessage;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Mark Fisher
@@ -72,7 +71,7 @@ public class JsonToObjectTransformerTests {
 				.hasSize(1)
 				.element(0)
 				.isInstanceOf(TestPerson.class)
-				.satisfies((actual) -> {
+				.satisfies(actual -> {
 					TestPerson bean = (TestPerson) actual;
 					assertThat(bean).extracting(TestPerson::getFirstName).isEqualTo("John");
 					assertThat(bean).extracting(TestPerson::getLastName).isEqualTo("Doe");

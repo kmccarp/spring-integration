@@ -16,6 +16,12 @@
 
 package org.springframework.integration.amqp.channel;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.willThrow;
+import static org.mockito.Mockito.mock;
+
 import java.util.Collection;
 import java.util.Set;
 import java.util.concurrent.CyclicBarrier;
@@ -26,7 +32,6 @@ import org.junit.After;
 import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.amqp.core.MessageListener;
 import org.springframework.amqp.core.Queue;
@@ -51,12 +56,6 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.BDDMockito.willThrow;
-import static org.mockito.Mockito.mock;
 
 /**
  * @author Gary Russell
@@ -144,7 +143,7 @@ public class ChannelTests {
 			try {
 				if (!consumers.isEmpty()) {
 					BlockingQueueConsumer newConsumer = consumers.iterator().next();
-					if (newConsumer != consumer && newConsumer.getConsumerTags().size() > 0) {
+					if (newConsumer != consumer && !newConsumer.getConsumerTags().isEmpty()) {
 						break;
 					}
 				}
@@ -281,7 +280,7 @@ public class ChannelTests {
 		public int hashCode() {
 			final int prime = 31;
 			int result = 1;
-			result = prime * result + ((this.bar == null) ? 0 : this.bar.hashCode());
+			result = prime * result + (this.bar == null ? 0 : this.bar.hashCode());
 			return result;
 		}
 

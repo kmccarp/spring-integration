@@ -31,7 +31,6 @@ import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.instance.EndpointQualifier;
 import com.hazelcast.map.AbstractIMapEvent;
 import com.hazelcast.map.MapEvent;
-
 import org.springframework.integration.endpoint.MessageProducerSupport;
 import org.springframework.integration.hazelcast.CacheEventType;
 import org.springframework.integration.hazelcast.CacheListeningPolicyType;
@@ -60,7 +59,7 @@ public abstract class AbstractHazelcastMessageProducer extends MessageProducerSu
 
 	private Set<String> cacheEvents = Collections.singleton(CacheEventType.ADDED.name());
 
-	public AbstractHazelcastMessageProducer(DistributedObject distributedObject) {
+	protected AbstractHazelcastMessageProducer(DistributedObject distributedObject) {
 		Assert.notNull(distributedObject, "'distributedObject' must not be null");
 		this.distributedObject = distributedObject;
 	}

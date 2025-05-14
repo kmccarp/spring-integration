@@ -19,7 +19,6 @@ package org.springframework.integration.xmpp.outbound;
 import org.jivesoftware.smack.AbstractXMPPConnection;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.packet.Presence;
-
 import org.springframework.integration.xmpp.core.AbstractXmppConnectionAwareMessageHandler;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageHandlingException;

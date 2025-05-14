@@ -16,12 +16,12 @@
 
 package org.springframework.integration.zookeeper.config;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.imps.CuratorFrameworkState;
 import org.apache.curator.test.TestingServer;
 import org.junit.jupiter.api.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Gary Russell

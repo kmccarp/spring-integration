@@ -24,7 +24,6 @@ import io.r2dbc.spi.Row;
 import io.r2dbc.spi.RowMetadata;
 import org.reactivestreams.Publisher;
 import reactor.core.publisher.Mono;
-
 import org.springframework.data.r2dbc.convert.EntityRowMapper;
 import org.springframework.data.r2dbc.core.R2dbcEntityOperations;
 import org.springframework.data.r2dbc.core.StatementMapper;
@@ -73,7 +72,7 @@ public class R2dbcMessageSource extends AbstractMessageSource<Publisher<?>> {
 
 	private BiFunction<Row, RowMetadata, ?> rowMapper = ColumnMapRowMapper.INSTANCE;
 
-	private boolean expectSingleResult = false;
+	private boolean expectSingleResult;
 
 	private StandardEvaluationContext evaluationContext = new StandardEvaluationContext();
 
@@ -83,7 +82,7 @@ public class R2dbcMessageSource extends AbstractMessageSource<Publisher<?>> {
 	@Nullable
 	private BiFunction<DatabaseClient.GenericExecuteSpec, Object, DatabaseClient.GenericExecuteSpec> bindFunction;
 
-	private volatile boolean initialized = false;
+	private volatile boolean initialized;
 
 	/**
 	 * Create an instance with the provided {@link R2dbcEntityOperations} and SpEL expression

@@ -19,7 +19,6 @@ package org.springframework.integration.jmx;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-
 import javax.management.MBeanServerConnection;
 import javax.management.MalformedObjectNameException;
 import javax.management.ObjectInstance;
@@ -44,7 +43,7 @@ public class MBeanTreePollingMessageSource extends AbstractMessageSource<Object>
 
 	private volatile MBeanServerConnection server;
 
-	private volatile ObjectName queryName = null;
+	private volatile ObjectName queryName;
 
 	private volatile QueryExp queryExpression = ObjectName.WILDCARD;
 

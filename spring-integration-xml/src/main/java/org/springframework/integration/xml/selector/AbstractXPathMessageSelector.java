@@ -40,7 +40,7 @@ public abstract class AbstractXPathMessageSelector implements MessageSelector {
 	/**
 	 * @param xPathExpression XPath expression as a String
 	 */
-	public AbstractXPathMessageSelector(String xPathExpression) {
+	protected AbstractXPathMessageSelector(String xPathExpression) {
 		this.xPathExpresion = XPathExpressionFactory.createXPathExpression(xPathExpression);
 	}
 
@@ -49,7 +49,7 @@ public abstract class AbstractXPathMessageSelector implements MessageSelector {
 	 * @param prefix namespace prefix
 	 * @param namespace namespace URI
 	 */
-	public AbstractXPathMessageSelector(String xPathExpression, String prefix, String namespace) {
+	protected AbstractXPathMessageSelector(String xPathExpression, String prefix, String namespace) {
 		Map<String, String> namespaces = new HashMap<>();
 		namespaces.put(prefix, namespace);
 		this.xPathExpresion = XPathExpressionFactory.createXPathExpression(xPathExpression, namespaces);
@@ -59,14 +59,14 @@ public abstract class AbstractXPathMessageSelector implements MessageSelector {
 	 * @param xPathExpression XPath expression as a String
 	 * @param namespaces Map of namespaces with prefixes as the Map keys
 	 */
-	public AbstractXPathMessageSelector(String xPathExpression, Map<String, String> namespaces) {
+	protected AbstractXPathMessageSelector(String xPathExpression, Map<String, String> namespaces) {
 		this.xPathExpresion = XPathExpressionFactory.createXPathExpression(xPathExpression, namespaces);
 	}
 
 	/**
 	 * @param xPathExpression XPath expression
 	 */
-	public AbstractXPathMessageSelector(XPathExpression xPathExpression) {
+	protected AbstractXPathMessageSelector(XPathExpression xPathExpression) {
 		this.xPathExpresion = xPathExpression;
 	}
 

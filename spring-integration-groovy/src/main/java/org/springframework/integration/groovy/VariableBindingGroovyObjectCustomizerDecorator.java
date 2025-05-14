@@ -21,7 +21,6 @@ import java.util.Map;
 import groovy.lang.Binding;
 import groovy.lang.GroovyObject;
 import groovy.lang.Script;
-
 import org.springframework.scripting.groovy.GroovyObjectCustomizer;
 import org.springframework.util.Assert;
 

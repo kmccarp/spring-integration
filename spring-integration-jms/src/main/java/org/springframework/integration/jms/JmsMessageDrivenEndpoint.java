@@ -17,7 +17,6 @@
 package org.springframework.integration.jms;
 
 import io.micrometer.observation.ObservationRegistry;
-
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.integration.context.OrderlyShutdownCapable;

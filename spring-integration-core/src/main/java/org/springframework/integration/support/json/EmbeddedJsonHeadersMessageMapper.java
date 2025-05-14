@@ -29,7 +29,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.springframework.integration.mapping.BytesMessageMapper;
 import org.springframework.integration.support.MutableMessage;
 import org.springframework.integration.support.MutableMessageHeaders;
@@ -130,7 +129,7 @@ public class EmbeddedJsonHeadersMessageMapper implements BytesMessageMapper {
 	public EmbeddedJsonHeadersMessageMapper(ObjectMapper objectMapper, String... headerPatterns) {
 		this.objectMapper = objectMapper;
 		this.headerPatterns = Arrays.copyOf(headerPatterns, headerPatterns.length);
-		this.allHeaders = this.headerPatterns.length == 1 && this.headerPatterns[0].equals("*");
+		this.allHeaders = this.headerPatterns.length == 1 && "*".equals(this.headerPatterns[0]);
 	}
 
 	/**

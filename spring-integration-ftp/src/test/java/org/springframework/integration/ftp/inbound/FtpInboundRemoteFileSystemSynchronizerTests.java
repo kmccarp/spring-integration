@@ -16,6 +16,13 @@
 
 package org.springframework.integration.ftp.inbound;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import java.io.File;
 import java.io.OutputStream;
 import java.net.InetAddress;
@@ -31,7 +38,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.expression.Expression;
 import org.springframework.expression.ExpressionParser;
@@ -52,13 +58,6 @@ import org.springframework.integration.metadata.SimpleMetadataStore;
 import org.springframework.integration.test.util.TestUtils;
 import org.springframework.messaging.Message;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 /**
  * @author Oleg Zhurakousky
  * @author Gunnar Hillert
@@ -69,7 +68,7 @@ import static org.mockito.Mockito.when;
  */
 public class FtpInboundRemoteFileSystemSynchronizerTests {
 
-	private static FTPClient ftpClient = mock(FTPClient.class);
+	private static final FTPClient ftpClient = mock(FTPClient.class);
 
 	@BeforeEach
 	@AfterEach
@@ -233,7 +232,7 @@ public class FtpInboundRemoteFileSystemSynchronizerTests {
 
 		@Override
 		protected FTPClient createClientInstance() {
-			if (this.ftpFiles.size() == 0) {
+			if (this.ftpFiles.isEmpty()) {
 				this.init();
 			}
 

@@ -20,7 +20,6 @@ import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import io.micrometer.common.lang.Nullable;
-
 import org.springframework.integration.support.MessageDecorator;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;

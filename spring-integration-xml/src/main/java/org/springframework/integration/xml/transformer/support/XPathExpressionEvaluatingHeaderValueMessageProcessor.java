@@ -17,7 +17,6 @@
 package org.springframework.integration.xml.transformer.support;
 
 import org.w3c.dom.Node;
-
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;

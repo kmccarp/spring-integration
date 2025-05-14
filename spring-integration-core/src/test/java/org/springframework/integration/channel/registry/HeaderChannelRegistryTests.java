@@ -16,10 +16,15 @@
 
 package org.springframework.integration.channel.registry;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 import java.util.Map;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,12 +48,6 @@ import org.springframework.messaging.support.GenericMessage;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 /**
  * @author Gary Russell
@@ -261,7 +260,7 @@ public class HeaderChannelRegistryTests {
 					.satisfiesAnyOf(
 							errorChannel -> assertThat(errorChannel).isInstanceOf(String.class),
 							errorChannel -> assertThat(errorChannel).isNull());
-			if (requestMessage.getPayload().equals("bar")) {
+			if ("bar".equals(requestMessage.getPayload())) {
 				throw new RuntimeException("intentional");
 			}
 			return MessageBuilder.withPayload("echo:" + requestMessage.getPayload())

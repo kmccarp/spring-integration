@@ -16,10 +16,11 @@
 
 package org.springframework.integration.mongodb.config;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import com.mongodb.BasicDBObject;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.data.mongodb.MongoDatabaseFactory;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -29,8 +30,6 @@ import org.springframework.integration.support.MessageBuilder;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.support.GenericMessage;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Oleg Zhurakousky
@@ -52,7 +51,7 @@ class MongoDbOutboundChannelAdapterIntegrationTests implements MongoDbContainerT
 				new ClassPathXmlApplicationContext("outbound-adapter-config.xml", this.getClass());
 
 		MessageChannel channel = context.getBean("simpleAdapter", MessageChannel.class);
-		Message<Person> message = new GenericMessage<MongoDbContainerTest.Person>(MongoDbContainerTest.createPerson("Bob"));
+		Message<Person> message = new GenericMessage<>(MongoDbContainerTest.createPerson("Bob"));
 		channel.send(message);
 
 		MongoDbContainerTest.prepareMongoData(MONGO_DATABASE_FACTORY);
@@ -150,7 +149,7 @@ class MongoDbOutboundChannelAdapterIntegrationTests implements MongoDbContainerT
 				new ClassPathXmlApplicationContext("outbound-adapter-config.xml", this.getClass());
 
 		MessageChannel channel = context.getBean("simpleAdapterWithConverter", MessageChannel.class);
-		Message<Person> message = new GenericMessage<MongoDbContainerTest.Person>(MongoDbContainerTest.createPerson("Bob"));
+		Message<Person> message = new GenericMessage<>(MongoDbContainerTest.createPerson("Bob"));
 		channel.send(message);
 
 		MongoDbContainerTest.prepareMongoData(MONGO_DATABASE_FACTORY);

@@ -16,8 +16,10 @@
 
 package org.springframework.integration.amqp.support;
 
-import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
 
+import org.junit.Test;
 import org.springframework.amqp.core.MessageDeliveryMode;
 import org.springframework.amqp.support.AmqpHeaders;
 import org.springframework.amqp.support.converter.ContentTypeDelegatingMessageConverter;
@@ -25,9 +27,6 @@ import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.amqp.support.converter.SimpleMessageConverter;
 import org.springframework.integration.support.MessageBuilder;
 import org.springframework.messaging.Message;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.fail;
 
 /**
  * @author Gary Russell

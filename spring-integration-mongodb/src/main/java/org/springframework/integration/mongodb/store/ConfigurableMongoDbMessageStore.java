@@ -106,7 +106,7 @@ public class ConfigurableMongoDbMessageStore extends AbstractConfigurableMongoDb
 		Query query = Query.query(Criteria.where(MessageDocumentFields.MESSAGE_ID).is(id)
 				.and(MessageDocumentFields.GROUP_ID).exists(false));
 		MessageDocument document = getMongoTemplate().findAndRemove(query, MessageDocument.class, this.collectionName);
-		return (document != null) ? document.getMessage() : null;
+		return document != null ? document.getMessage() : null;
 	}
 
 	@Override

@@ -27,7 +27,6 @@ import org.jivesoftware.smackx.jiveproperties.JivePropertiesManager;
 import org.jivesoftware.smackx.jiveproperties.packet.JivePropertiesExtension;
 import org.jxmpp.jid.Jid;
 import org.jxmpp.stringprep.XmppStringprepException;
-
 import org.springframework.integration.mapping.AbstractHeaderMapper;
 import org.springframework.integration.xmpp.XmppHeaders;
 import org.springframework.util.StringUtils;

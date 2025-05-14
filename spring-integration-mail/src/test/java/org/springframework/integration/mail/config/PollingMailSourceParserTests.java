@@ -16,6 +16,8 @@
 
 package org.springframework.integration.mail.config;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.Properties;
 import java.util.stream.Stream;
 
@@ -23,7 +25,6 @@ import jakarta.mail.URLName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-
 import org.springframework.beans.DirectFieldAccessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -33,8 +34,6 @@ import org.springframework.integration.mail.MailReceiver;
 import org.springframework.integration.mail.MailReceivingMessageSource;
 import org.springframework.integration.mail.Pop3MailReceiver;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Jonas Partner

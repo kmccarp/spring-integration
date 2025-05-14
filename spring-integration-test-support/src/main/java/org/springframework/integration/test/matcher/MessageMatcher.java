@@ -21,7 +21,6 @@ import java.util.Map;
 
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
-
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageHeaders;
 

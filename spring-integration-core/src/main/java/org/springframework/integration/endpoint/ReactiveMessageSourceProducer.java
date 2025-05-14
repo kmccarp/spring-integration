@@ -19,7 +19,6 @@ package org.springframework.integration.endpoint;
 import java.time.Duration;
 
 import reactor.core.publisher.Flux;
-
 import org.springframework.integration.core.MessageSource;
 import org.springframework.integration.util.IntegrationReactiveUtils;
 import org.springframework.messaging.Message;
@@ -47,7 +46,7 @@ public class ReactiveMessageSourceProducer extends MessageProducerSupport {
 		Assert.notNull(messageSource, "'messageSource' must not be null");
 		this.messageFlux =
 				IntegrationReactiveUtils.messageSourceToFlux(messageSource)
-						.contextWrite((ctx) ->
+						.contextWrite(ctx ->
 								ctx.put(IntegrationReactiveUtils.DELAY_WHEN_EMPTY_KEY, this.delayWhenEmpty));
 	}
 

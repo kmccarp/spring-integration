@@ -16,13 +16,15 @@
 
 package org.springframework.integration.config.annotation;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+
 import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.integration.annotation.MessageEndpoint;
 import org.springframework.integration.annotation.Router;
 import org.springframework.integration.channel.DirectChannel;
@@ -32,9 +34,6 @@ import org.springframework.integration.test.util.TestUtils;
 import org.springframework.integration.test.util.TestUtils.TestApplicationContext;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.GenericMessage;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
 
 /**
  * @author Mark Fisher
@@ -105,7 +104,7 @@ public class RouterAnnotationPostProcessorTests {
 
 		@Router(inputChannel = "routingChannel")
 		public String route(List<?> payload) {
-			if (payload.size() == 0) {
+			if (payload.isEmpty()) {
 				return null;
 			}
 			if (payload.get(0) instanceof Integer) {

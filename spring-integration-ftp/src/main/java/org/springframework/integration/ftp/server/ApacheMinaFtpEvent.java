@@ -17,7 +17,6 @@
 package org.springframework.integration.ftp.server;
 
 import org.apache.ftpserver.ftplet.FtpSession;
-
 import org.springframework.integration.file.remote.server.FileServerEvent;
 
 /**
@@ -31,11 +30,11 @@ public abstract class ApacheMinaFtpEvent extends FileServerEvent {
 
 	private static final long serialVersionUID = 1L;
 
-	public ApacheMinaFtpEvent(Object source) {
+	protected ApacheMinaFtpEvent(Object source) {
 		super(source);
 	}
 
-	public ApacheMinaFtpEvent(Object source, Throwable cause) {
+	protected ApacheMinaFtpEvent(Object source, Throwable cause) {
 		super(source, cause);
 	}
 

@@ -17,7 +17,6 @@
 package org.springframework.integration.sftp.inbound;
 
 import org.apache.sshd.sftp.client.SftpClient;
-
 import org.springframework.integration.file.remote.session.SessionFactory;
 import org.springframework.integration.file.remote.synchronizer.AbstractInboundFileSynchronizer;
 import org.springframework.integration.metadata.SimpleMetadataStore;

@@ -16,6 +16,9 @@
 
 package org.springframework.integration.hazelcast.outbound.util;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -33,14 +36,10 @@ import com.hazelcast.multimap.MultiMap;
 import com.hazelcast.replicatedmap.ReplicatedMap;
 import com.hazelcast.topic.ITopic;
 import com.hazelcast.topic.MessageListener;
-
 import org.springframework.integration.hazelcast.HazelcastIntegrationTestUser;
 import org.springframework.integration.hazelcast.HazelcastTestRequestHandlerAdvice;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.support.GenericMessage;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.fail;
 
 /**
  * Util Class for Hazelcast Outbound Channel Adapter Test Support

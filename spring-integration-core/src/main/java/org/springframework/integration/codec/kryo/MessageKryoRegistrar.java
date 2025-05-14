@@ -23,7 +23,6 @@ import java.util.UUID;
 
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryo.Registration;
-
 import org.springframework.integration.message.AdviceMessage;
 import org.springframework.integration.support.MutableMessage;
 import org.springframework.integration.support.MutableMessageHeaders;

@@ -23,7 +23,6 @@ import java.util.function.Function;
 import org.apache.camel.ExchangePattern;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.LambdaRouteBuilder;
-
 import org.springframework.expression.Expression;
 import org.springframework.integration.camel.outbound.CamelMessageHandler;
 import org.springframework.integration.camel.support.CamelHeaderMapper;

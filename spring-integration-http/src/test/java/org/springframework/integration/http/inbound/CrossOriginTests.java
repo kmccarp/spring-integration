@@ -16,9 +16,10 @@
 
 package org.springframework.integration.http.inbound;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.integration.test.util.TestUtils;
@@ -29,8 +30,6 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerExecutionChain;
 import org.springframework.web.servlet.HandlerInterceptor;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Artem Bilan
@@ -175,14 +174,14 @@ public class CrossOriginTests {
 	private CorsConfiguration getCorsConfiguration(HandlerExecutionChain chain, boolean isPreFlightRequest) {
 		if (isPreFlightRequest) {
 			Object handler = chain.getHandler();
-			assertThat(handler.getClass().getSimpleName().equals("PreFlightHttpRequestHandler")).isTrue();
+			assertThat("PreFlightHttpRequestHandler".equals(handler.getClass().getSimpleName())).isTrue();
 			return TestUtils.getPropertyValue(handler, "config", CorsConfiguration.class);
 		}
 		else {
 			HandlerInterceptor[] interceptors = chain.getInterceptors();
 			if (interceptors != null) {
 				for (HandlerInterceptor interceptor : interceptors) {
-					if (interceptor.getClass().getSimpleName().equals("CorsInterceptor")) {
+					if ("CorsInterceptor".equals(interceptor.getClass().getSimpleName())) {
 						return TestUtils.getPropertyValue(interceptor, "config", CorsConfiguration.class);
 					}
 				}

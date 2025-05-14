@@ -16,6 +16,9 @@
 
 package org.springframework.integration.redis.inbound;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.awaitility.Awaitility.await;
+
 import java.time.Duration;
 import java.util.Date;
 import java.util.concurrent.atomic.AtomicReference;
@@ -27,7 +30,6 @@ import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -55,9 +57,6 @@ import org.springframework.messaging.support.ErrorMessage;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.awaitility.Awaitility.await;
 
 /**
  * @author Attoumane Ahamadi
@@ -117,7 +116,7 @@ class ReactiveRedisStreamMessageProducerTests implements RedisContainerTest {
 				.groups(STREAM_KEY)
 				.next()
 				.as(StepVerifier::create)
-				.assertNext((infoGroup) ->
+				.assertNext(infoGroup ->
 						assertThat(infoGroup.groupName()).isEqualTo(this.reactiveRedisStreamProducer.getBeanName()))
 				.thenCancel()
 				.verify(Duration.ofSeconds(10));

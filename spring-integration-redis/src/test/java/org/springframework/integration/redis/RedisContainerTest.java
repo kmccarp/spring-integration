@@ -16,6 +16,8 @@
 
 package org.springframework.integration.redis;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.time.Duration;
 
 import io.lettuce.core.ClientOptions;
@@ -23,7 +25,6 @@ import io.lettuce.core.SocketOptions;
 import org.junit.jupiter.api.BeforeAll;
 import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.junit.jupiter.Testcontainers;
-
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
@@ -37,8 +38,6 @@ import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 import org.springframework.integration.channel.QueueChannel;
 import org.springframework.integration.test.util.TestUtils;
 import org.springframework.messaging.Message;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * The base contract for all tests requiring a Redis connection.
@@ -120,7 +119,7 @@ public interface RedisContainerTest {
 				RedisConnection.class);
 
 		int n = 0;
-		while (n++ < 300 && connection.getSubscription().getPatterns().size() == 0) {
+		while (n++ < 300 && connection.getSubscription().getPatterns().isEmpty()) {
 			Thread.sleep(100);
 		}
 		assertThat(n < 300).as("RedisMessageListenerContainer Failed to Subscribe with patterns").isTrue();

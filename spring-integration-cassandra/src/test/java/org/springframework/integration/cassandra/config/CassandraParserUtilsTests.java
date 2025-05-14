@@ -16,13 +16,12 @@
 
 package org.springframework.integration.cassandra.config;
 
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.RootBeanDefinition;
 import org.springframework.integration.cassandra.config.xml.CassandraParserUtils;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Filippo Balicchia

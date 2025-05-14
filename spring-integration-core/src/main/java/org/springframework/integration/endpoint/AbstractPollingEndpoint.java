@@ -32,7 +32,6 @@ import org.reactivestreams.Subscription;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
-
 import org.springframework.aop.framework.Advised;
 import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.aop.support.AopUtils;
@@ -122,12 +121,12 @@ public abstract class AbstractPollingEndpoint extends AbstractEndpoint implement
 
 	private volatile boolean initialized;
 
-	public AbstractPollingEndpoint() {
+	protected AbstractPollingEndpoint() {
 		this.setPhase(Integer.MAX_VALUE / 2);
 	}
 
 	public void setTaskExecutor(Executor taskExecutor) {
-		this.taskExecutor = (taskExecutor != null ? taskExecutor : new SyncTaskExecutor());
+		this.taskExecutor = taskExecutor != null ? taskExecutor : new SyncTaskExecutor();
 		this.syncExecutor = this.taskExecutor instanceof SyncTaskExecutor
 				|| (this.taskExecutor instanceof ErrorHandlingTaskExecutor
 				&& ((ErrorHandlingTaskExecutor) this.taskExecutor).isSyncExecutor());
@@ -142,7 +141,7 @@ public abstract class AbstractPollingEndpoint extends AbstractEndpoint implement
 	}
 
 	public void setTrigger(Trigger trigger) {
-		this.trigger = (trigger != null ? trigger : new PeriodicTrigger(Duration.ofMillis(DEFAULT_POLLING_PERIOD)));
+		this.trigger = trigger != null ? trigger : new PeriodicTrigger(Duration.ofMillis(DEFAULT_POLLING_PERIOD));
 	}
 
 	public void setAdviceChain(List<Advice> adviceChain) {

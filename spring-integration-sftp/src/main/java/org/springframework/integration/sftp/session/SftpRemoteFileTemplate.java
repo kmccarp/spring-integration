@@ -21,7 +21,6 @@ import java.util.List;
 import org.apache.sshd.sftp.client.SftpClient;
 import org.apache.sshd.sftp.common.SftpConstants;
 import org.apache.sshd.sftp.common.SftpException;
-
 import org.springframework.integration.file.remote.ClientCallback;
 import org.springframework.integration.file.remote.RemoteFileTemplate;
 import org.springframework.integration.file.remote.session.SessionFactory;

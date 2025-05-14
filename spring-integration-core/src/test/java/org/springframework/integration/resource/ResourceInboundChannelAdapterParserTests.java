@@ -16,6 +16,9 @@
 
 package org.springframework.integration.resource;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+
 import java.io.File;
 import java.util.Collection;
 
@@ -23,7 +26,6 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.io.Resource;
@@ -32,9 +34,6 @@ import org.springframework.integration.endpoint.SourcePollingChannelAdapter;
 import org.springframework.integration.test.util.TestUtils;
 import org.springframework.integration.util.CollectionFilter;
 import org.springframework.messaging.Message;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 /**
  * @author Oleg Zhurakousky
@@ -172,7 +171,7 @@ public class ResourceInboundChannelAdapterParserTests {
 
 	public static class TestCollectionFilter implements CollectionFilter<Resource> {
 
-		private volatile boolean invoked = false;
+		private volatile boolean invoked;
 
 		@Override
 		public Collection<Resource> filter(Collection<Resource> unfilteredResources) {

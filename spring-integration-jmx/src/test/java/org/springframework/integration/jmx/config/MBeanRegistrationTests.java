@@ -16,10 +16,11 @@
 
 package org.springframework.integration.jmx.config;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-
 import javax.management.MBeanOperationInfo;
 import javax.management.MBeanServer;
 import javax.management.ObjectName;
@@ -27,14 +28,11 @@ import javax.management.ObjectName;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.integration.gateway.MessagingGatewaySupport;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Dave Syer
@@ -81,7 +79,7 @@ public class MBeanRegistrationTests {
 	@Ignore // re-instate this if Spring decides to look for @ManagedResource on super classes
 	public void testServiceActivatorMBeanHasTrackableComponent() throws Exception {
 		Set<ObjectName> names = server.queryNames(new ObjectName("test.MBeanRegistration:type=ServiceActivatingHandler,name=service,*"), null);
-		Map<String, MBeanOperationInfo> infos = new HashMap<String, MBeanOperationInfo>();
+		Map<String, MBeanOperationInfo> infos = new HashMap<>();
 		for (MBeanOperationInfo info : server.getMBeanInfo(names.iterator().next()).getOperations()) {
 			infos.put(info.getName(), info);
 		}

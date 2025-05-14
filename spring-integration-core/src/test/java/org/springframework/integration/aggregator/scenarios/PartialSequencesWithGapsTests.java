@@ -16,12 +16,13 @@
 
 package org.springframework.integration.aggregator.scenarios;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.integration.IntegrationMessageHeaderAccessor;
 import org.springframework.integration.support.MessageBuilder;
@@ -29,8 +30,6 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.SubscribableChannel;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Iwein Fuld
@@ -46,7 +45,7 @@ public class PartialSequencesWithGapsTests {
 	SubscribableChannel out;
 
 	@SuppressWarnings("rawtypes")
-	Queue<Message> received = new ArrayBlockingQueue<Message>(10);
+	Queue<Message> received = new ArrayBlockingQueue<>(10);
 
 	@BeforeEach
 	public void collectOutput() {

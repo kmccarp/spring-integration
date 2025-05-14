@@ -16,18 +16,17 @@
 
 package org.springframework.integration.handler;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Mono;
-
 import org.springframework.integration.channel.QueueChannel;
 import org.springframework.integration.history.MessageHistory;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.GenericMessage;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author David Turanski
@@ -37,9 +36,9 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 class ReactiveMessageHandlerTests {
 
-	private AtomicBoolean handled = new AtomicBoolean();
+	private final AtomicBoolean handled = new AtomicBoolean();
 
-	private QueueChannel output = new QueueChannel();
+	private final QueueChannel output = new QueueChannel();
 
 	@BeforeEach
 	void setUp() {

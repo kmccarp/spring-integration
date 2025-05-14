@@ -31,7 +31,6 @@ import java.util.stream.Collectors;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.springframework.integration.IntegrationMessageHeaderAccessor;
 import org.springframework.integration.message.AdviceMessage;
 import org.springframework.integration.support.DefaultMessageBuilderFactory;
@@ -243,7 +242,7 @@ public final class MessageHistory implements List<Properties>, Serializable, Clo
 	public String toString() {
 		return this.components
 				.stream()
-				.map((props) -> props.getProperty(NAME_PROPERTY))
+				.map(props -> props.getProperty(NAME_PROPERTY))
 				.collect(Collectors.joining(","));
 	}
 

@@ -27,7 +27,6 @@ import com.hazelcast.replicatedmap.ReplicatedMap;
 import com.hazelcast.topic.ITopic;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.integration.hazelcast.HazelcastIntegrationTestUser;

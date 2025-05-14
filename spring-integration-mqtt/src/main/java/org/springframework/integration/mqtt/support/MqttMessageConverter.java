@@ -17,7 +17,6 @@
 package org.springframework.integration.mqtt.support;
 
 import org.eclipse.paho.client.mqttv3.MqttMessage;
-
 import org.springframework.integration.handler.MessageProcessor;
 import org.springframework.integration.support.AbstractIntegrationMessageBuilder;
 import org.springframework.messaging.Message;

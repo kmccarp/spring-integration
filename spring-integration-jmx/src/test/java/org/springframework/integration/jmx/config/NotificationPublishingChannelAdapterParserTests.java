@@ -16,8 +16,10 @@
 
 package org.springframework.integration.jmx.config;
 
-import java.util.Set;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
 
+import java.util.Set;
 import javax.management.Attribute;
 import javax.management.MBeanException;
 import javax.management.MBeanServer;
@@ -28,7 +30,6 @@ import javax.management.ObjectName;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.integration.handler.advice.AbstractRequestHandlerAdvice;
@@ -40,9 +41,6 @@ import org.springframework.messaging.MessageHandler;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.fail;
 
 /**
  * @author Mark Fisher
@@ -156,9 +154,6 @@ public class NotificationPublishingChannelAdapterParserTests {
 				catch (MBeanException e) {
 					assertThat(e.getTargetException()).isInstanceOf(IllegalStateException.class);
 					assertThat(e.getTargetException().getMessage()).contains("cannot be changed");
-				}
-				catch (Exception e) {
-					throw e;
 				}
 				server.invoke(objectName, "stop", new Object[] {}, new String[] {});
 				server.setAttribute(objectName, new Attribute("ComponentNamePatternsString", "foo, bar"));

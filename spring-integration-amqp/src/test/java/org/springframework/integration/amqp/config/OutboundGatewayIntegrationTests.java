@@ -16,10 +16,11 @@
 
 package org.springframework.integration.amqp.config;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
 import org.springframework.amqp.rabbit.junit.BrokerRunning;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.Message;
@@ -29,8 +30,6 @@ import org.springframework.messaging.support.GenericMessage;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Mark Fisher

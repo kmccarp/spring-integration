@@ -23,7 +23,6 @@ import org.apache.logging.log4j.Level;
 import org.junit.rules.MethodRule;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.Statement;
-
 import org.springframework.integration.test.util.TestUtils;
 import org.springframework.integration.test.util.TestUtils.LevelsContainer;
 import org.springframework.util.Assert;

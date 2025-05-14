@@ -16,6 +16,11 @@
 
 package org.springframework.integration.config.xml;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import java.time.Duration;
 import java.util.Map;
 import java.util.concurrent.Callable;
@@ -32,7 +37,6 @@ import org.mockito.ArgumentMatchers;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Sinks;
 import reactor.test.StepVerifier;
-
 import org.springframework.beans.DirectFieldAccessor;
 import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,11 +65,6 @@ import org.springframework.messaging.support.ChannelInterceptor;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 /**
  * @author Mark Fisher
@@ -403,21 +402,21 @@ public class GatewayParserTests {
 			Message<?> reply = MessageBuilder.fromMessage(request)
 					.setCorrelationId(request.getHeaders().getId()).build();
 			Object payload = null;
-			if (request.getPayload().equals("futureSync")) {
+			if ("futureSync".equals(request.getPayload())) {
 				payload = CompletableFuture.completedFuture(reply);
 			}
-			else if (request.getPayload().equals("flowCompletable")) {
+			else if ("flowCompletable".equals(request.getPayload())) {
 				payload = CompletableFuture.completedFuture("SYNC_COMPLETABLE");
 			}
-			else if (request.getPayload().equals("flowCustomCompletable")) {
+			else if ("flowCustomCompletable".equals(request.getPayload())) {
 				MyCompletableFuture myCompletableFuture1 = new MyCompletableFuture();
 				myCompletableFuture1.complete("SYNC_CUSTOM_COMPLETABLE");
 				payload = myCompletableFuture1;
 			}
-			else if (request.getPayload().equals("flowCompletableM")) {
+			else if ("flowCompletableM".equals(request.getPayload())) {
 				payload = CompletableFuture.<Message<?>>completedFuture(reply);
 			}
-			else if (request.getPayload().equals("flowCustomCompletableM")) {
+			else if ("flowCustomCompletableM".equals(request.getPayload())) {
 				MyCompletableMessageFuture myCompletableFuture2 = new MyCompletableMessageFuture();
 				myCompletableFuture2.complete(reply);
 				payload = myCompletableFuture2;

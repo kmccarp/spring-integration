@@ -16,19 +16,18 @@
 
 package org.springframework.integration.smb.session;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+
 import java.io.IOException;
 
 import jcifs.smb.SmbFile;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.integration.file.remote.session.CachingSessionFactory;
 import org.springframework.integration.file.remote.session.Session;
 import org.springframework.integration.smb.SmbTestSupport;
 import org.springframework.integration.test.util.TestUtils;
 import org.springframework.messaging.MessagingException;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 /**
  *

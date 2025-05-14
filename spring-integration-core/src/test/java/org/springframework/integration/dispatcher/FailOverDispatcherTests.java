@@ -16,12 +16,15 @@
 
 package org.springframework.integration.dispatcher;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.mockito.Mockito.mock;
+
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.integration.MessageRejectedException;
 import org.springframework.integration.handler.ServiceActivatingHandler;
@@ -30,10 +33,6 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageDeliveryException;
 import org.springframework.messaging.MessageHandler;
 import org.springframework.messaging.support.GenericMessage;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.mockito.Mockito.mock;
 
 /**
  * @author Mark Fisher
@@ -174,7 +173,7 @@ public class FailOverDispatcherTests {
 	@Test
 	public void failoverStrategyRejects() {
 		UnicastingDispatcher dispatcher = new UnicastingDispatcher();
-		dispatcher.setFailoverStrategy((exception) -> !(exception instanceof MessageRejectedException));
+		dispatcher.setFailoverStrategy(exception -> !(exception instanceof MessageRejectedException));
 		AtomicInteger counter = new AtomicInteger();
 		MessageHandler target1 = new CountingTestEndpoint(counter, false);
 		MessageHandler target2 = new CountingTestEndpoint(counter, true);

@@ -16,13 +16,14 @@
 
 package org.springframework.integration.event.config;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;
-
 import org.springframework.beans.DirectFieldAccessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
@@ -42,8 +43,6 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.event.ApplicationEvents;
 import org.springframework.test.context.event.RecordApplicationEvents;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Oleg Zhurakousky
@@ -121,7 +120,7 @@ public class EventOutboundChannelAdapterParserTests {
 			Object source = event.getSource();
 			if (source instanceof Message) {
 				String payload = (String) ((Message<?>) source).getPayload();
-				if (payload.equals("hello")) {
+				if ("hello".equals(payload)) {
 					eventLatch.countDown();
 				}
 			}

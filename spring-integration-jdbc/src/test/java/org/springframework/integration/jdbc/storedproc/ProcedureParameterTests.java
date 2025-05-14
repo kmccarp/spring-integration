@@ -16,14 +16,14 @@
 
 package org.springframework.integration.jdbc.storedproc;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import org.junit.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.fail;
 
 public class ProcedureParameterTests {
 
@@ -98,7 +98,7 @@ public class ProcedureParameterTests {
 
 	private List<ProcedureParameter> getProcedureParameterList() {
 
-		List<ProcedureParameter> procedureParameterList = new ArrayList<ProcedureParameter>();
+		List<ProcedureParameter> procedureParameterList = new ArrayList<>();
 		procedureParameterList.add(new ProcedureParameter("param1", "value1", null));
 		procedureParameterList.add(new ProcedureParameter("param2", "value1", null));
 		procedureParameterList.add(new ProcedureParameter("param3", "value1", null));

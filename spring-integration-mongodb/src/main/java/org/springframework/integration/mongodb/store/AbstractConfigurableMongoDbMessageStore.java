@@ -25,7 +25,6 @@ import java.util.UUID;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ApplicationContext;
@@ -90,7 +89,7 @@ public abstract class AbstractConfigurableMongoDbMessageStore extends AbstractMe
 
 	private boolean createIndexes = true;
 
-	public AbstractConfigurableMongoDbMessageStore(MongoTemplate mongoTemplate, String collectionName) {
+	protected AbstractConfigurableMongoDbMessageStore(MongoTemplate mongoTemplate, String collectionName) {
 		Assert.notNull(mongoTemplate, "'mongoTemplate' must not be null");
 		Assert.hasText(collectionName, "'collectionName' must not be empty");
 		this.collectionName = collectionName;
@@ -98,11 +97,11 @@ public abstract class AbstractConfigurableMongoDbMessageStore extends AbstractMe
 		this.mongoDbFactory = null;
 	}
 
-	public AbstractConfigurableMongoDbMessageStore(MongoDatabaseFactory mongoDbFactory, String collectionName) {
+	protected AbstractConfigurableMongoDbMessageStore(MongoDatabaseFactory mongoDbFactory, String collectionName) {
 		this(mongoDbFactory, null, collectionName);
 	}
 
-	public AbstractConfigurableMongoDbMessageStore(MongoDatabaseFactory mongoDbFactory,
+	protected AbstractConfigurableMongoDbMessageStore(MongoDatabaseFactory mongoDbFactory,
 			MappingMongoConverter mappingMongoConverter, String collectionName) {
 		Assert.notNull(mongoDbFactory, "'mongoDbFactory' must not be null");
 		Assert.hasText(collectionName, "'collectionName' must not be empty");

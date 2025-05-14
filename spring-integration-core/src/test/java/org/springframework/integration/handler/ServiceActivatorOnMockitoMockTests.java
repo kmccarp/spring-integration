@@ -16,8 +16,9 @@
 
 package org.springframework.integration.handler;
 
-import org.junit.jupiter.api.Test;
+import static org.mockito.Mockito.verify;
 
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.integration.annotation.ServiceActivator;
@@ -27,8 +28,6 @@ import org.springframework.messaging.PollableChannel;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.mockito.Mockito.verify;
 
 /**
  * @author Iwein Fuld

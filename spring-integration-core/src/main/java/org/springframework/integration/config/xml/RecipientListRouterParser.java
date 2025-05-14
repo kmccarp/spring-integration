@@ -19,7 +19,6 @@ package org.springframework.integration.config.xml;
 import java.util.List;
 
 import org.w3c.dom.Element;
-
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.ManagedList;
@@ -46,7 +45,7 @@ public class RecipientListRouterParser extends AbstractRouterParser {
 		BeanDefinitionBuilder recipientListRouterBuilder =
 				BeanDefinitionBuilder.genericBeanDefinition(RecipientListRouter.class);
 		List<Element> childElements = DomUtils.getChildElementsByTagName(element, "recipient");
-		ManagedList<BeanDefinition> recipientList = new ManagedList<BeanDefinition>();
+		ManagedList<BeanDefinition> recipientList = new ManagedList<>();
 		for (Element childElement : childElements) {
 			BeanDefinitionBuilder recipientBuilder = BeanDefinitionBuilder.genericBeanDefinition(Recipient.class);
 			recipientBuilder.addConstructorArgReference(childElement.getAttribute("channel"));

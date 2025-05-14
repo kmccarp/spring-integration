@@ -16,6 +16,8 @@
 
 package org.springframework.integration.groovy;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -30,7 +32,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import groovy.lang.Script;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.core.io.AbstractResource;
 import org.springframework.integration.handler.MessageProcessor;
 import org.springframework.integration.scripting.RefreshableResourceScriptSource;
@@ -41,8 +42,6 @@ import org.springframework.messaging.support.GenericMessage;
 import org.springframework.scripting.ScriptSource;
 import org.springframework.scripting.support.ResourceScriptSource;
 import org.springframework.scripting.support.StaticScriptSource;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Mark Fisher
@@ -203,7 +202,7 @@ public class GroovyScriptExecutingMessageProcessorTests {
 
 	}
 
-	private static class TestResource extends AbstractResource {
+	private static final class TestResource extends AbstractResource {
 
 		private volatile String script;
 

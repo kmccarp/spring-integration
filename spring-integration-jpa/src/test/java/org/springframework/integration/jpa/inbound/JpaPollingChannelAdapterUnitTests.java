@@ -16,13 +16,12 @@
 
 package org.springframework.integration.jpa.inbound;
 
-import org.junit.Test;
-
-import org.springframework.integration.jpa.core.JpaExecutor;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+
+import org.junit.Test;
+import org.springframework.integration.jpa.core.JpaExecutor;
 
 /**
  * @author Gunnar Hillert

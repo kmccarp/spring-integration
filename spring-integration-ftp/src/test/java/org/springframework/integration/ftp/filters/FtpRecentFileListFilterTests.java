@@ -16,13 +16,13 @@
 
 package org.springframework.integration.ftp.filters;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.time.Duration;
 import java.util.Calendar;
 
 import org.apache.commons.net.ftp.FTPFile;
 import org.junit.jupiter.api.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Artem Bilan

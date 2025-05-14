@@ -17,7 +17,6 @@
 package org.springframework.integration.jdbc.store.channel;
 
 import org.junit.Rule;
-
 import org.springframework.integration.test.support.LongRunningIntegrationTest;
 import org.springframework.test.context.ContextConfiguration;
 

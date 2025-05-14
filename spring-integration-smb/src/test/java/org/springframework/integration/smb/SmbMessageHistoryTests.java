@@ -16,6 +16,8 @@
 
 package org.springframework.integration.smb;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.net.URI;
 import java.net.URL;
 import java.util.Properties;
@@ -24,12 +26,9 @@ import jcifs.CIFSContext;
 import jcifs.config.PropertyConfiguration;
 import jcifs.context.BaseContext;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.integration.endpoint.SourcePollingChannelAdapter;
 import org.springframework.integration.smb.session.SmbSessionFactory;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Markus Spann

@@ -23,7 +23,6 @@ import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 import org.hamcrest.TypeSafeMatcher;
-
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageHeaders;
 

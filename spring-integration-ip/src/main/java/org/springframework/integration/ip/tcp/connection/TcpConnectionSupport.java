@@ -30,7 +30,6 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.core.serializer.Deserializer;
 import org.springframework.core.serializer.Serializer;
@@ -110,11 +109,11 @@ public abstract class TcpConnectionSupport implements TcpConnection {
 
 	private volatile boolean testFailed;
 
-	public TcpConnectionSupport() {
+	protected TcpConnectionSupport() {
 		this(null);
 	}
 
-	public TcpConnectionSupport(@Nullable ApplicationEventPublisher applicationEventPublisher) {
+	protected TcpConnectionSupport(@Nullable ApplicationEventPublisher applicationEventPublisher) {
 		this.server = false;
 		this.applicationEventPublisher = applicationEventPublisher;
 		this.socketInfo = null;
@@ -132,7 +131,7 @@ public abstract class TcpConnectionSupport implements TcpConnection {
 	 * @param connectionFactoryName the name of the connection factory creating this connection; used
 	 * during event publishing, may be null, in which case "unknown" will be used.
 	 */
-	public TcpConnectionSupport(Socket socket, boolean server, boolean lookupHost,
+	protected TcpConnectionSupport(Socket socket, boolean server, boolean lookupHost,
 			@Nullable ApplicationEventPublisher applicationEventPublisher,
 			@Nullable String connectionFactoryName) {
 
@@ -371,7 +370,7 @@ public abstract class TcpConnectionSupport implements TcpConnection {
 	 */
 	@Nullable
 	public TcpSender getSender() {
-		return !this.senders.isEmpty() ? this.senders.get(0) : null;
+		return this.senders.isEmpty() ? null : this.senders.get(0);
 	}
 
 	/**

@@ -105,7 +105,7 @@ public class WebSocketInboundChannelAdapter extends MessageProducerSupport
 
 	private List<MessageConverter> messageConverters;
 
-	private boolean mergeWithDefaultConverters = false;
+	private boolean mergeWithDefaultConverters;
 
 	private boolean useBroker;
 

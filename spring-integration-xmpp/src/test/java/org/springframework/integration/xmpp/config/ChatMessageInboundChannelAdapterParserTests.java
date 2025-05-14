@@ -16,6 +16,8 @@
 
 package org.springframework.integration.xmpp.config;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.lang.reflect.Field;
 import java.util.Map;
 
@@ -27,7 +29,6 @@ import org.jivesoftware.smackx.jiveproperties.JivePropertiesManager;
 import org.junit.jupiter.api.Test;
 import org.jxmpp.jid.impl.JidCreate;
 import org.mockito.Mockito;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
@@ -39,8 +40,6 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.util.ReflectionUtils;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Oleg Zhurakousky

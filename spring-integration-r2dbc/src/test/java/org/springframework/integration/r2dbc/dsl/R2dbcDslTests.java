@@ -16,6 +16,8 @@
 
 package org.springframework.integration.r2dbc.dsl;
 
+import static org.awaitility.Awaitility.await;
+
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
@@ -23,7 +25,6 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import reactor.test.StepVerifier;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.Lifecycle;
 import org.springframework.context.annotation.Bean;
@@ -41,8 +42,6 @@ import org.springframework.integration.r2dbc.outbound.R2dbcMessageHandler;
 import org.springframework.r2dbc.core.DatabaseClient;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.awaitility.Awaitility.await;
 
 /**
  * @author Artem Bilan
@@ -101,7 +100,7 @@ public class R2dbcDslTests {
 		IntegrationFlow r2dbcDslFlow(R2dbcEntityTemplate r2dbcEntityTemplate) {
 			return IntegrationFlow
 					.from(R2dbc.inboundChannelAdapter(r2dbcEntityTemplate,
-											(selectCreator) ->
+											selectCreator ->
 													selectCreator.createSelect("person")
 															.withProjection("*")
 															.withCriteria(Criteria.where("id").is(1)))
@@ -117,7 +116,7 @@ public class R2dbcDslTests {
 							R2dbc.outboundChannelAdapter(r2dbcEntityTemplate)
 									.queryType(R2dbcMessageHandler.Type.UPDATE)
 									.tableNameExpression("payload.class.simpleName")
-									.criteria((message) -> Criteria.where("id").is(2))
+									.criteria(message -> Criteria.where("id").is(2))
 									.values("{age:36}"));
 		}
 

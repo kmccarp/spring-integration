@@ -31,7 +31,6 @@ import java.util.function.BiConsumer;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.context.ApplicationEventPublisher;
@@ -88,9 +87,9 @@ public abstract class AbstractStompSessionManager implements StompSessionManager
 
 	private final AtomicInteger epoch = new AtomicInteger();
 
-	private boolean autoStartup = false;
+	private boolean autoStartup;
 
-	private boolean running = false;
+	private boolean running;
 
 	private int phase = Integer.MAX_VALUE / 2;
 
@@ -112,7 +111,7 @@ public abstract class AbstractStompSessionManager implements StompSessionManager
 
 	private volatile ScheduledFuture<?> reconnectFuture;
 
-	public AbstractStompSessionManager(StompClientSupport stompClient) {
+	protected AbstractStompSessionManager(StompClientSupport stompClient) {
 		Assert.notNull(stompClient, "'stompClient' is required.");
 		this.stompClient = stompClient;
 	}

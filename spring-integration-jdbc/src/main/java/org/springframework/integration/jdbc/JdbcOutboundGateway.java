@@ -18,7 +18,6 @@ package org.springframework.integration.jdbc;
 
 import java.util.Collections;
 import java.util.List;
-
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.BeanFactory;

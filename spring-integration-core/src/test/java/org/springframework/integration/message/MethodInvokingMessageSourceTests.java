@@ -16,11 +16,14 @@
 
 package org.springframework.integration.message;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.Mockito.mock;
+
 import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.expression.Expression;
 import org.springframework.expression.common.LiteralExpression;
@@ -28,10 +31,6 @@ import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.integration.endpoint.MethodInvokingMessageSource;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessagingException;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.Mockito.mock;
 
 /**
  * @author Mark Fisher
@@ -53,7 +52,7 @@ public class MethodInvokingMessageSourceTests {
 
 	@Test
 	public void testHeaderExpressions() {
-		Map<String, Expression> headerExpressions = new HashMap<String, Expression>();
+		Map<String, Expression> headerExpressions = new HashMap<>();
 		headerExpressions.put("foo", new LiteralExpression("abc"));
 		headerExpressions.put("bar", new SpelExpressionParser().parseExpression("new Integer(123)"));
 		MethodInvokingMessageSource source = new MethodInvokingMessageSource();
@@ -75,7 +74,7 @@ public class MethodInvokingMessageSourceTests {
 		source.setBeanFactory(mock(BeanFactory.class));
 		source.setObject(new TestBean());
 		source.setMethodName("noMatchingMethod");
-		assertThatThrownBy(() -> source.receive())
+		assertThatThrownBy(source::receive)
 				.isInstanceOf(MessagingException.class);
 	}
 
@@ -85,7 +84,7 @@ public class MethodInvokingMessageSourceTests {
 		source.setBeanFactory(mock(BeanFactory.class));
 		source.setObject(new TestBean());
 		source.setMethodName("invalidMethodWithArg");
-		assertThatThrownBy(() -> source.receive())
+		assertThatThrownBy(source::receive)
 				.isInstanceOf(MessagingException.class);
 	}
 
@@ -95,7 +94,7 @@ public class MethodInvokingMessageSourceTests {
 		source.setBeanFactory(mock(BeanFactory.class));
 		source.setObject(new TestBean());
 		source.setMethodName("invalidMethodWithNoReturnValue");
-		assertThatThrownBy(() -> source.receive())
+		assertThatThrownBy(source::receive)
 				.isInstanceOf(MessagingException.class);
 	}
 

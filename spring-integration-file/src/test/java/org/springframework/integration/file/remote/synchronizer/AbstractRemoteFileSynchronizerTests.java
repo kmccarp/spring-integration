@@ -16,6 +16,11 @@
 
 package org.springframework.integration.file.remote.synchronizer;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
+import static org.mockito.Mockito.mock;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -30,7 +35,6 @@ import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
-
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.expression.EvaluationContext;
 import org.springframework.integration.expression.SupplierExpression;
@@ -40,11 +44,6 @@ import org.springframework.integration.file.filters.ChainFileListFilter;
 import org.springframework.integration.file.remote.session.Session;
 import org.springframework.integration.file.remote.session.SessionFactory;
 import org.springframework.messaging.MessagingException;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
-import static org.mockito.Mockito.mock;
 
 /**
  * @author Gary Russell

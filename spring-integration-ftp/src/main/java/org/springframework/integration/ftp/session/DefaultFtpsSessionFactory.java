@@ -18,12 +18,10 @@ package org.springframework.integration.ftp.session;
 
 import java.io.IOException;
 import java.util.Arrays;
-
 import javax.net.ssl.KeyManager;
 import javax.net.ssl.TrustManager;
 
 import org.apache.commons.net.ftp.FTPSClient;
-
 import org.springframework.integration.JavaUtils;
 import org.springframework.util.StringUtils;
 
@@ -56,7 +54,7 @@ public class DefaultFtpsSessionFactory extends AbstractFtpSessionFactory<FTPSCli
 
 	private Boolean wantsClientAuth;
 
-	private boolean implicit = false;
+	private boolean implicit;
 
 	private String prot = "P";
 

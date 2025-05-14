@@ -16,6 +16,8 @@
 
 package org.springframework.integration.file.filters;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.time.Duration;
@@ -23,8 +25,6 @@ import java.time.Instant;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Gary Russell

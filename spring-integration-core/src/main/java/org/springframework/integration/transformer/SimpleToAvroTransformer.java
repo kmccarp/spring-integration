@@ -25,7 +25,6 @@ import org.apache.avro.io.DatumWriter;
 import org.apache.avro.io.EncoderFactory;
 import org.apache.avro.specific.SpecificDatumWriter;
 import org.apache.avro.specific.SpecificRecord;
-
 import org.springframework.expression.EvaluationContext;
 import org.springframework.expression.Expression;
 import org.springframework.integration.context.IntegrationContextUtils;
@@ -46,7 +45,7 @@ public class SimpleToAvroTransformer extends AbstractTransformer {
 	private final EncoderFactory encoderFactory = new EncoderFactory();
 
 	private Expression typeIdExpression =
-			new FunctionExpression<Message<?>>((message) -> message.getPayload().getClass());
+			new FunctionExpression<Message<?>>(message -> message.getPayload().getClass());
 
 	private EvaluationContext evaluationContext;
 

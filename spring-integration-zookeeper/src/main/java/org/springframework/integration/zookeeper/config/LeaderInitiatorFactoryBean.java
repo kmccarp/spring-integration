@@ -19,7 +19,6 @@ package org.springframework.integration.zookeeper.config;
 import java.util.UUID;
 
 import org.apache.curator.framework.CuratorFramework;
-
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ApplicationEventPublisher;

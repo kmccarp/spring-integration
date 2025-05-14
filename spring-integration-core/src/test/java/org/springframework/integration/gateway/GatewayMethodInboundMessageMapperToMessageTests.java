@@ -16,12 +16,16 @@
 
 package org.springframework.integration.gateway;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.mockito.Mockito.mock;
+
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.expression.Expression;
 import org.springframework.expression.common.LiteralExpression;
@@ -33,11 +37,6 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.Headers;
 import org.springframework.messaging.handler.annotation.Payload;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
-import static org.mockito.Mockito.mock;
 
 /**
  * @author Mark Fisher
@@ -260,7 +259,7 @@ public class GatewayMethodInboundMessageMapperToMessageTests {
 		map.put(2, "Two");
 		GatewayMethodInboundMessageMapper mapper = new GatewayMethodInboundMessageMapper(method);
 		mapper.setBeanFactory(mock(BeanFactory.class));
-		mapper.setPayloadExpression(new FunctionExpression<MethodArgsHolder>((methodArgs) -> methodArgs.getArgs()[0]));
+		mapper.setPayloadExpression(new FunctionExpression<MethodArgsHolder>(methodArgs -> methodArgs.getArgs()[0]));
 		Message<?> message = mapper.toMessage(new Object[] {map});
 		assertThat(message.getPayload()).isEqualTo(map);
 	}
@@ -288,7 +287,7 @@ public class GatewayMethodInboundMessageMapperToMessageTests {
 		mapB.put("2", "TWO");
 		GatewayMethodInboundMessageMapper mapper = new GatewayMethodInboundMessageMapper(method);
 		mapper.setBeanFactory(mock(BeanFactory.class));
-		mapper.setPayloadExpression(new FunctionExpression<MethodArgsHolder>((methodArgs) -> methodArgs.getArgs()[0]));
+		mapper.setPayloadExpression(new FunctionExpression<MethodArgsHolder>(methodArgs -> methodArgs.getArgs()[0]));
 		Message<?> message = mapper.toMessage(new Object[] {mapA, mapB});
 		assertThat(message.getPayload()).isEqualTo(mapA);
 		assertThat(message.getHeaders().get("1")).isEqualTo(mapB.get("1"));

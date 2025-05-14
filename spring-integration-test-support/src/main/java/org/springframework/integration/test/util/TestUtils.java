@@ -33,7 +33,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.LoggerContext;
 import org.apache.logging.log4j.core.config.Configuration;
 import org.apache.logging.log4j.core.config.LoggerConfig;
-
 import org.springframework.beans.DirectFieldAccessor;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.SmartLifecycle;
@@ -200,7 +199,7 @@ public abstract class TestUtils {
 						catch (InvocationTargetException e) {
 							throw new IllegalArgumentException(e);
 						}
-					}, method -> method.getName().equals("getComponentName"));
+					}, method -> "getComponentName".equals(method.getName()));
 					break;
 				}
 			}

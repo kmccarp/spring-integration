@@ -24,7 +24,6 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.integration.util.SimplePool;
 import org.springframework.util.Assert;
@@ -176,7 +175,7 @@ public class CachingSessionFactory<F> implements SessionFactory<F>, DisposableBe
 		}
 	}
 
-	public class CachedSession implements Session<F> { //NOSONAR must be final, but can't for mocking in tests
+	public final class CachedSession implements Session<F> { //NOSONAR must be final, but can't for mocking in tests
 
 		private final Session<F> targetSession;
 

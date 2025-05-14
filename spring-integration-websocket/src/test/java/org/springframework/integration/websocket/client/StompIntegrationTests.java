@@ -16,6 +16,8 @@
 
 package org.springframework.integration.websocket.client;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -26,7 +28,6 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -92,8 +93,6 @@ import org.springframework.web.socket.server.standard.TomcatRequestUpgradeStrate
 import org.springframework.web.socket.server.support.DefaultHandshakeHandler;
 import org.springframework.web.socket.sockjs.client.SockJsClient;
 import org.springframework.web.socket.sockjs.client.WebSocketTransport;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Artem Bilan
@@ -493,7 +492,7 @@ public class StompIntegrationTests {
 				final AbstractSubscribableChannel clientOutboundChannel) {
 			// Cannot be lambda because Java can't infer generic type from lambdas,
 			// therefore we end up with ClassCastException for other event types
-			return new ApplicationListener<SessionSubscribeEvent>() {
+			return new ApplicationListener<>() {
 
 				@Override
 				public void onApplicationEvent(SessionSubscribeEvent event) {

@@ -16,6 +16,9 @@
 
 package org.springframework.integration.jms.dsl;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -29,7 +32,6 @@ import jakarta.jms.JMSException;
 import jakarta.jms.TextMessage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.ListableBeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -80,9 +82,6 @@ import org.springframework.retry.support.RetryTemplate;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.transaction.PlatformTransactionManager;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
 
 /**
  * @author Artem Bilan
@@ -506,7 +505,7 @@ public class JmsTests extends ActiveMQMultiContextTests {
 									.configureListenerContainer(c ->
 											c.transactionManager(mock(PlatformTransactionManager.class))))
 					.filter(payload -> !"junk".equals(payload))
-					.<String, String>transform(String::toUpperCase)
+					.transform(String::toUpperCase)
 					.get();
 		}
 
@@ -542,7 +541,7 @@ public class JmsTests extends ActiveMQMultiContextTests {
 									.subscriptionDurable(false)
 									.subscriptionShared(false)
 									.id("jmsMessageDrivenRedeliveryFlowContainer")))
-					.<String, String>transform(p -> {
+					.transform(p -> {
 						throw new RuntimeException("intentional");
 					})
 					.get();

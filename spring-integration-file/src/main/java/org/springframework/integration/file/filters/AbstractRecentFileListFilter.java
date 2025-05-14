@@ -41,11 +41,11 @@ public abstract class AbstractRecentFileListFilter<F> implements FileListFilter<
 	/**
 	 * Construct an instance with default age as 1 day.
 	 */
-	public AbstractRecentFileListFilter() {
+	protected AbstractRecentFileListFilter() {
 		this(Duration.ofDays(1));
 	}
 
-	public AbstractRecentFileListFilter(Duration age) {
+	protected AbstractRecentFileListFilter(Duration age) {
 		this.age = age;
 	}
 

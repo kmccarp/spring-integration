@@ -21,7 +21,6 @@ import java.util.regex.Pattern;
 
 import jcifs.smb.SmbException;
 import jcifs.smb.SmbFile;
-
 import org.springframework.integration.file.filters.AbstractRegexPatternFileListFilter;
 
 /**
@@ -50,7 +49,7 @@ public class SmbRegexPatternFileListFilter extends AbstractRegexPatternFileListF
 	 */
 	@Override
 	protected String getFilename(SmbFile file) {
-		return (file != null ? file.getName() : null);
+		return file != null ? file.getName() : null;
 	}
 
 	@Override

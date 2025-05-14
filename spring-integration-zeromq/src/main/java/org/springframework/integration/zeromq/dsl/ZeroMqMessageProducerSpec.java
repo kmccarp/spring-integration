@@ -22,7 +22,6 @@ import java.util.function.Consumer;
 import org.zeromq.SocketType;
 import org.zeromq.ZContext;
 import org.zeromq.ZMQ;
-
 import org.springframework.integration.dsl.MessageProducerSpec;
 import org.springframework.integration.mapping.InboundMessageMapper;
 import org.springframework.integration.zeromq.inbound.ZeroMqMessageProducer;

@@ -21,12 +21,10 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
 import javax.xml.transform.Source;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.core.ResolvableType;
@@ -117,7 +115,7 @@ public abstract class HttpRequestHandlingEndpointSupport extends BaseHttpInbound
 
 	private boolean convertersMerged;
 
-	private boolean mergeWithDefaultConverters = false;
+	private boolean mergeWithDefaultConverters;
 
 	private MultipartResolver multipartResolver;
 
@@ -129,7 +127,7 @@ public abstract class HttpRequestHandlingEndpointSupport extends BaseHttpInbound
 	 * @see #setReplyTimeout(long)
 	 * @see #setStatusCodeExpression
 	 */
-	public HttpRequestHandlingEndpointSupport() {
+	protected HttpRequestHandlingEndpointSupport() {
 		this(true);
 	}
 
@@ -144,7 +142,7 @@ public abstract class HttpRequestHandlingEndpointSupport extends BaseHttpInbound
 	 * @see #setReplyTimeout(long)
 	 * @see #setStatusCodeExpression
 	 */
-	public HttpRequestHandlingEndpointSupport(boolean expectReply) {
+	protected HttpRequestHandlingEndpointSupport(boolean expectReply) {
 		super(expectReply);
 		this.defaultMessageConverters.add(new MultipartAwareFormHttpMessageConverter());
 		this.defaultMessageConverters.add(new ByteArrayHttpMessageConverter());
@@ -232,7 +230,7 @@ public abstract class HttpRequestHandlingEndpointSupport extends BaseHttpInbound
 						+ "': no multipart request handling will be supported.");
 			}
 		}
-		if (this.messageConverters.size() == 0 || (this.mergeWithDefaultConverters && !this.convertersMerged)) {
+		if (this.messageConverters.isEmpty() || (this.mergeWithDefaultConverters && !this.convertersMerged)) {
 			this.messageConverters.addAll(this.defaultMessageConverters);
 		}
 	}

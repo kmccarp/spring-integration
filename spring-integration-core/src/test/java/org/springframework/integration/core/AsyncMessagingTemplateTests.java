@@ -16,6 +16,10 @@
 
 package org.springframework.integration.core;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.awaitility.Awaitility.await;
+
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -25,7 +29,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.context.support.StaticApplicationContext;
 import org.springframework.integration.channel.DirectChannel;
 import org.springframework.integration.channel.QueueChannel;
@@ -36,10 +39,6 @@ import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessagingException;
 import org.springframework.messaging.core.MessagePostProcessor;
 import org.springframework.messaging.support.GenericMessage;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.awaitility.Awaitility.await;
 
 /**
  * @author Mark Fisher
@@ -446,7 +445,7 @@ public class AsyncMessagingTemplateTests {
 		executorService.shutdown();
 	}
 
-	private static class EchoHandler extends AbstractReplyProducingMessageHandler {
+	private static final class EchoHandler extends AbstractReplyProducingMessageHandler {
 
 		private final long delay;
 
@@ -456,7 +455,7 @@ public class AsyncMessagingTemplateTests {
 
 		private EchoHandler(long delay) {
 			this.delay = delay;
-			this.shouldFail = (this.delay < 0);
+			this.shouldFail = this.delay < 0;
 		}
 
 		@Override
@@ -474,7 +473,7 @@ public class AsyncMessagingTemplateTests {
 			}
 			String result = requestMessage.getPayload().toString().toUpperCase();
 			String header = requestMessage.getHeaders().get("foo", String.class);
-			return (header != null) ? result + "-" + header : result;
+			return header != null ? result + "-" + header : result;
 		}
 
 	}

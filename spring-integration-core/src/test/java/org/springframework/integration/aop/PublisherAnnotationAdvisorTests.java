@@ -16,6 +16,8 @@
 
 package org.springframework.integration.aop;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -24,15 +26,12 @@ import java.lang.annotation.Target;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.context.support.StaticApplicationContext;
 import org.springframework.integration.annotation.Publisher;
 import org.springframework.integration.channel.QueueChannel;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.handler.annotation.Payload;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Mark Fisher

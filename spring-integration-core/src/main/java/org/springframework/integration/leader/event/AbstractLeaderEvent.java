@@ -39,7 +39,7 @@ public abstract class AbstractLeaderEvent extends ApplicationEvent {
 	 *
 	 * @param source the component that published the event (never {@code null})
 	 */
-	public AbstractLeaderEvent(Object source) {
+	protected AbstractLeaderEvent(Object source) {
 		this(source, null, null);
 	}
 
@@ -50,7 +50,7 @@ public abstract class AbstractLeaderEvent extends ApplicationEvent {
 	 * @param context the context associated with this event
 	 * @param role the role of the leader
 	 */
-	public AbstractLeaderEvent(Object source, Context context, String role) {
+	protected AbstractLeaderEvent(Object source, Context context, String role) {
 		super(source);
 		this.context = context;
 		this.role = role;

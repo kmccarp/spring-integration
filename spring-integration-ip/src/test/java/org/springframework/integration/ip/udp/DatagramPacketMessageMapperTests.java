@@ -16,19 +16,18 @@
 
 package org.springframework.integration.ip.udp;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
+
 import java.net.DatagramPacket;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.integration.ip.IpHeaders;
 import org.springframework.integration.mapping.MessageMappingException;
 import org.springframework.integration.support.MessageBuilder;
 import org.springframework.messaging.Message;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.fail;
 
 /**
  * @author Gary Russell
@@ -73,7 +72,7 @@ public class DatagramPacketMessageMapperTests {
 			assertThat(message.getHeaders().getId().toString())
 					.isEqualTo(messageOut.getHeaders().get(IpHeaders.ACK_ID).toString());
 		}
-		assertThat(((String) messageOut.getHeaders().get(IpHeaders.HOSTNAME))).doesNotContain("localhost");
+		assertThat((String) messageOut.getHeaders().get(IpHeaders.HOSTNAME)).doesNotContain("localhost");
 		mapper.setLookupHost(true);
 		messageOut = mapper.toMessage(packet);
 		assertThat(new String(messageOut.getPayload())).isEqualTo(new String(message.getPayload()));
@@ -81,7 +80,7 @@ public class DatagramPacketMessageMapperTests {
 			assertThat(message.getHeaders().getId().toString())
 					.isEqualTo(messageOut.getHeaders().get(IpHeaders.ACK_ID).toString());
 		}
-		assertThat(((String) messageOut.getHeaders().get(IpHeaders.HOSTNAME))).contains("localhost");
+		assertThat((String) messageOut.getHeaders().get(IpHeaders.HOSTNAME)).contains("localhost");
 	}
 
 	@Test

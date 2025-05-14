@@ -19,7 +19,6 @@ package org.springframework.integration.camel.dsl;
 import org.apache.camel.ExchangePattern;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.LambdaRouteBuilder;
-
 import org.springframework.lang.Nullable;
 
 /**

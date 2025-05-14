@@ -20,7 +20,6 @@ import java.io.File;
 import java.util.Comparator;
 
 import org.apache.commons.net.ftp.FTPFile;
-
 import org.springframework.integration.file.dsl.RemoteFileInboundChannelAdapterSpec;
 import org.springframework.integration.file.filters.CompositeFileListFilter;
 import org.springframework.integration.file.filters.FileListFilter;

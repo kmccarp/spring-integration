@@ -16,10 +16,11 @@
 
 package org.springframework.integration.ws.config;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.URI;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.Source;
@@ -31,7 +32,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.integration.channel.QueueChannel;
@@ -60,8 +60,6 @@ import org.springframework.ws.transport.WebServiceConnection;
 import org.springframework.ws.transport.WebServiceMessageSender;
 import org.springframework.xml.namespace.QNameUtils;
 import org.springframework.xml.transform.StringResult;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Oleg Zhurakousky
@@ -288,7 +286,7 @@ public class WebServiceOutboundGatewayWithHeaderMapperTests {
 		StringResult result = new StringResult();
 		Object payload = replyMessage.getPayload();
 		if (payload instanceof DOMSource) {
-			transformer.transform(((DOMSource) replyMessage.getPayload()), result);
+			transformer.transform((DOMSource) replyMessage.getPayload(), result);
 		}
 		else if (payload instanceof Document) {
 			transformer.transform(new DOMSource((Document) replyMessage.getPayload()), result);

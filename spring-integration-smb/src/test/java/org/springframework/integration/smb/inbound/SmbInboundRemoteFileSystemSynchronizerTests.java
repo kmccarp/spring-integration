@@ -16,6 +16,10 @@
 
 package org.springframework.integration.smb.inbound;
 
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 import java.io.File;
 import java.io.OutputStream;
 import java.util.ArrayList;
@@ -26,14 +30,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
-
 import org.springframework.integration.smb.AbstractBaseTests;
 import org.springframework.integration.smb.session.SmbSession;
 import org.springframework.integration.smb.session.SmbSessionFactory;
-
-import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 /**
  * @author Markus Spann
@@ -45,9 +44,9 @@ public class SmbInboundRemoteFileSystemSynchronizerTests extends AbstractBaseTes
 
 	private SmbSessionFactory smbSessionFactory;
 
-	private String testLocalDir = "test-temp/local-9/";
+	private final String testLocalDir = "test-temp/local-9/";
 
-	private String testRemoteDir = "test-temp/remote-9/";
+	private final String testRemoteDir = "test-temp/remote-9/";
 
 	@BeforeEach
 	public void prepare() {

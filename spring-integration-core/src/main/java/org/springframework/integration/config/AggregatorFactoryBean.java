@@ -24,7 +24,6 @@ import java.util.function.Function;
 
 import org.aopalliance.aop.Advice;
 import org.jetbrains.annotations.Nullable;
-
 import org.springframework.expression.Expression;
 import org.springframework.integration.JavaUtils;
 import org.springframework.integration.aggregator.AbstractAggregatingMessageGroupProcessor;
@@ -252,7 +251,7 @@ public class AggregatorFactoryBean extends AbstractSimpleMessageHandlerFactoryBe
 				.acceptIfNotNull(this.popSequence, aggregator::setPopSequence)
 				.acceptIfNotNull(this.releaseLockBeforeSend, aggregator::setReleaseLockBeforeSend)
 				.acceptIfNotNull(this.expireDuration,
-						(duration) -> aggregator.setExpireDuration(Duration.ofMillis(duration)))
+						duration -> aggregator.setExpireDuration(Duration.ofMillis(duration)))
 				.acceptIfNotNull(this.groupConditionSupplier, aggregator::setGroupConditionSupplier)
 				.acceptIfNotNull(this.expireTimeout, aggregator::setExpireTimeout)
 				.acceptIfNotNull(this.discardIndividuallyOnExpiry, aggregator::setDiscardIndividuallyOnExpiry);

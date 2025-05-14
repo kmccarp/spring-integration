@@ -16,16 +16,15 @@
 
 package org.springframework.integration.ip.tcp.serializer;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.integration.test.util.TestUtils;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.fail;
 
 /**
  * @author Gary Russell

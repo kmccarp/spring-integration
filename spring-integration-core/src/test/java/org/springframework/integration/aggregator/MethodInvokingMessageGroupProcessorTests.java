@@ -16,6 +16,13 @@
 
 package org.springframework.integration.aggregator;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
+import static org.assertj.core.api.Assertions.fail;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -25,7 +32,6 @@ import java.util.Map;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.core.convert.converter.Converter;
@@ -44,13 +50,6 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.Headers;
 import org.springframework.messaging.support.GenericMessage;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
-import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
-import static org.assertj.core.api.Assertions.fail;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 /**
  * @author Iwein Fuld
@@ -158,7 +157,7 @@ public class MethodInvokingMessageGroupProcessorTests {
 		class SimpleAggregator {
 
 			public String and(List<Integer> flags, @Header("foo") List<Integer> header) {
-				List<Integer> result = new ArrayList<Integer>();
+				List<Integer> result = new ArrayList<>();
 				for (int flag : flags) {
 					result.add(flag);
 				}
@@ -189,7 +188,7 @@ public class MethodInvokingMessageGroupProcessorTests {
 			public String and(@Payloads List<?> rawFlags, @Header("foo") List<Integer> header) {
 				@SuppressWarnings("unchecked")
 				List<Integer> flags = (List<Integer>) rawFlags;
-				List<Integer> result = new ArrayList<Integer>();
+				List<Integer> result = new ArrayList<>();
 				for (int flag : flags) {
 					result.add(flag);
 				}

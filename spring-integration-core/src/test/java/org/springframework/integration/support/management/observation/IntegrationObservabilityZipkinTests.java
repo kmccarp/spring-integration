@@ -16,6 +16,9 @@
 
 package org.springframework.integration.support.management.observation;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.awaitility.Awaitility.await;
+
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
@@ -28,7 +31,6 @@ import io.micrometer.tracing.Span;
 import io.micrometer.tracing.test.SampleTestRunner;
 import io.micrometer.tracing.test.simple.SpansAssert;
 import reactor.core.publisher.Mono;
-
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -53,9 +55,6 @@ import org.springframework.messaging.PollableChannel;
 import org.springframework.messaging.support.ErrorMessage;
 import org.springframework.messaging.support.GenericMessage;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.awaitility.Awaitility.await;
-
 /**
  * @author Artem Bilan
  *
@@ -76,8 +75,8 @@ public class IntegrationObservabilityZipkinTests extends SampleTestRunner {
 			observationRegistry.observationConfig()
 					.observationPredicate((name, context) ->
 							!(context instanceof MessageRequestReplyReceiverContext messageRequestReplyReceiverContext)
-									|| !messageRequestReplyReceiverContext.getGatewayName()
-									.equals("skippedObservationInboundGateway"));
+									|| !"skippedObservationInboundGateway"
+									.equals(messageRequestReplyReceiverContext.getGatewayName()));
 
 			try (AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext()) {
 				applicationContext.registerBean(ObservationRegistry.class, () -> observationRegistry);

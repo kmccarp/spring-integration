@@ -27,11 +27,11 @@ import org.springframework.integration.events.IntegrationEvent;
 @SuppressWarnings("serial")
 public abstract class IpIntegrationEvent extends IntegrationEvent {
 
-	public IpIntegrationEvent(Object source) {
+	protected IpIntegrationEvent(Object source) {
 		super(source);
 	}
 
-	public IpIntegrationEvent(Object source, Throwable cause) {
+	protected IpIntegrationEvent(Object source, Throwable cause) {
 		super(source, cause);
 	}
 

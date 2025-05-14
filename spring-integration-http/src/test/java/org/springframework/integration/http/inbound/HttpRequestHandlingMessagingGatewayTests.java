@@ -16,6 +16,11 @@
 
 package org.springframework.integration.http.inbound;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Serializable;
@@ -28,7 +33,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import org.assertj.core.api.InstanceOfAssertFactories;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.ResolvableType;
@@ -57,11 +61,6 @@ import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.SerializationUtils;
 import org.springframework.web.multipart.MultipartResolver;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 
 /**
  * @author Mark Fisher
@@ -307,7 +306,7 @@ public class HttpRequestHandlingMessagingGatewayTests extends AbstractHttpInboun
 				.hasSize(1)
 				.element(0)
 				.isInstanceOf(TestBean.class)
-				.satisfies((actual) -> {
+				.satisfies(actual -> {
 					TestBean bean = (TestBean) actual;
 					assertThat(bean).extracting(TestBean::getName).isEqualTo("T. Bean");
 					assertThat(bean).extracting(TestBean::getAge).isEqualTo(42);

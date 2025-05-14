@@ -17,7 +17,6 @@
 package org.springframework.integration.kafka.inbound;
 
 import org.apache.kafka.clients.consumer.ConsumerRecord;
-
 import org.springframework.core.AttributeAccessor;
 import org.springframework.integration.core.ErrorMessagePublisher;
 import org.springframework.integration.kafka.support.RawRecordHeaderErrorMessageStrategy;

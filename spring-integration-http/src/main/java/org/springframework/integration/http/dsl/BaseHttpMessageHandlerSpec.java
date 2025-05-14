@@ -57,7 +57,7 @@ public abstract class BaseHttpMessageHandlerSpec<S extends BaseHttpMessageHandle
 
 	private boolean headerMapperExplicitlySet;
 
-	public BaseHttpMessageHandlerSpec(E handler) {
+	protected BaseHttpMessageHandlerSpec(E handler) {
 		this.target = handler;
 		this.target.setHeaderMapper(this.headerMapper);
 	}

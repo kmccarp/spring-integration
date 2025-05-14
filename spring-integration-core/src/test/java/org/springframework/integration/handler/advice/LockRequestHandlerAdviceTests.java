@@ -16,6 +16,8 @@
 
 package org.springframework.integration.handler.advice;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -24,7 +26,6 @@ import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -41,8 +42,6 @@ import org.springframework.messaging.core.MessagePostProcessor;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Artem Bilan
@@ -126,7 +125,7 @@ public class LockRequestHandlerAdviceTests {
 		@Bean
 		LockRequestHandlerAdvice lockRequestHandlerAdvice(LockRegistry lockRegistry, QueueChannel discardChannel) {
 			LockRequestHandlerAdvice lockRequestHandlerAdvice =
-					new LockRequestHandlerAdvice(lockRegistry, (message) -> message.getHeaders().get(LOCK_KEY_HEADER));
+					new LockRequestHandlerAdvice(lockRegistry, message -> message.getHeaders().get(LOCK_KEY_HEADER));
 			lockRequestHandlerAdvice.setDiscardChannel(discardChannel);
 			lockRequestHandlerAdvice.setWaitLockDurationExpressionString("'PT1s'");
 			return lockRequestHandlerAdvice;

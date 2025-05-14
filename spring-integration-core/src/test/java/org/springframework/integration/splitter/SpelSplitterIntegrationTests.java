@@ -16,13 +16,14 @@
 
 package org.springframework.integration.splitter;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.integration.IntegrationMessageHeaderAccessor;
 import org.springframework.integration.support.MessageBuilder;
@@ -32,8 +33,6 @@ import org.springframework.messaging.PollableChannel;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Mark Fisher
@@ -154,7 +153,7 @@ public class SpelSplitterIntegrationTests {
 
 	static class TestBean {
 
-		private final List<Integer> numbers = new ArrayList<Integer>();
+		private final List<Integer> numbers = new ArrayList<>();
 
 		TestBean() {
 			for (int i = 1; i <= 10; i++) {

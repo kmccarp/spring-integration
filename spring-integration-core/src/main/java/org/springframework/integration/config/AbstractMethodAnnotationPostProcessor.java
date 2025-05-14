@@ -32,7 +32,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.reactivestreams.Publisher;
 import reactor.core.publisher.Flux;
-
 import org.springframework.aop.framework.Advised;
 import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor;
@@ -144,7 +143,7 @@ public abstract class AbstractMethodAnnotationPostProcessor<T extends Annotation
 	private volatile DestinationResolver<MessageChannel> channelResolver;
 
 	@SuppressWarnings(UNCHECKED)
-	public AbstractMethodAnnotationPostProcessor() {
+	protected AbstractMethodAnnotationPostProcessor() {
 		this.messageHandlerAttributes.add(SEND_TIMEOUT_ATTRIBUTE);
 		this.annotationType =
 				(Class<T>) GenericTypeResolver.resolveTypeArgument(getClass(), MethodAnnotationPostProcessor.class);
@@ -203,7 +202,7 @@ public abstract class AbstractMethodAnnotationPostProcessor<T extends Annotation
 				if (isClassIn(handlerBeanClass, Orderable.class, AbstractSimpleMessageHandlerFactoryBean.class)) {
 					mergedAnnotations.get(Order.class)
 							.getValue(AnnotationUtils.VALUE, String.class).
-							ifPresent((order) -> handlerBeanDefinition.getPropertyValues().add("order", order));
+							ifPresent(order -> handlerBeanDefinition.getPropertyValues().add("order", order));
 				}
 
 				if (isClassIn(handlerBeanClass, AbstractMessageProducingHandler.class, AbstractMessageRouter.class,
@@ -266,7 +265,7 @@ public abstract class AbstractMethodAnnotationPostProcessor<T extends Annotation
 
 		mergedAnnotations.get(Role.class)
 				.getValue(AnnotationUtils.VALUE, String.class).
-				ifPresent((role) -> endpointBeanDefinition.getPropertyValues().add("role", role));
+				ifPresent(role -> endpointBeanDefinition.getPropertyValues().add("role", role));
 
 		String endpointBeanName =
 				generateHandlerBeanName(beanName, mergedAnnotations)

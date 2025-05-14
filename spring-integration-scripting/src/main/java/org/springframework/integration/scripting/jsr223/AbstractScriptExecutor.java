@@ -18,7 +18,6 @@ package org.springframework.integration.scripting.jsr223;
 
 import java.util.Date;
 import java.util.Map;
-
 import javax.script.Bindings;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
@@ -26,7 +25,6 @@ import javax.script.SimpleBindings;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.springframework.integration.scripting.ScriptExecutor;
 import org.springframework.integration.scripting.ScriptingException;
 import org.springframework.lang.Nullable;

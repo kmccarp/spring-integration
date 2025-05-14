@@ -16,6 +16,8 @@
 
 package org.springframework.integration.mail.dsl;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.io.Closeable;
 import java.util.Properties;
 
@@ -36,7 +38,6 @@ import jakarta.mail.search.SearchTerm;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -58,8 +59,6 @@ import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.PollableChannel;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Gary Russell

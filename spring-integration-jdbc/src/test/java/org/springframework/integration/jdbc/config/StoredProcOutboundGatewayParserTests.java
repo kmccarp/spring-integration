@@ -16,6 +16,8 @@
 
 package org.springframework.integration.jdbc.config;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.sql.Types;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +25,6 @@ import java.util.Map.Entry;
 
 import org.junit.After;
 import org.junit.Test;
-
 import org.springframework.beans.DirectFieldAccessor;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -41,8 +42,6 @@ import org.springframework.jdbc.core.SqlParameter;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageHandler;
 import org.springframework.messaging.support.GenericMessage;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Gunnar Hillert

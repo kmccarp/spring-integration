@@ -16,6 +16,10 @@
 
 package org.springframework.integration.dsl.routers;
 
+import static org.assertj.core.api.Assertions.as;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +29,6 @@ import java.util.stream.Collectors;
 
 import org.assertj.core.api.InstanceOfAssertFactories;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.ListableBeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -57,10 +60,6 @@ import org.springframework.messaging.support.ErrorMessage;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.as;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 /**
  * @author Artem Bilan
@@ -610,7 +609,7 @@ public class RouterTests {
 				.containsAllEntriesOf(
 						headers1.entrySet()
 								.stream()
-								.filter((entry) ->
+								.filter(entry ->
 										!MessageHeaders.ID.equals(entry.getKey())
 												&& !MessageHeaders.TIMESTAMP.equals(entry.getKey()))
 								.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)));
@@ -743,7 +742,7 @@ public class RouterTests {
 		@Bean
 		public IntegrationFlow routeMultiMethodInvocationFlow() {
 			return IntegrationFlow.from("routerMultiInput")
-					.route(String.class, p -> p.equals("foo") || p.equals("bar")
+					.route(String.class, p -> "foo".equals(p) || "bar".equals(p)
 									? new String[] {"foo", "bar"}
 									: null,
 							s -> s.suffix("-channel"))
@@ -961,10 +960,10 @@ public class RouterTests {
 
 		@SuppressWarnings("unused")
 		public String routeMessage(Message<?> message) {
-			if (message.getPayload().equals("foo")) {
+			if ("foo".equals(message.getPayload())) {
 				return "foo-channel";
 			}
-			else if (message.getPayload().equals("bar")) {
+			else if ("bar".equals(message.getPayload())) {
 				return "bar-channel";
 			}
 			return null;

@@ -17,7 +17,6 @@
 package org.springframework.integration.ftp.inbound;
 
 import org.apache.commons.net.ftp.FTPFile;
-
 import org.springframework.expression.common.LiteralExpression;
 import org.springframework.integration.file.remote.session.SessionFactory;
 import org.springframework.integration.file.remote.synchronizer.AbstractInboundFileSynchronizer;
@@ -55,7 +54,7 @@ public class FtpInboundFileSynchronizer extends AbstractInboundFileSynchronizer<
 
 	@Override
 	protected String getFilename(FTPFile file) {
-		return (file != null ? file.getName() : null);
+		return file != null ? file.getName() : null;
 	}
 
 	@Override

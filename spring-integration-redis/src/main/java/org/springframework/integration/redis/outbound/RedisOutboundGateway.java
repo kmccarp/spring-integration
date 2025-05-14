@@ -48,7 +48,7 @@ public class RedisOutboundGateway extends AbstractReplyProducingMessageHandler {
 
 	private EvaluationContext evaluationContext;
 
-	private volatile RedisSerializer<Object> argumentsSerializer = new GenericToStringSerializer<Object>(Object.class);
+	private volatile RedisSerializer<Object> argumentsSerializer = new GenericToStringSerializer<>(Object.class);
 
 	private volatile Expression commandExpression = PARSER.parseExpression("headers[" + RedisHeaders.COMMAND + "]");
 

@@ -16,6 +16,10 @@
 
 package org.springframework.integration.graph;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
+import static org.mockito.Mockito.mock;
+
 import java.io.ByteArrayOutputStream;
 import java.time.Duration;
 import java.util.Arrays;
@@ -31,7 +35,6 @@ import io.micrometer.core.instrument.simple.SimpleMeterRegistry;
 import io.micrometer.observation.ObservationRegistry;
 import org.assertj.core.api.InstanceOfAssertFactories;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.ListableBeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.SmartLifecycle;
@@ -78,10 +81,6 @@ import org.springframework.messaging.support.GenericMessage;
 import org.springframework.scheduling.support.PeriodicTrigger;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
-import static org.mockito.Mockito.mock;
 
 /**
  * @author Gary Russell
@@ -272,7 +271,7 @@ public class IntegrationGraphServerTests {
 		IntegrationNode myFilter =
 				graph.getNodes()
 						.stream()
-						.filter(node -> node.getName().equals("myFilter"))
+						.filter(node -> "myFilter".equals(node.getName()))
 						.findFirst()
 						.get();
 

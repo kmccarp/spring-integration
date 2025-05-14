@@ -16,12 +16,16 @@
 
 package org.springframework.integration.router;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.fail;
+import static org.mockito.Mockito.mock;
+
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.integration.channel.QueueChannel;
 import org.springframework.integration.channel.TestChannelResolver;
@@ -33,11 +37,6 @@ import org.springframework.messaging.MessagingException;
 import org.springframework.messaging.core.DestinationResolver;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.support.GenericMessage;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.assertj.core.api.Assertions.fail;
-import static org.mockito.Mockito.mock;
 
 /**
  * @author Mark Fisher
@@ -620,10 +619,10 @@ public class MethodInvokingRouterTests {
 		}
 
 		public String routeMessage(Message<?> message) {
-			if (message.getPayload().equals("foo")) {
+			if ("foo".equals(message.getPayload())) {
 				return "foo-channel";
 			}
-			else if (message.getPayload().equals("bar")) {
+			else if ("bar".equals(message.getPayload())) {
 				return "bar-channel";
 			}
 			return null;
@@ -635,7 +634,7 @@ public class MethodInvokingRouterTests {
 
 		public List<String> routePayload(String name) {
 			List<String> results = new ArrayList<>();
-			if (name.equals("foo") || name.equals("bar")) {
+			if ("foo".equals(name) || "bar".equals(name)) {
 				results.add("foo-channel");
 				results.add("bar-channel");
 			}
@@ -644,7 +643,7 @@ public class MethodInvokingRouterTests {
 
 		public List<String> routeMessage(Message<?> message) {
 			List<String> results = new ArrayList<>();
-			if (message.getPayload().equals("foo") || message.getPayload().equals("bar")) {
+			if ("foo".equals(message.getPayload()) || "bar".equals(message.getPayload())) {
 				results.add("foo-channel");
 				results.add("bar-channel");
 			}
@@ -653,7 +652,7 @@ public class MethodInvokingRouterTests {
 
 		public String[] routeMessageToArray(Message<?> message) {
 			String[] results = null;
-			if (message.getPayload().equals("foo") || message.getPayload().equals("bar")) {
+			if ("foo".equals(message.getPayload()) || "bar".equals(message.getPayload())) {
 				results = new String[2];
 				results[0] = "foo-channel";
 				results[1] = "bar-channel";
@@ -676,10 +675,10 @@ public class MethodInvokingRouterTests {
 		}
 
 		public MessageChannel routeMessage(Message<?> message) {
-			if (message.getPayload().equals("foo")) {
+			if ("foo".equals(message.getPayload())) {
 				return channelResolver.resolveDestination("foo-channel");
 			}
-			else if (message.getPayload().equals("bar")) {
+			else if ("bar".equals(message.getPayload())) {
 				return channelResolver.resolveDestination("bar-channel");
 			}
 			return null;
@@ -697,7 +696,7 @@ public class MethodInvokingRouterTests {
 
 		public List<MessageChannel> routePayload(String name) {
 			List<MessageChannel> results = new ArrayList<>();
-			if (name.equals("foo") || name.equals("bar")) {
+			if ("foo".equals(name) || "bar".equals(name)) {
 				results.add(channelResolver.resolveDestination("foo-channel"));
 				results.add(channelResolver.resolveDestination("bar-channel"));
 			}
@@ -706,7 +705,7 @@ public class MethodInvokingRouterTests {
 
 		public List<MessageChannel> routeMessage(Message<?> message) {
 			List<MessageChannel> results = new ArrayList<>();
-			if (message.getPayload().equals("foo") || message.getPayload().equals("bar")) {
+			if ("foo".equals(message.getPayload()) || "bar".equals(message.getPayload())) {
 				results.add(channelResolver.resolveDestination("foo-channel"));
 				results.add(channelResolver.resolveDestination("bar-channel"));
 			}
@@ -715,7 +714,7 @@ public class MethodInvokingRouterTests {
 
 		public MessageChannel[] routeMessageToArray(Message<?> message) {
 			MessageChannel[] results = null;
-			if (message.getPayload().equals("foo") || message.getPayload().equals("bar")) {
+			if ("foo".equals(message.getPayload()) || "bar".equals(message.getPayload())) {
 				results = new MessageChannel[2];
 				results[0] = channelResolver.resolveDestination("foo-channel");
 				results[1] = channelResolver.resolveDestination("bar-channel");

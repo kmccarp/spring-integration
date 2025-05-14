@@ -17,7 +17,6 @@
 package org.springframework.integration.xml.util;
 
 import java.io.StringReader;
-
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
@@ -27,7 +26,6 @@ import javax.xml.transform.dom.DOMSource;
 
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
-
 import org.springframework.xml.transform.StringResult;
 
 /**
@@ -36,7 +34,7 @@ import org.springframework.xml.transform.StringResult;
  * @author Jonas Partner
  * @author Artem Bilan
  */
-public class XmlTestUtil {
+public final class XmlTestUtil {
 
 	private static final TransformerFactory TRANSFORMER_FACTORY = TransformerFactory.newInstance();
 

@@ -16,6 +16,8 @@
 
 package org.springframework.integration.file.tail;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -34,8 +36,6 @@ import org.junit.Test;
 import org.junit.rules.TestWatcher;
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Ignores tests annotated with {@link TailAvailable} if 'tail' with the requested options

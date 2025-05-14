@@ -16,10 +16,12 @@
 
 package org.springframework.integration.mail.config;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+
 import jakarta.mail.Authenticator;
 import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXParseException;
-
 import org.springframework.beans.DirectFieldAccessor;
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.beans.factory.BeanDefinitionStoreException;
@@ -37,9 +39,6 @@ import org.springframework.integration.test.util.TestUtils;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 /**
  * @author Mark Fisher
@@ -301,7 +300,7 @@ public class InboundChannelAdapterParserTests {
 
 	private AbstractMailReceiver getReceiver(String name) {
 		Object adapter = context.getBean(name);
-		Object target = (adapter instanceof ImapIdleChannelAdapter) ? adapter
+		Object target = adapter instanceof ImapIdleChannelAdapter ? adapter
 				: new DirectFieldAccessor(adapter).getPropertyValue("source");
 		return (AbstractMailReceiver) new DirectFieldAccessor(target).getPropertyValue("mailReceiver");
 	}

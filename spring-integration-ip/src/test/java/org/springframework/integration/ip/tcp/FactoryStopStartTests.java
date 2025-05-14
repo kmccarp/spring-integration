@@ -17,7 +17,6 @@
 package org.springframework.integration.ip.tcp;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.integration.ip.tcp.connection.AbstractServerConnectionFactory;
 import org.springframework.integration.ip.tcp.connection.TcpNetServerConnectionFactory;
 

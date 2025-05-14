@@ -16,14 +16,13 @@
 
 package org.springframework.integration.expression;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.io.FileOutputStream;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.core.io.ClassPathResource;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Mark Fisher

@@ -22,7 +22,6 @@ import java.util.Map;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-
 import org.springframework.beans.BeanMetadataElement;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinitionHolder;
@@ -245,7 +244,7 @@ public abstract class IntegrationNamespaceUtils {
 			 */
 			if (numberOfAttributes != 1 && !(numberOfAttributes == 2 &&
 					pollerElement.hasAttribute("default") &&
-					pollerElement.getAttribute("default").equals("false"))) {
+					"false".equals(pollerElement.getAttribute("default")))) {
 				parserContext.getReaderContext().error(
 						"A 'poller' element that provides a 'ref' must have no other attributes.", pollerElement);
 			}

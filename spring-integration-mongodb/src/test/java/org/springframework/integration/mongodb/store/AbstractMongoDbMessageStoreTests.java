@@ -16,6 +16,8 @@
 
 package org.springframework.integration.mongodb.store;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.io.Serializable;
 import java.util.Properties;
 import java.util.UUID;
@@ -24,7 +26,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.data.annotation.PersistenceCreator;
 import org.springframework.data.mongodb.MongoDatabaseFactory;
@@ -41,8 +42,6 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.MessagingException;
 import org.springframework.messaging.support.ErrorMessage;
 import org.springframework.messaging.support.GenericMessage;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  *
@@ -402,8 +401,8 @@ public abstract class AbstractMongoDbMessageStoreTests implements MongoDbContain
 		public int hashCode() {
 			final int prime = 31;
 			int result = 1;
-			result = prime * result + ((fname == null) ? 0 : fname.hashCode());
-			result = prime * result + ((lname == null) ? 0 : lname.hashCode());
+			result = prime * result + (fname == null ? 0 : fname.hashCode());
+			result = prime * result + (lname == null ? 0 : lname.hashCode());
 			return result;
 		}
 

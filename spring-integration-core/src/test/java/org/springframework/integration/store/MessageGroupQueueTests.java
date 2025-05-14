@@ -16,6 +16,10 @@
 
 package org.springframework.integration.store;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.willAnswer;
+import static org.mockito.Mockito.spy;
+
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.CompletionService;
@@ -29,13 +33,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.GenericMessage;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.BDDMockito.willAnswer;
-import static org.mockito.Mockito.spy;
 
 /**
  * @author Dave Syer

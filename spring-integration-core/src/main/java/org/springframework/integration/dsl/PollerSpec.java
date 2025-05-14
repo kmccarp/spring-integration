@@ -24,7 +24,6 @@ import java.util.Map;
 import java.util.concurrent.Executor;
 
 import org.aopalliance.aop.Advice;
-
 import org.springframework.integration.channel.MessagePublishingErrorHandler;
 import org.springframework.integration.scheduling.PollerMetadata;
 import org.springframework.integration.transaction.TransactionInterceptorBuilder;

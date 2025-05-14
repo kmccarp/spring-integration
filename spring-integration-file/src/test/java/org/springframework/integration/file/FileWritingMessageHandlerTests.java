@@ -16,6 +16,20 @@
 
 package org.springframework.integration.file;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.fail;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.startsWith;
+import static org.mockito.BDDMockito.willAnswer;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -39,7 +53,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.DisabledOnOs;
 import org.junit.jupiter.api.condition.OS;
 import org.junit.jupiter.api.io.TempDir;
-
 import org.springframework.beans.DirectFieldAccessor;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.support.GenericApplicationContext;
@@ -56,20 +69,6 @@ import org.springframework.messaging.MessageHandlingException;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.util.FileCopyUtils;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
-import static org.assertj.core.api.Assertions.fail;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.startsWith;
-import static org.mockito.BDDMockito.willAnswer;
-import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 /**
  * @author Mark Fisher
@@ -120,18 +119,18 @@ public class FileWritingMessageHandlerTests {
 	public void permissions() {
 		if (FileUtils.IS_POSIX) {
 			FileWritingMessageHandler handler = new FileWritingMessageHandler(mock(Expression.class));
-			handler.setChmod(0421);
+			handler.setChmod(273);
 			Set<?> permissions = TestUtils.getPropertyValue(handler, "permissions", Set.class);
 			assertThat(permissions.size()).isEqualTo(3);
 			assertThat(permissions.contains(PosixFilePermission.OWNER_READ)).isTrue();
 			assertThat(permissions.contains(PosixFilePermission.GROUP_WRITE)).isTrue();
 			assertThat(permissions.contains(PosixFilePermission.OTHERS_EXECUTE)).isTrue();
-			handler.setChmod(0600);
+			handler.setChmod(384);
 			permissions = TestUtils.getPropertyValue(handler, "permissions", Set.class);
 			assertThat(permissions.size()).isEqualTo(2);
 			assertThat(permissions.contains(PosixFilePermission.OWNER_READ)).isTrue();
 			assertThat(permissions.contains(PosixFilePermission.OWNER_WRITE)).isTrue();
-			handler.setChmod(0777);
+			handler.setChmod(511);
 			permissions = TestUtils.getPropertyValue(handler, "permissions", Set.class);
 			assertThat(permissions.size()).isEqualTo(9);
 		}
@@ -140,7 +139,7 @@ public class FileWritingMessageHandlerTests {
 	@Test
 	public void supportedTypeAndPermissions() throws Exception {
 		if (FileUtils.IS_POSIX) {
-			handler.setChmod(0777);
+			handler.setChmod(511);
 		}
 		handler.setOutputChannel(new NullChannel());
 		handler.handleMessage(new GenericMessage<>("test"));
@@ -309,7 +308,7 @@ public class FileWritingMessageHandlerTests {
 		QueueChannel output = new QueueChannel();
 		handler.setDeleteSourceFiles(true);
 		handler.setOutputChannel(output);
-		handler.setChmod(0400);
+		handler.setChmod(256);
 		Message<?> message = MessageBuilder.withPayload(sourceFile).build();
 		handler.handleMessage(message);
 		Message<?> result = output.receive(0);

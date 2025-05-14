@@ -16,18 +16,17 @@
 
 package org.springframework.integration.xml.transformer;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+
 import javax.xml.transform.dom.DOMResult;
 import javax.xml.transform.sax.SAXResult;
 
 import org.junit.jupiter.api.Test;
 import org.w3c.dom.Document;
-
 import org.springframework.integration.xml.util.XmlTestUtil;
 import org.springframework.messaging.MessagingException;
 import org.springframework.xml.transform.StringResult;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 /**
  * @author Jonas Partner

@@ -27,7 +27,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
-
 import javax.sql.DataSource;
 
 import org.springframework.integration.handler.AbstractMessageHandler;
@@ -260,7 +259,7 @@ public class JdbcMessageHandler extends AbstractMessageHandler {
 				else {
 					SqlParameterSource[] sqlParameterSources =
 							payloadStream
-									.map((payload) ->
+									.map(payload ->
 											this.usePayloadAsParameterSource
 													? payload :
 													payloadToMessage(payload, message.getHeaders()))

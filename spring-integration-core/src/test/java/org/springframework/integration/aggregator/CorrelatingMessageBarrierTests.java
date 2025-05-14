@@ -16,6 +16,12 @@
 
 package org.springframework.integration.aggregator;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.isA;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.CountDownLatch;
@@ -27,17 +33,10 @@ import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;
-
 import org.springframework.integration.store.MessageGroup;
 import org.springframework.integration.support.MessageBuilder;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageHandler;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.isA;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 /**
  * @author Iwein Fuld
@@ -100,10 +99,10 @@ public class CorrelatingMessageBarrierTests {
 			Thread.currentThread().interrupt();
 		}
 
-		assertThat((barrier.receive())).isNotNull();
+		assertThat(barrier.receive()).isNotNull();
 		for (int i = 0; i < 199; i++) {
 			trackingReleaseStrategy.release("foo");
-			assertThat((barrier.receive())).isNotNull();
+			assertThat(barrier.receive()).isNotNull();
 		}
 		exec.shutdownNow();
 	}
@@ -131,7 +130,7 @@ public class CorrelatingMessageBarrierTests {
 	 */
 	private static class OneMessagePerKeyReleaseStrategy implements ReleaseStrategy {
 
-		private final ConcurrentMap<Object, Semaphore> keyLocks = new ConcurrentHashMap<Object, Semaphore>();
+		private final ConcurrentMap<Object, Semaphore> keyLocks = new ConcurrentHashMap<>();
 
 		OneMessagePerKeyReleaseStrategy() {
 			super();

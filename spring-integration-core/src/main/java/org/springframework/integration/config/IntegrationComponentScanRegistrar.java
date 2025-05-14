@@ -27,7 +27,6 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.Aware;
 import org.springframework.beans.factory.BeanClassLoaderAware;
@@ -138,7 +137,7 @@ public class IntegrationComponentScanRegistrar implements ImportBeanDefinitionRe
 		BeanNameGenerator beanNameGenerator = IntegrationConfigUtils.annotationBeanNameGenerator(registry);
 
 		Class<? extends BeanNameGenerator> generatorClass = componentScan.getClass("nameGenerator");
-		if (!(BeanNameGenerator.class == generatorClass)) {
+		if (BeanNameGenerator.class != generatorClass) {
 			beanNameGenerator = BeanUtils.instantiateClass(generatorClass);
 		}
 

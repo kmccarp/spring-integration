@@ -17,7 +17,6 @@
 package org.springframework.integration.xmpp.core;
 
 import org.jivesoftware.smack.XMPPConnection;
-
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.integration.endpoint.MessageProducerSupport;
 import org.springframework.util.Assert;
@@ -34,10 +33,10 @@ public abstract class AbstractXmppConnectionAwareEndpoint extends MessageProduce
 
 	private boolean initialized;
 
-	public AbstractXmppConnectionAwareEndpoint() {
+	protected AbstractXmppConnectionAwareEndpoint() {
 	}
 
-	public AbstractXmppConnectionAwareEndpoint(XMPPConnection xmppConnection) {
+	protected AbstractXmppConnectionAwareEndpoint(XMPPConnection xmppConnection) {
 		Assert.notNull(xmppConnection, "'xmppConnection' must no be null");
 		this.xmppConnection = xmppConnection;
 	}

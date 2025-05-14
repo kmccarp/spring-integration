@@ -28,7 +28,6 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.recipes.locks.InterProcessMutex;
-
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.core.task.AsyncTaskExecutor;
 import org.springframework.integration.support.locks.ExpirableLockRegistry;
@@ -63,7 +62,7 @@ public class ZookeeperLockRegistry implements ExpirableLockRegistry, DisposableB
 	private final Lock locksLock = new ReentrantLock();
 
 	private final Map<String, ZkLock> locks =
-			new LinkedHashMap<String, ZkLock>(16, 0.75F, true) {
+			new LinkedHashMap<>(16, 0.75F, true) {
 
 				@Override
 				protected boolean removeEldestEntry(Entry<String, ZkLock> eldest) {

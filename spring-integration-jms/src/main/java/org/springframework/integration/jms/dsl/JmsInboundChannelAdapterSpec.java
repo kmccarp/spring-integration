@@ -22,7 +22,6 @@ import java.util.function.Consumer;
 
 import jakarta.jms.ConnectionFactory;
 import jakarta.jms.Destination;
-
 import org.springframework.integration.dsl.ComponentsRegistration;
 import org.springframework.integration.dsl.MessageSourceSpec;
 import org.springframework.integration.jms.JmsDestinationPollingSource;

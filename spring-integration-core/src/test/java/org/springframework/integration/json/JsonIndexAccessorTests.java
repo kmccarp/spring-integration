@@ -16,16 +16,15 @@
 
 package org.springframework.integration.json;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.List;
 
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.integration.json.JsonPropertyAccessor.ArrayNodeAsList;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Tests for {@link JsonIndexAccessor} combined with {@link JsonPropertyAccessor}.

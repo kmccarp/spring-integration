@@ -22,7 +22,6 @@ import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
@@ -72,7 +71,7 @@ public class TcpMessageMapper implements
 
 	private boolean stringToBytes = true;
 
-	private boolean applySequence = false;
+	private boolean applySequence;
 
 	private MessageBuilderFactory messageBuilderFactory = new DefaultMessageBuilderFactory();
 

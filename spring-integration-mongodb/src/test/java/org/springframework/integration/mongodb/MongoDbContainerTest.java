@@ -29,7 +29,6 @@ import org.bson.conversions.Bson;
 import org.junit.jupiter.api.BeforeAll;
 import org.testcontainers.containers.MongoDBContainer;
 import org.testcontainers.junit.jupiter.Testcontainers;
-
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mapping.context.MappingContext;

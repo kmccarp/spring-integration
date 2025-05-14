@@ -16,20 +16,19 @@
 
 package org.springframework.integration.transformer;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
 import org.springframework.integration.codec.Codec;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.GenericMessage;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Gary Russell
@@ -41,7 +40,7 @@ public class CodecTransformerTests {
 	@Test
 	public void testCodec() throws Exception {
 		MyCodec codec = new MyCodec();
-		EncodingPayloadTransformer<String> enc = new EncodingPayloadTransformer<String>(codec);
+		EncodingPayloadTransformer<String> enc = new EncodingPayloadTransformer<>(codec);
 		Message<?> message = new GenericMessage<String>("bar");
 		byte[] transformed = enc.doTransform(message);
 		assertThat(transformed).isEqualTo("foo".getBytes());

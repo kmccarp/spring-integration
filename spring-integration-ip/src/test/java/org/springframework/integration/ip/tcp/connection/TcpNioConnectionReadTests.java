@@ -16,6 +16,9 @@
 
 package org.springframework.integration.ip.tcp.connection;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.awaitility.Awaitility.with;
+
 import java.net.InetAddress;
 import java.net.Socket;
 import java.time.Duration;
@@ -25,11 +28,9 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
-
 import javax.net.SocketFactory;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.integration.ip.tcp.serializer.AbstractByteArraySerializer;
 import org.springframework.integration.ip.tcp.serializer.ByteArrayCrLfSerializer;
 import org.springframework.integration.ip.tcp.serializer.ByteArrayLengthHeaderSerializer;
@@ -38,9 +39,6 @@ import org.springframework.integration.ip.util.SocketTestUtils;
 import org.springframework.integration.ip.util.TestingUtilities;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.ErrorMessage;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.awaitility.Awaitility.with;
 
 /**
  * @author Gary Russell

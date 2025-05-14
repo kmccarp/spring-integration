@@ -16,6 +16,9 @@
 
 package org.springframework.integration.zookeeper.event;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+
 import java.util.Collections;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.CountDownLatch;
@@ -23,7 +26,6 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationEventPublisher;
@@ -41,9 +43,6 @@ import org.springframework.integration.zookeeper.ZookeeperTestSupport;
 import org.springframework.integration.zookeeper.leader.LeaderInitiator;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.Trigger;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
 
 /**
  * @author Gary Russell

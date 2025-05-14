@@ -39,9 +39,9 @@ class MqttRuntimeHints implements RuntimeHintsRegistrar {
 		ReflectionHints reflectionHints = hints.reflection();
 		// TODO until the real fix in Paho library.
 		Stream.of("org.eclipse.paho.client.mqttv3.MqttAsyncClient", "org.eclipse.paho.mqttv5.client.MqttAsyncClient")
-				.filter((typeName) -> ClassUtils.isPresent(typeName, classLoader))
-				.map((typeName) -> loadClassByName(typeName, classLoader))
-				.flatMap((type) -> Stream.ofNullable(ReflectionUtils.findMethod(type, "stopReconnectCycle")))
+				.filter(typeName -> ClassUtils.isPresent(typeName, classLoader))
+				.map(typeName -> loadClassByName(typeName, classLoader))
+				.flatMap(type -> Stream.ofNullable(ReflectionUtils.findMethod(type, "stopReconnectCycle")))
 				.forEach(method -> reflectionHints.registerMethod(method, ExecutableMode.INVOKE));
 	}
 

@@ -16,10 +16,12 @@
 
 package org.springframework.integration.ws.config;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.Source;
@@ -28,13 +30,9 @@ import javax.xml.transform.TransformerFactory;
 
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
-
 import org.springframework.ws.WebServiceMessage;
 import org.springframework.ws.WebServiceMessageFactory;
 import org.springframework.ws.pox.dom.DomPoxMessage;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 /**
  * @author Mark Fisher

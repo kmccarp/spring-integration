@@ -16,11 +16,11 @@
 
 package org.springframework.integration.config.xml;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.integration.test.util.TestUtils;
 import org.springframework.messaging.MessageChannel;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Gary Russell
@@ -55,7 +55,7 @@ public abstract class DispatcherMaxSubscribersTests {
 	@Autowired
 	private MessageChannel pubSubExplicitChannel;
 
-	public DispatcherMaxSubscribersTests() {
+	protected DispatcherMaxSubscribersTests() {
 		super();
 	}
 
